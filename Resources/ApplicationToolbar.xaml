@@ -7,7 +7,7 @@
         <ResourceDictionary Source="Styles/ToolBar.xaml"/>
     </ResourceDictionary.MergedDictionaries>
     
-    <ToolBar x:Key="MyToolbar" Height="120">
+    <ToolBar x:Key="MyToolbar" Height="150">
         <!--Файл-->
         <GroupBox Header="Файл" Style="{StaticResource ToolbarGroup}" Foreground="Black" Margin="5,3,3,3">
             <StackPanel Grid.Row="1" Orientation="Horizontal">
@@ -75,7 +75,7 @@
                     </Button>
                     <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
            Style="{StaticResource ToolBarButtonBaseStyle}"
-           Command="{x:Static ApplicationCommands.Print}"
+           Command="{x:Static s:DesignerCanvas.Settings}"
            CommandTarget="{Binding ElementName=MyDesigner}">
                         <Button.Content>
                             <Grid>

@@ -11,6 +11,7 @@ using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
 using System.Xml.Linq;
+using ArsVisual.SettingsMaster;
 using Microsoft.Win32;
 
 namespace DiagramDesigner
@@ -32,6 +33,7 @@ namespace DiagramDesigner
         public static RoutedCommand DistributeHorizontal = new RoutedCommand();
         public static RoutedCommand DistributeVertical = new RoutedCommand();
         public static RoutedCommand SelectAll = new RoutedCommand();
+        public static RoutedCommand Settings = new RoutedCommand();
 
         public DesignerCanvas()
         {
@@ -58,6 +60,7 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeHorizontal, DistributeHorizontal_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeVertical, DistributeVertical_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SelectAll, SelectAll_Executed));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Settings, opensettings));
             SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
 
             this.AllowDrop = true;
@@ -78,7 +81,8 @@ namespace DiagramDesigner
 
         private void opensettings(object sender, ExecutedRoutedEventArgs e)
         {
-           //
+            Window settings = new SettingsMaster();
+            settings.Show();
         }
 
         #endregion
