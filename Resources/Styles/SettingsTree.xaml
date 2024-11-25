@@ -15,10 +15,10 @@
                 <ControlTemplate TargetType="ToggleButton">
                     <Grid Width="16" Height="16" Background="Transparent">
                         <Path x:Name="ExpandPath"
-                  HorizontalAlignment="Center"
-                  VerticalAlignment="Center"
-                  Data="M 0,0 L 8,8 L 16,0 Z"
-                  Fill="Black" />
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Data="M 0,0 L 8,8 L 16,0 Z"
+                              Fill="Black" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
@@ -40,8 +40,8 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TreeView}">
                     <Border Background="{TemplateBinding Background}"
-                  BorderBrush="{TemplateBinding BorderBrush}"
-                  BorderThickness="{TemplateBinding BorderThickness}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
                         <ScrollViewer Focusable="false" Padding="{TemplateBinding Padding}">
                             <ItemsPresenter />
                         </ScrollViewer>
@@ -70,23 +70,23 @@
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <ToggleButton x:Name="Expander"
-                          Style="{StaticResource ExpandCollapseToggleStyle}"
-                          IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
-                          ClickMode="Press" />
+                                      Style="{StaticResource ExpandCollapseToggleStyle}"
+                                      IsChecked="{Binding IsExpanded, RelativeSource={RelativeSource TemplatedParent}}"
+                                      ClickMode="Press" />
                         <Border x:Name="Bd"
-                    Grid.Column="1"
-                    Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Padding="{TemplateBinding Padding}">
+                                Grid.Column="1"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Padding="{TemplateBinding Padding}">
                             <ContentPresenter x:Name="PART_Header"
-                                ContentSource="Header"
-                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                              ContentSource="Header"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ItemsPresenter x:Name="ItemsHost"
-                            Grid.Row="1"
-                            Grid.Column="1" />
+                                        Grid.Row="1"
+                                        Grid.Column="1" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsExpanded" Value="false">
@@ -98,6 +98,8 @@
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="Bd" Property="Background" Value="{StaticResource ToolbarSelectedBackgroundBrush}" />
                             <Setter Property="Foreground" Value="{StaticResource ToolbarTextBrush}" />
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource ToolbarBorderBrushSelected}" />
+                            <Setter TargetName="Bd" Property="BorderThickness" Value="2" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="{StaticResource DisabledForegroundBrush}" />
@@ -109,3 +111,5 @@
     </Style>
 
 </ResourceDictionary>
+
+

@@ -42,21 +42,42 @@
                             </Grid>
                         </Button.Content>
                     </Button>
-                    <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static ApplicationCommands.Save}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Save.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Сохранить" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
+                       Style="{StaticResource ToolBarButtonBaseStyle}"
+                       Command="{x:Static ApplicationCommands.Save}"
+                       CommandTarget="{Binding ElementName=MyDesigner}">
+                                 <Button.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="Images/Save.png" Width="16"/>
+                                
+                              <!--  <TextBlock Margin="3,0,3,0" Text="Сохранить" VerticalAlignment="Center" Grid.Column="1"/> -->
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+
+                        <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
+                 Style="{StaticResource ToolBarButtonBaseStyle}"
+                 Command="{x:Static s:DesignerCanvas.SaveTOpng}"
+                 CommandTarget="{Binding ElementName=MyDesigner}">
+                            <Button.Content>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Source="Images/Save.png" Width="16"/>
+
+                                    <!--  <TextBlock Margin="3,0,3,0" Text="Сохранить" VerticalAlignment="Center" Grid.Column="1"/> -->
+                                </Grid>
+                            </Button.Content>
+                        </Button>
+                    </StackPanel>
+                   
                     <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
                             Style="{StaticResource ToolBarButtonBaseStyle}"
                             Command="{x:Static ApplicationCommands.Print}"

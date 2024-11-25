@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
 using ArsVisual.SettingsMaster;
@@ -34,6 +36,7 @@ namespace DiagramDesigner
         public static RoutedCommand DistributeVertical = new RoutedCommand();
         public static RoutedCommand SelectAll = new RoutedCommand();
         public static RoutedCommand Settings = new RoutedCommand();
+        public static RoutedCommand SaveTOpng = new RoutedCommand();
 
         public DesignerCanvas()
         {
@@ -46,6 +49,7 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Paste, Paste_Executed, Paste_Enabled));
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.Delete, Delete_Executed, Delete_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Group, Group_Executed, Group_Enabled));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SaveTOpng, SaveTOPNG));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Ungroup, Ungroup_Executed, Ungroup_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.BringForward, BringForward_Executed, Order_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.BringToFront, BringToFront_Executed, Order_Enabled));
@@ -76,7 +80,57 @@ namespace DiagramDesigner
         }
 
         #endregion
+        #region SaveToPNG Command
 
+        private void SaveTOPNG(object sender, ExecutedRoutedEventArgs e)
+        {
+            var surface = this; 
+
+          
+            Transform transform = surface.LayoutTransform;
+            
+            surface.LayoutTransform = null;
+
+           
+            Size size = new Size(surface.ActualWidth, surface.ActualHeight);
+      
+            surface.Measure(size);
+            surface.Arrange(new Rect(size));
+
+          
+            RenderTargetBitmap renderBitmap =
+              new RenderTargetBitmap(
+                (int)size.Width,
+                (int)size.Height,
+                96d,
+                96d,
+                PixelFormats.Pbgra32);
+            renderBitmap.Render(surface);
+
+          
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PNG Files (*.png)|*.png";
+            saveFileDialog.DefaultExt = "png";
+            saveFileDialog.AddExtension = true;
+
+            if (saveFileDialog.ShowDialog() == true)
+            {
+                
+                using (FileStream outStream = new FileStream(saveFileDialog.FileName, FileMode.Create))
+                {
+                 
+                    PngBitmapEncoder encoder = new PngBitmapEncoder();
+                   
+                    encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+                  
+                    encoder.Save(outStream);
+                }
+            }
+
+           
+            surface.LayoutTransform = transform;
+        }
+        #endregion
         #region settings Command
 
         private void opensettings(object sender, ExecutedRoutedEventArgs e)
