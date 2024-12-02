@@ -109,7 +109,7 @@ namespace DiagramDesigner
 
           
             SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "PNG Files (*.png)|*.png";
+            saveFileDialog.Filter = "PNG Files (*.png)|*.png|JPEG Files (*.jpeg)|*.jpeg";
             saveFileDialog.DefaultExt = "png";
             saveFileDialog.AddExtension = true;
 

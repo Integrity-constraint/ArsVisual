@@ -13,21 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ArsVisual.SettingsMaster
+namespace ArsVisual.pages
 {
     /// <summary>
-    /// Логика взаимодействия для SettingsMaster.xaml
+    /// Логика взаимодействия для ColorChanger.xaml
     /// </summary>
-    public partial class SettingsMaster : Window
+    public partial class ColorChanger : Page
     {
-        public SettingsMaster()
+        public ColorChanger()
         {
             InitializeComponent();
-        }
-
-        private void Palitra(object sender, RoutedEventArgs e)
-        {
-           OCHKO.Navigate(new pages.ColorChanger());
         }
     }
 }

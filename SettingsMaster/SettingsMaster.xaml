@@ -14,12 +14,15 @@
             <ColumnDefinition Width="150*"></ColumnDefinition>
             
         </Grid.ColumnDefinitions>
-        <TreeView Style="{DynamicResource TreeViewStyle}">
+        <TreeView >
             <TreeViewItem Header="Общее">
-                <TreeViewItem Header="Текст">
+                <TreeViewItem Selected="Palitra" Header="Цвета">
                     
                 </TreeViewItem>
             </TreeViewItem>
         </TreeView>
+        <Frame Name="OCHKO" Grid.Column="1">
+            
+        </Frame>
     </Grid>
 </Window>

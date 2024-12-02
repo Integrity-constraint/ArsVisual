@@ -1,0 +1,37 @@
+﻿<Page x:Class="ArsVisual.pages.ColorChanger"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:ArsVisual.pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="550"
+      Title="ColorChanger">
+
+    <Grid Background="White">
+        <ScrollViewer>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="6*"/>
+                    <RowDefinition Height="19*"/>
+                </Grid.RowDefinitions>
+                <StackPanel >
+                    <TextBlock Margin="10">
+                        Стандартные темы
+                    </TextBlock>
+                    <GroupBox   Header="Предложенные темы">
+                        <StackPanel Orientation="Horizontal">
+                            <GroupItem Margin="10">
+                                <CheckBox Content="Арбуз"></CheckBox>
+                                
+                            </GroupItem>
+                            <GroupItem Margin="10">
+                            <CheckBox Content="1с"></CheckBox>
+                            </GroupItem>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>
