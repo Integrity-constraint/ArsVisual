@@ -286,7 +286,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox IsHitTestVisible="False" Style="{StaticResource Textadapter}">
 
                 </TextBox>
             </Grid>
