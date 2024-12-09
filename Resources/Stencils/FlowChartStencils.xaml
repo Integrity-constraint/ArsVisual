@@ -30,6 +30,7 @@
     <!-- Process -->
     <Style x:Key="Process" TargetType="Path" BasedOn="{StaticResource FlowChartItemStyle}">
         <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
+       
     </Style>
 
     <Style x:Key="Process_DragThumb" TargetType="Path" BasedOn="{StaticResource Process}">
@@ -261,14 +262,25 @@
     <s:Toolbox x:Key="FlowChartStencils" ItemSize="60,50" SnapsToDevicePixels="True"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
+            <Grid>
+                
+                <Path Style="{StaticResource Process}"  ToolTip="Process">
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
 
-            <Path Style="{StaticResource Process}" ToolTip="Process">
-                <s:DesignerItem.DragThumbTemplate>
-                    <ControlTemplate>
-                        <Path Style="{StaticResource Process_DragThumb}"/>
-                    </ControlTemplate>
-                </s:DesignerItem.DragThumbTemplate>
-            </Path>
+
+                            <Path Style="{StaticResource Process_DragThumb}"/>
+
+
+
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+                    
+                </Path>
+                <TextBox BorderBrush="Transparent" Background="Transparent" HorizontalAlignment="Center"  VerticalAlignment="Center">Процесс</TextBox>
+            </Grid>
+
+          
 
             <Path Style="{StaticResource Decision}" ToolTip="Decision">
                 <s:DesignerItem.DragThumbTemplate>

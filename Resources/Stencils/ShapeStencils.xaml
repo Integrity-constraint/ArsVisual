@@ -40,7 +40,8 @@
             Data="M 9,2 11,7 17,7 12,10 14,15 9,12 4,15 6,10 1,7 7,7 Z">
         <s:DesignerItem.DragThumbTemplate>
           <ControlTemplate>
-            <Path Fill="Transparent" Stretch="Fill" Data="M 9,2 11,7 17,7 12,10 14,15 9,12 4,15 6,10 1,7 7,7 Z"/>
+                        
+            <Path  Fill="Transparent" Stretch="Fill" Data="M 9,2 11,7 17,7 12,10 14,15 9,12 4,15 6,10 1,7 7,7 Z"/>
           </ControlTemplate>
         </s:DesignerItem.DragThumbTemplate>
         <s:DesignerItem.ConnectorDecoratorTemplate>

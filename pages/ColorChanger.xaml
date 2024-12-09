@@ -30,6 +30,17 @@
                             </GroupItem>
                         </StackPanel>
                     </GroupBox>
+                    <GroupBox   Header="Настройка стилей кнопок">
+                        <StackPanel Orientation="Horizontal">
+                            <GroupItem Margin="10">
+                                <CheckBox Content="Арбуз"></CheckBox>
+
+                            </GroupItem>
+                            <GroupItem Margin="10">
+                                <CheckBox Content="1с"></CheckBox>
+                            </GroupItem>
+                        </StackPanel>
+                    </GroupBox>
                 </StackPanel>
             </Grid>
         </ScrollViewer>

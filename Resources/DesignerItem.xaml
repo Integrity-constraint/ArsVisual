@@ -2,9 +2,33 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:s="clr-namespace:DiagramDesigner"
-                    xmlns:c="clr-namespace:DiagramDesigner.Controls">
+                    xmlns:c="clr-namespace:DiagramDesigner.Controls" 
+                    xmlns:pages="clr-namespace:ArsVisual.pages">
 
     <ContextMenu x:Key="DesignerItemContextMenu">
+        <MenuItem Header="Выбор цвета">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Цвет" Grid.Row="0">
+                    <ComboBox Name="ColorComboBox" SelectedIndex="0" >
+                        <ComboBoxItem Background="Red" Foreground="White" Tag="Red">Красный</ComboBoxItem>
+                        <ComboBoxItem Background="Green" Foreground="White" Tag="Green">Зеленый</ComboBoxItem>
+                        <ComboBoxItem Background="Blue" Foreground="White" Tag="Blue">Синий</ComboBoxItem>
+                        <ComboBoxItem Background="Yellow" Foreground="Black" Tag="Yellow">Желтый</ComboBoxItem>
+                        <ComboBoxItem Background="Black" Foreground="White" Tag="Black">Черный</ComboBoxItem>
+                        <ComboBoxItem Background="White" Foreground="Black" Tag="White">Белый</ComboBoxItem>
+                    </ComboBox>
+                </GroupBox>
+
+                <GroupBox Header="Выбранный цвет" Grid.Row="1">
+                    <Border Name="SelectedColorBorder" Background="Red" Height="50" Width="100"/>
+                </GroupBox>
+            </Grid>
+        </MenuItem>
         <MenuItem Header="Вырезать" Command="{x:Static ApplicationCommands.Cut}">
             <MenuItem.Icon>
                 <Image Source="Images/Cut.png" Width="16"/>
@@ -61,6 +85,9 @@
             </MenuItem>
         </MenuItem>
     </ContextMenu>
+
+   
+
 
     <!-- Connector Style -->
     <Style TargetType="{x:Type s:Connector}">
@@ -143,8 +170,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type s:DesignerItem}">
+                   
                     <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                           ContextMenu="{StaticResource DesignerItemContextMenu}">
+                      
                         <!-- PART_DragThumb -->
                         <c:MoveThumb x:Name="PART_DragThumb" 
                                      Cursor="SizeAll"/>

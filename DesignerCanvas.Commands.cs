@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
+using ArsVisual.pages;
 using ArsVisual.SettingsMaster;
 using Microsoft.Win32;
 
@@ -37,7 +38,8 @@ namespace DiagramDesigner
         public static RoutedCommand SelectAll = new RoutedCommand();
         public static RoutedCommand Settings = new RoutedCommand();
         public static RoutedCommand SaveTOpng = new RoutedCommand();
-
+        public static RoutedCommand ColorChange = new RoutedCommand();
+        public static  RoutedCommand ChangeColorCommand = new RoutedCommand();
         public DesignerCanvas()
         {
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.New, New_Executed));
@@ -65,12 +67,32 @@ namespace DiagramDesigner
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeVertical, DistributeVertical_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SelectAll, SelectAll_Executed));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Settings, opensettings));
-            SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
+                 
+
+        SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
 
             this.AllowDrop = true;
             Clipboard.Clear();
         }
+        #region ColoRCHANGE
 
+        private void ChangeColorCommand_Executed(object sender, ExecutedRoutedEventArgs e)
+        { if (e.Parameter is string colorName) 
+            { var color = (Color)ColorConverter.ConvertFromString(colorName);
+                ChangeSelectedItemsColor(color); } }
+        public void ChangeSelectedItemsColor(Color color) 
+        { foreach (var item in SelectionService.CurrentSelection) 
+            { if (item is DesignerItem designerItem && designerItem.Content is Grid grid)
+                { foreach (var child in grid.Children.OfType<System.Windows.Shapes.Path>())
+                    { child.Fill = new SolidColorBrush(color); } } } } 
+        
+        private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
+        { if (sender is ComboBox comboBox && comboBox.SelectedItem is ComboBoxItem selectedItem) 
+            { var colorName = selectedItem.Tag as string; 
+                ChangeColorCommand.Execute(colorName, this);
+            }
+        }
+        #endregion
         #region New Command
 
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)

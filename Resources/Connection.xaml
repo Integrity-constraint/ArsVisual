@@ -111,15 +111,16 @@
                             </Grid.LayoutTransform>
                         </Grid>
 
-                        <!--Uncomment this to show default label text-->
-                        <!--<TextBlock Width="100" Height="35"
-                                       Text="{Binding Path=(Canvas.ZIndex)}"
+                      
+                        <TextBox  Background="Transparent" BorderBrush="Transparent" IsHitTestVisible="True"  Width="100" Height="35"
+                                       Text=""
                                        Canvas.Left="{Binding LabelPosition.X}"
                                        Canvas.Top="{Binding LabelPosition.Y}">
-                              <TextBlock.RenderTransform>
+                           <!--Text="{Binding Path=(Canvas.ZIndex)}" -->
+                            <TextBox.RenderTransform>
                                 <TranslateTransform X="5" Y="5"/>
-                              </TextBlock.RenderTransform>
-                            </TextBlock>-->
+                              </TextBox.RenderTransform>
+                            </TextBox>
 
                         <Canvas.BitmapEffect>
                             <DropShadowBitmapEffect Color="Gray" Direction="315" ShadowDepth="10" Softness="0" Opacity="0.1"/>

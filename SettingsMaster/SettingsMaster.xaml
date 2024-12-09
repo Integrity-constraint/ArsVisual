@@ -14,13 +14,21 @@
             <ColumnDefinition Width="150*"></ColumnDefinition>
             
         </Grid.ColumnDefinitions>
-        <TreeView >
+        <GroupBox Header="Параметры">
+            <TreeView >
+           
+                
+           
             <TreeViewItem Header="Общее">
                 <TreeViewItem Selected="Palitra" Header="Цвета">
                     
                 </TreeViewItem>
             </TreeViewItem>
+            <TreeViewItem>
+                
+            </TreeViewItem>
         </TreeView>
+        </GroupBox>
         <Frame Name="OCHKO" Grid.Column="1">
             
         </Frame>
