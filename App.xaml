@@ -21,8 +21,11 @@
          <ResourceDictionary Source="Resources/ZoomBox.xaml"/>
           <ResourceDictionary Source="Resources/Connection.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml"/>
+        <ResourceDictionary Source="Resources/Stencils/UMLQuery.xaml"/>
+          
         <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/Styles/SettingsTree.xaml"/>
+          
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </Application.Resources>
