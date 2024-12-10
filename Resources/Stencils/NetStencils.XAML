@@ -2,8 +2,18 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
-    <DrawingImage x:Key="document_filled_svgrepo_comDrawingImage">
-        
+    
+    <Style x:Key="Textadapter" TargetType="TextBox">
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="BorderBrush" Value="Transparent"></Setter>
+        <Setter Property="AcceptsReturn" Value="True"></Setter>
+        <Setter Property="Text" Value="{Binding QueryString}"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+    </Style>
+    
+    <DrawingImage x:Key="CustomDrawingImage">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
                 <GeometryDrawing Geometry="F1 M24,24z M0,0z M5,21L19,21 19,9 15,9C13.8954,9,13,8.10457,13,7L13,3 5,3 5,21z">
@@ -19,4 +29,44 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
+    
+    <Style x:Key="CustomDrawingImageStyle" TargetType="Image">
+        <Setter Property="Source" Value="{StaticResource CustomDrawingImage}"/>
+        <Setter Property="Stretch" Value="Fill"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+    </Style>
+
+    <Style x:Key="CustomDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource CustomDrawingImageStyle}">
+        <Setter Property="IsHitTestVisible" Value="True"/>
+        <Setter Property="Opacity" Value="0"/>
+    </Style>
+
+
+
+    <s:Toolbox x:Key="NetStencils" ItemSize="60,60" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ItemsControl.Items>
+            <Grid>
+
+                <Image Style="{StaticResource CustomDrawingImageStyle}"  ToolTip="Process">
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+
+
+                            <Image Style="{StaticResource CustomDrawingImage_DragThumb}"/>
+
+
+
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+
+                </Image>
+                <TextBox  Style="{StaticResource Textadapter}">
+
+                </TextBox>
+            </Grid>
+        </ItemsControl.Items>
+    </s:Toolbox>
+
+
+
 </ResourceDictionary>

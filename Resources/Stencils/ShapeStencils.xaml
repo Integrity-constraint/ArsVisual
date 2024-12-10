@@ -25,6 +25,10 @@
     </LinearGradientBrush.GradientStops>
   </LinearGradientBrush>
 
+    
+
+
+   
 
     <s:Toolbox x:Key="ShapeStencils" ItemSize="60,60">
     <ItemsControl.Items>
@@ -59,7 +63,8 @@
           </ControlTemplate>
         </s:DesignerItem.ConnectorDecoratorTemplate>
       </Path>
-          
+            
+
         </ItemsControl.Items>
   </s:Toolbox>
 </ResourceDictionary>

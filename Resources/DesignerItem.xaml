@@ -176,6 +176,7 @@
                       
                         <!-- PART_DragThumb -->
                         <c:MoveThumb x:Name="PART_DragThumb" 
+                                    
                                      Cursor="SizeAll"/>
                         <!-- PART_RotateThumb -->
                         <c:RotateThumb x:Name="PART_RotateThumb" 
@@ -192,6 +193,7 @@
                         <ContentPresenter x:Name="PART_ContentPresenter"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch"
+                                          
                                           Content="{TemplateBinding ContentControl.Content}"
                                           Margin="{TemplateBinding ContentControl.Padding}"/>
                         <!-- PART_ConnectorDecorator -->
@@ -202,6 +204,7 @@
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True" Binding="{Binding RelativeSource={RelativeSource Self},Path=IsGroup}">
                             <Setter TargetName="PART_DragThumb" Property="Visibility" Value="Collapsed"/>
+                           
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
