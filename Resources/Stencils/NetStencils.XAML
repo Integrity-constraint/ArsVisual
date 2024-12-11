@@ -29,21 +29,887 @@
             </DrawingGroup>
         </DrawingImage.Drawing>
     </DrawingImage>
-    
-    <Style x:Key="CustomDrawingImageStyle" TargetType="Image">
-        <Setter Property="Source" Value="{StaticResource CustomDrawingImage}"/>
+  <Style x:Key="CustomDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource CustomDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="CustomDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource CustomDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+  <DrawingImage x:Key="serverDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V84.3064 H74.4508 V0 H0 Z">
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,0.375,-10.2">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,-3.67706E-13,-10.6501">
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,29.8189,-2.17341">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L7.02,75.61 7.02,25.62 0,23.45 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,28.0648,-3.12639E-13">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L7.02,75.61 7.02,23.45 0,32.14 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.75405,-2.98428E-13">
+                <GeometryDrawing Brush="#FF000000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,32.1445,26.3108,52.1619" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-2.17341">
+                <GeometryDrawing Brush="#FFC0C0C0">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,32.1445,28.0648,52.1619" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.67706E-13,-54.3353">
+                <GeometryDrawing Brush="#FFC0C0C0" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L28.06,84.31 35.08,75.61 7.02,75.61 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,28.0648,-2.17341">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L7.02,75.61 7.02,23.45 0,32.14 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-53.2486">
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M74.4508,84.3064z M0,0z M0,83.22L28.06,83.22 27.19,84.31 0,84.31 0,83.22z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.47382E-13,-2.17341">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M0,32.14L0,84.31 0.88,83.22 0.88,33.23 0,32.14z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-39.1214">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2197,28.0648,1.0867" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0.877026,-38.0347">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2197,27.1878,1.0867" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-23.9075">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2197,28.0648,1.0867" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0.877026,-22.8208">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2197,27.1878,1.0867" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,19.2946,-6.52023">
+                <GeometryDrawing Brush="#FFFF0000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,79.9596,5.2622,4.3468" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.67706E-13,-54.3353">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M35.08,75.61L34.2,76.7 7.02,76.7 0.88,84.31 0,84.31 7.02,75.61 35.08,75.61z" />
+              </DrawingGroup>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,36.8351,-14.7463">
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,29.8437,-2.03397">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L7.02,76.17 7.02,29.39 0,27.36 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,28.0881,-2.84217E-13">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L7.02,76.17 7.02,27.36 0,35.49 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.75551,-2.84217E-13">
+                <GeometryDrawing Brush="#FF000000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,35.4911,26.3326,48.8153" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-2.03397">
+                <GeometryDrawing Brush="#FFC0C0C0">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,35.4911,28.0881,48.8153" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.73701E-13,-50.8492">
+                <GeometryDrawing Brush="#FFC0C0C0" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L28.09,84.31 35.11,76.17 7.02,76.17 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,28.0881,-2.03397">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L7.02,76.17 7.02,27.36 0,35.49 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-49.8322">
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M74.4508,84.3064z M0,0z M0,83.29L28.09,83.29 27.21,84.31 0,84.31 0,83.29z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.47445E-13,-2.03397">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M0,35.49L0,84.31 0.88,83.29 0.88,36.51 0,35.49z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-36.6114">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2894,28.0881,1.017" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0.877755,-35.5945">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2894,27.2104,1.017" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-22.3737">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2894,28.0881,1.017" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0.877755,-21.3567">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.2894,27.2104,1.017" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,19.3106,-6.10191">
+                <GeometryDrawing Brush="#FFFF0000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,80.2385,5.2665,4.0679" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.73701E-13,-50.8492">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M35.11,76.17L34.23,77.19 7.02,77.19 0.88,84.31 0,84.31 7.02,76.17 35.11,76.17z" />
+              </DrawingGroup>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,22.791,3.83693E-13">
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,25.5803,-1.63848">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L6.02,77.75 6.02,40.07 0,38.43 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,24.0756,-2.41585E-13">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L6.02,77.75 6.02,38.43 0,44.98 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.50472,-2.41585E-13">
+                <GeometryDrawing Brush="#FF000000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,44.983,22.5708,39.3234" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-1.63848">
+                <GeometryDrawing Brush="#FFC0C0C0">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,44.983,24.0756,39.3234" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.15747E-13,-40.9619">
+                <GeometryDrawing Brush="#FFC0C0C0" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L24.08,84.31 30.09,77.75 6.02,77.75 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,24.0756,-1.63848">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M0,84.31L6.02,77.75 6.02,38.43 0,44.98 0,84.31z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-40.1426">
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M74.4508,84.3064z M0,0z M0,83.49L24.08,83.49 23.32,84.31 0,84.31 0,83.49z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.26399E-13,-1.63848">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M0,44.98L0,84.31 0.75,83.49 0.75,45.8 0,44.98z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-29.4926">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.4872,24.0756,0.8192" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0.752361,-28.6733">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.4872,23.3232,0.8192" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-18.0232">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.4872,24.0756,0.8192" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0.752361,-17.204">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,83.4872,23.3232,0.8192" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,16.5519,-4.91543">
+                <GeometryDrawing Brush="#FFFF0000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,81.0294,4.5142,3.277" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.15747E-13,-40.9619">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M74.4508,84.3064z M0,0z M30.09,77.75L29.34,78.57 6.02,78.57 0.75,84.31 0,84.31 6.02,77.75 30.09,77.75z" />
+              </DrawingGroup>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+
+  <Style x:Key="ServerDrawingImageStyle" TargetType="Image">
+        <Setter Property="Source" Value="{StaticResource serverDrawingImage}"/>
         <Setter Property="Stretch" Value="Fill"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
     </Style>
 
-    <Style x:Key="CustomDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource CustomDrawingImageStyle}">
+    <Style x:Key="ServerDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource ServerDrawingImageStyle}">
         <Setter Property="IsHitTestVisible" Value="True"/>
         <Setter Property="Opacity" Value="0"/>
     </Style>
 
+  <DrawingImage x:Key="userDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V113.785 H103.465 V0 H0 Z">
+        <DrawingGroup.Transform>
+          <TranslateTransform X="0.021433372050523758" Y="0" />
+        </DrawingGroup.Transform>
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,1.59872E-14,-10.2">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,8.27776,0">
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,7.47639,-9.38448">
+                <GeometryDrawing Geometry="F0 M103.465,113.785z M0,0z M41.85,98.02L64.11,98.39 68.92,96.52 70.95,78.5A133.078,123.602,-180,0,0,79.43,74.37L68.52,61.61A9.25378,8.59483,0,0,1,74.18,57.1L72.61,46.97A40.1217,37.2647,-180,1,0,16.79,99.14L17.6,113.78 54.78,113.78 54.78,98.77 41.85,98.02z">
+                  <GeometryDrawing.Brush>
+                    <RadialGradientBrush Center="0,1" RadiusX="1.4" RadiusY="1.4" GradientOrigin="0.5,0.5" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1">
+                      <GradientStop Color="#FFD2C4AC" Offset="0" />
+                      <GradientStop Color="#FFFFFFFF" Offset="1" />
+                    </RadialGradientBrush>
+                  </GeometryDrawing.Brush>
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.72" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-23.6356">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M103.465,113.785z M0,0z M62.29,58.97A24.6079,22.8556,-180,0,0,81.69,58.22A26.1576,24.2949,-180,0,0,83.26,53.36A43.4274,40.335,-180,0,0,63.11,35.68A64.3875,59.8026,-180,0,0,45.31,34.01A41.5502,38.5915,-180,0,0,29.56,36.07A133.257,123.768,-180,0,0,17.59,42.88A36.438,33.8433,-180,0,0,4.88,53.7A72.1652,67.0264,-180,0,0,0.19,80.42A41.4825,38.5286,-180,0,0,6.96,105.48A37.947,35.2449,-180,0,0,24.71,113.77A7.09602,6.59072,-180,0,0,31.58,104.39L24.78,97.29 21.47,86.74A12.3869,11.5049,0,0,1,24.3,75.48A18.1073,16.8179,-180,0,0,42.52,68.82A20.3339,18.886,-180,0,0,62.29,58.97z">
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,64.3138,-58.5591">
+                <GeometryDrawing Brush="#FF0000FF" Geometry="F0 M103.465,113.785z M0,0z M0,110.78A12.0609,11.2021,0,0,1,6.47,107.78L6.87,113.78 0,110.78z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,9.34824,-1.13687E-13">
+                <GeometryDrawing Geometry="F0 M103.465,113.785z M0,0z M0,104.78A37.823,35.1297,0,0,1,52.54,110.78L38.8,113.78A103.235,95.8834,-180,0,0,0,104.78z">
+                  <GeometryDrawing.Brush>
+                    <DrawingBrush ViewportUnits="RelativeToBoundingBox" ViewboxUnits="Absolute" Viewport="0,0,1,1" Viewbox="0,0,1,1" TileMode="Tile" Opacity="1">
+                      <DrawingBrush.Drawing>
+                        <DrawingGroup>
+                          <DrawingGroup.ClipGeometry>
+                            <RectangleGeometry Rect="0,0,1,1" />
+                          </DrawingGroup.ClipGeometry>
+                          <GeometryDrawing Geometry="F0 M0,0L1,0 1,1z">
+                            <GeometryDrawing.Brush>
+                              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="-1.83690953073357E-16,-1,1,-1.83690953073357E-16,1.11022302462516E-16,1">
+                                <GradientStop Color="#FF0000FF" Offset="0" />
+                                <GradientStop Color="#FF000080" Offset="1" />
+                              </LinearGradientBrush>
+                            </GeometryDrawing.Brush>
+                          </GeometryDrawing>
+                          <GeometryDrawing Geometry="F0 M0,0L0,1 1,1z">
+                            <GeometryDrawing.Brush>
+                              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="-1,1.22460635382238E-16,-1.22460635382238E-16,-1,1,1">
+                                <GradientStop Color="#FF0000FF" Offset="0" />
+                                <GradientStop Color="#FF000080" Offset="1" />
+                              </LinearGradientBrush>
+                            </GeometryDrawing.Brush>
+                          </GeometryDrawing>
+                        </DrawingGroup>
+                      </DrawingBrush.Drawing>
+                    </DrawingBrush>
+                  </GeometryDrawing.Brush>
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000080" Thickness="0.72" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,57.6755,-2.62765">
+                <GeometryDrawing Geometry="F0 M103.465,113.785z M0,0z M0.58,109.66A9.96556,9.25593,0,0,1,17.95,101.02A56.4848,52.4626,0,0,1,3.41,113.78A5.27366,4.89813,0,0,1,0.58,109.66z">
+                  <GeometryDrawing.Brush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="6.12303176911189E-17,1,-1,6.12303176911189E-17,1,0">
+                      <GradientStop Color="#FF000080" Offset="0" />
+                      <GradientStop Color="#FF0000FF" Offset="1" />
+                    </LinearGradientBrush>
+                  </GeometryDrawing.Brush>
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000080" Thickness="0.72" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  
+  <Style x:Key="UserDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource userDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="UserDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource userDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+
+  <DrawingImage x:Key="сomputerDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V841.89 H595.276 V0 H0 Z">
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,249.449,-447.874">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,32.3327,-32.3327">
+              <GeometryDrawing Brush="#FF000000">
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,833.402,38.7992,8.4873" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,6.46654,-38.7992">
+              <GeometryDrawing>
+                <GeometryDrawing.Pen>
+                  <Pen Brush="#FF000000" Thickness="0.72" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                </GeometryDrawing.Pen>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,779.245,90.5315,62.6446" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1">
+              <GeometryDrawing Brush="#FF000000">
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,811.174,103.465,30.716" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,6.46654,-38.7992">
+              <GeometryDrawing Brush="#FFC0C0C0" Geometry="F0 M595.276,841.89z M0,0z M0,841.89L90.53,841.89 90.53,779.25 0,779.25 0,841.89z M3.23,838.76L87.3,838.76 87.3,782.38 3.23,782.38 3.23,838.76z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,9.6998,-41.9314">
+              <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M595.276,841.89z M0,0z M0,841.89L3.23,838.76 80.83,838.76 80.83,788.64 84.06,785.51 84.06,841.89 0,841.89z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,9.6998,-41.9314">
+              <GeometryDrawing Brush="#FF9A9A9A" Geometry="F0 M595.276,841.89z M0,0z M3.23,838.76L0,841.89 0,785.51 84.06,785.51 80.83,788.64 3.23,788.64 3.23,838.76z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,12.9331,-45.0637">
+              <GeometryDrawing>
+                <GeometryDrawing.Brush>
+                  <DrawingBrush ViewportUnits="RelativeToBoundingBox" ViewboxUnits="Absolute" Viewport="0,0,1,1" Viewbox="0,0,1,1" TileMode="Tile" Opacity="1">
+                    <DrawingBrush.Drawing>
+                      <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                          <RectangleGeometry Rect="0,0,1,1" />
+                        </DrawingGroup.ClipGeometry>
+                        <GeometryDrawing Geometry="F0 M0,0L0,1 1,1z">
+                          <GeometryDrawing.Brush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="6.12303176911189E-17,1,-1,6.12303176911189E-17,1,0">
+                              <GradientStop Color="#FFFFFFFF" Offset="0" />
+                              <GradientStop Color="#FF00FFFF" Offset="1" />
+                            </LinearGradientBrush>
+                          </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                        <GeometryDrawing Geometry="F0 M0,0L1,0 1,1z">
+                          <GeometryDrawing.Brush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="1,-2.44921270764475E-16,2.44921270764475E-16,1,-1.11022302462516E-16,1.11022302462516E-16">
+                              <GradientStop Color="#FFFFFFFF" Offset="0" />
+                              <GradientStop Color="#FF00FFFF" Offset="1" />
+                            </LinearGradientBrush>
+                          </GeometryDrawing.Brush>
+                        </GeometryDrawing>
+                      </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                  </DrawingBrush>
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,791.774,77.5984,50.1156" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,4.77292,-4.67028">
+              <GeometryDrawing Brush="#FFC0C0C0">
+                <GeometryDrawing.Geometry>
+                  <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,820.514,93.9187,21.3755" />
+                </GeometryDrawing.Geometry>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,1.64229,-1.61663">
+              <GeometryDrawing Brush="#FF9A9A9A" Geometry="F0 M595.276,841.89z M0,0z M0,841.89L3.13,838.84 97.05,838.84 97.05,817.46 100.18,814.41 100.18,841.89 0,841.89z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,1.64229,-1.61663">
+              <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M595.276,841.89z M0,0z M0,841.89L3.13,838.84 3.13,817.46 97.05,817.46 100.18,814.41 0,814.41 0,841.89z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,64.2548,-15.358">
+              <GeometryDrawing Brush="#FF000000" Geometry="F0 M595.276,841.89z M0,0z M6.26,840.36L6.26,841.89 25.04,841.89 25.04,840.36 31.31,840.36 31.31,837.31 25.04,837.31 25.04,835.78 6.26,835.78 6.26,837.31 0,837.31 0,840.36 6.26,840.36z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,7.90354,-18.4117">
+              <DrawingGroup Opacity="1">
+                <GeometryDrawing Brush="#FF008000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,837.309,6.2613,4.5805" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-2.29023">
+                <GeometryDrawing Brush="#FF00FF00">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,839.6,3.1306,2.2902" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <Style x:Key="ComputerDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource сomputerDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="ComputerDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource ComputerDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+
+  <DrawingImage x:Key="ContactDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V112.622 H102.797 V0 H0 Z">
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,0.375,-10.2">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,79.3701,5.25802E-13">
+              <GeometryDrawing Brush="#FF000000" Geometry="F0 M102.797,112.622z M0,0z M0,106.04L18.14,106.04 18.6,30.33 22.22,30.33 22.68,112.62 0,112.62 0,106.04z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-3.29185">
+              <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M102.797,112.622z M0,0z M0,112.62L99.78,112.62 99.78,27.03 90.71,13.87 9.07,13.87 0,27.03 0,112.62z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,6.80315,5.25802E-13">
+              <GeometryDrawing Brush="#FF000000" Geometry="F0 M102.797,112.622z M0,0z M72.57,112.62L72.57,86.29 68.03,86.29 68.03,112.62 22.68,112.62 22.68,86.29 18.14,86.29 18.14,112.62 0,112.62 0,106.04 13.61,106.04 13.61,79.7 27.21,79.7 27.21,106.04 63.5,106.04 63.5,79.7 77.1,79.7 77.1,112.62 72.57,112.62z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-3.29185">
+              <GeometryDrawing Brush="#FF808080" Geometry="F0 M102.797,112.622z M0,0z M9.07,13.87L0,27.03 0,112.62 4.54,112.62 4.54,27.03 9.07,20.45 90.71,20.45 95.24,27.03 99.78,27.03 90.71,13.87 9.07,13.87z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,4.53543,-3.29185">
+              <GeometryDrawing Brush="#FFC0C0C0" Geometry="F0 M102.797,112.622z M0,0z M72.57,106.04L72.57,112.62 77.1,112.62 95.24,112.62 95.24,27.03 90.71,27.03 90.71,106.04 77.1,106.04 77.1,79.7 63.5,79.7 63.5,106.04 27.21,106.04 27.21,79.7 13.61,79.7 13.61,106.04 0,106.04 0,112.62 18.14,112.62 18.14,86.29 22.68,86.29 22.68,112.62 68.03,112.62 68.03,86.29 72.57,86.29 72.57,106.04z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,18.1417,-44.1107">
+              <GeometryDrawing Brush="#FF008000" Geometry="F0 M102.797,112.622z M0,0z M31.75,112.62L63.5,112.62 63.5,107.62 31.75,107.62 31.75,112.62z M31.75,102.62L72.57,102.62 72.57,97.61 31.75,97.61 31.75,102.62z M31.75,92.61L63.5,92.61 63.5,87.6 31.75,87.6 31.75,92.61z M0,112.62L22.68,112.62 22.68,107.62 0,107.62 0,112.62z M0,102.62L18.14,102.62 18.14,97.61 0,97.61 0,102.62z M0,92.61L22.68,92.61 22.68,87.6 0,87.6 0,92.61z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,15.874,-79.0043">
+              <DrawingGroup Opacity="1">
+                <GeometryDrawing Geometry="F0 M102.797,112.622z M0,0z M34.02,112.62L36.28,112.62 36.28,109.33 34.02,109.33 34.02,112.62z M29.48,112.62L31.75,112.62 31.75,109.33 29.48,109.33 29.48,112.62z M24.94,112.62L27.21,112.62 27.21,109.33 24.94,109.33 24.94,112.62z M20.41,112.62L22.68,112.62 22.68,109.33 20.41,109.33 20.41,112.62z M15.87,112.62L18.14,112.62 18.14,109.33 15.87,109.33 15.87,112.62z M11.34,112.62L13.61,112.62 13.61,109.33 11.34,109.33 11.34,112.62z M6.8,112.62L9.07,112.62 9.07,109.33 6.8,109.33 6.8,112.62z M2.27,112.62L4.54,112.62 4.54,109.33 2.27,109.33 2.27,112.62z M36.28,109.33L38.55,109.33 38.55,106.04 36.28,106.04 36.28,109.33z M31.75,109.33L34.02,109.33 34.02,106.04 31.75,106.04 31.75,109.33z M27.21,109.33L29.48,109.33 29.48,106.04 27.21,106.04 27.21,109.33z M22.68,109.33L24.94,109.33 24.94,106.04 22.68,106.04 22.68,109.33z M18.14,109.33L20.41,109.33 20.41,106.04 18.14,106.04 18.14,109.33z M13.61,109.33L15.87,109.33 15.87,106.04 13.61,106.04 13.61,109.33z M9.07,109.33L11.34,109.33 11.34,106.04 9.07,106.04 9.07,109.33z M4.54,109.33L6.8,109.33 6.8,106.04 4.54,106.04 4.54,109.33z M0,109.33L2.27,109.33 2.27,106.04 0,106.04 0,109.33z">
+                  <GeometryDrawing.Brush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1">
+                      <GradientStop Color="#FFC0C0C0" Offset="0" />
+                      <GradientStop Color="#FFFFFFFF" Offset="1" />
+                    </LinearGradientBrush>
+                  </GeometryDrawing.Brush>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1">
+                <GeometryDrawing Brush="#FF008000" Geometry="F0 M102.797,112.622z M0,0z M36.28,112.62L38.55,112.62 38.55,109.33 36.28,109.33 36.28,112.62z M31.75,112.62L34.02,112.62 34.02,109.33 31.75,109.33 31.75,112.62z M27.21,112.62L29.48,112.62 29.48,109.33 27.21,109.33 27.21,112.62z M22.68,112.62L24.94,112.62 24.94,109.33 22.68,109.33 22.68,112.62z M18.14,112.62L20.41,112.62 20.41,109.33 18.14,109.33 18.14,112.62z M13.61,112.62L15.87,112.62 15.87,109.33 13.61,109.33 13.61,112.62z M9.07,112.62L11.34,112.62 11.34,109.33 9.07,109.33 9.07,112.62z M4.54,112.62L6.8,112.62 6.8,109.33 4.54,109.33 4.54,112.62z M38.55,109.33L40.82,109.33 40.82,106.04 38.55,106.04 38.55,109.33z M34.02,109.33L36.28,109.33 36.28,106.04 34.02,106.04 34.02,109.33z M29.48,109.33L31.75,109.33 31.75,106.04 29.48,106.04 29.48,109.33z M24.94,109.33L27.21,109.33 27.21,106.04 24.94,106.04 24.94,109.33z M20.41,109.33L22.68,109.33 22.68,106.04 20.41,106.04 20.41,109.33z M15.87,109.33L18.14,109.33 18.14,106.04 15.87,106.04 15.87,109.33z M11.34,109.33L13.61,109.33 13.61,106.04 11.34,106.04 11.34,109.33z M6.8,109.33L9.07,109.33 9.07,106.04 6.8,106.04 6.8,109.33z M2.27,109.33L4.54,109.33 4.54,106.04 2.27,106.04 2.27,109.33z M0,112.62L2.27,112.62 2.27,109.33 0,109.33 0,112.62z" />
+              </DrawingGroup>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <Style x:Key="ContactDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource ContactDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="ContactDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource ContactDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+  
+  <DrawingImage x:Key="PolicyDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V226.008 H215.433 V0 H0 Z">
+        <DrawingGroup.Transform>
+          <TranslateTransform X="0.0024781986139714718" Y="0" />
+        </DrawingGroup.Transform>
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-10.2">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,65.582,-28.1">
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,107.356,-6.45976">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M215.433,226.008z M0,0z M0,226.01L25.26,200.17 25.26,51.59 0,45.13 0,226.01z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,101.041,-9.66338E-13">
+                <GeometryDrawing Brush="#FF000000" Geometry="F0 M215.433,226.008z M0,0z M0,226.01L25.26,200.17 25.26,45.13 0,70.97 0,226.01z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,6.31507,-9.66338E-13">
+                <GeometryDrawing Brush="#FF000000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,70.9738,94.726,155.034" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-6.45976">
+                <GeometryDrawing Brush="#FFC0C0C0">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,70.9738,101.041,155.034" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.31894E-12,-161.494">
+                <GeometryDrawing Brush="#FFC0C0C0" Geometry="F0 M215.433,226.008z M0,0z M0,226.01L101.04,226.01 126.3,200.17 25.26,200.17 0,226.01z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,101.041,-6.45976">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M215.433,226.008z M0,0z M0,226.01L25.26,200.17 25.26,45.13 0,70.97 0,226.01z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-158.264">
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M215.433,226.008z M0,0z M0,222.78L101.04,222.78 97.88,226.01 0,226.01 0,222.78z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,5.30576E-13,-6.45976">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M215.433,226.008z M0,0z M0,70.97L0,226.01 3.16,222.78 3.16,74.2 0,70.97z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-116.276">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,222.778,101.041,3.2299" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.15753,-113.046">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,222.778,97.8835,3.2299" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-71.0574">
+                <GeometryDrawing Brush="#FF808080">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,222.778,101.041,3.2299" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,3.15753,-67.8275">
+                <GeometryDrawing Brush="#FFFFFFFF">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,222.778,97.8835,3.2299" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,69.4657,-19.3793">
+                <GeometryDrawing Brush="#FFFF0000">
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,213.089,18.9452,12.9195" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,1.31894E-12,-161.494">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M215.433,226.008z M0,0z M126.3,200.17L123.14,203.4 25.26,203.4 3.16,226.01 0,226.01 25.26,200.17 126.3,200.17z" />
+              </DrawingGroup>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,17.2346,-1.08002E-12">
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,10.9175,-109.176">
+                <GeometryDrawing Geometry="F0 M215.433,226.008z M0,0z M0,226.01L90.04,226.01A11.5295,12.4807,-180,0,0,80.04,204.35L0,204.35 0,226.01z">
+                  <GeometryDrawing.Brush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="-1.83690953073357E-16,-1,1,-1.83690953073357E-16,1.11022302462516E-16,1">
+                      <GradientStop Color="#FFC0C0C0" Offset="0" />
+                      <GradientStop Color="#FFFFFFFF" Offset="1" />
+                    </LinearGradientBrush>
+                  </GeometryDrawing.Brush>
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0,-0.878715">
+                <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M215.433,226.008z M0,0z M10.92,96.05L90.95,96.05A46.118,49.9228,-180,0,0,90.95,161.03A44.0374,34.0022,96.56,0,1,90.95,226.01L10.92,226.01A45.3978,35.4288,-75.75,0,0,10.92,161.03A44.7157,34.4989,84.37,0,1,10.92,96.05z">
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,0.101362,-2.55795E-13">
+                <GeometryDrawing Geometry="F0 M215.433,226.008z M0,0z M0.81,203.47L80.85,203.47A12.5055,13.5372,-180,0,0,90.85,225.13L20.82,225.13A15.8183,17.1234,0,0,1,0.81,203.47z">
+                  <GeometryDrawing.Brush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="-1.83690953073357E-16,-1,1,-1.83690953073357E-16,1.11022302462516E-16,1">
+                      <GradientStop Color="#FFC0C0C0" Offset="0" />
+                      <GradientStop Color="#FFFFFFFF" Offset="1" />
+                    </LinearGradientBrush>
+                  </GeometryDrawing.Brush>
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,28.4861,-44.1978">
+                <GeometryDrawing Brush="#FF808080" Geometry="F0 M215.433,226.008z M0,0z M0,153.5L0,158.68 18.87,158.68 18.87,153.5 0,153.5z M23.59,153.5L23.59,158.68 33.02,158.68 33.02,153.5 23.59,153.5z M37.74,153.5L37.74,158.68 42.46,158.68 42.46,153.5 37.74,153.5z M28.31,169.03L28.31,174.21 42.46,174.21 42.46,169.03 28.31,169.03z M0,169.03L0,174.21 9.44,174.21 9.44,169.03 0,169.03z M0,187.16L0,192.34 14.15,192.34 14.15,187.16 0,187.16z M0,205.29L0,210.47 14.15,210.47 14.15,205.29 0,205.29z M0,220.83L0,226.01 18.87,226.01 18.87,220.83 0,220.83z M23.59,220.83L23.59,226.01 37.74,226.01 37.74,220.83 23.59,220.83z M28.31,205.29L28.31,210.47 42.46,210.47 42.46,205.29 28.31,205.29z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,40.6169,-60.6779">
+                <GeometryDrawing Brush="#FF0000FF" Geometry="F0 M215.433,226.008z M0,0z M0,184.57L0,189.75 9.44,189.75 9.44,184.57 0,184.57z M4.72,202.7L4.72,207.88 18.87,207.88 18.87,202.7 4.72,202.7z M4.72,220.83L4.72,226.01 9.44,226.01 9.44,220.83 4.72,220.83z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="1,0,0,1,25.4534,-47.4938">
+                <GeometryDrawing Brush="#FF0000FF" Geometry="F0 M215.433,226.008z M0,0z M14.15,169.03L14.15,174.21 23.59,174.21 23.59,169.03 14.15,169.03z M18.87,187.16L18.87,192.34 33.02,192.34 33.02,187.16 18.87,187.16z M18.87,205.29L18.87,210.47 23.59,210.47 23.59,205.29 18.87,205.29z M0,153.5L0,158.68 18.87,158.68 18.87,153.5 0,153.5z M23.59,153.5L23.59,158.68 33.02,158.68 33.02,153.5 23.59,153.5z M37.74,153.5L37.74,158.68 42.46,158.68 42.46,153.5 37.74,153.5z M28.31,169.03L28.31,174.21 42.46,174.21 42.46,169.03 28.31,169.03z M0,169.03L0,174.21 9.44,174.21 9.44,169.03 0,169.03z M0,187.16L0,192.34 14.15,192.34 14.15,187.16 0,187.16z M0,205.29L0,210.47 14.15,210.47 14.15,205.29 0,205.29z M0,220.83L0,226.01 18.87,226.01 18.87,220.83 0,220.83z M23.59,220.83L23.59,226.01 37.74,226.01 37.74,220.83 23.59,220.83z M28.31,205.29L28.31,210.47 42.46,210.47 42.46,205.29 28.31,205.29z" />
+              </DrawingGroup>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <Style x:Key="PolicyDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource PolicyDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="PolicyDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource PolicyDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+
+  <DrawingImage x:Key="PdrzDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V155.517 H152.844 V0 H0 Z">
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,0.75,-10.2">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,6.77657,6.77657">
+              <GeometryDrawing Brush="#F0E68C" Geometry="F0 M152.844,155.517z M0,0z M0,29.02L0,155.52 144.57,155.52 144.57,29.02 72.28,29.02 72.28,10.95 0,10.95 0,29.02z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1">
+              <GeometryDrawing Geometry="F0 M152.844,155.517z M0,0z M0,29.02L0,155.52 144.57,155.52 144.57,29.02 72.28,29.02 72.28,10.95 0,10.95 0,29.02z">
+                <GeometryDrawing.Brush>
+                  <DrawingBrush ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0,0,6,6" Viewbox="0,0,6,6" TileMode="Tile" Opacity="1">
+                    <DrawingBrush.Drawing>
+                      <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                          <RectangleGeometry Rect="0,0,64,64" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup.Transform>
+                          <ScaleTransform ScaleX="0.09375" ScaleY="0.09375" />
+                        </DrawingGroup.Transform>
+                        <!-- Remove the ImageDrawing and BitmapImage -->
+                      </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                  </DrawingBrush>
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Pen>
+                  <Pen Brush="#FF000000" Thickness="0.75" StartLineCap="Flat" EndLineCap="Flat" LineJoin="Miter" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,10.2195,-10.4681">
+              <DrawingGroup Opacity="1" Transform="-0.939692620785908,0.342020143325669,0.342020143325669,0.939692620785908,61.1552,-19.105">
+                <GeometryDrawing Brush="#FFE6E6E6" Geometry="F0 M152.844,155.517z M0,0z M0,155.52L39.53,115.99 107.3,115.99 67.77,155.52 0,155.52z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="-0.939692620785908,0.342020143325669,0.342020143325669,0.939692620785908,-0.592354,9.37882">
+                <GeometryDrawing Brush="#FF9A9A9A" Geometry="F0 M152.844,155.517z M0,0z M0,149.87L39.53,110.34 39.53,115.99 0,155.52 0,149.87z" />
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="-0.939692620785908,0.342020143325669,0.342020143325669,0.939692620785908,52.2296,-18.8611">
+                <GeometryDrawing Brush="#FFB3B3B3" Geometry="F0 M152.844,155.517z M0,0z M0,155.52L33.88,121.63 90.35,121.63 56.47,155.52 0,155.52z">
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.12" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="-0.939692620785908,0.342020143325669,0.342020143325669,0.939692620785908,63.5549,-62.0454">
+                <GeometryDrawing Geometry="F0 M152.844,155.517z M0,0z M56.47,155.52L0,127.28 67.77,127.28 124.24,155.52 56.47,155.52z">
+                  <GeometryDrawing.Brush>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0" MappingMode="RelativeToBoundingBox" SpreadMethod="Pad" Opacity="1" Transform="-1.83690953073357E-16,-1,1,-1.83690953073357E-16,1.11022302462516E-16,1">
+                      <GradientStop Color="#FFC0C0C0" Offset="0" />
+                      <GradientStop Color="#FFE6E6E6" Offset="1" />
+                    </LinearGradientBrush>
+                  </GeometryDrawing.Brush>
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="-0.939692620785908,0.342020143325669,0.342020143325669,0.939692620785908,63.0866,-13.7984">
+                <GeometryDrawing Brush="#FFC0C0C0">
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                  <GeometryDrawing.Geometry>
+                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,149.87,67.7657,5.6472" />
+                  </GeometryDrawing.Geometry>
+                </GeometryDrawing>
+              </DrawingGroup>
+              <DrawingGroup Opacity="1" Transform="-0.939692620785908,0.342020143325669,0.342020143325669,0.939692620785908,79.0064,-19.5927">
+                <GeometryDrawing Geometry="F0 M152.844,155.517z M0,0z M16.94,155.52L16.94,149.87 56.47,110.34 0,82.1 67.77,82.1 124.24,110.34 124.24,115.99 84.71,155.52 16.94,155.52">
+                  <GeometryDrawing.Pen>
+                    <Pen Brush="#FF000000" Thickness="0.75" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                  </GeometryDrawing.Pen>
+                </GeometryDrawing>
+              </DrawingGroup>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <Style x:Key="PdrzDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource PdrzDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="PdrzDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource PdrzDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+
+  <DrawingImage x:Key="ContainerDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V193.41 H192.155 V0 H0 Z">
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,0.375,-10.2">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,8.57037,8.57037">
+              <GeometryDrawing Brush="#F0E68C" Geometry="F0 M192.155,193.41z M0,0z M0,33.43L0,193.41 182.83,193.41 182.83,33.43 91.42,33.43 91.42,10.58 0,10.58 0,33.43z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1">
+              <GeometryDrawing Geometry="F0 M192.155,193.41z M0,0z M0,33.43L0,193.41 182.83,193.41 182.83,33.43 91.42,33.43 91.42,10.58 0,10.58 0,33.43z">
+                <GeometryDrawing.Brush>
+                  <DrawingBrush ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0,0,6,6" Viewbox="0,0,6,6" TileMode="Tile" Opacity="1">
+                    <DrawingBrush.Drawing>
+                      <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                          <RectangleGeometry Rect="0,0,64,64" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup.Transform>
+                          <ScaleTransform ScaleX="0.09375" ScaleY="0.09375" />
+                        </DrawingGroup.Transform>
+                        <!-- Remove the ImageDrawing and BitmapImage -->
+                      </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                  </DrawingBrush>
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Pen>
+                  <Pen Brush="#FF000000" Thickness="0.75" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+
+  <Style x:Key="ContainerDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource ContainerDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="ContainerDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource ContainerDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
 
 
-    <s:Toolbox x:Key="NetStencils" ItemSize="60,60" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+  <DrawingImage x:Key="UniversalDrawingImage">
+    <DrawingImage.Drawing>
+      <DrawingGroup ClipGeometry="M0,0 V129.63 H125.386 V0 H0 Z">
+        <DrawingGroup Opacity="1">
+          <DrawingGroup Opacity="1" Transform="1,0,0,1,0.375,-10.2">
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,5.58071,5.58071">
+              <GeometryDrawing Brush="#F0E68C" Geometry="F0 M125.386,129.63z M0,0z M0,25.46L0,129.63 119.06,129.63 119.06,25.46 59.53,25.46 59.53,10.58 0,10.58 0,25.46z" />
+            </DrawingGroup>
+            <DrawingGroup Opacity="1">
+              <GeometryDrawing Geometry="F0 M125.386,129.63z M0,0z M0,25.46L0,129.63 119.06,129.63 119.06,25.46 59.53,25.46 59.53,10.58 0,10.58 0,25.46z">
+                <GeometryDrawing.Brush>
+                  <DrawingBrush ViewportUnits="Absolute" ViewboxUnits="Absolute" Viewport="0,0,6,6" Viewbox="0,0,6,6" TileMode="Tile" Opacity="1">
+                    <DrawingBrush.Drawing>
+                      <DrawingGroup>
+                        <DrawingGroup.ClipGeometry>
+                          <RectangleGeometry Rect="0,0,64,64" />
+                        </DrawingGroup.ClipGeometry>
+                        <DrawingGroup.Transform>
+                          <ScaleTransform ScaleX="0.09375" ScaleY="0.09375" />
+                        </DrawingGroup.Transform>
+                        <!-- Remove the ImageDrawing and BitmapImage -->
+                      </DrawingGroup>
+                    </DrawingBrush.Drawing>
+                  </DrawingBrush>
+                </GeometryDrawing.Brush>
+                <GeometryDrawing.Pen>
+                  <Pen Brush="#FF000000" Thickness="0.75" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+            </DrawingGroup>
+            <DrawingGroup Opacity="1" Transform="1,0,0,1,7.44094,-14.8819">
+              <GeometryDrawing Geometry="F0 M125.386,129.63z M0,0z M104.17,99.87L0,99.87">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Green" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+              <GeometryDrawing Geometry="F0 M125.386,129.63z M0,0z M104.17,84.98L0,84.98">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Green" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+              <GeometryDrawing Geometry="F0 M125.386,129.63z M0,0z M104.17,70.1L0,70.1">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Green" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+              <GeometryDrawing Geometry="F0 M125.386,129.63z M0,0z M104.17,55.22L0,55.22">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Green" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+              <GeometryDrawing Geometry="F0 M125.386,129.63z M0,0z M104.17,129.63L0,129.63">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Green" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+              <GeometryDrawing Geometry="F0 M125.386,129.63z M0,0z M104.17,114.75L0,114.75">
+                <GeometryDrawing.Pen>
+                  <Pen Brush="Green" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                </GeometryDrawing.Pen>
+              </GeometryDrawing>
+            </DrawingGroup>
+          </DrawingGroup>
+        </DrawingGroup>
+      </DrawingGroup>
+    </DrawingImage.Drawing>
+  </DrawingImage>
+  <Style x:Key="UniversalDrawingImageStyle" TargetType="Image">
+    <Setter Property="Source" Value="{StaticResource UniversalDrawingImage}"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+  </Style>
+
+  <Style x:Key="UniversalDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource UniversalDrawingImageStyle}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Opacity" Value="0"/>
+  </Style>
+  <s:Toolbox x:Key="NetStencils" ItemSize="60,60" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
             <Grid>
 
@@ -64,6 +930,147 @@
 
                 </TextBox>
             </Grid>
+          <Grid>
+
+            <Image Style="{StaticResource ServerDrawingImageStyle}"  ToolTip="Домен">
+              <s:DesignerItem.DragThumbTemplate>
+                <ControlTemplate>
+
+
+                  <Image Style="{StaticResource ServerDrawingImage_DragThumb}"/>
+
+
+
+                </ControlTemplate>
+              </s:DesignerItem.DragThumbTemplate>
+
+            </Image>
+            <TextBox  Style="{StaticResource Textadapter}">
+
+            </TextBox>
+          </Grid>
+          <Grid>
+
+            <Image Style="{StaticResource UserDrawingImageStyle}"  ToolTip="Пользователь">
+              <s:DesignerItem.DragThumbTemplate>
+                <ControlTemplate>
+
+
+                  <Image Style="{StaticResource UserDrawingImage_DragThumb}"/>
+
+
+
+                </ControlTemplate>
+              </s:DesignerItem.DragThumbTemplate>
+
+            </Image>
+            <TextBox  Style="{StaticResource Textadapter}">
+
+            </TextBox>
+          </Grid>
+
+          <Grid>
+
+            <Image Style="{StaticResource ContactDrawingImageStyle}"  ToolTip="Контакт">
+              <s:DesignerItem.DragThumbTemplate>
+                <ControlTemplate>
+
+
+                  <Image Style="{StaticResource ContactDrawingImage_DragThumb}"/>
+
+
+
+                </ControlTemplate>
+              </s:DesignerItem.DragThumbTemplate>
+
+            </Image>
+            <TextBox  Style="{StaticResource Textadapter}">
+
+            </TextBox>
+          </Grid>
+
+
+
+
+          <Grid>
+
+            <Image Style="{StaticResource PolicyDrawingImageStyle}"  ToolTip="Политика">
+              <s:DesignerItem.DragThumbTemplate>
+                <ControlTemplate>
+
+
+                  <Image Style="{StaticResource PolicyDrawingImage_DragThumb}"/>
+
+
+
+                </ControlTemplate>
+              </s:DesignerItem.DragThumbTemplate>
+
+            </Image>
+            <TextBox  Style="{StaticResource Textadapter}">
+
+            </TextBox>
+          </Grid>
+
+          <Grid>
+
+            <Image Style="{StaticResource PdrzDrawingImageStyle}"  ToolTip="Подразделение">
+              <s:DesignerItem.DragThumbTemplate>
+                <ControlTemplate>
+
+
+                  <Image Style="{StaticResource PdrzDrawingImage_DragThumb}"/>
+
+
+
+                </ControlTemplate>
+              </s:DesignerItem.DragThumbTemplate>
+
+            </Image>
+            <TextBox  Style="{StaticResource Textadapter}">
+
+            </TextBox>
+          </Grid>
+
+          <Grid>
+
+            <Image Style="{StaticResource ContainerDrawingImageStyle}"  ToolTip="Контейнер">
+              <s:DesignerItem.DragThumbTemplate>
+                <ControlTemplate>
+
+
+                  <Image Style="{StaticResource ContainerDrawingImage_DragThumb}"/>
+
+
+
+                </ControlTemplate>
+              </s:DesignerItem.DragThumbTemplate>
+
+            </Image>
+            <TextBox  Style="{StaticResource Textadapter}">
+
+            </TextBox>
+          </Grid>
+
+          <Grid>
+
+            <Image Style="{StaticResource UniversalDrawingImageStyle}"  ToolTip="Контейнер">
+              <s:DesignerItem.DragThumbTemplate>
+                <ControlTemplate>
+
+
+                  <Image Style="{StaticResource UniversalDrawingImage_DragThumb}"/>
+
+
+
+                </ControlTemplate>
+              </s:DesignerItem.DragThumbTemplate>
+
+            </Image>
+            <TextBox  Style="{StaticResource Textadapter}">
+
+            </TextBox>
+          </Grid>
         </ItemsControl.Items>
     </s:Toolbox>
 

@@ -39,7 +39,7 @@
             <StackPanel Grid.Column="0" Margin="0,0,5,0">
                 <Expander Header="Простые Процессы" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
                 <Expander Header="Формы" Content="{StaticResource ShapeStencils}" IsExpanded="True"/>
-                <Expander Header="Сетевые инструкции " Content="{StaticResource NetStencils}" IsExpanded="True"/>
+                <Expander Header="Объекты Active Directory " Content="{StaticResource NetStencils}" IsExpanded="True"/>
                 <Expander Header="Сценарий выполнения UML " Content="{StaticResource UMLPosl}" IsExpanded="True"/>
                 
                
