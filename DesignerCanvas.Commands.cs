@@ -900,6 +900,7 @@ namespace DiagramDesigner
             XElement serializedItems = new XElement("DesignerItems",
                                        from item in designerItems
                                        let contentXaml = XamlWriter.Save(((DesignerItem)item).Content)
+                                       let rotateTransform = item.RenderTransform as RotateTransform
                                        select new XElement("DesignerItem",
                                                   new XElement("Left", Canvas.GetLeft(item)),
                                                   new XElement("Top", Canvas.GetTop(item)),
@@ -909,12 +910,15 @@ namespace DiagramDesigner
                                                   new XElement("zIndex", Canvas.GetZIndex(item)),
                                                   new XElement("IsGroup", item.IsGroup),
                                                   new XElement("ParentID", item.ParentID),
+                                                  new XElement("RotationAngle", rotateTransform != null ? rotateTransform.Angle : 0),
                                                   new XElement("Content", contentXaml)
                                               )
                                    );
 
             return serializedItems;
         }
+
+
 
         private XElement SerializeConnections(IEnumerable<Connection> connections)
         {
@@ -944,10 +948,17 @@ namespace DiagramDesigner
             Canvas.SetLeft(item, Double.Parse(itemXML.Element("Left").Value, CultureInfo.InvariantCulture) + OffsetX);
             Canvas.SetTop(item, Double.Parse(itemXML.Element("Top").Value, CultureInfo.InvariantCulture) + OffsetY);
             Canvas.SetZIndex(item, Int32.Parse(itemXML.Element("zIndex").Value));
+
+            double rotationAngle = Double.Parse(itemXML.Element("RotationAngle").Value, CultureInfo.InvariantCulture);
+            RotateTransform rotateTransform = new RotateTransform(rotationAngle);
+            item.RenderTransform = rotateTransform;
+            item.RenderTransformOrigin = new Point(0.5, 0.5); // Центрируем вращение
+
             Object content = XamlReader.Load(XmlReader.Create(new StringReader(itemXML.Element("Content").Value)));
             item.Content = content;
             return item;
         }
+
 
         private void CopyCurrentSelection()
         {
