@@ -13,14 +13,17 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Xml;
 using System.Xml.Linq;
+using ArsVisual.NotifyComponents.Not;
 using ArsVisual.pages;
 using ArsVisual.SettingsMaster;
 using Microsoft.Win32;
-
+using Hardcodet.Wpf.TaskbarNotification;
+using System.Windows.Controls.Primitives;
 namespace DiagramDesigner
 {
     public partial class DesignerCanvas
     {
+        TaskbarIcon ts = new TaskbarIcon();
         public static RoutedCommand Group = new RoutedCommand();
         public static RoutedCommand Ungroup = new RoutedCommand();
         public static RoutedCommand BringForward = new RoutedCommand();
@@ -146,7 +149,16 @@ namespace DiagramDesigner
                     encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
                   
                     encoder.Save(outStream);
+
+
                 }
+
+               
+                MessageSave messageSave = new MessageSave();
+                messageSave.BalloonText = saveFileDialog.FileName.ToString();
+                messageSave.Headersave = "Изображение сохранено";
+                ts.ShowCustomBalloon(messageSave, PopupAnimation.Slide, 4000);
+
             }
 
            
