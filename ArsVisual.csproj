@@ -10,6 +10,8 @@
 
   <ItemGroup>
     <None Remove="icons\close.png" />
+    <None Remove="icons\collage.gif" />
+    <None Remove="icons\folder.gif" />
     <None Remove="icons\integration.png" />
   </ItemGroup>
 
@@ -87,9 +89,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="icons\collage.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="icons\close.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="icons\folder.gif" />
     <Resource Include="icons\integration.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
@@ -97,6 +104,7 @@
 
   <ItemGroup>
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
+    <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
 </Project>

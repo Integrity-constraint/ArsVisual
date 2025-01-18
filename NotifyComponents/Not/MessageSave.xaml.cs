@@ -8,6 +8,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ArsVisual.NotifyComponents.Not
 {
@@ -31,6 +32,19 @@ namespace ArsVisual.NotifyComponents.Not
                  typeof(string),
                  typeof(MessageSave),
                  new FrameworkPropertyMetadata(string.Empty));
+
+        public static readonly DependencyProperty IconmsgProperty =
+          DependencyProperty.Register(nameof(Iconmsg),
+              typeof(ImageSource),
+              typeof(MessageSave),
+              new FrameworkPropertyMetadata(null));
+
+        public ImageSource Iconmsg
+        {
+            get { return (ImageSource)GetValue(IconmsgProperty); }
+            set { SetValue(IconmsgProperty, value); }
+        }
+
         public string BalloonText
         {
             get { return (string)GetValue(BalloonTextProperty); }
@@ -53,14 +67,14 @@ namespace ArsVisual.NotifyComponents.Not
        
         private void OnBalloonClosing(object sender, RoutedEventArgs e)
         {
-            e.Handled = true; //suppresses the popup from being closed immediately
+            e.Handled = true; 
             isClosing = true;
         }
 
 
         private void imgClose_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            //the tray icon assigned this attached property to simplify access
+            
             TaskbarIcon taskbarIcon = TaskbarIcon.GetParentTaskbarIcon(this);
             taskbarIcon.CloseBalloon();
         }

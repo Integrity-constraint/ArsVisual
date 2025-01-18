@@ -18,12 +18,16 @@ using ArsVisual.pages;
 using ArsVisual.SettingsMaster;
 using Microsoft.Win32;
 using Hardcodet.Wpf.TaskbarNotification;
-using System.Windows.Controls.Primitives;
+using System.Windows.Controls.Primitives; 
+
 namespace DiagramDesigner
 {
     public partial class DesignerCanvas
     {
         TaskbarIcon ts = new TaskbarIcon();
+
+        
+        MessageSave messageSave = new MessageSave();
         public static RoutedCommand Group = new RoutedCommand();
         public static RoutedCommand Ungroup = new RoutedCommand();
         public static RoutedCommand BringForward = new RoutedCommand();
@@ -77,6 +81,16 @@ namespace DiagramDesigner
             this.AllowDrop = true;
             Clipboard.Clear();
         }
+        #region NotifyMethod
+
+        private void NotifyUser(string balloontext, string header,string imgtext,int time, PopupAnimation popup )
+        {
+            messageSave.BalloonText = balloontext;
+            messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
+            messageSave.Headersave = header;
+            ts.ShowCustomBalloon(messageSave, popup, time);
+        }
+        #endregion
         #region ColoRCHANGE
 
         private void ChangeColorCommand_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -153,11 +167,7 @@ namespace DiagramDesigner
 
                 }
 
-               
-                MessageSave messageSave = new MessageSave();
-                messageSave.BalloonText = saveFileDialog.FileName.ToString();
-                messageSave.Headersave = "Изображение сохранено";
-                ts.ShowCustomBalloon(messageSave, PopupAnimation.Slide, 4000);
+                NotifyUser(saveFileDialog.FileName.ToString(), "Изображение сохранено", "collage.gif",4000, PopupAnimation.Slide );
 
             }
 
@@ -878,6 +888,11 @@ namespace DiagramDesigner
                 try
                 {
                     xElement.Save(saveFile.FileName);
+                   
+
+                    NotifyUser(saveFile.FileName.ToString(), "Файл сохранён", "folder.gif", 4000, PopupAnimation.Scroll);
+
+
                 }
                 catch (Exception ex)
                 {

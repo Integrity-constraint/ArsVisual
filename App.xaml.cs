@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Windows;
+using ArsVisual.NotifyComponents.Not;
 
 namespace DiagramDesigner
 {
@@ -13,6 +14,12 @@ namespace DiagramDesigner
     /// </summary>
     public partial class App : Application
     {
-       
+        private TaskbarIcon ts;
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            ts = (TaskbarIcon)FindResource("MyNotifyIcon");
+        }
     }
 }

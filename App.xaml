@@ -1,7 +1,7 @@
 ﻿<Application x:Class="DiagramDesigner.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    StartupUri="Window1.xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:tb="http://www.hardcodet.net/taskbar"
+             StartupUri="Window1.xaml">
   <Application.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -22,15 +22,19 @@
           <ResourceDictionary Source="Resources/Connection.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/UMLPosl.xaml"/>
-       
-       
-       
-          
+
+      
+
+
         <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/Styles/SettingsTree.xaml"/>
            <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml"/>
           
       </ResourceDictionary.MergedDictionaries>
-    </ResourceDictionary>
+            <tb:TaskbarIcon x:Key="MyNotifyIcon"
+         IconSource="/icons/integration.png"
+         ToolTipText="hello world" />
+        </ResourceDictionary>
+       
   </Application.Resources>
 </Application>

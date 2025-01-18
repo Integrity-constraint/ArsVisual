@@ -1,6 +1,7 @@
 <UserControl x:Class="ArsVisual.NotifyComponents.Not.MessageSave"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:gif="http://wpfanimatedgif.codeplex.com"
              xmlns:tb="http://www.hardcodet.net/taskbar"
              x:Name="me"
              Height="120"
@@ -86,35 +87,27 @@
                              x:Name="FadeOut_BeginStoryboard" />
     </EventTrigger>
   </UserControl.Triggers>
-  <Grid x:Name="grid"
+  <Grid  x:Name="grid"
           MouseEnter="grid_MouseEnter">
-    <Border HorizontalAlignment="Stretch"
+    <Border Background="White"  HorizontalAlignment="Stretch"
                 Margin="5,5,5,5"
                 BorderThickness="1,1,1,1"
                 BorderBrush="#FF997137">
       <Border.Effect>
         <DropShadowEffect Color="#FF747474" />
       </Border.Effect>
-      <Border.Background>
-        <LinearGradientBrush EndPoint="0.5,1"
-                                     StartPoint="0.5,0">
-          <GradientStop Color="#FF4B4B4B"
-                                  Offset="0" />
-          <GradientStop Color="#FF8F8F8F"
-                                  Offset="1" />
-        </LinearGradientBrush>
-      </Border.Background>
+     
     </Border>
     <Image HorizontalAlignment="Left"
                Margin="10,31,0,0"
                Width="57"
-               Source="/icons/integration.png"
+             
                Stretch="Fill"
                Height="53"
-               VerticalAlignment="Top" />
+               VerticalAlignment="Top" gif:ImageBehavior.AnimatedSource="{Binding Path=Iconmsg, ElementName=me, Mode=Default}" />
     <TextBlock Margin="72,49,10,0"
                    VerticalAlignment="Top"
-                   Foreground="#FFECAD25"
+                   Foreground="Black"
                    TextWrapping="Wrap" Height="52">
             <Run Text="{Binding Path=BalloonText, ElementName=me, Mode=Default}"/>
 
@@ -141,7 +134,7 @@
                    Height="23"
                    Text="{Binding Path=Headersave, ElementName=me, Mode=Default}"
                    TextWrapping="Wrap"
-                   Foreground="#FFECAD25"
+                   Foreground="Black"
                    FontWeight="Bold" />
     <Image HorizontalAlignment="Right"
                Margin="0,10,10,0"
@@ -151,7 +144,7 @@
                Source="/icons/close.png"
                Stretch="Fill"
                Opacity="0.4"
-               ToolTip="Close Balloon"
+               ToolTip="Закрыть сообщение"
                x:Name="imgClose"
                MouseDown="imgClose_MouseDown" />
 
