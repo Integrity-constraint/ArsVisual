@@ -18,7 +18,8 @@ using ArsVisual.pages;
 using ArsVisual.SettingsMaster;
 using Microsoft.Win32;
 using Hardcodet.Wpf.TaskbarNotification;
-using System.Windows.Controls.Primitives; 
+using System.Windows.Controls.Primitives;
+using ArsVisual.NotifyComponents.Error;
 
 namespace DiagramDesigner
 {
@@ -915,7 +916,10 @@ namespace DiagramDesigner
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                   // MessageBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+
+                    ErrorTrace errorTrace = new ErrorTrace(e.StackTrace);
+                    errorTrace.Show();
                 }
             }
 

@@ -7,23 +7,27 @@
         mc:Ignorable="d"
         Title="ErrorTrace" Height="450"  Width="400" WindowStyle="None">
     <Grid MouseLeftButtonDown="MouseLeftButtonDown">
-        <TextBlock FontSize="30" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="49" Width="280">
+        <TextBlock FontSize="30" HorizontalAlignment="Center" Margin="0,10,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="51" Width="304" FontFamily="Bahnschrift Light">
             Произошла ошибка
         </TextBlock>
-        <ScrollViewer Margin="10,104,10,104">
-            <TextBlock  >
+        <ScrollViewer Margin="10,66,10,263">
+            <TextBlock TextWrapping="Wrap"  >
 
             </TextBlock>
         </ScrollViewer>
         <Image HorizontalAlignment="Right"
            VerticalAlignment="Top"
-           Width="45"
-           Height="34"
+           Width="23"
+           Height="21"
            Source="/icons/close.png"
            Stretch="Fill"
            Opacity="0.4"
            ToolTip="Закрыть окно ошибки"
            x:Name="imgClose"
-           MouseDown="imgClose_MouseDown" Margin="0,5,10,0" />
+           MouseDown="imgClose_MouseDown" Margin="0,10,10,0" />
+        <TextBlock FontSize="30" HorizontalAlignment="Center" Margin="0,209,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="51" Width="304" FontFamily="Bahnschrift Light"><Run Text="Возможные решения"/></TextBlock>
+        <ScrollViewer Margin="10,290,10,39">
+            <TextBlock TextWrapping="Wrap"  />
+        </ScrollViewer>
     </Grid>
 </Window>

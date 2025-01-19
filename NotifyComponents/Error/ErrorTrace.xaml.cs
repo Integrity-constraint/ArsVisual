@@ -19,9 +19,11 @@ namespace ArsVisual.NotifyComponents.Error
     /// </summary>
     public partial class ErrorTrace : Window
     {
-        public ErrorTrace()
+        string errormsg;
+        public ErrorTrace(string ex)
         {
             InitializeComponent();
+            errormsg = ex;
         }
 
         private void imgClose_MouseDown(object sender, MouseButtonEventArgs e)
@@ -33,5 +35,8 @@ namespace ArsVisual.NotifyComponents.Error
         {
             this.DragMove();
         }
+
+
+
     }
 }
