@@ -144,7 +144,7 @@
                Source="/icons/close.png"
                Stretch="Fill"
                Opacity="0.4"
-               ToolTip="Закрыть сообщение"
+               
                x:Name="imgClose"
                MouseDown="imgClose_MouseDown" />
 

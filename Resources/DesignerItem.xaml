@@ -117,26 +117,45 @@
             <s:Connector x:Name="Bottom" Orientation="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         </Grid>
     </ControlTemplate>
-
+    
+    <Style x:Key="CornerResizeThumbStyle" TargetType="{x:Type c:ResizeThumb}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type c:ResizeThumb}">
+                    <!-- Круг для угловых ResizeThumb -->
+                    <Ellipse Fill="White" Stroke="Gray" StrokeThickness="1"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!-- ResizeDecorator Default Template -->
     <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
         <Grid Opacity="0.7" SnapsToDevicePixels="true">
+            <!-- Верхний ResizeThumb -->
             <c:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
-                     VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+                 VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            <!-- Левый ResizeThumb -->
             <c:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
-                     VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+                 VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+            <!-- Правый ResizeThumb -->
             <c:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
-                     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+                 VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+            <!-- Нижний ResizeThumb -->
             <c:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
-                     VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
-            <c:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="-6 -6 0 0"
-                     VerticalAlignment="Top" HorizontalAlignment="Left"/>
-            <c:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="0 -6 -6 0"
-                     VerticalAlignment="Top" HorizontalAlignment="Right"/>
-            <c:ResizeThumb Width="7" Height="7" Cursor="SizeNESW" Margin="-6 0 0 -6"
-                     VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
-            <c:ResizeThumb Width="7" Height="7" Cursor="SizeNWSE" Margin="0 0 -6 -6"
-                     VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                 VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+            <!-- Угловые ResizeThumb -->
+            <c:ResizeThumb Width="8" Height="8" Cursor="SizeNWSE" Margin="-6 -6 0 0"
+                 VerticalAlignment="Top" HorizontalAlignment="Left"
+                 Style="{StaticResource CornerResizeThumbStyle}"/>
+            <c:ResizeThumb Width="8" Height="8" Cursor="SizeNESW" Margin="0 -6 -6 0"
+                 VerticalAlignment="Top" HorizontalAlignment="Right"
+                 Style="{StaticResource CornerResizeThumbStyle}"/>
+            <c:ResizeThumb Width="8" Height="8" Cursor="SizeNESW" Margin="-6 0 0 -6"
+                 VerticalAlignment="Bottom" HorizontalAlignment="Left"
+              Style="{StaticResource CornerResizeThumbStyle}" />
+            <c:ResizeThumb Width="8" Height="8" Cursor="SizeNWSE" Margin="0 0 -6 -6"
+                 VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                 Style="{StaticResource CornerResizeThumbStyle}"/>
         </Grid>
     </ControlTemplate>
 
