@@ -17,6 +17,7 @@ using ArsVisual.pages;
 using ArsVisual.SettingsMaster;
 using Microsoft.Win32;
 
+
 namespace DiagramDesigner
 {
     public partial class DesignerCanvas
@@ -866,6 +867,11 @@ namespace DiagramDesigner
                 try
                 {
                     xElement.Save(saveFile.FileName);
+                   
+
+                    NotifyUser(saveFile.FileName.ToString(), "Файл сохранён", "folder.gif", 4000, PopupAnimation.Scroll);
+
+
                 }
                 catch (Exception ex)
                 {
