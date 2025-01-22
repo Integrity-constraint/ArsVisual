@@ -11,7 +11,7 @@
             Произошла ошибка
         </TextBlock>
         <ScrollViewer Margin="10,66,10,263">
-            <TextBlock TextWrapping="Wrap"  >
+            <TextBlock Name="errortext" TextWrapping="Wrap"  >
 
             </TextBlock>
         </ScrollViewer>
@@ -26,7 +26,7 @@
            x:Name="imgClose"
            MouseDown="imgClose_MouseDown" Margin="0,10,10,0" />
         <TextBlock FontSize="30" HorizontalAlignment="Center" Margin="0,209,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Height="51" Width="304" FontFamily="Bahnschrift Light"><Run Text="Возможные решения"/></TextBlock>
-        <ScrollViewer Margin="10,290,10,39">
+        <ScrollViewer Name="helptext" Margin="10,290,10,39">
             <TextBlock TextWrapping="Wrap"  />
         </ScrollViewer>
     </Grid>

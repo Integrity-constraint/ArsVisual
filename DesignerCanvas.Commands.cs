@@ -27,6 +27,8 @@ namespace DiagramDesigner
     {
         TaskbarIcon ts = new TaskbarIcon();
 
+        ErrorTrace et;
+
         
         MessageSave messageSave = new MessageSave();
         public static RoutedCommand Group = new RoutedCommand();
@@ -873,7 +875,10 @@ namespace DiagramDesigner
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+
+
+                    et = new ErrorTrace(e.StackTrace);
+                    et.Show();
                 }
             }
 
@@ -897,7 +902,8 @@ namespace DiagramDesigner
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                    et = new ErrorTrace(ex.StackTrace);
+                    et.Show();
                 }
             }
         }
@@ -916,10 +922,10 @@ namespace DiagramDesigner
                 }
                 catch (Exception e)
                 {
-                   // MessageBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                    // MessageBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
 
-                    ErrorTrace errorTrace = new ErrorTrace(e.StackTrace);
-                    errorTrace.Show();
+                    et = new ErrorTrace(e.StackTrace);
+                    et.Show();
                 }
             }
 
