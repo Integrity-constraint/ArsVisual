@@ -22,6 +22,7 @@ using System.Windows.Controls.Primitives;
 using ArsVisual.NotifyComponents.Error;
 
 
+
 namespace DiagramDesigner
 {
     public partial class DesignerCanvas
@@ -29,7 +30,7 @@ namespace DiagramDesigner
         TaskbarIcon ts = new TaskbarIcon();
 
         
-        MessageSave messageSave = new MessageSave();
+        
         public static RoutedCommand Group = new RoutedCommand();
         public static RoutedCommand Ungroup = new RoutedCommand();
         public static RoutedCommand BringForward = new RoutedCommand();
@@ -87,6 +88,7 @@ namespace DiagramDesigner
 
         private void NotifyUser(string balloontext, string header,string imgtext,int time, PopupAnimation popup )
         {
+            MessageSave messageSave = new MessageSave();
             messageSave.BalloonText = balloontext;
             messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
             messageSave.Headersave = header;
@@ -890,9 +892,9 @@ namespace DiagramDesigner
                 try
                 {
                     xElement.Save(saveFile.FileName);
-                   
 
-                    NotifyUser(saveFile.FileName.ToString(), "Файл сохранён", "folder.gif", 4000, PopupAnimation.Scroll);
+
+                    NotifyUser(saveFile.FileName.ToString(), "Файл проекта сохранён", "folder.gif", 4000, PopupAnimation.Slide);
 
 
                 }
