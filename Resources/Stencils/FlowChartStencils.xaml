@@ -19,6 +19,7 @@
         <Setter Property="Text" Value="{Binding QueryString}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        
     </Style>
     <Brush x:Key="ItemStroke1">#ACADCD</Brush>
     <LinearGradientBrush x:Key="ItemBrush1" StartPoint="0,0" EndPoint="0,1" >

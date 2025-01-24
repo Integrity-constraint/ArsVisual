@@ -6,6 +6,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
+using ArsVisual.NotifyComponents.Error;
 
 namespace DiagramDesigner
 {
@@ -30,33 +31,44 @@ namespace DiagramDesigner
         {
             base.OnApplyTemplate();
 
-            if (this.ScrollViewer == null)
-                return;
+            try
+            {
+                if (this.ScrollViewer == null)
+                    return;
 
-            this.designerCanvas = this.ScrollViewer.Content as DesignerCanvas;
-            if (this.designerCanvas == null)
-                throw new Exception("DesignerCanvas must not be null!");
+                this.designerCanvas = this.ScrollViewer.Content as DesignerCanvas;
+                if (this.designerCanvas == null)
+                    throw new Exception("DesignerCanvas must not be null!");
 
-            this.zoomThumb = Template.FindName("PART_ZoomThumb", this) as Thumb;
-            if (this.zoomThumb == null)
-                throw new Exception("PART_ZoomThumb template is missing!");
+                this.zoomThumb = Template.FindName("PART_ZoomThumb", this) as Thumb;
+                if (this.zoomThumb == null)
+                    throw new Exception("PART_ZoomThumb template is missing!");
 
-            this.zoomCanvas = Template.FindName("PART_ZoomCanvas", this) as Canvas;
-            if (this.zoomCanvas == null)
-                throw new Exception("PART_ZoomCanvas template is missing!");
+                this.zoomCanvas = Template.FindName("PART_ZoomCanvas", this) as Canvas;
+                if (this.zoomCanvas == null)
+                    throw new Exception("PART_ZoomCanvas template is missing!");
 
-            this.zoomSlider = Template.FindName("PART_ZoomSlider", this) as Slider;
-            if (this.zoomSlider == null)
-                throw new Exception("PART_ZoomSlider template is missing!");
+                this.zoomSlider = Template.FindName("PART_ZoomSlider", this) as Slider;
+                if (this.zoomSlider == null)
+                    throw new Exception("PART_ZoomSlider template is missing!");
 
-            this.designerCanvas.LayoutUpdated += new EventHandler(this.DesignerCanvas_LayoutUpdated);
+                this.designerCanvas.LayoutUpdated += new EventHandler(this.DesignerCanvas_LayoutUpdated);
 
-            this.zoomThumb.DragDelta += new DragDeltaEventHandler(this.Thumb_DragDelta);
+                this.zoomThumb.DragDelta += new DragDeltaEventHandler(this.Thumb_DragDelta);
 
-            this.zoomSlider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(this.ZoomSlider_ValueChanged);
+                this.zoomSlider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(this.ZoomSlider_ValueChanged);
 
-            this.scaleTransform = new ScaleTransform();
-            this.designerCanvas.LayoutTransform = this.scaleTransform;
+                this.scaleTransform = new ScaleTransform();
+                this.designerCanvas.LayoutTransform = this.scaleTransform;
+
+            }
+            catch (Exception ex) 
+            {
+
+                ErrorTrace error = new ErrorTrace(ex.ToString());
+                error.Show();
+            }
+           
         }
 
         private void ZoomSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
