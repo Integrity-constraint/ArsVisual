@@ -20,6 +20,7 @@ using Microsoft.Win32;
 using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows.Controls.Primitives;
 using ArsVisual.NotifyComponents.Error;
+using System.Security.Cryptography;
 
 
 
@@ -29,7 +30,7 @@ namespace DiagramDesigner
     {
         TaskbarIcon ts = new TaskbarIcon();
 
-        
+
         
         public static RoutedCommand Group = new RoutedCommand();
         public static RoutedCommand Ungroup = new RoutedCommand();
@@ -88,11 +89,19 @@ namespace DiagramDesigner
 
         private void NotifyUser(string balloontext, string header,string imgtext,int time, PopupAnimation popup )
         {
-            MessageSave messageSave = new MessageSave();
-            messageSave.BalloonText = balloontext;
-            messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
-            messageSave.Headersave = header;
-            ts.ShowCustomBalloon(messageSave, popup, time);
+            try
+            {
+                MessageSave messageSave = new MessageSave();
+                messageSave.BalloonText = balloontext;
+                messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
+                messageSave.Headersave = header;
+                ts.ShowCustomBalloon(messageSave, popup, time);
+            }
+           catch(Exception ex)
+            {
+                ErrorTrace error = new ErrorTrace(ex.ToString());
+                error.Show();
+            }
         }
         #endregion
         #region ColoRCHANGE
