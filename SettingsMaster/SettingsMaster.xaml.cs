@@ -27,7 +27,15 @@ namespace ArsVisual.SettingsMaster
 
         private void Palitra(object sender, RoutedEventArgs e)
         {
-           OCHKO.Navigate(new pages.ColorChanger());
+            var colorChangerPage = new pages.ColorChanger();
+            colorChangerPage.ColorSelected += OnColorSelected;
+            OCHKO.Navigate(colorChangerPage);
+        }
+
+        private void OnColorSelected(Color selectedColor)
+        {
+            // Обновляем ресурс приложения
+            Application.Current.Resources["SizeChromeColor"] = new SolidColorBrush(selectedColor);
         }
     }
 }

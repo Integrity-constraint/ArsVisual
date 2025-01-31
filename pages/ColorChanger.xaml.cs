@@ -20,9 +20,37 @@ namespace ArsVisual.pages
     /// </summary>
     public partial class ColorChanger : Page
     {
+        public event Action<Color> ColorSelected;
+
         public ColorChanger()
         {
             InitializeComponent();
+            LoadColors();
+        }
+
+        private void LoadColors()
+        {
+            // Добавляем предопределённые цвета
+            var colors = new List<Color>
+            {
+                Colors.Red,
+                Colors.Green,
+                Colors.Blue,
+                Colors.Yellow,
+                Colors.Orange,
+                Colors.Purple
+            };
+
+            ColorComboBox.ItemsSource = colors;
+        }
+
+        private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ColorComboBox.SelectedItem is Color selectedColor)
+            {
+                // Вызываем событие при выборе цвета
+                ColorSelected?.Invoke(selectedColor);
+            }
         }
     }
 }
