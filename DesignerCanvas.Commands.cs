@@ -235,18 +235,6 @@ namespace DiagramDesigner
                 Connector sinkConnector = GetConnector(sinkID, sinkConnectorName);
 
                 Connection connection = new Connection(sourceConnector, sinkConnector);
-
-                // Десериализация стиля стрелок
-                if (Enum.TryParse(connectionXML.Element("SourceArrowSymbol").Value, out ArrowSymbol sourceArrowSymbol))
-                {
-                    connection.SourceArrowSymbol = sourceArrowSymbol;
-                }
-
-                if (Enum.TryParse(connectionXML.Element("SinkArrowSymbol").Value, out ArrowSymbol sinkArrowSymbol))
-                {
-                    connection.SinkArrowSymbol = sinkArrowSymbol;
-                }
-
                 Canvas.SetZIndex(connection, Int32.Parse(connectionXML.Element("zIndex").Value));
                 this.Children.Add(connection);
             }
@@ -954,22 +942,23 @@ namespace DiagramDesigner
         private XElement SerializeDesignerItems(IEnumerable<DesignerItem> designerItems)
         {
             XElement serializedItems = new XElement("DesignerItems",
-                                       from item in designerItems
-                                       let contentXaml = XamlWriter.Save(((DesignerItem)item).Content)
-                                       let rotateTransform = item.RenderTransform as RotateTransform
-                                       select new XElement("DesignerItem",
-                                                  new XElement("Left", Canvas.GetLeft(item)),
-                                                  new XElement("Top", Canvas.GetTop(item)),
-                                                  new XElement("Width", item.Width),
-                                                  new XElement("Height", item.Height),
-                                                  new XElement("ID", item.ID),
-                                                  new XElement("zIndex", Canvas.GetZIndex(item)),
-                                                  new XElement("IsGroup", item.IsGroup),
-                                                  new XElement("ParentID", item.ParentID),
-                                                  new XElement("RotationAngle", rotateTransform != null ? rotateTransform.Angle : 0),
-                                                  new XElement("Content", contentXaml)
-                                              )
-                                   );
+                                           from item in designerItems
+                                           let contentXaml = XamlWriter.Save(((DesignerItem)item).Content)
+                                           let rotateTransform = item.RenderTransform as RotateTransform
+                                           select new XElement("DesignerItem",
+                                                      new XElement("Left", Canvas.GetLeft(item)),
+                                                      new XElement("Top", Canvas.GetTop(item)),
+                                                      new XElement("Width", item.Width),
+                                                      new XElement("Height", item.Height),
+                                                      new XElement("ID", item.ID),
+                                                      new XElement("zIndex", Canvas.GetZIndex(item)),
+                                                      new XElement("IsGroup", item.IsGroup),
+                                                      new XElement("ParentID", item.ParentID),
+                                                      new XElement("RotationAngle", rotateTransform != null ? rotateTransform.Angle : 0),
+                                                      new XElement("Text", item.Text), // Сериализация текста
+                                                      new XElement("Content", contentXaml)
+                                                  )
+                                       );
 
             return serializedItems;
         }
@@ -1001,6 +990,7 @@ namespace DiagramDesigner
             item.Height = Double.Parse(itemXML.Element("Height").Value, CultureInfo.InvariantCulture);
             item.ParentID = new Guid(itemXML.Element("ParentID").Value);
             item.IsGroup = Boolean.Parse(itemXML.Element("IsGroup").Value);
+            item.Text = itemXML.Element("Text")?.Value; // Десериализация текста
             Canvas.SetLeft(item, Double.Parse(itemXML.Element("Left").Value, CultureInfo.InvariantCulture) + OffsetX);
             Canvas.SetTop(item, Double.Parse(itemXML.Element("Top").Value, CultureInfo.InvariantCulture) + OffsetY);
             Canvas.SetZIndex(item, Int32.Parse(itemXML.Element("zIndex").Value));
@@ -1008,13 +998,12 @@ namespace DiagramDesigner
             double rotationAngle = Double.Parse(itemXML.Element("RotationAngle").Value, CultureInfo.InvariantCulture);
             RotateTransform rotateTransform = new RotateTransform(rotationAngle);
             item.RenderTransform = rotateTransform;
-            item.RenderTransformOrigin = new Point(0.5, 0.5); // Центрируем вращение
+            item.RenderTransformOrigin = new Point(0.5, 0.5);
 
             Object content = XamlReader.Load(XmlReader.Create(new StringReader(itemXML.Element("Content").Value)));
             item.Content = content;
             return item;
         }
-
 
         private void CopyCurrentSelection()
         {

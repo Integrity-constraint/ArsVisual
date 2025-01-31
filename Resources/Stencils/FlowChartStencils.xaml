@@ -3,17 +3,16 @@
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
 
-   
+
 
     <Style x:Key="Textadapter" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="Background" Value="Transparent"></Setter>
         <Setter Property="BorderBrush" Value="Transparent"></Setter>
         <Setter Property="AcceptsReturn" Value="True"></Setter>
-        <Setter Property="Text" Value="{Binding QueryString}"></Setter>
+        <Setter Property="Text" Value="{Binding Text, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
-        
     </Style>
     <Brush x:Key="ItemStroke1">#ACADCD</Brush>
     <LinearGradientBrush x:Key="ItemBrush1" StartPoint="0,0" EndPoint="0,1" >

@@ -121,6 +121,16 @@ namespace DiagramDesigner
 
         #endregion
 
+
+        public static readonly DependencyProperty TextProperty =
+       DependencyProperty.Register("Text", typeof(string), typeof(DesignerItem), new PropertyMetadata(string.Empty));
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
         static DesignerItem()
         {
             // set the key to reference the style for this control

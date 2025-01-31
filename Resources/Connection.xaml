@@ -4,45 +4,45 @@
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
 
     <ContextMenu x:Key="ConnectionContextMenu">
-        <MenuItem Header="Delete" Command="{x:Static ApplicationCommands.Delete}">
+        <MenuItem Header="Удалить" Command="{x:Static ApplicationCommands.Delete}">
             <MenuItem.Icon>
                 <Image Source="Images/Delete.png" Width="16"/>
             </MenuItem.Icon>
         </MenuItem>
         <Separator/>
-        <MenuItem Header="Order">
-            <MenuItem Header="Bring Forward" Command="{x:Static s:DesignerCanvas.BringForward}">
+        <MenuItem Header="Порядок">
+            <MenuItem Header="Вперёд" Command="{x:Static s:DesignerCanvas.BringForward}">
                 <MenuItem.Icon>
                     <Image Source="Images/BringForward.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Bring To Front" Command="{x:Static s:DesignerCanvas.BringToFront}">
+            <MenuItem Header="На передний план" Command="{x:Static s:DesignerCanvas.BringToFront}">
                 <MenuItem.Icon>
                     <Image Source="Images/BringToFront.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Send Backward" Command="{x:Static s:DesignerCanvas.SendBackward}">
+            <MenuItem Header="Назад" Command="{x:Static s:DesignerCanvas.SendBackward}">
                 <MenuItem.Icon>
                     <Image Source="Images/SendBackward.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Send To Back" Command="{x:Static s:DesignerCanvas.SendToBack}">
+            <MenuItem Header="На задний план" Command="{x:Static s:DesignerCanvas.SendToBack}">
                 <MenuItem.Icon>
                     <Image Source="Images/SendToBack.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
-        <MenuItem Header="Set Source Arrow">
-            <MenuItem Header="None" Command="s:Connection.SetSourceArrowCommand" CommandParameter="None" />
-            <MenuItem Header="Arrow" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Arrow" />
-            <MenuItem Header="Diamond" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Diamond" />
+        <MenuItem Header="Начало линии">
+            <MenuItem Header="нет" Command="s:Connection.SetSourceArrowCommand" CommandParameter="None" />
+            <MenuItem Header="Стрелка" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Arrow" />
+            <MenuItem Header="Пин" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Diamond" />
         </MenuItem>
 
         <!-- Пункт меню для изменения стиля стрелки на приемнике -->
-        <MenuItem Header="Set Sink Arrow">
-            <MenuItem Header="None" Command="s:Connection.SetSinkArrowCommand" CommandParameter="None" />
-            <MenuItem Header="Arrow" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Arrow" />
-            <MenuItem Header="Diamond" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Diamond" />
+        <MenuItem Header="Конец линии">
+            <MenuItem Header="нет" Command="s:Connection.SetSinkArrowCommand" CommandParameter="None" />
+            <MenuItem Header="Стрелка" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Arrow" />
+            <MenuItem Header="Пин" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Diamond" />
         </MenuItem>
     </ContextMenu>
 
