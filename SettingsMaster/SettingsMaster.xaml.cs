@@ -36,6 +36,8 @@ namespace ArsVisual.SettingsMaster
         {
             // Обновляем ресурс приложения
             Application.Current.Resources["SizeChromeColor"] = new SolidColorBrush(selectedColor);
+          //  Application.Current.Resources["ItemBrush"] = new SolidColorBrush(selectedColor);
+            Application.Current.Resources["ItemStroke"] = new SolidColorBrush(selectedColor);
         }
     }
 }

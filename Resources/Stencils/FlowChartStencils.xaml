@@ -3,13 +3,7 @@
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
 
-    <Brush x:Key="ItemStroke">#FFD69436</Brush>
-    <LinearGradientBrush x:Key="ItemBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStop Color="#FAFBE9" Offset="0" />
-            <GradientStop Color="Aquamarine" Offset="1" />
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
+   
 
     <Style x:Key="Textadapter" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
@@ -27,9 +21,9 @@
         <GradientStop Color="#BDBEDE" Offset="1"/>
     </LinearGradientBrush>
 
-    <Style  x:Key="FlowChartItemStyle" TargetType="Path">
-        <Setter Property="Fill" Value="{StaticResource ItemBrush}"/>
-        <Setter Property="Stroke" Value="{StaticResource ItemStroke}"/>
+    <Style x:Key="FlowChartItemStyle" TargetType="Path">
+        <Setter Property="Fill" Value="{DynamicResource ItemBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource ItemStroke}"/>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="StrokeLineJoin" Value="Round"/>
         <Setter Property="Stretch" Value="Fill"/>

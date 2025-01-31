@@ -29,8 +29,27 @@
                 <ResourceDictionary>
                     <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
                 </ResourceDictionary>
+                <ResourceDictionary>
+                   
+                    <LinearGradientBrush x:Key="ItemBrush" StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#FAFBE9" Offset="0" />
+                            <GradientStop Color="Aquamarine" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </ResourceDictionary>
+                <ResourceDictionary>
+                    <LinearGradientBrush x:Key="ItemBrush" StartPoint="0,0" EndPoint="0,1">
+                        <LinearGradientBrush.GradientStops>
+                            <GradientStop Color="#FAFBE9" Offset="0" />
+                            <GradientStop Color="Aquamarine" Offset="1" />
+                        </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                </ResourceDictionary>
+                
+               
 
-        <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
+                <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/Styles/SettingsTree.xaml"/>
            <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml"/>
           

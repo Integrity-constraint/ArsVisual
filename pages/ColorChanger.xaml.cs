@@ -42,11 +42,31 @@ namespace ArsVisual.pages
             };
 
             ColorComboBox.ItemsSource = colors;
+            ColorItemComboBox.ItemsSource = colors;
+            ColorItemOutlineComboBox.ItemsSource = colors;
         }
 
         private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (ColorComboBox.SelectedItem is Color selectedColor)
+            {
+                // Вызываем событие при выборе цвета
+                ColorSelected?.Invoke(selectedColor);
+            }
+        }
+
+        private void ColorComboBoxItemOutline_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ColorItemOutlineComboBox.SelectedItem is Color selectedColor)
+            {
+                // Вызываем событие при выборе цвета
+                ColorSelected?.Invoke(selectedColor);
+            }
+        }
+
+        private void ColorComboBoxItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ColorItemComboBox.SelectedItem is Color selectedColor)
             {
                 // Вызываем событие при выборе цвета
                 ColorSelected?.Invoke(selectedColor);
