@@ -44,9 +44,9 @@
                     </GroupBox>
                     <GroupBox   Header="Настройка слоя разметки">
                         <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="ColorComboBox"
+                            <ComboBox x:Name="ColorSizeChromeComboBox"
                                       Margin="10"
-                                      SelectionChanged="ColorComboBox_SelectionChanged">
+                                      SelectionChanged="ColorComboBoxSizeChrome_SelectionChanged">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">
@@ -63,9 +63,9 @@
                             <Rectangle Fill="{DynamicResource SizeChromeColor}" Margin="10" Width="50">
                                 
                             </Rectangle>
-                            <ComboBox x:Name="ColorItemComboBox"
+                            <ComboBox x:Name="ColorItemBrushComboBox"
             Margin="10"
-            SelectionChanged="ColorComboBoxItem_SelectionChanged">
+            SelectionChanged="ColorComboBoxItemBrush_SelectionChanged">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <StackPanel Orientation="Horizontal">

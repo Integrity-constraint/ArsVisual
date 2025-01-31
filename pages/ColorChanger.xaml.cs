@@ -20,7 +20,10 @@ namespace ArsVisual.pages
     /// </summary>
     public partial class ColorChanger : Page
     {
-        public event Action<Color> ColorSelected;
+       
+        public event Action<Color> ColorItemStrokeSelected;
+        public event Action<Color> ColorSizeChromeSelected;
+        public event Action<Color> ColorItemBrushSelected;
 
         public ColorChanger()
         {
@@ -30,7 +33,7 @@ namespace ArsVisual.pages
 
         private void LoadColors()
         {
-            // Добавляем предопределённые цвета
+            
             var colors = new List<Color>
             {
                 Colors.Red,
@@ -41,17 +44,33 @@ namespace ArsVisual.pages
                 Colors.Purple
             };
 
-            ColorComboBox.ItemsSource = colors;
-            ColorItemComboBox.ItemsSource = colors;
-            ColorItemOutlineComboBox.ItemsSource = colors;
+
+            ColorSizeChromeComboBox.ItemsSource = colors;
+
+            ColorItemBrushComboBox.ItemsSource= colors;
+            ColorItemOutlineComboBox.ItemsSource=colors;
         }
 
-        private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+       
+
+       
+
+        private void ColorComboBoxSizeChrome_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ColorComboBox.SelectedItem is Color selectedColor)
+            if (ColorSizeChromeComboBox.SelectedItem is Color selectedColor)
             {
-                // Вызываем событие при выборе цвета
-                ColorSelected?.Invoke(selectedColor);
+
+                ColorSizeChromeSelected?.Invoke(selectedColor);
+            }
+
+        }
+
+        private void ColorComboBoxItemBrush_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ColorItemBrushComboBox.SelectedItem is Color selectedColor)
+            {
+
+                ColorItemBrushSelected?.Invoke(selectedColor);
             }
         }
 
@@ -59,17 +78,8 @@ namespace ArsVisual.pages
         {
             if (ColorItemOutlineComboBox.SelectedItem is Color selectedColor)
             {
-                // Вызываем событие при выборе цвета
-                ColorSelected?.Invoke(selectedColor);
-            }
-        }
 
-        private void ColorComboBoxItem_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ColorItemComboBox.SelectedItem is Color selectedColor)
-            {
-                // Вызываем событие при выборе цвета
-                ColorSelected?.Invoke(selectedColor);
+                ColorItemStrokeSelected?.Invoke(selectedColor);
             }
         }
     }
