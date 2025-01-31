@@ -32,6 +32,18 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="Set Source Arrow">
+            <MenuItem Header="None" Command="s:Connection.SetSourceArrowCommand" CommandParameter="None" />
+            <MenuItem Header="Arrow" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Arrow" />
+            <MenuItem Header="Diamond" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Diamond" />
+        </MenuItem>
+
+        <!-- Пункт меню для изменения стиля стрелки на приемнике -->
+        <MenuItem Header="Set Sink Arrow">
+            <MenuItem Header="None" Command="s:Connection.SetSinkArrowCommand" CommandParameter="None" />
+            <MenuItem Header="Arrow" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Arrow" />
+            <MenuItem Header="Diamond" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Diamond" />
+        </MenuItem>
     </ContextMenu>
 
     <Style TargetType="{x:Type s:Connection}">

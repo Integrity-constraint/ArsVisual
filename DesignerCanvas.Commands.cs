@@ -51,6 +51,7 @@ namespace DiagramDesigner
         public static RoutedCommand SaveTOpng = new RoutedCommand();
         public static RoutedCommand ColorChange = new RoutedCommand();
         public static  RoutedCommand ChangeColorCommand = new RoutedCommand();
+      
         public DesignerCanvas()
         {
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.New, New_Executed));
@@ -234,6 +235,18 @@ namespace DiagramDesigner
                 Connector sinkConnector = GetConnector(sinkID, sinkConnectorName);
 
                 Connection connection = new Connection(sourceConnector, sinkConnector);
+
+                // Десериализация стиля стрелок
+                if (Enum.TryParse(connectionXML.Element("SourceArrowSymbol").Value, out ArrowSymbol sourceArrowSymbol))
+                {
+                    connection.SourceArrowSymbol = sourceArrowSymbol;
+                }
+
+                if (Enum.TryParse(connectionXML.Element("SinkArrowSymbol").Value, out ArrowSymbol sinkArrowSymbol))
+                {
+                    connection.SinkArrowSymbol = sinkArrowSymbol;
+                }
+
                 Canvas.SetZIndex(connection, Int32.Parse(connectionXML.Element("zIndex").Value));
                 this.Children.Add(connection);
             }
@@ -966,17 +979,17 @@ namespace DiagramDesigner
         private XElement SerializeConnections(IEnumerable<Connection> connections)
         {
             var serializedConnections = new XElement("Connections",
-                           from connection in connections
-                           select new XElement("Connection",
-                                      new XElement("SourceID", connection.Source.ParentDesignerItem.ID),
-                                      new XElement("SinkID", connection.Sink.ParentDesignerItem.ID),
-                                      new XElement("SourceConnectorName", connection.Source.Name),
-                                      new XElement("SinkConnectorName", connection.Sink.Name),
-                                      new XElement("SourceArrowSymbol", connection.SourceArrowSymbol),
-                                      new XElement("SinkArrowSymbol", connection.SinkArrowSymbol),
-                                      new XElement("zIndex", Canvas.GetZIndex(connection))
-                                     )
-                                  );
+                               from connection in connections
+                               select new XElement("Connection",
+                                          new XElement("SourceID", connection.Source.ParentDesignerItem.ID),
+                                          new XElement("SinkID", connection.Sink.ParentDesignerItem.ID),
+                                          new XElement("SourceConnectorName", connection.Source.Name),
+                                          new XElement("SinkConnectorName", connection.Sink.Name),
+                                          new XElement("SourceArrowSymbol", connection.SourceArrowSymbol.ToString()), // Сериализация стиля стрелки источника
+                                          new XElement("SinkArrowSymbol", connection.SinkArrowSymbol.ToString()),     // Сериализация стиля стрелки приемника
+                                          new XElement("zIndex", Canvas.GetZIndex(connection))
+                                         )
+                                      );
 
             return serializedConnections;
         }

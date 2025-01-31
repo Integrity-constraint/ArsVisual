@@ -11,6 +11,33 @@ namespace DiagramDesigner
 {
     public class Connection : Control, ISelectable, INotifyPropertyChanged
     {
+        public static readonly RoutedUICommand SetSourceArrowCommand = new RoutedUICommand("Set Source Arrow", "SetSourceArrow", typeof(Connection));
+        public static readonly RoutedUICommand SetSinkArrowCommand = new RoutedUICommand("Set Sink Arrow", "SetSinkArrow", typeof(Connection));
+
+     
+
+        private void OnSetSourceArrowCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter is string arrowSymbol)
+            {
+                if (Enum.TryParse(arrowSymbol, out ArrowSymbol symbol))
+                {
+                    this.SourceArrowSymbol = symbol;
+                }
+            }
+        }
+
+        // Обработчик команды для изменения стиля стрелки на приемнике
+        private void OnSetSinkArrowCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter is string arrowSymbol)
+            {
+                if (Enum.TryParse(arrowSymbol, out ArrowSymbol symbol))
+                {
+                    this.SinkArrowSymbol = symbol;
+                }
+            }
+        }
         private Adorner connectionAdorner;
 
         #region Properties
@@ -240,6 +267,11 @@ namespace DiagramDesigner
             this.ID = Guid.NewGuid();
             this.Source = source;
             this.Sink = sink;
+            base.Unloaded += new RoutedEventHandler(Connection_Unloaded);
+            // Регистрируем обработчики команд
+            CommandBindings.Add(new CommandBinding(SetSourceArrowCommand, OnSetSourceArrowCommandExecuted));
+            CommandBindings.Add(new CommandBinding(SetSinkArrowCommand, OnSetSinkArrowCommandExecuted));
+
             base.Unloaded += new RoutedEventHandler(Connection_Unloaded);
         }
 
