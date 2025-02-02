@@ -636,52 +636,73 @@ namespace DiagramDesigner
         }
         internal static List<Point> GetStraightConnectionLine(ConnectorInfo source, ConnectorInfo sink, bool showLastLine)
         {
+            List<Point> linePoints = new List<Point>();
+
             // Получаем начальные и конечные точки с учетом ориентации коннекторов
-            Point startPoint = GetOffsetPointStraight(source, 10);
-            Point endPoint = GetOffsetPointStraight(sink, -10);
+            Point startPoint = GetOffsetPointStraight(source);
+            Point endPoint = GetOffsetPointStraight(sink);
 
-            // Создаем прямую линию между этими точками
-            List<Point> linePoints = new List<Point> { startPoint, endPoint };
-
-            // Добавляем визуальные отступы
-            if (showLastLine)
-            {
-                double marginPath = 15;
-                ApplyMargin(ref startPoint, source.Orientation, marginPath);
-                ApplyMargin(ref endPoint, sink.Orientation, marginPath);
-
-                linePoints[0] = startPoint;
-                linePoints[linePoints.Count - 1] = endPoint;
-            }
+            // Добавляем сгибы на концах линий
+            linePoints.Add(GetBendPoint(source, startPoint, 10));
+            linePoints.Add(startPoint);
+            linePoints.Add(endPoint);
+            linePoints.Add(GetBendPoint(sink, endPoint, 10));
 
             return linePoints;
         }
-        private static Point GetOffsetPointStraight(ConnectorInfo connector, double offset)
+
+        private static Point GetOffsetPointStraight(ConnectorInfo connector)
         {
-            Point point = new Point();
+            {
+                Point point = connector.Position;
+
+                switch (connector.Orientation)
+                {
+                    case ConnectorOrientation.Left:
+                        point.X -= margin;
+                        break;
+                    case ConnectorOrientation.Top:
+                        point.Y -= margin;
+                        break;
+                    case ConnectorOrientation.Right:
+                        point.X += margin;
+                        break;
+                    case ConnectorOrientation.Bottom:
+                        point.Y += margin;
+                        break;
+                }
+
+                return point;
+            }
+        }
+
+        private static Point GetBendPoint(ConnectorInfo connector, Point point, double offset)
+        {
+            Point bendPoint = new Point();
 
             switch (connector.Orientation)
             {
                 case ConnectorOrientation.Left:
-                    point.X = connector.Position.X - offset; // Отступ влево
-                    point.Y = connector.Position.Y;
+                    bendPoint.X = point.X + offset; // Сгиб влево
+                    bendPoint.Y = point.Y;
                     break;
                 case ConnectorOrientation.Top:
-                    point.X = connector.Position.X;
-                    point.Y = connector.Position.Y - offset; // Отступ вверх
+                    bendPoint.X = point.X;
+                    bendPoint.Y = point.Y + offset; // Сгиб вверх
                     break;
                 case ConnectorOrientation.Right:
-                    point.X = connector.Position.X + offset; // Отступ вправо
-                    point.Y = connector.Position.Y;
+                    bendPoint.X = point.X - offset; // Сгиб вправо
+                    bendPoint.Y = point.Y;
                     break;
                 case ConnectorOrientation.Bottom:
-                    point.X = connector.Position.X;
-                    point.Y = connector.Position.Y + offset; // Отступ вниз
+                    bendPoint.X = point.X;
+                    bendPoint.Y = point.Y - offset; // Сгиб вниз
                     break;
             }
 
-            return point;
+            return bendPoint;
         }
+
 
         private static void ApplyMargin(ref Point point, ConnectorOrientation orientation, double margin)
         {
