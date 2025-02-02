@@ -16,6 +16,7 @@ namespace DiagramDesigner
 
         public ConnectorOrientation Orientation { get; set; }
 
+
         // center position of this Connector relative to the DesignerCanvas
         private Point position;
         public Point Position

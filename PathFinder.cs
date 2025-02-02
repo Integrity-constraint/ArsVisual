@@ -5,12 +5,7 @@ using System.Windows.Controls;
 
 namespace DiagramDesigner
 {
-    // Note: I couldn't find a useful open source library that does
-    // orthogonal routing so started to write something on my own.
-    // Categorize this as a quick and dirty short term solution.
-    // I will keep on searching.
-
-    // Helper class to provide an orthogonal connection path
+    
     internal class PathFinder
     {
         private const int margin = 20;
@@ -639,7 +634,73 @@ namespace DiagramDesigner
                 linePoints.Add(sink.Position);
             }
         }
+        internal static List<Point> GetStraightConnectionLine(ConnectorInfo source, ConnectorInfo sink, bool showLastLine)
+        {
+            // Получаем начальные и конечные точки с учетом ориентации коннекторов
+            Point startPoint = GetOffsetPointStraight(source, 10);
+            Point endPoint = GetOffsetPointStraight(sink, -10);
 
+            // Создаем прямую линию между этими точками
+            List<Point> linePoints = new List<Point> { startPoint, endPoint };
+
+            // Добавляем визуальные отступы
+            if (showLastLine)
+            {
+                double marginPath = 15;
+                ApplyMargin(ref startPoint, source.Orientation, marginPath);
+                ApplyMargin(ref endPoint, sink.Orientation, marginPath);
+
+                linePoints[0] = startPoint;
+                linePoints[linePoints.Count - 1] = endPoint;
+            }
+
+            return linePoints;
+        }
+        private static Point GetOffsetPointStraight(ConnectorInfo connector, double offset)
+        {
+            Point point = new Point();
+
+            switch (connector.Orientation)
+            {
+                case ConnectorOrientation.Left:
+                    point.X = connector.Position.X - offset; // Отступ влево
+                    point.Y = connector.Position.Y;
+                    break;
+                case ConnectorOrientation.Top:
+                    point.X = connector.Position.X;
+                    point.Y = connector.Position.Y - offset; // Отступ вверх
+                    break;
+                case ConnectorOrientation.Right:
+                    point.X = connector.Position.X + offset; // Отступ вправо
+                    point.Y = connector.Position.Y;
+                    break;
+                case ConnectorOrientation.Bottom:
+                    point.X = connector.Position.X;
+                    point.Y = connector.Position.Y + offset; // Отступ вниз
+                    break;
+            }
+
+            return point;
+        }
+
+        private static void ApplyMargin(ref Point point, ConnectorOrientation orientation, double margin)
+        {
+            switch (orientation)
+            {
+                case ConnectorOrientation.Left:
+                    point.X -= margin;
+                    break;
+                case ConnectorOrientation.Top:
+                    point.Y -= margin;
+                    break;
+                case ConnectorOrientation.Right:
+                    point.X += margin;
+                    break;
+                case ConnectorOrientation.Bottom:
+                    point.Y += margin;
+                    break;
+            }
+        }
         private static ConnectorOrientation GetOpositeOrientation(ConnectorOrientation connectorOrientation)
         {
             switch (connectorOrientation)

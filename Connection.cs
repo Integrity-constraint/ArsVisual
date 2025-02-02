@@ -14,7 +14,20 @@ namespace DiagramDesigner
         public static readonly RoutedUICommand SetSourceArrowCommand = new RoutedUICommand("Set Source Arrow", "SetSourceArrow", typeof(Connection));
         public static readonly RoutedUICommand SetSinkArrowCommand = new RoutedUICommand("Set Sink Arrow", "SetSinkArrow", typeof(Connection));
 
-     
+        private bool _isStraightLine;
+        public bool IsStraightLine
+        {
+            get => _isStraightLine;
+            set
+            {
+                if (_isStraightLine != value)
+                {
+                    _isStraightLine = value;
+                    UpdatePathGeometry();
+                    OnPropertyChanged(nameof(IsStraightLine));
+                }
+            }
+        }
 
         private void OnSetSourceArrowCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
@@ -267,14 +280,24 @@ namespace DiagramDesigner
             this.ID = Guid.NewGuid();
             this.Source = source;
             this.Sink = sink;
-            base.Unloaded += new RoutedEventHandler(Connection_Unloaded);
+
             // Регистрируем обработчики команд
             CommandBindings.Add(new CommandBinding(SetSourceArrowCommand, OnSetSourceArrowCommandExecuted));
             CommandBindings.Add(new CommandBinding(SetSinkArrowCommand, OnSetSinkArrowCommandExecuted));
+            CommandBindings.Add(new CommandBinding(SetLineTypeCommand, OnSetLineTypeCommandExecuted));
 
             base.Unloaded += new RoutedEventHandler(Connection_Unloaded);
         }
 
+        public static readonly RoutedUICommand SetLineTypeCommand = new RoutedUICommand("Set Line Type", "SetLineType", typeof(Connection));
+
+        private void OnSetLineTypeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter is string lineType)
+            {
+                IsStraightLine = (lineType == "Straight");
+            }
+        }
 
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
         {
@@ -305,20 +328,31 @@ namespace DiagramDesigner
 
         void OnConnectorPositionChanged(object sender, PropertyChangedEventArgs e)
         {
-            // whenever the 'Position' property of the source or sink Connector 
-            // changes we must update the connection path geometry
             if (e.PropertyName.Equals("Position"))
             {
-                UpdatePathGeometry();
+                UpdatePathGeometry(); // Учитывает IsStraightLine
             }
         }
+        
 
         private void UpdatePathGeometry()
         {
             if (Source != null && Sink != null)
             {
                 PathGeometry geometry = new PathGeometry();
-                List<Point> linePoints = PathFinder.GetConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
+                List<Point> linePoints;
+
+                if (IsStraightLine)
+                {
+                    // Используем прямую линию между коннекторами
+                    linePoints = PathFinder.GetStraightConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
+                }
+                else
+                {
+                    // Используем ортогональную линию
+                    linePoints = PathFinder.GetConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
+                }
+
                 if (linePoints.Count > 0)
                 {
                     PathFigure figure = new PathFigure();

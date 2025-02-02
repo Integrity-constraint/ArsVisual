@@ -32,6 +32,14 @@
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
+        <MenuItem Header="Тип линии">
+            <MenuItem Header="Ортогональная" 
+              Command="s:Connection.SetLineTypeCommand" 
+              CommandParameter="Orthogonal"/>
+            <MenuItem Header="Прямая" 
+              Command="s:Connection.SetLineTypeCommand" 
+              CommandParameter="Straight"/>
+        </MenuItem>
         <MenuItem Header="Начало линии">
             <MenuItem Header="нет" Command="s:Connection.SetSourceArrowCommand" CommandParameter="None" />
             <MenuItem Header="Стрелка" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Arrow" />
