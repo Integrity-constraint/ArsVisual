@@ -21,6 +21,7 @@ using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows.Controls.Primitives;
 using ArsVisual.NotifyComponents.Error;
 using System.Security.Cryptography;
+using static DiagramDesigner.Connection;
 
 
 
@@ -236,6 +237,14 @@ namespace DiagramDesigner
 
                 Connection connection = new Connection(sourceConnector, sinkConnector);
                 Canvas.SetZIndex(connection, Int32.Parse(connectionXML.Element("zIndex").Value));
+
+                // Загружаем тип линии
+                var lineTypeElement = connectionXML.Element("ConnectionLineType");
+                if (lineTypeElement != null && Enum.TryParse(lineTypeElement.Value, out ConnectionLineType lineType))
+                {
+                    connection._ConnectionLineType = lineType;
+                }
+
                 this.Children.Add(connection);
             }
         }
@@ -968,17 +977,17 @@ namespace DiagramDesigner
         private XElement SerializeConnections(IEnumerable<Connection> connections)
         {
             var serializedConnections = new XElement("Connections",
-                               from connection in connections
-                               select new XElement("Connection",
-                                          new XElement("SourceID", connection.Source.ParentDesignerItem.ID),
-                                          new XElement("SinkID", connection.Sink.ParentDesignerItem.ID),
-                                          new XElement("SourceConnectorName", connection.Source.Name),
-                                          new XElement("SinkConnectorName", connection.Sink.Name),
-                                          new XElement("SourceArrowSymbol", connection.SourceArrowSymbol.ToString()), // Сериализация стиля стрелки источника
-                                          new XElement("SinkArrowSymbol", connection.SinkArrowSymbol.ToString()),     // Сериализация стиля стрелки приемника
-                                          new XElement("zIndex", Canvas.GetZIndex(connection))
-                                         )
-                                      );
+         from connection in connections
+         select new XElement("Connection",
+             new XElement("SourceID", connection.Source.ParentDesignerItem.ID),
+             new XElement("SinkID", connection.Sink.ParentDesignerItem.ID),
+             new XElement("SourceConnectorName", connection.Source.Name),
+             new XElement("SinkConnectorName", connection.Sink.Name),
+             new XElement("SourceArrowSymbol", connection.SourceArrowSymbol.ToString()),
+             new XElement("SinkArrowSymbol", connection.SinkArrowSymbol.ToString()),
+             new XElement("ConnectionLineType", connection._ConnectionLineType.ToString()), // Сохраняем тип линии
+             new XElement("zIndex", Canvas.GetZIndex(connection))
+     ));
 
             return serializedConnections;
         }

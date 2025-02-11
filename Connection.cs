@@ -13,6 +13,25 @@ namespace DiagramDesigner
     {
         public static readonly RoutedUICommand SetSourceArrowCommand = new RoutedUICommand("Set Source Arrow", "SetSourceArrow", typeof(Connection));
         public static readonly RoutedUICommand SetSinkArrowCommand = new RoutedUICommand("Set Sink Arrow", "SetSinkArrow", typeof(Connection));
+        public enum ConnectionLineType
+        {
+            Straight,   // Прямая линия
+            Orthogonal  // Ортогональная линия
+        }
+        private ConnectionLineType _connectionLineType;
+        public ConnectionLineType _ConnectionLineType
+        {
+            get { return _connectionLineType; }
+            set
+            {
+                if (_connectionLineType != value)
+                {
+                    _connectionLineType = value;
+                    IsStraightLine = (value == ConnectionLineType.Straight); // Синхронизация с IsStraightLine
+                    OnPropertyChanged(nameof(ConnectionLineType));
+                }
+            }
+        }
 
         private bool _isStraightLine;
         public bool IsStraightLine
@@ -23,7 +42,7 @@ namespace DiagramDesigner
                 if (_isStraightLine != value)
                 {
                     _isStraightLine = value;
-                    UpdatePathGeometry();
+                    UpdatePathGeometry(); // Обновляем геометрию линии
                     OnPropertyChanged(nameof(IsStraightLine));
                 }
             }
@@ -295,7 +314,10 @@ namespace DiagramDesigner
         {
             if (e.Parameter is string lineType)
             {
-                IsStraightLine = (lineType == "Straight");
+                if (Enum.TryParse(lineType, out ConnectionLineType type))
+                {
+                    this._ConnectionLineType = type;
+                }
             }
         }
 
@@ -342,9 +364,9 @@ namespace DiagramDesigner
                 PathGeometry geometry = new PathGeometry();
                 List<Point> linePoints;
 
-                if (IsStraightLine)
+                if (_ConnectionLineType == ConnectionLineType.Straight)
                 {
-                    // Используем прямую линию между коннекторами
+                    // Используем прямую линию
                     linePoints = PathFinder.GetStraightConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
                 }
                 else
