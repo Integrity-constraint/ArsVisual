@@ -1003,7 +1003,7 @@ namespace DiagramDesigner
                     new XElement("zIndex", Canvas.GetZIndex(connection))
             ));
 
-            MessageBox.Show(serializedConnections.ToString() );
+           
 
             return serializedConnections;
         }
