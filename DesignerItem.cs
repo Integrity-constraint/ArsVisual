@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -130,18 +131,37 @@ namespace DiagramDesigner
             get { return (string)GetValue(TextProperty); }
             set { SetValue(TextProperty, value); }
         }
+        public static readonly DependencyProperty FontSizeProperty =
+      DependencyProperty.Register("FontSize", typeof(double), typeof(DesignerItem), new PropertyMetadata(12.0));
 
+        public double FontSize
+        {
+            get { return (double)GetValue(FontSizeProperty); }
+            set { SetValue(FontSizeProperty, value); } 
+        }
+
+        public static readonly DependencyProperty FontFamilyProperty =
+            DependencyProperty.Register("FontFamily", typeof(FontFamily), typeof(DesignerItem), new PropertyMetadata(new FontFamily("Segoe UI")));
+
+        public FontFamily FontFamily
+        {
+            get { return (FontFamily)GetValue(FontFamilyProperty); }
+            set { SetValue(FontFamilyProperty, value); } 
+        }
+     
         static DesignerItem()
         {
             // set the key to reference the style for this control
             FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(DesignerItem), new FrameworkPropertyMetadata(typeof(DesignerItem)));
+
         }
 
         public DesignerItem(Guid id)
         {
             this.id = id;
             this.Loaded += new RoutedEventHandler(DesignerItem_Loaded);
+
         }
 
         public DesignerItem()
