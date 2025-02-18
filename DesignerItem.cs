@@ -178,7 +178,18 @@ namespace DiagramDesigner
         }
         private void OnChangeFontSizeExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            FontSize = Convert.ToDouble(e.Parameter);
+            if (double.TryParse(e.Parameter.ToString(), out double fontSize))
+            {
+                
+                if (fontSize > 0)
+                {
+                    FontSize = fontSize;
+                }
+                else
+                {
+                    MessageBox.Show("Размер шрифта должен быть больше 0.");
+                }
+            }
         }
 
         private void OnChangeFontFamilyExecuted(object sender, ExecutedRoutedEventArgs e)

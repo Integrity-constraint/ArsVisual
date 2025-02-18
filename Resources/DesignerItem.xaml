@@ -6,10 +6,7 @@
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls" 
                     xmlns:m="clr-namespace:ArsVisual" 
-                    xmlns:pages="clr-namespace:ArsVisual.pages" 
-  
-    
-    >
+                    xmlns:pages="clr-namespace:ArsVisual.pages" xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
 
 
     <ContextMenu x:Key="DesignerItemContextMenu" 
@@ -47,7 +44,17 @@
             <MenuItem Header="16" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="16"/>
             <MenuItem Header="18" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="18"/>
             <MenuItem Header="20" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="20"/>
-        </MenuItem>               
+            <MenuItem Header="Другой размер...">
+                <TextBox Width="50">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="KeyDown">
+                            <i:InvokeCommandAction Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" 
+                                           CommandParameter="{Binding Text, RelativeSource={RelativeSource AncestorType=TextBox}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </TextBox>
+            </MenuItem>
+        </MenuItem>
 
         <!-- Изменение семейства шрифтов -->
         <MenuItem Header="Семейство шрифтов">
@@ -245,7 +252,7 @@
                              Visibility="Hidden"
                              Template="{StaticResource ConnectorDecoratorTemplate}"/>
 
-                        <!-- TextBox 
+                        <!-- TextBox -
                         <TextBox TextWrapping="Wrap" 
                              FontSize="{Binding FontSize, Mode=TwoWay}" 
                              FontFamily="{Binding FontFamily, Mode=TwoWay}" 

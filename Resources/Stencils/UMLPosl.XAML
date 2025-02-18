@@ -125,7 +125,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapterboundry}">
+                <TextBox  Style="{StaticResource Textadapterboundry}">
                     
                 </TextBox>
             </Grid>
