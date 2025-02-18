@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using ArsVisual;
 using DiagramDesigner.Controls;
 
 namespace DiagramDesigner
@@ -14,7 +15,7 @@ namespace DiagramDesigner
     [TemplatePart(Name = "PART_ResizeDecorator", Type = typeof(Control))]
     [TemplatePart(Name = "PART_ConnectorDecorator", Type = typeof(Control))]
     [TemplatePart(Name = "PART_ContentPresenter", Type = typeof(ContentPresenter))]
-    public class DesignerItem : ContentControl, ISelectable, IGroupable
+    public class DesignerItem : ContentControl, ISelectable, IGroupable, INotifyPropertyChanged
     {
         #region ID
         private Guid id;
@@ -23,7 +24,7 @@ namespace DiagramDesigner
             get { return id; }
         }
         #endregion
-
+            
         #region ParentID
         public Guid ParentID
         {
@@ -122,7 +123,7 @@ namespace DiagramDesigner
 
         #endregion
 
-
+      
         public static readonly DependencyProperty TextProperty =
        DependencyProperty.Register("Text", typeof(string), typeof(DesignerItem), new PropertyMetadata(string.Empty));
 
@@ -132,12 +133,12 @@ namespace DiagramDesigner
             set { SetValue(TextProperty, value); }
         }
         public static readonly DependencyProperty FontSizeProperty =
-      DependencyProperty.Register("FontSize", typeof(double), typeof(DesignerItem), new PropertyMetadata(12.0));
+     DependencyProperty.Register("FontSize", typeof(double), typeof(DesignerItem), new PropertyMetadata(12.0));
 
         public double FontSize
         {
             get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); } 
+            set { SetValue(FontSizeProperty, value); }
         }
 
         public static readonly DependencyProperty FontFamilyProperty =
@@ -146,14 +147,20 @@ namespace DiagramDesigner
         public FontFamily FontFamily
         {
             get { return (FontFamily)GetValue(FontFamilyProperty); }
-            set { SetValue(FontFamilyProperty, value); } 
+            set { SetValue(FontFamilyProperty, value); }
         }
-     
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
         static DesignerItem()
         {
             // set the key to reference the style for this control
             FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(DesignerItem), new FrameworkPropertyMetadata(typeof(DesignerItem)));
+
 
         }
 
@@ -163,10 +170,21 @@ namespace DiagramDesigner
             this.Loaded += new RoutedEventHandler(DesignerItem_Loaded);
 
         }
+        private void OnChangeFontSizeExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            FontSize = Convert.ToDouble(e.Parameter);
+        }
 
+        private void OnChangeFontFamilyExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            FontFamily = new FontFamily(e.Parameter.ToString());
+        }
         public DesignerItem()
             : this(Guid.NewGuid())
         {
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontSizeCommand, OnChangeFontSizeExecuted));
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontFamilyCommand, OnChangeFontFamilyExecuted));
+
         }
 
 

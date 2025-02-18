@@ -5,9 +5,18 @@
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls" 
-                    xmlns:pages="clr-namespace:ArsVisual.pages">
+                    xmlns:m="clr-namespace:ArsVisual" 
+                    xmlns:pages="clr-namespace:ArsVisual.pages" 
+  
+    
+    >
 
-    <ContextMenu x:Key="DesignerItemContextMenu" DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+
+    <ContextMenu x:Key="DesignerItemContextMenu" 
+                 DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+
+
+
         <MenuItem Header="Выбор цвета">
             <Grid>
                 <Grid.RowDefinitions>
@@ -32,26 +41,21 @@
             </Grid>
         </MenuItem>
         <MenuItem Header="Размер шрифта">
-            <ComboBox SelectedValue="{Binding FontSize, Mode=TwoWay}" 
-                  SelectedValuePath="Content">
-                <ComboBoxItem Content="10"/>
-                <ComboBoxItem Content="12"/>
-                <ComboBoxItem Content="14"/>
-                <ComboBoxItem Content="16"/>
-                <ComboBoxItem Content="18"/>
-                <ComboBoxItem Content="20"/>
-            </ComboBox>
-        </MenuItem>
+            <MenuItem Header="10" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="10"/>
+            <MenuItem Header="12" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="12"/>
+            <MenuItem Header="14" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="14"/>
+            <MenuItem Header="16" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="16"/>
+            <MenuItem Header="18" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="18"/>
+            <MenuItem Header="20" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="20"/>
+        </MenuItem>               
 
+        <!-- Изменение семейства шрифтов -->
         <MenuItem Header="Семейство шрифтов">
-            <ComboBox Name="FontFamilyComboBox"  SelectedValue="{Binding FontFamily, Mode=TwoWay}" 
-                  SelectedValuePath="Tag">
-                <ComboBoxItem Tag="Arial" Content="Arial"/>
-                <ComboBoxItem Tag="Times New Roman" Content="Times New Roman"/>
-                <ComboBoxItem Tag="Verdana" Content="Verdana"/>
-                <ComboBoxItem Tag="Segoe UI" Content="Segoe UI"/>
-                <ComboBoxItem Tag="Courier New" Content="Courier New"/>
-            </ComboBox>
+            <MenuItem Header="Arial" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Arial"/>
+            <MenuItem Header="Times New Roman" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Times New Roman"/>
+            <MenuItem Header="Verdana" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Verdana"/>
+            <MenuItem Header="Segoe UI" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Segoe UI"/>
+            <MenuItem Header="Courier New" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Courier New"/>
         </MenuItem>
         <MenuItem Header="Вырезать" Command="{x:Static ApplicationCommands.Cut}">
             <MenuItem.Icon>
@@ -214,47 +218,44 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type s:DesignerItem}">
-                   
                     <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
-                          ContextMenu="{StaticResource DesignerItemContextMenu}">
+                      ContextMenu="{StaticResource DesignerItemContextMenu}">
 
-                        
                         <!-- PART_DragThumb -->
-                        <c:MoveThumb x:Name="PART_DragThumb" 
-                                    
-                                     Cursor="SizeAll"/>
+                        <c:MoveThumb x:Name="PART_DragThumb" Cursor="SizeAll"/>
+
                         <!-- PART_RotateThumb -->
-                        <c:RotateThumb x:Name="PART_RotateThumb" 
-                                       Cursor="Hand"
-                                       VerticalAlignment="Top"
-                                       HorizontalAlignment="Center"
-                                       Margin="0,-20,0,0"
-                                       Visibility="Collapsed"/>
+                        <c:RotateThumb x:Name="PART_RotateThumb" Cursor="Hand"
+                                   VerticalAlignment="Top" HorizontalAlignment="Center"
+                                   Margin="0,-20,0,0" Visibility="Collapsed"/>
+
                         <!-- PART_ResizeDecorator -->
-                        <Control x:Name="PART_ResizeDecorator" 
-                                 Visibility="Collapsed"
-                                 Template="{StaticResource ResizeDecoratorTemplate}"/>
+                        <Control x:Name="PART_ResizeDecorator" Visibility="Collapsed"
+                             Template="{StaticResource ResizeDecoratorTemplate}"/>
+
                         <!-- PART_ContentPresenter -->
                         <ContentPresenter x:Name="PART_ContentPresenter"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"
-                                          
-                                          Content="{TemplateBinding ContentControl.Content}"
-                                          Margin="{TemplateBinding ContentControl.Padding}"/>
+                                      HorizontalAlignment="Stretch"
+                                      VerticalAlignment="Stretch"
+                                      Content="{TemplateBinding ContentControl.Content}"
+                                      Margin="{TemplateBinding ContentControl.Padding}"/>
+
                         <!-- PART_ConnectorDecorator -->
                         <Control x:Name="PART_ConnectorDecorator"
-                                 Visibility="Hidden"
-                                 Template="{StaticResource ConnectorDecoratorTemplate}"/>
+                             Visibility="Hidden"
+                             Template="{StaticResource ConnectorDecoratorTemplate}"/>
+
+                        <!-- TextBox -->
                         <TextBox TextWrapping="Wrap" 
-         FontSize="{Binding FontSize, Mode=TwoWay}" 
-         FontFamily="{Binding FontFamily, Mode=TwoWay}" 
-         Name="itemtext"  
-         TextAlignment="Center" 
-         Text="{Binding Text, Mode=TwoWay}"  
-         BorderBrush="Transparent" 
-         VerticalAlignment="Center" 
-         HorizontalAlignment="Center" 
-         Background="Transparent"/>
+                             FontSize="{Binding FontSize, Mode=TwoWay}" 
+                             FontFamily="{Binding FontFamily, Mode=TwoWay}" 
+                             Name="itemtext"  
+                             TextAlignment="Center" 
+                             Text="{Binding Text, Mode=TwoWay}"  
+                             BorderBrush="Transparent" 
+                             VerticalAlignment="Center" 
+                             HorizontalAlignment="Center" 
+                             Background="Transparent"/>
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True" Binding="{Binding RelativeSource={RelativeSource Self},Path=IsGroup}">

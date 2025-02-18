@@ -978,7 +978,9 @@ namespace DiagramDesigner
                                                       new XElement("IsGroup", item.IsGroup),
                                                       new XElement("ParentID", item.ParentID),
                                                       new XElement("RotationAngle", rotateTransform != null ? rotateTransform.Angle : 0),
-                                                      new XElement("Text", item.Text), // Сериализация текста
+                                                      new XElement("Text", item.Text),
+                                                      new XElement("FontSize", item.FontSize),
+                                                      new XElement("FontFamily", item.FontFamily),
                                                       new XElement("Content", contentXaml)
                                                   )
                                        );
@@ -1016,9 +1018,13 @@ namespace DiagramDesigner
             item.ParentID = new Guid(itemXML.Element("ParentID").Value);
             item.IsGroup = Boolean.Parse(itemXML.Element("IsGroup").Value);
             item.Text = itemXML.Element("Text")?.Value; // Десериализация текста
+            item.FontSize = Double.Parse(itemXML.Element("FontSize").Value, CultureInfo.InvariantCulture); // Десериализация размера шрифта
+            item.FontFamily = new FontFamily(itemXML.Element("FontFamily").Value); // Десериализация семейства шрифта
+
             Canvas.SetLeft(item, Double.Parse(itemXML.Element("Left").Value, CultureInfo.InvariantCulture) + OffsetX);
             Canvas.SetTop(item, Double.Parse(itemXML.Element("Top").Value, CultureInfo.InvariantCulture) + OffsetY);
             Canvas.SetZIndex(item, Int32.Parse(itemXML.Element("zIndex").Value));
+            
 
             double rotationAngle = Double.Parse(itemXML.Element("RotationAngle").Value, CultureInfo.InvariantCulture);
             RotateTransform rotateTransform = new RotateTransform(rotationAngle);
