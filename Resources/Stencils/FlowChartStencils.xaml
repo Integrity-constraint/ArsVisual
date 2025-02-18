@@ -293,9 +293,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
-
-                </TextBox>
+               
             </Grid>
             <Grid>
 
@@ -317,9 +315,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
-
-                </TextBox>
+              
             </Grid>
             <Grid>
                 <Path Style="{StaticResource Data}" ToolTip="Data">
@@ -339,9 +335,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
-
-                </TextBox>
+              
             </Grid>
             <Grid>
 
@@ -353,9 +347,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
-
-                </TextBox>
+             
             </Grid>
             <Grid>
 
@@ -377,9 +369,7 @@
                     </ControlTemplate>
                 </s:DesignerItem.ConnectorDecoratorTemplate>
             </Path>
-            <TextBox Style="{StaticResource Textadapter}">
-
-            </TextBox>
+           
             </Grid>
             <Grid>
 
@@ -391,9 +381,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
-
-                </TextBox>
+             
             </Grid>
             <Grid>
                 <Path Style="{StaticResource StoredData}" ToolTip="Stored Data">

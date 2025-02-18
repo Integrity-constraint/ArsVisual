@@ -163,11 +163,17 @@ namespace DiagramDesigner
 
 
         }
+        private void InitializeCommands()
+        {
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontSizeCommand, OnChangeFontSizeExecuted));
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontFamilyCommand, OnChangeFontFamilyExecuted));
+        }
 
         public DesignerItem(Guid id)
         {
             this.id = id;
             this.Loaded += new RoutedEventHandler(DesignerItem_Loaded);
+            InitializeCommands();
 
         }
         private void OnChangeFontSizeExecuted(object sender, ExecutedRoutedEventArgs e)
