@@ -245,7 +245,7 @@
                              Visibility="Hidden"
                              Template="{StaticResource ConnectorDecoratorTemplate}"/>
 
-                        <!-- TextBox -->
+                        <!-- TextBox 
                         <TextBox TextWrapping="Wrap" 
                              FontSize="{Binding FontSize, Mode=TwoWay}" 
                              FontFamily="{Binding FontFamily, Mode=TwoWay}" 
@@ -256,6 +256,7 @@
                              VerticalAlignment="Center" 
                              HorizontalAlignment="Center" 
                              Background="Transparent"/>
+                        -->
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True" Binding="{Binding RelativeSource={RelativeSource Self},Path=IsGroup}">
@@ -284,5 +285,6 @@
             </Setter.Value>
         </Setter>
     </Style>
+   
 
 </ResourceDictionary>

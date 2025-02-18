@@ -8,12 +8,15 @@
     <Style x:Key="Textadapter" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="FontFamily" Value="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="BorderBrush" Value="Transparent"></Setter>
         <Setter Property="AcceptsReturn" Value="True"></Setter>
         <Setter Property="Text" Value="{Binding Text, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
     </Style>
+   
     <Brush x:Key="ItemStroke1">#ACADCD</Brush>
     <LinearGradientBrush x:Key="ItemBrush1" StartPoint="0,0" EndPoint="0,1" >
         <GradientStop Color="#FEFEFE" Offset="0"/>
@@ -265,8 +268,10 @@
     <s:Toolbox x:Key="FlowChartStencils" ItemSize="60,50" SnapsToDevicePixels="True"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
-           
 
+            <Grid>
+                
+         
                 <Path Style="{StaticResource Process}"  ToolTip="Process">
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
@@ -280,7 +285,10 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Path>
-             
+                <TextBox Style="{StaticResource Textadapter}">
+                    
+                </TextBox>
+            </Grid>
 
 
             <Grid>
@@ -293,7 +301,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-               
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -315,7 +325,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-              
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
                 <Path Style="{StaticResource Data}" ToolTip="Data">
@@ -335,7 +347,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-              
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -347,7 +361,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-             
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -369,7 +385,9 @@
                     </ControlTemplate>
                 </s:DesignerItem.ConnectorDecoratorTemplate>
             </Path>
-           
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -381,7 +399,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-             
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
                 <Path Style="{StaticResource StoredData}" ToolTip="Stored Data">
@@ -401,7 +421,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -413,7 +435,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-               
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -425,7 +449,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -437,7 +463,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-              
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -459,7 +487,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-               
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
             <Path Style="{StaticResource Card}" ToolTip="Card">
@@ -469,7 +499,9 @@
                 </ControlTemplate>
             </s:DesignerItem.DragThumbTemplate>
             </Path>
-           
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -481,7 +513,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-               
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -493,7 +527,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-               
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -505,7 +541,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -517,7 +555,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -529,7 +569,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-               
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
 
@@ -551,7 +593,9 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
             <Grid>
                 
@@ -563,7 +607,9 @@
                     </ControlTemplate>
                 </s:DesignerItem.DragThumbTemplate>
             </Path>
-              
+                <TextBox Style="{StaticResource Textadapter}">
+
+                </TextBox>
             </Grid>
         </ItemsControl.Items>
     </s:Toolbox>

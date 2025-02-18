@@ -27,13 +27,20 @@
     <Style x:Key="Textadapter" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="FontFamily" Value="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="BorderBrush" Value="Transparent"></Setter>
         <Setter Property="AcceptsReturn" Value="True"></Setter>
-        <Setter Property="Text" Value="{Binding QueryString}"></Setter>
+        <Setter Property="Text" Value="{Binding Text, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
     </Style>
-    
+    <Style x:Key="Textadapterboundry" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
+       
+        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+    </Style>
+
     <DrawingImage x:Key="Human">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V465.688 H213.348 V0 H0 Z">
@@ -63,11 +70,66 @@
         <Setter Property="IsHitTestVisible" Value="True"/>
         <Setter Property="Opacity" Value="0"/>
     </Style>
+
+    <!-- Basic Style for UML Elements -->
+    <Style x:Key="UMLElementStyle" TargetType="Path">
+        <Setter Property="Fill" Value="{DynamicResource ItemBrush}"/>
+        <Setter Property="Stroke" Value="{DynamicResource ItemStroke}"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+        <Setter Property="StrokeLineJoin" Value="Round"/>
+        <Setter Property="Stretch" Value="Fill"/>
+        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+    </Style>
+
+    <!-- Use Case (Ellipse) -->
+    <Style x:Key="UseCase" TargetType="Path" BasedOn="{StaticResource UMLElementStyle}">
+        <Setter Property="Data" Value="M 50,25 A 25,15 0 1,1 25,40 A 25,15 0 1,1 50,25"/>
+    </Style>
+
+    <Style x:Key="UseCase_DragThumb" TargetType="Path" BasedOn="{StaticResource UseCase}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+        <Setter Property="Fill" Value="Transparent"/>
+        <Setter Property="Stroke" Value="Transparent"/>
+    </Style>
+    <!-- System Boundary (Rectangle) -->
+    <Style x:Key="SystemBoundary" TargetType="Path" BasedOn="{StaticResource UMLElementStyle}">
+        <Setter Property="Data" Value="M 0,0 H 100 V 50 H 0 Z"/>
+        <Setter Property="Fill" Value="Transparent"></Setter>
+    </Style>
+
+    <Style x:Key="SystemBoundary_DragThumb" TargetType="Path" BasedOn="{StaticResource SystemBoundary}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+        <Setter Property="Fill" Value="Transparent"/>
+        <Setter Property="Stroke" Value="Transparent"/>
+    </Style>
     <s:Toolbox x:Key="UMLPosl" ItemSize="60,60" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
+          
+                <!-- Use Case -->
+                <Path Style="{StaticResource UseCase}" ToolTip="Use Case">
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+                            <Path Style="{StaticResource UseCase_DragThumb}"/>
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+                </Path>
+                <!-- System Boundary -->
             <Grid>
-
-                <Image Style="{StaticResource CustomDrawingImageStyle}"  >
+                
+            
+                <Path Style="{StaticResource SystemBoundary}" ToolTip="System Boundary">
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+                            <Path Style="{StaticResource SystemBoundary_DragThumb}"/>
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+                </Path>
+                <TextBox Style="{StaticResource Textadapterboundry}">
+                    
+                </TextBox>
+            </Grid>
+            <Image Style="{StaticResource CustomDrawingImageStyle}"  >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 
@@ -80,10 +142,8 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Image>
-                <TextBox  Style="{StaticResource Textadapter}">
-
-                </TextBox>
-            </Grid>
+             
+            
         </ItemsControl.Items>
     </s:Toolbox>
 </ResourceDictionary>
