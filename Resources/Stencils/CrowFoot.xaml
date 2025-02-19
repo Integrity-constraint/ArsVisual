@@ -38,58 +38,57 @@
     <s:Toolbox x:Key="CrowFootStencils" ItemSize="120,120">
         <ItemsControl.Items>
             <Grid>
-              <Path Style="{StaticResource TableField}">
-                  <s:DesignerItem.DragThumbTemplate>
-                        <ControlTemplate>
-                            <Path Style="{StaticResource TableField_DragThumb}"/>
-                        </ControlTemplate>
-                    </s:DesignerItem.DragThumbTemplate>
-              </Path>
-                <!-- Основной контур таблицы -->
-                <Path Style="{StaticResource CrowFootTable}" ToolTip="Database Table">
-                    <s:DesignerItem.DragThumbTemplate>
-                        <ControlTemplate>
-                            <Path Style="{StaticResource CrowFootTable_DragThumb}"/>
-                        </ControlTemplate>
-                    </s:DesignerItem.DragThumbTemplate>
+              <!-- Основной контур таблицы -->
+    <Path Style="{StaticResource CrowFootTable}" ToolTip="Database Table">
+        <s:DesignerItem.DragThumbTemplate>
+            <ControlTemplate>
+                <Path Style="{StaticResource CrowFootTable_DragThumb}"/>
+            </ControlTemplate>
+        </s:DesignerItem.DragThumbTemplate>
 
-                    <s:DesignerItem.ConnectorDecoratorTemplate>
-                        <ControlTemplate>
-                            <c:RelativePositionPanel Margin="-4">
-                                <s:Connector Orientation="Top" c:RelativePositionPanel.RelativePosition="0.5,0"/>
-                                <s:Connector Orientation="Left" c:RelativePositionPanel.RelativePosition="0,0.5"/>
-                                <s:Connector Orientation="Right" c:RelativePositionPanel.RelativePosition="1,0.5"/>
-                                <s:Connector Orientation="Bottom" c:RelativePositionPanel.RelativePosition="0.5,1"/>
-                            </c:RelativePositionPanel>
-                        </ControlTemplate>
-                    </s:DesignerItem.ConnectorDecoratorTemplate>
-                </Path>
+        <s:DesignerItem.ConnectorDecoratorTemplate>
+            <ControlTemplate>
+                <c:RelativePositionPanel Margin="-4">
+                    <s:Connector Orientation="Top" c:RelativePositionPanel.RelativePosition="0.5,0"/>
+                    <s:Connector Orientation="Left" c:RelativePositionPanel.RelativePosition="0,0.5"/>
+                    <s:Connector Orientation="Right" c:RelativePositionPanel.RelativePosition="1,0.5"/>
+                    <s:Connector Orientation="Bottom" c:RelativePositionPanel.RelativePosition="0.5,1"/>
+                </c:RelativePositionPanel>
+            </ControlTemplate>
+        </s:DesignerItem.ConnectorDecoratorTemplate>
+    </Path>
 
-                <!-- Заголовок таблицы -->
-                <TextBox Style="{StaticResource Textadapter}" 
-                         VerticalAlignment="Top"
-                         Margin="5,2,5,0"
-                         Text="{Binding TableName}"/>
+    <!-- Заголовок таблицы и кнопка добавления поля -->
+    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="5,2,5,0">
+        <TextBox Style="{StaticResource Textadapter}" 
+                 Text="{Binding TableName}"
+                 VerticalAlignment="Center"/>
+        <Button Content="+" 
+                Command="{Binding AddFieldCommand}"
+                Margin="5,0,0,0"
+                Width="20"
+                Height="20"/>
+    </StackPanel>
 
-                <!-- Список полей -->
-                <ItemsControl ItemsSource="{Binding Fields}" Margin="0,30,0,0">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Path Style="{StaticResource TableField}"/>
-                                <TextBox Style="{StaticResource Textadapter}"
-                                         Margin="5,2"
-                                         Text="{Binding Name}"
-                                         VerticalAlignment="Center"/>
-                                <TextBlock Style="{StaticResource FieldTypeDecorator}"/>
-                                <Path Data="M 5,12 L 15,12 M 10,7 L 10,17"
-                                      Stroke="Black"
-                                      Visibility="{Binding IsPrimaryKey, Converter={StaticResource BoolToVisibility}}"
-                                      Margin="5"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
+    <!-- Список полей -->
+    <ItemsControl ItemsSource="{Binding Fields}" Margin="0,30,0,0">
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <Grid>
+                    <Path Style="{StaticResource TableField}"/>
+                    <TextBox Style="{StaticResource Textadapter}"
+                             Margin="5,2"
+                             Text="{Binding Name}"
+                             VerticalAlignment="Center"/>
+                    <TextBlock Style="{StaticResource FieldTypeDecorator}"/>
+                    <Path Data="M 5,12 L 15,12 M 10,7 L 10,17"
+                          Stroke="Black"
+                          Visibility="{Binding IsPrimaryKey, Converter={StaticResource BoolToVisibility}}"
+                          Margin="5"/>
+                </Grid>
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
             </Grid>
         </ItemsControl.Items>
     </s:Toolbox>
