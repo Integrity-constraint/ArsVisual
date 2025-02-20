@@ -52,6 +52,17 @@
             <MenuItem Header="Стрелка" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Arrow" />
             <MenuItem Header="Пин" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Diamond" />
         </MenuItem>
+        <MenuItem Header="Стиль линии">
+            <MenuItem Header="Сплошная" 
+              Command="s:Connection.SetLineStyleCommand" 
+              CommandParameter="Solid"/>
+            <MenuItem Header="Точечная" 
+              Command="s:Connection.SetLineStyleCommand" 
+              CommandParameter="Dotted"/>
+            <MenuItem Header="Прерывистая" 
+              Command="s:Connection.SetLineStyleCommand" 
+              CommandParameter="Dashed"/>
+        </MenuItem>
     </ContextMenu>
 
     <Style TargetType="{x:Type s:Connection}">

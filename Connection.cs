@@ -13,6 +13,7 @@ namespace DiagramDesigner
     {
         public static readonly RoutedUICommand SetSourceArrowCommand = new RoutedUICommand("Set Source Arrow", "SetSourceArrow", typeof(Connection));
         public static readonly RoutedUICommand SetSinkArrowCommand = new RoutedUICommand("Set Sink Arrow", "SetSinkArrow", typeof(Connection));
+        public static readonly RoutedUICommand SetLineStyleCommand = new RoutedUICommand("Set Line Style","SetLineStyle", typeof(Connection));
         public enum ConnectionLineType
         {
             Straight,   // Прямая линия
@@ -57,6 +58,25 @@ namespace DiagramDesigner
                     this.SourceArrowSymbol = symbol;
                 }
             }
+        }
+        private void OnSetLineStyleCommandExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter is string style)
+            {
+                switch (style)
+                {
+                    case "Solid":
+                        StrokeDashArray = null;
+                        break;
+                    case "Dotted":
+                        StrokeDashArray = new DoubleCollection(new double[] { 2, 2 });
+                        break;
+                    case "Dashed":
+                        StrokeDashArray = new DoubleCollection(new double[] { 5, 3 });
+                        break;
+                }
+            }
+
         }
 
         // Обработчик команды для изменения стиля стрелки на приемнике
@@ -260,16 +280,13 @@ namespace DiagramDesigner
         private DoubleCollection strokeDashArray;
         public DoubleCollection StrokeDashArray
         {
-            get
-            {
-                return strokeDashArray;
-            }
+            get => strokeDashArray;
             set
             {
                 if (strokeDashArray != value)
                 {
                     strokeDashArray = value;
-                    OnPropertyChanged("StrokeDashArray");
+                    OnPropertyChanged(nameof(StrokeDashArray));
                 }
             }
         }
@@ -304,6 +321,7 @@ namespace DiagramDesigner
             CommandBindings.Add(new CommandBinding(SetSourceArrowCommand, OnSetSourceArrowCommandExecuted));
             CommandBindings.Add(new CommandBinding(SetSinkArrowCommand, OnSetSinkArrowCommandExecuted));
             CommandBindings.Add(new CommandBinding(SetLineTypeCommand, OnSetLineTypeCommandExecuted));
+            CommandBindings.Add(new CommandBinding(SetLineStyleCommand, OnSetLineStyleCommandExecuted));
 
             base.Unloaded += new RoutedEventHandler(Connection_Unloaded);
         }

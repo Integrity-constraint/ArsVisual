@@ -22,6 +22,7 @@ using System.Windows.Controls.Primitives;
 using ArsVisual.NotifyComponents.Error;
 using System.Security.Cryptography;
 using static DiagramDesigner.Connection;
+using ArsVisual.Helpers;
 
 
 
@@ -30,7 +31,7 @@ namespace DiagramDesigner
     public partial class DesignerCanvas
     {
         TaskbarIcon ts = new TaskbarIcon();
-
+       DoubleToSTRconvert sTRconvert = new DoubleToSTRconvert();
 
         
         public static RoutedCommand Group = new RoutedCommand();
@@ -256,8 +257,11 @@ namespace DiagramDesigner
                 {
                     connection.SinkArrowSymbol = sinkArrowSymbol;
                 }
-
-
+                var strokedashArray = connectionXML.Element("StrokeDashArray");
+                if (strokedashArray != null)
+                {
+                    connection.StrokeDashArray = StringToDoubleCollection(strokedashArray.Value);
+                }
                 this.Children.Add(connection);
             }
         }
@@ -987,8 +991,31 @@ namespace DiagramDesigner
 
             return serializedItems;
         }
+        private static string DoubleCollectionToString(DoubleCollection collection)
+        {
+            if (collection == null || collection.Count == 0)
+                return string.Empty;
 
+            return string.Join(",", collection);
+        }
+        private static DoubleCollection StringToDoubleCollection(string value)
+        {
+            if (string.IsNullOrEmpty(value))
+                return null;
 
+            var values = value.Split(',');
+            var doubleCollection = new DoubleCollection();
+
+            foreach (var val in values)
+            {
+                if (double.TryParse(val, out double result))
+                {
+                    doubleCollection.Add(result);
+                }
+            }
+
+            return doubleCollection;
+        }
         private XElement SerializeConnections(IEnumerable<Connection> connections)
         {
             var serializedConnections = new XElement("Connections",
@@ -1000,8 +1027,10 @@ namespace DiagramDesigner
                     new XElement("SinkConnectorName", connection.Sink.Name),
                     new XElement("SourceArrowSymbol", connection.SourceArrowSymbol.ToString()),
                     new XElement("SinkArrowSymbol", connection.SinkArrowSymbol.ToString()),
-                    new XElement("ConnectionLineType", connection._ConnectionLineType.ToString()), // Сохраняем тип линии
-                   // Сохраняем тип коннектора на приемнике
+                    new XElement("ConnectionLineType", connection._ConnectionLineType.ToString()),
+                  new XElement("StrokeDashArray", DoubleCollectionToString(connection.StrokeDashArray)),
+
+
                     new XElement("zIndex", Canvas.GetZIndex(connection))
             ));
 
