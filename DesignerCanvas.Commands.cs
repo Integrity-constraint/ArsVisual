@@ -31,7 +31,7 @@ namespace DiagramDesigner
     public partial class DesignerCanvas
     {
         TaskbarIcon ts = new TaskbarIcon();
-       DoubleToSTRconvert sTRconvert = new DoubleToSTRconvert();
+       
 
         
         public static RoutedCommand Group = new RoutedCommand();

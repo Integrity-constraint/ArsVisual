@@ -39,6 +39,9 @@
             <MenuItem Header="Прямая" 
               Command="s:Connection.SetLineTypeCommand" 
               CommandParameter="Straight"/>
+            <MenuItem Header="Прямая" 
+              Command="s:Connection.SetLineTypeCommand" 
+              CommandParameter="Curved"/>
         </MenuItem>
         <MenuItem Header="Начало линии">
             <MenuItem Header="нет" Command="s:Connection.SetSourceArrowCommand" CommandParameter="None" />

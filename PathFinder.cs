@@ -704,24 +704,7 @@ namespace DiagramDesigner
         }
 
 
-        private static void ApplyMargin(ref Point point, ConnectorOrientation orientation, double margin)
-        {
-            switch (orientation)
-            {
-                case ConnectorOrientation.Left:
-                    point.X -= margin;
-                    break;
-                case ConnectorOrientation.Top:
-                    point.Y -= margin;
-                    break;
-                case ConnectorOrientation.Right:
-                    point.X += margin;
-                    break;
-                case ConnectorOrientation.Bottom:
-                    point.Y += margin;
-                    break;
-            }
-        }
+        
         private static ConnectorOrientation GetOpositeOrientation(ConnectorOrientation connectorOrientation)
         {
             switch (connectorOrientation)

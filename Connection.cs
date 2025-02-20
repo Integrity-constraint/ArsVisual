@@ -17,7 +17,8 @@ namespace DiagramDesigner
         public enum ConnectionLineType
         {
             Straight,   // Прямая линия
-            Orthogonal  // Ортогональная линия
+            Orthogonal,
+            Curved // Ортогональная линия
         }
         private ConnectionLineType _connectionLineType;
         public ConnectionLineType _ConnectionLineType
@@ -373,8 +374,96 @@ namespace DiagramDesigner
                 UpdatePathGeometry(); // Учитывает IsStraightLine
             }
         }
-        
+        private List<Point> GetCurvedConnectionLine(ConnectorInfo sourceInfo, ConnectorInfo sinkInfo)
+        {
+            var points = new List<Point>();
 
+            Point start = GetOffsetPoint(sourceInfo);
+            Point end = GetOffsetPoint(sinkInfo);
+
+       
+            Point controlPoint1;
+            Point controlPoint2;
+
+            switch (sourceInfo.Orientation)
+            {
+                case ConnectorOrientation.Left:
+                    controlPoint1 = new Point(start.X - 100, start.Y);
+                    break;
+                case ConnectorOrientation.Top:
+                    controlPoint1 = new Point(start.X, start.Y - 100);
+                    break;
+                case ConnectorOrientation.Right:
+                    controlPoint1 = new Point(start.X + 100, start.Y);
+                    break;
+                case ConnectorOrientation.Bottom:
+                    controlPoint1 = new Point(start.X, start.Y + 100);
+                    break;
+                default:
+                    controlPoint1 = new Point(start.X + 100, start.Y);
+                    break;
+            }
+
+            switch (sinkInfo.Orientation)
+            {
+                case ConnectorOrientation.Left:
+                    controlPoint2 = new Point(end.X - 100, end.Y);
+                    break;
+                case ConnectorOrientation.Top:
+                    controlPoint2 = new Point(end.X, end.Y - 100);
+                    break;
+                case ConnectorOrientation.Right:
+                    controlPoint2 = new Point(end.X + 100, end.Y);
+                    break;
+                case ConnectorOrientation.Bottom:
+                    controlPoint2 = new Point(end.X, end.Y + 100);
+                    break;
+                default:
+                    controlPoint2 = new Point(end.X - 100, end.Y);
+                    break;
+            }
+
+          
+            for (double t = 0; t <= 1; t += 0.01)
+            {
+                var x = (1 - t) * (1 - t) * (1 - t) * start.X +
+                        3 * (1 - t) * (1 - t) * t * controlPoint1.X +
+                        3 * (1 - t) * t * t * controlPoint2.X +
+                        t * t * t * end.X;
+
+                var y = (1 - t) * (1 - t) * (1 - t) * start.Y +
+                        3 * (1 - t) * (1 - t) * t * controlPoint1.Y +
+                        3 * (1 - t) * t * t * controlPoint2.Y +
+                        t * t * t * end.Y;
+
+                points.Add(new Point(x, y));
+            }
+
+            return points;
+        }
+        private Point GetOffsetPoint(ConnectorInfo connector)
+        {
+            Point point = connector.Position;
+            double margin = 10; 
+
+            switch (connector.Orientation)
+            {
+                case ConnectorOrientation.Left:
+                    point.X -= margin;
+                    break;
+                case ConnectorOrientation.Top:
+                    point.Y -= margin;
+                    break;
+                case ConnectorOrientation.Right:
+                    point.X += margin;
+                    break;
+                case ConnectorOrientation.Bottom:
+                    point.Y += margin;
+                    break;
+            }
+
+            return point;
+        }
         private void UpdatePathGeometry()
         {
             if (Source != null && Sink != null)
@@ -382,15 +471,25 @@ namespace DiagramDesigner
                 PathGeometry geometry = new PathGeometry();
                 List<Point> linePoints;
 
-                if (_ConnectionLineType == ConnectionLineType.Straight)
+                switch (_ConnectionLineType)
                 {
-                    // Используем прямую линию
-                    linePoints = PathFinder.GetStraightConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
-                }
-                else
-                {
-                    // Используем ортогональную линию
-                    linePoints = PathFinder.GetConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
+                    case ConnectionLineType.Straight:
+                        // Прямая линия
+                        linePoints = PathFinder.GetStraightConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
+                        break;
+
+                    case ConnectionLineType.Orthogonal:
+                        // Ортогональная линия
+                        linePoints = PathFinder.GetConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
+                        break;
+
+                    case ConnectionLineType.Curved:
+                        // Кривая линия
+                        linePoints = GetCurvedConnectionLine(Source.GetInfo(), Sink.GetInfo());
+                        break;
+
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
 
                 if (linePoints.Count > 0)
