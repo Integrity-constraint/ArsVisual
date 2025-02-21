@@ -162,21 +162,22 @@ namespace DiagramDesigner
         {
             get { return (SolidColorBrush)GetValue(FontForeground); }
             set { SetValue(FontForeground, value); }
+
         }
         public static readonly DependencyProperty ItemFill =
-            DependencyProperty.Register(
-                nameof(Fill),
-                typeof(Brush), // Используем Brush вместо SolidColorBrush
-                typeof(DesignerItem),
-                new PropertyMetadata(new SolidColorBrush(Colors.Aquamarine))
-            );
+         DependencyProperty.Register(
+             nameof(Fill),
+             typeof(Brush),
+             typeof(DesignerItem),
+             new PropertyMetadata((Brush)Application.Current.Resources["DefaultFillBrush"])
+         );
 
         public static readonly DependencyProperty ItemStroke =
             DependencyProperty.Register(
                 nameof(Stroke),
-                typeof(Brush), // Используем Brush вместо SolidColorBrush
+                typeof(Brush),
                 typeof(DesignerItem),
-                new PropertyMetadata(new SolidColorBrush(Colors.Orange))
+                new PropertyMetadata((Brush)Application.Current.Resources["DefaultStrokeBrush"])
             );
 
         public Brush Fill
@@ -208,7 +209,7 @@ namespace DiagramDesigner
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontSizeCommand, OnChangeFontSizeExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontFamilyCommand, OnChangeFontFamilyExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontForegroundCommand, OnChangeFontForegroubd));
-            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemFillCommand, OnChangeFontForegroubd));
+           
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemFillCommand, OnChangeItemFill));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemStrokeCommand, OnChangeItemStroke));
         }
@@ -246,30 +247,33 @@ namespace DiagramDesigner
         }
         private void OnChangeItemFill(object sender, ExecutedRoutedEventArgs e)
         {
-            if (e.Parameter != null)
+            try
             {
-                var colorString = e.Parameter.ToString();
-                var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorString);
-                Fill = new SolidColorBrush(color);
-                MessageBox.Show($"Цвет {color.ToString()}");
+                if (e.Parameter is string colorName)
+                {
+                    var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorName);
+                    Fill = new SolidColorBrush(color);
+                    MessageBox.Show($"Цвет изменен на {colorName}");
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Parameter is null");
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
+
         private void OnChangeItemStroke(object sender, ExecutedRoutedEventArgs e)
         {
-            if (e.Parameter != null)
+            if (e.Parameter is string colorName)
             {
-                var colorString = e.Parameter.ToString();
-                var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorString);
-               Stroke = new SolidColorBrush(color);
+                this.Stroke = (Brush)new BrushConverter().ConvertFromString(colorName);
+                // Добавьте отладочное сообщение здесь
+               MessageBox.Show($"Цвет границы изменен на {colorName}");
             }
-            else
-            {
-                MessageBox.Show("Parameter is null");
-            }
+        }
+        private void CanExecuteChangeItemFill(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true; // Всегда разрешаем выполнение
         }
         public DesignerItem()
             : this(Guid.NewGuid())
@@ -277,7 +281,10 @@ namespace DiagramDesigner
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontSizeCommand, OnChangeFontSizeExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontFamilyCommand, OnChangeFontFamilyExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontForegroundCommand, OnChangeFontForegroubd));
-            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemFillCommand, OnChangeItemFill));
+            CommandBindings.Add(new CommandBinding(
+     DesignerItemCommands.ChangeItemFillCommand,
+     OnChangeItemFill,
+     CanExecuteChangeItemFill));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemStrokeCommand, OnChangeItemStroke));
 
         }

@@ -45,7 +45,7 @@
                 <Expander Header="Формы" Content="{StaticResource ShapeStencils}" IsExpanded="True"/>
                 <Expander Header="Объекты Active Directory " Content="{StaticResource NetStencils}" IsExpanded="True"/>
                 <Expander Header="Сценарий выполнения UML " Content="{StaticResource UMLPosl}" IsExpanded="True"/>
-                    <Expander  Header="Нотация CrowFoot" Content="{StaticResource CrowFootStencils}" IsExpanded="True"/>
+                    
 
 
 

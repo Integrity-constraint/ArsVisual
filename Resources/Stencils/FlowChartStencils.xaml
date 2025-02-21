@@ -25,33 +25,45 @@
     </LinearGradientBrush>
 
     <Style x:Key="FlowChartItemStyle" TargetType="Path">
-        <Setter Property="Fill" Value="Aquamarine"/>
-        <!-- Значение по умолчанию для Toolbox -->
+        <Setter Property="Fill" Value="AliceBlue"/>
+        
         <Setter Property="Stroke" Value="Orange"/>
-        <!-- Значение по умолчанию для Toolbox -->
+      
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="StrokeLineJoin" Value="Round"/>
         <Setter Property="Stretch" Value="Fill"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
 
-        <!-- Переопределение для DesignerItem -->
+        
      
     </Style>
+    
+    <Style x:Key="DesignerItemFlowChartStyle" TargetType="Path" 
+       BasedOn="{StaticResource FlowChartItemStyle}">
+        <Setter Property="Fill" 
+            Value="{Binding Fill, 
+            RelativeSource={RelativeSource AncestorType=s:DesignerItem}, 
+            FallbackValue={StaticResource DefaultFillBrush} }"/>
+        <Setter Property="Stroke" 
+            Value="{Binding Stroke, 
+            RelativeSource={RelativeSource AncestorType=s:DesignerItem}, 
+            FallbackValue={StaticResource DefaultStrokeBrush}}"/>
+    </Style>
     <!-- Process -->
-    <Style x:Key="Process" TargetType="Path" BasedOn="{StaticResource FlowChartItemStyle}">
+    <Style x:Key="Process" TargetType="Path"  BasedOn="{StaticResource DesignerItemFlowChartStyle}">
         <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
        
     </Style>
+   
 
     <Style x:Key="Process_DragThumb" TargetType="Path" BasedOn="{StaticResource Process}">
         <Setter Property="IsHitTestVisible" Value="true"/>
-        <Setter Property="Fill" Value="Transparent"/>
-        <Setter Property="Stroke" Value="Transparent"/>
+        <!-- Убраны строки с прозрачностью -->
     </Style>
 
     <!-- Decision -->
-    <Style x:Key="Decision" TargetType="Path" BasedOn="{StaticResource FlowChartItemStyle}">
+    <Style x:Key="Decision" TargetType="Path" BasedOn="{StaticResource DesignerItemFlowChartStyle}">
         <Setter Property="Data" Value="M 0,20 L 30 0 L 60,20 L 30,40 Z"/>
     </Style>
 
@@ -274,7 +286,7 @@
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
 
-            <Grid>
+            <Grid >
                 
          
                 <Path Style="{StaticResource Process}"  ToolTip="Process">
