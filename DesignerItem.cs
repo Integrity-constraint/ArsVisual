@@ -1,11 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ArsVisual;
 using DiagramDesigner.Controls;
+using Brush = System.Windows.Media.Brush;
+using FontFamily = System.Windows.Media.FontFamily;
+
 
 namespace DiagramDesigner
 {
@@ -150,6 +155,42 @@ namespace DiagramDesigner
             set { SetValue(FontFamilyProperty, value); }
         }
 
+        public static readonly DependencyProperty FontForeground =
+           DependencyProperty.Register("Foreground", typeof(SolidColorBrush), typeof(DesignerItem), new PropertyMetadata(new SolidColorBrush(Colors.Black)));
+       
+        public SolidColorBrush Foreground
+        {
+            get { return (SolidColorBrush)GetValue(FontForeground); }
+            set { SetValue(FontForeground, value); }
+
+        }
+        public static readonly DependencyProperty ItemFill =
+         DependencyProperty.Register(
+             nameof(Fill),
+             typeof(Brush),
+             typeof(DesignerItem),
+             new PropertyMetadata((Brush)Application.Current.Resources["FillElement"])
+         );
+
+        public static readonly DependencyProperty ItemStroke =
+            DependencyProperty.Register(
+                nameof(Stroke),
+                typeof(Brush),
+                typeof(DesignerItem),
+                new PropertyMetadata((Brush)Application.Current.Resources["StrokeElement"])
+            );
+
+        public Brush Fill
+        {
+            get { return (Brush)GetValue(ItemFill); }
+            set { SetValue(ItemFill, value); }
+        }
+
+        public Brush Stroke
+        {
+            get { return (Brush)GetValue(ItemStroke); }
+            set { SetValue(ItemStroke, value); }
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
@@ -167,6 +208,10 @@ namespace DiagramDesigner
         {
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontSizeCommand, OnChangeFontSizeExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontFamilyCommand, OnChangeFontFamilyExecuted));
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontForegroundCommand, OnChangeFontForegroubd));
+           
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemFillCommand, OnChangeItemFill));
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemStrokeCommand, OnChangeItemStroke));
         }
 
         public DesignerItem(Guid id)
@@ -196,11 +241,51 @@ namespace DiagramDesigner
         {
             FontFamily = new FontFamily(e.Parameter.ToString());
         }
+        private void OnChangeFontForegroubd(object sender, ExecutedRoutedEventArgs e)
+        {
+            Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(e.Parameter.ToString()));
+        }
+        private void OnChangeItemFill(object sender, ExecutedRoutedEventArgs e)
+        {
+            try
+            {
+                if (e.Parameter is string colorName)
+                {
+                    var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorName);
+                    Fill = new SolidColorBrush(color);
+                  
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
+            }
+        }
+
+        private void OnChangeItemStroke(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (e.Parameter is string colorName)
+            {
+                this.Stroke = (Brush)new BrushConverter().ConvertFromString(colorName);
+                // Добавьте отладочное сообщение здесь
+               MessageBox.Show($"Цвет границы изменен на {colorName}");
+            }
+        }
+        private void CanExecuteChangeItemFill(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true; // Всегда разрешаем выполнение
+        }
         public DesignerItem()
             : this(Guid.NewGuid())
         {
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontSizeCommand, OnChangeFontSizeExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontFamilyCommand, OnChangeFontFamilyExecuted));
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontForegroundCommand, OnChangeFontForegroubd));
+            CommandBindings.Add(new CommandBinding(
+     DesignerItemCommands.ChangeItemFillCommand,
+     OnChangeItemFill,
+     CanExecuteChangeItemFill));
+            CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemStrokeCommand, OnChangeItemStroke));
 
         }
 

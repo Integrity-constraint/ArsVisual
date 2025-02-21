@@ -361,22 +361,7 @@ namespace DiagramDesigner
             throw new Exception("Failed to retrieve orientation");
         }
 
-        private static Orientation GetOrientation(ConnectorOrientation sourceOrientation)
-        {
-            switch (sourceOrientation)
-            {
-                case ConnectorOrientation.Left:
-                    return Orientation.Horizontal;
-                case ConnectorOrientation.Top:
-                    return Orientation.Vertical;
-                case ConnectorOrientation.Right:
-                    return Orientation.Horizontal;
-                case ConnectorOrientation.Bottom:
-                    return Orientation.Vertical;
-                default:
-                    throw new Exception("Unknown ConnectorOrientation");
-            }
-        }
+      
 
         private static Point GetNearestNeighborSource(ConnectorInfo source, Point endPoint, Rect rectSource, Rect rectSink, out bool flag)
         {

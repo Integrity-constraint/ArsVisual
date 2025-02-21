@@ -14,29 +14,17 @@
 
 
 
-        <MenuItem Header="Выбор цвета">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
 
-                <GroupBox Header="Цвет" Grid.Row="0">
-                    <ComboBox Name="ColorComboBox" SelectedIndex="0" >
-                        <ComboBoxItem Background="Red" Foreground="White" Tag="Red">Красный</ComboBoxItem>
-                        <ComboBoxItem Background="Green" Foreground="White" Tag="Green">Зеленый</ComboBoxItem>
-                        <ComboBoxItem Background="Blue" Foreground="White" Tag="Blue">Синий</ComboBoxItem>
-                        <ComboBoxItem Background="Yellow" Foreground="Black" Tag="Yellow">Желтый</ComboBoxItem>
-                        <ComboBoxItem Background="Black" Foreground="White" Tag="Black">Черный</ComboBoxItem>
-                        <ComboBoxItem Background="White" Foreground="Black" Tag="White">Белый</ComboBoxItem>
-                    </ComboBox>
-                </GroupBox>
-
-                <GroupBox Header="Выбранный цвет" Grid.Row="1">
-                    <Border Name="SelectedColorBorder" Background="Red" Height="50" Width="100"/>
-                </GroupBox>
-            </Grid>
+        <MenuItem Header="Цвет элемента" 
+          CommandTarget="{Binding PlacementTarget.SelectedItem, 
+          RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+            <MenuItem Header="Красный" 
+              Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+              CommandParameter="Red"/>
+            <!-- остальные пункты -->
         </MenuItem>
+
+
         <MenuItem Header="Размер шрифта">
             <MenuItem Header="10" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="10"/>
             <MenuItem Header="12" Command="{x:Static m:DesignerItemCommands.ChangeFontSizeCommand}" CommandParameter="12"/>
@@ -63,6 +51,13 @@
             <MenuItem Header="Verdana" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Verdana"/>
             <MenuItem Header="Segoe UI" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Segoe UI"/>
             <MenuItem Header="Courier New" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Courier New"/>
+        </MenuItem>
+        <MenuItem Header="Цвет Шрифта">
+            <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" CommandParameter="Red"/>
+          
+           
+           
+           
         </MenuItem>
         <MenuItem Header="Вырезать" Command="{x:Static ApplicationCommands.Cut}">
             <MenuItem.Icon>

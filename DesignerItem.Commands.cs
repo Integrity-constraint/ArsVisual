@@ -11,5 +11,8 @@ namespace ArsVisual
     {
         public static readonly RoutedCommand ChangeFontSizeCommand = new RoutedCommand("ChangeFontSizeCommand", typeof(DesignerItemCommands));
         public static readonly RoutedCommand ChangeFontFamilyCommand = new RoutedCommand("ChangeFontFamilyCommand", typeof(DesignerItemCommands));
+         public static readonly RoutedCommand ChangeFontForegroundCommand= new RoutedCommand("ChangeFontForegroundCommand", typeof(DesignerItemCommands));
+         public static readonly RoutedCommand ChangeItemFillCommand= new RoutedCommand("ChangeItemFillCommand", typeof(DesignerItemCommands));
+         public static readonly RoutedCommand ChangeItemStrokeCommand= new RoutedCommand("ChangeItemStrokeCommand", typeof(DesignerItemCommands));
     }
 }
