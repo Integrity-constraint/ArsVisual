@@ -24,7 +24,9 @@
           <ResourceDictionary Source="Resources/Connection.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/UMLPosl.xaml"/>
-                <ResourceDictionary Source="Resources/Stencils/CrowFoot.xaml"/>
+               
+          <ResourceDictionary Source="Resources/Stencils/CrowFoot.xaml"/>
+          
 
                 <ResourceDictionary>
                     <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
