@@ -169,7 +169,7 @@ namespace DiagramDesigner
              nameof(Fill),
              typeof(Brush),
              typeof(DesignerItem),
-             new PropertyMetadata((Brush)Application.Current.Resources["DefaultFillBrush"])
+             new PropertyMetadata((Brush)Application.Current.Resources["FillElement"])
          );
 
         public static readonly DependencyProperty ItemStroke =
@@ -177,7 +177,7 @@ namespace DiagramDesigner
                 nameof(Stroke),
                 typeof(Brush),
                 typeof(DesignerItem),
-                new PropertyMetadata((Brush)Application.Current.Resources["DefaultStrokeBrush"])
+                new PropertyMetadata((Brush)Application.Current.Resources["StrokeElement"])
             );
 
         public Brush Fill
@@ -253,7 +253,7 @@ namespace DiagramDesigner
                 {
                     var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorName);
                     Fill = new SolidColorBrush(color);
-                    MessageBox.Show($"Цвет изменен на {colorName}");
+                  
                 }
             }
             catch (Exception ex)

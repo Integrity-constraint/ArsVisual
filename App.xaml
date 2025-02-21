@@ -23,28 +23,23 @@
          <ResourceDictionary Source="Resources/ZoomBox.xaml"/>
           <ResourceDictionary Source="Resources/Connection.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml"/>
-        <ResourceDictionary Source="Resources/Stencils/UMLPosl.xaml"/>
-
-
-                <ResourceDictionary>
-                    <SolidColorBrush x:Key="DefaultFillBrush" Color="Aquamarine"/>
-                    
-                    <SolidColorBrush x:Key="DefaultStrokeBrush" Color="Orange"/>
-                </ResourceDictionary>
-
-              
-          
-                <ResourceDictionary>
-                    <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
-                </ResourceDictionary>
-          
-               
-          
-                <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
+                <ResourceDictionary Source="Resources/Stencils/UMLPosl.xaml"/>
+         <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/Styles/SettingsTree.xaml"/>
            <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml"/>
-          
-      </ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml">
+
+                    <Color x:Key="FillElementColor">Aquamarine</Color>
+                    <Color x:Key="StrokeElementColor">Orange</Color>
+
+                    <!-- Объявите кисти -->
+                    <SolidColorBrush x:Key="FillElement" Color="{StaticResource FillElementColor}"/>
+                    <SolidColorBrush x:Key="StrokeElement" Color="{StaticResource StrokeElementColor}"/>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+            <Color x:Key="FillElementColor">Aquamarine</Color>
+            <Color x:Key="StrokeElementColor">Orange</Color>
+            <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
             <tb:TaskbarIcon x:Key="MyNotifyIcon"
          IconSource="/icons/integration.png"
          ToolTipText="hello world" />
