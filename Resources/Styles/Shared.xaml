@@ -5,7 +5,7 @@
     <!-- Светло-оранжевый бордер -->
     <SolidColorBrush x:Key="ToolbarDarkBorderBrush" Color="#9370DB"/>
     <!-- Темно-оранжевый бордер -->
-    <SolidColorBrush x:Key="ToolbarTextBrush" Color="#00CED1"/>
+    <SolidColorBrush x:Key="ToolbarTextBrush" Color="Black"/>
     <!-- Светло-оранжевый текст -->
     <SolidColorBrush x:Key="ToolbarGroupHeaderBrush" Color="#E6E6FA"/>
     <!-- Светло-оранжевый фон заголовка -->

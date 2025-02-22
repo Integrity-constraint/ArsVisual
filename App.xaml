@@ -29,16 +29,15 @@
            <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml"/>
                 <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml">
 
-                    <Color x:Key="FillElementColor">Aquamarine</Color>
-                    <Color x:Key="StrokeElementColor">Orange</Color>
+                    <Color x:Key="FillElementColor">White</Color>
+                    <Color x:Key="StrokeElementColor">Black</Color>
 
-                    <!-- Объявите кисти -->
+                    
                     <SolidColorBrush x:Key="FillElement" Color="{StaticResource FillElementColor}"/>
                     <SolidColorBrush x:Key="StrokeElement" Color="{StaticResource StrokeElementColor}"/>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
-            <Color x:Key="FillElementColor">Aquamarine</Color>
-            <Color x:Key="StrokeElementColor">Orange</Color>
+           
             <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
             <tb:TaskbarIcon x:Key="MyNotifyIcon"
          IconSource="/icons/integration.png"

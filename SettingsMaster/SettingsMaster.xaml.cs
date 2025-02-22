@@ -37,7 +37,7 @@ namespace ArsVisual.SettingsMaster
         private void OnColorItemStrokeSelected(Color selectedColor)
         {
            
-            Application.Current.Resources["ItemStroke"] = new SolidColorBrush(selectedColor);
+            Application.Current.Resources["StrokeElement"] = new SolidColorBrush(selectedColor);
         }
         private void OnColorSizeChromeSelected(Color selectedColor)
         {
@@ -49,7 +49,7 @@ namespace ArsVisual.SettingsMaster
         private void OnColorItemBrushSelected(Color selectedColor)
         {
            
-            Application.Current.Resources["ItemBrush"] = new SolidColorBrush(selectedColor);
+            Application.Current.Resources["FillElement"] = new SolidColorBrush(selectedColor);
            
         }
     }

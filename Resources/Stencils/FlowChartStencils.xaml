@@ -19,8 +19,8 @@
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
     </Style>
 
-    <SolidColorBrush x:Key="LocalFillBrush" Color="Aquamarine"/>
-    <SolidColorBrush x:Key="LocalStrokeBrush" Color="Orange"/>
+    <SolidColorBrush x:Key="LocalFillBrush" Color="White"/>
+    <SolidColorBrush x:Key="LocalStrokeBrush" Color="Black"/>
 
     <Style x:Key="FlowChartItemStyle" TargetType="Path">
         <Setter Property="Fill" Value="Orange"/>

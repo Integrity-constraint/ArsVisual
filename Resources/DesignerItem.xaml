@@ -15,14 +15,29 @@
 
 
 
-        <MenuItem Header="Цвет элемента" 
-          CommandTarget="{Binding PlacementTarget.SelectedItem, 
-          RelativeSource={RelativeSource AncestorType=ContextMenu}}">
-            <MenuItem Header="Красный" 
-              Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
-              CommandParameter="Red"/>
-            <!-- остальные пункты -->
+        
+       <MenuItem Header="Цвет элемента" 
+   CommandTarget="{Binding PlacementTarget.SelectedItem, 
+   RelativeSource={RelativeSource AncestorType=ContextMenu}}">
+
+            <MenuItem Header="Основной" >
+
+                <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+ CommandParameter="Red">
+                    
+                </MenuItem>
+            </MenuItem>
+
+            <MenuItem Header="Обводка" >
+
+                <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+CommandParameter="Green">
+
+                </MenuItem>
+            </MenuItem>
         </MenuItem>
+        
+        
 
 
         <MenuItem Header="Размер шрифта">

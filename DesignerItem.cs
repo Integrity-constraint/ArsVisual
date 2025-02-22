@@ -267,13 +267,13 @@ namespace DiagramDesigner
             if (e.Parameter is string colorName)
             {
                 this.Stroke = (Brush)new BrushConverter().ConvertFromString(colorName);
-                // Добавьте отладочное сообщение здесь
-               MessageBox.Show($"Цвет границы изменен на {colorName}");
+               
+              
             }
         }
         private void CanExecuteChangeItemFill(object sender, CanExecuteRoutedEventArgs e)
         {
-            e.CanExecute = true; // Всегда разрешаем выполнение
+            e.CanExecute = true; 
         }
         public DesignerItem()
             : this(Guid.NewGuid())
@@ -281,10 +281,7 @@ namespace DiagramDesigner
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontSizeCommand, OnChangeFontSizeExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontFamilyCommand, OnChangeFontFamilyExecuted));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeFontForegroundCommand, OnChangeFontForegroubd));
-            CommandBindings.Add(new CommandBinding(
-     DesignerItemCommands.ChangeItemFillCommand,
-     OnChangeItemFill,
-     CanExecuteChangeItemFill));
+            CommandBindings.Add(new CommandBinding( DesignerItemCommands.ChangeItemFillCommand,  OnChangeItemFill, CanExecuteChangeItemFill));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemStrokeCommand, OnChangeItemStroke));
 
         }

@@ -182,7 +182,7 @@
         </GroupBox>
 
         <!--Выравнивание-->
-        <!--Выравнивание
+        
         <GroupBox Header="Выравнивание" Style="{StaticResource ToolbarGroup}" Margin="3">
             <Grid>
                 <Grid.ColumnDefinitions>

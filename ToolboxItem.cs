@@ -48,6 +48,7 @@ namespace DiagramDesigner
                     dataObject.DesiredSize = new Size(panel.ItemWidth * scale, panel.ItemHeight * scale);
                 }
 
+               
                 DragDrop.DoDragDrop(this, dataObject, DragDropEffects.Copy);
 
                 e.Handled = true;

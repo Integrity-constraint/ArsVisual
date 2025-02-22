@@ -986,6 +986,8 @@ namespace DiagramDesigner
                                                       new XElement("FontSize", item.FontSize),
                                                       new XElement("FontFamily", item.FontFamily),
                                                       new XElement("Foreground", item.Foreground),
+                                                      new XElement("ItemFill", item.Fill),
+                                                      new XElement("ItemStroke", item.Stroke),
                                                       new XElement("Content", contentXaml)
                                                   )
                                        );
@@ -1047,10 +1049,12 @@ namespace DiagramDesigner
             item.Height = Double.Parse(itemXML.Element("Height").Value, CultureInfo.InvariantCulture);
             item.ParentID = new Guid(itemXML.Element("ParentID").Value);
             item.IsGroup = Boolean.Parse(itemXML.Element("IsGroup").Value);
-            item.Text = itemXML.Element("Text")?.Value; // Десериализация текста
+            item.Text = itemXML.Element("Text")?.Value; 
             item.FontSize = Double.Parse(itemXML.Element("FontSize").Value, CultureInfo.InvariantCulture); 
             item.FontFamily = new FontFamily(itemXML.Element("FontFamily").Value); 
             item.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString(itemXML.Element("Foreground").Value)); 
+            item.Stroke = new SolidColorBrush((Color)ColorConverter.ConvertFromString(itemXML.Element("ItemStroke").Value)); 
+            item.Fill = new SolidColorBrush((Color)ColorConverter.ConvertFromString(itemXML.Element("ItemFill").Value)); 
 
             Canvas.SetLeft(item, Double.Parse(itemXML.Element("Left").Value, CultureInfo.InvariantCulture) + OffsetX);
             Canvas.SetTop(item, Double.Parse(itemXML.Element("Top").Value, CultureInfo.InvariantCulture) + OffsetY);
