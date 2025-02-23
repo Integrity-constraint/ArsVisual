@@ -251,9 +251,10 @@ namespace DiagramDesigner
             {
                 if (e.Parameter is string colorName)
                 {
-                    var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorName);
-                    Fill = new SolidColorBrush(color);
-                  
+                 // var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorName);
+                 //this.Fill = new SolidColorBrush(color);
+                 this.Fill = (Brush)new BrushConverter().ConvertFromString(colorName);
+
                 }
             }
             catch (Exception ex)

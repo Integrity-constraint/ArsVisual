@@ -47,7 +47,7 @@
                     <Setter.Value>
                         <ControlTemplate TargetType="ToggleButton">
                             <Border x:Name="Border"
-                                    Background="{StaticResource NormalBrush}">
+                                    Background="{StaticResource zoomboxnormalbrush}">
                                 <ContentPresenter />
                             </Border>
                             <ControlTemplate.Triggers>
@@ -55,7 +55,7 @@
                                          Value="true">
                                     <Setter TargetName="Border"
                                             Property="Background"
-                                            Value="{StaticResource DarkBrush}" />
+                                            Value="{StaticResource zoomboxdarkbrush}" />
                                 </Trigger>
                             </ControlTemplate.Triggers>
                         </ControlTemplate>

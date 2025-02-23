@@ -16,8 +16,8 @@
             Name="Border"
             Margin="1" 
             CornerRadius="2" 
-            Background="{StaticResource NormalBrush}"
-            BorderBrush="{StaticResource NormalBorderBrush}"
+            Background="{StaticResource ScrollbarNormalBrush}"
+            
             BorderThickness="1">
                         <Path 
               HorizontalAlignment="Center"
@@ -100,8 +100,10 @@
                     <Thumb 
             Style="{StaticResource ScrollBarThumb}" 
             Margin="1,0,1,0"  
-            Background="{StaticResource HorizontalNormalBrush}"
-            BorderBrush="{StaticResource HorizontalNormalBorderBrush}" />
+            Background="{StaticResource ScrollbarNormalBrush}"
+            BorderBrush="{StaticResource ScrollbarDarkbrush}"
+                        
+                        />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
                     <RepeatButton 
@@ -143,8 +145,8 @@
                 <Track.Thumb>
                     <Thumb Style="{StaticResource ScrollBarThumb}" 
                            Margin="0,1,0,1"  
-                           Background="{StaticResource NormalBrush}"
-                           BorderBrush="{StaticResource NormalBorderBrush}" />
+                           Background="{StaticResource ScrollbarNormalBrush}"
+                           BorderBrush="{StaticResource ScrollbarDarkbrush}" />
                 </Track.Thumb>
                 <Track.IncreaseRepeatButton>
                     <RepeatButton Style="{StaticResource ScrollBarPageButton}"
