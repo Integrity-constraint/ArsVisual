@@ -24,16 +24,77 @@
 
                 <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
  CommandParameter="Red">
-                    
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+CommandParameter="Yellow">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+CommandParameter="Green">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+CommandParameter="Black">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Black"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+CommandParameter="Purple">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Purple"/>
+                    </MenuItem.Icon>
                 </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Обводка" >
-
-                <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+               
+                    <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Green">
+                        <MenuItem.Icon>
+                            <Rectangle Width="16" Height="16" Fill="Green"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+ CommandParameter="Red">
+                        <MenuItem.Icon>
+                            <Rectangle Width="16" Height="16" Fill="Red"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+CommandParameter="Yellow">
+                        <MenuItem.Icon>
+                            <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
 
-                </MenuItem>
+                    <MenuItem Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+CommandParameter="Black">
+                        <MenuItem.Icon>
+                            <Rectangle Width="16" Height="16" Fill="Black"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+CommandParameter="Purple">
+                        <MenuItem.Icon>
+                            <Rectangle Width="16" Height="16" Fill="Purple"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                    <MenuItem Header="Оранжевый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+CommandParameter="Purple">
+                        <MenuItem.Icon>
+                            <Rectangle Width="16" Height="16" Fill="Orange"/>
+                        </MenuItem.Icon>
+                    </MenuItem>
+                
+                
             </MenuItem>
         </MenuItem>
         
