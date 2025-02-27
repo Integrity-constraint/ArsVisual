@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
-    
+
     <SolidColorBrush x:Key="LocalFillBrush" Color="White"/>
     <SolidColorBrush x:Key="LocalStrokeBrush" Color="Black"/>
 
@@ -39,7 +39,7 @@
     </Style>
 
     <Style x:Key="Textadapterboundry" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
-       
+
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
     </Style>
@@ -57,10 +57,10 @@
     <Style x:Key="Human_DragThumb" TargetType="Path" BasedOn="{StaticResource Human}">
         <Setter Property="IsHitTestVisible" Value="True"/>
         <Setter Property="Opacity" Value="0"/>
-        
+
     </Style>
 
-   
+
 
     <!-- Use Case (Ellipse) -->
     <Style x:Key="UseCase" TargetType="Path" BasedOn="{StaticResource DesignerUMLChartStyle}">
@@ -85,19 +85,19 @@
     </Style>
     <s:Toolbox x:Key="UMLPosl" ItemSize="60,60" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
-          
-                <!-- Use Case -->
-                <Path Style="{StaticResource UseCase}" ToolTip="Use Case">
-                    <s:DesignerItem.DragThumbTemplate>
-                        <ControlTemplate>
-                            <Path Style="{StaticResource UseCase_DragThumb}"/>
-                        </ControlTemplate>
-                    </s:DesignerItem.DragThumbTemplate>
-                </Path>
-                <!-- System Boundary -->
+
+            <!-- Use Case -->
+            <Path Style="{StaticResource UseCase}" ToolTip="Use Case">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource UseCase_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <!-- System Boundary -->
             <Grid>
-                
-            
+
+
                 <Path Style="{StaticResource SystemBoundary}" ToolTip="System Boundary">
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
@@ -106,7 +106,7 @@
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
                 <TextBox  Style="{StaticResource Textadapterboundry}">
-                    
+
                 </TextBox>
             </Grid>
             <Grid>
