@@ -39,7 +39,7 @@
             <MenuItem Header="Прямая" 
               Command="s:Connection.SetLineTypeCommand" 
               CommandParameter="Straight"/>
-            <MenuItem Header="Прямая" 
+            <MenuItem Header="Кривая" 
               Command="s:Connection.SetLineTypeCommand" 
               CommandParameter="Curved"/>
         </MenuItem>

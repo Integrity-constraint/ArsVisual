@@ -14,6 +14,7 @@ namespace DiagramDesigner
         public static readonly RoutedUICommand SetSourceArrowCommand = new RoutedUICommand("Set Source Arrow", "SetSourceArrow", typeof(Connection));
         public static readonly RoutedUICommand SetSinkArrowCommand = new RoutedUICommand("Set Sink Arrow", "SetSinkArrow", typeof(Connection));
         public static readonly RoutedUICommand SetLineStyleCommand = new RoutedUICommand("Set Line Style","SetLineStyle", typeof(Connection));
+       
         public enum ConnectionLineType
         {
             Straight,   // Прямая линия
@@ -336,6 +337,7 @@ namespace DiagramDesigner
                 if (Enum.TryParse(lineType, out ConnectionLineType type))
                 {
                     this._ConnectionLineType = type;
+                    UpdatePathGeometry();
                 }
             }
         }
