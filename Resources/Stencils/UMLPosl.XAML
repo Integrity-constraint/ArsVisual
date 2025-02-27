@@ -2,22 +2,13 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
-    <Brush x:Key="ItemStroke">#FFD69436</Brush>
-    <LinearGradientBrush x:Key="ItemBrush" StartPoint="0,0" EndPoint="0,1">
-        <LinearGradientBrush.GradientStops>
-            <GradientStop Color="#FAFBE9" Offset="0" />
-            <GradientStop Color="Aquamarine" Offset="1" />
-        </LinearGradientBrush.GradientStops>
-    </LinearGradientBrush>
-    <Brush x:Key="ItemStroke1">#ACADCD</Brush>
-    <LinearGradientBrush x:Key="ItemBrush1" StartPoint="0,0" EndPoint="0,1" >
-        <GradientStop Color="#FEFEFE" Offset="0"/>
-        <GradientStop Color="#BDBEDE" Offset="1"/>
-    </LinearGradientBrush>
+    
+    <SolidColorBrush x:Key="LocalFillBrush" Color="White"/>
+    <SolidColorBrush x:Key="LocalStrokeBrush" Color="Black"/>
 
     <Style  x:Key="BasicStyle" TargetType="Path">
-        <Setter Property="Fill" Value="{StaticResource ItemBrush}"/>
-        <Setter Property="Stroke" Value="{StaticResource ItemStroke}"/>
+        <Setter Property="Fill" Value="{StaticResource LocalFillBrush }"/>
+        <Setter Property="Stroke" Value="{StaticResource LocalStrokeBrush}"/>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="StrokeLineJoin" Value="Round"/>
         <Setter Property="Stretch" Value="Fill"/>
@@ -35,55 +26,44 @@
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
     </Style>
+    <Style x:Key="DesignerUMLChartStyle" TargetType="Path"
+       BasedOn="{StaticResource BasicStyle}">
+        <Setter Property="Fill" 
+            Value="{Binding Fill, 
+                    RelativeSource={RelativeSource AncestorType=s:DesignerItem},
+                    FallbackValue={StaticResource LocalFillBrush}}"/>
+        <Setter Property="Stroke" 
+            Value="{Binding Stroke, 
+                    RelativeSource={RelativeSource AncestorType=s:DesignerItem},
+                    FallbackValue={StaticResource LocalStrokeBrush}}"/>
+    </Style>
+
     <Style x:Key="Textadapterboundry" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
        
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
     </Style>
 
-    <DrawingImage x:Key="Human">
-        <DrawingImage.Drawing>
-            <DrawingGroup ClipGeometry="M0,0 V465.688 H213.348 V0 H0 Z">
-                <DrawingGroup Opacity="1">
-                    <DrawingGroup Opacity="1" Transform="1,0,0,1,0.375,-22.4">
-                        <GeometryDrawing Brush="Aquamarine" Geometry="F0 M213.348,465.688z M0,0z M42.52,465.69L42.52,244.23 42.52,332.81 0,332.81 0,155.65 21.26,133.5 191.34,133.5 212.6,155.65 212.6,332.81 170.08,332.81 170.08,244.23 170.08,465.69 106.3,465.69 106.3,288.52 106.3,465.69 42.52,465.69z M150.59,67.07A44.2913,44.2913,-180,1,0,62.01,67.07A44.2913,44.2913,-180,1,0,150.59,67.07z">
-                            <GeometryDrawing.Pen>
-                                <Pen Brush="#FFD69436" Thickness="0.75" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
-                            </GeometryDrawing.Pen>
-                        </GeometryDrawing>
-                    </DrawingGroup>
-                </DrawingGroup>
-            </DrawingGroup>
-        </DrawingImage.Drawing>
-    </DrawingImage>
 
-
-
-
-    <Style x:Key="CustomDrawingImageStyle" TargetType="Image">
-        <Setter Property="Source" Value="{StaticResource Human}"/>
+    <Style x:Key="Human" TargetType="Path" BasedOn="{StaticResource DesignerUMLChartStyle}">
+        <Setter Property="Data" Value="M42.52,465.69 L42.52,244.23 42.52,332.81 0,332.81 0,155.65 21.26,133.5 191.34,133.5 212.6,155.65 212.6,332.81 170.08,332.81 170.08,244.23 170.08,465.69 106.3,465.69 106.3,288.52 106.3,465.69 42.52,465.69z M150.59,67.07 A44.2913,44.2913,-180,1,0,62.01,67.07 A44.2913,44.2913,-180,1,0,150.59,67.07"/>
         <Setter Property="Stretch" Value="Fill"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="CustomDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource CustomDrawingImageStyle}">
+
+
+    <Style x:Key="Human_DragThumb" TargetType="Path" BasedOn="{StaticResource Human}">
         <Setter Property="IsHitTestVisible" Value="True"/>
         <Setter Property="Opacity" Value="0"/>
+        
     </Style>
 
-    <!-- Basic Style for UML Elements -->
-    <Style x:Key="UMLElementStyle" TargetType="Path">
-        <Setter Property="Fill" Value="{DynamicResource ItemBrush}"/>
-        <Setter Property="Stroke" Value="{DynamicResource ItemStroke}"/>
-        <Setter Property="StrokeThickness" Value="1"/>
-        <Setter Property="StrokeLineJoin" Value="Round"/>
-        <Setter Property="Stretch" Value="Fill"/>
-        <Setter Property="IsHitTestVisible" Value="False"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-    </Style>
+   
 
     <!-- Use Case (Ellipse) -->
-    <Style x:Key="UseCase" TargetType="Path" BasedOn="{StaticResource UMLElementStyle}">
+    <Style x:Key="UseCase" TargetType="Path" BasedOn="{StaticResource DesignerUMLChartStyle}">
         <Setter Property="Data" Value="M 50,25 A 25,15 0 1,1 25,40 A 25,15 0 1,1 50,25"/>
     </Style>
 
@@ -93,7 +73,7 @@
         <Setter Property="Stroke" Value="Transparent"/>
     </Style>
     <!-- System Boundary (Rectangle) -->
-    <Style x:Key="SystemBoundary" TargetType="Path" BasedOn="{StaticResource UMLElementStyle}">
+    <Style x:Key="SystemBoundary" TargetType="Path" BasedOn="{StaticResource DesignerUMLChartStyle}">
         <Setter Property="Data" Value="M 0,0 H 100 V 50 H 0 Z"/>
         <Setter Property="Fill" Value="Transparent"></Setter>
     </Style>
@@ -129,21 +109,22 @@
                     
                 </TextBox>
             </Grid>
-            <Image Style="{StaticResource CustomDrawingImageStyle}"  >
+            <Grid>
+
+
+                <Path Style="{StaticResource Human}" ToolTip="System Boundary">
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
-
-
-                            <Image Style="{StaticResource CustomDrawingImage_DragThumb}"/>
-
-
-
+                            <Path Style="{StaticResource Human_DragThumb}"/>
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
+                </Path>
+                <TextBox  Style="{StaticResource Textadapter}">
 
-                </Image>
-             
-            
+                </TextBox>
+            </Grid>
+
+
         </ItemsControl.Items>
     </s:Toolbox>
 </ResourceDictionary>
