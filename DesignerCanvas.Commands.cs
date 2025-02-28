@@ -229,7 +229,7 @@ namespace DiagramDesigner
             {
                 Guid sourceID = new Guid(connectionXML.Element("SourceID").Value);
                 Guid sinkID = new Guid(connectionXML.Element("SinkID").Value);
-
+                
                 String sourceConnectorName = connectionXML.Element("SourceConnectorName").Value;
                 String sinkConnectorName = connectionXML.Element("SinkConnectorName").Value;
 
@@ -238,7 +238,7 @@ namespace DiagramDesigner
 
                 Connection connection = new Connection(sourceConnector, sinkConnector);
                 Canvas.SetZIndex(connection, Int32.Parse(connectionXML.Element("zIndex").Value));
-
+                connection.Text = connectionXML.Element("Text").Value;
                 // Загружаем тип линии
                 var lineTypeElement = connectionXML.Element("ConnectionLineType");
                 if (lineTypeElement != null && Enum.TryParse(lineTypeElement.Value, out ConnectionLineType lineType))
@@ -1032,6 +1032,7 @@ namespace DiagramDesigner
                     new XElement("SinkArrowSymbol", connection.SinkArrowSymbol.ToString()),
                     new XElement("ConnectionLineType", connection._ConnectionLineType.ToString()),
                   new XElement("StrokeDashArray", DoubleCollectionToString(connection.StrokeDashArray)),
+                  new XElement("Text", connection.Text),
 
 
                     new XElement("zIndex", Canvas.GetZIndex(connection))

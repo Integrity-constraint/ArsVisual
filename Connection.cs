@@ -17,9 +17,9 @@ namespace DiagramDesigner
        
         public enum ConnectionLineType
         {
-            Straight,   // Прямая линия
+            Straight,   
             Orthogonal,
-            Curved // Ортогональная линия
+            Curved 
         }
         private ConnectionLineType _connectionLineType;
         public ConnectionLineType _ConnectionLineType
@@ -30,7 +30,7 @@ namespace DiagramDesigner
                 if (_connectionLineType != value)
                 {
                     _connectionLineType = value;
-                    IsStraightLine = (value == ConnectionLineType.Straight); // Синхронизация с IsStraightLine
+                    IsStraightLine = (value == ConnectionLineType.Straight); 
                     OnPropertyChanged(nameof(ConnectionLineType));
                 }
             }
@@ -45,12 +45,19 @@ namespace DiagramDesigner
                 if (_isStraightLine != value)
                 {
                     _isStraightLine = value;
-                    UpdatePathGeometry(); // Обновляем геометрию линии
+                    UpdatePathGeometry(); 
                     OnPropertyChanged(nameof(IsStraightLine));
                 }
             }
         }
+        public static readonly DependencyProperty TextProperty =
+      DependencyProperty.Register("Text", typeof(string), typeof(Connection), new PropertyMetadata(string.Empty));
 
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
         private void OnSetSourceArrowCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Parameter is string arrowSymbol)
