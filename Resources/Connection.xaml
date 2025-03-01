@@ -2,7 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
-
+    <!-- base style for all arrow shapes -->
+    <Style x:Key="ArrowSymbolBaseStyle" TargetType="Path">
+        <Setter Property="Fill" Value="{StaticResource SolidBorderBrush}"/>
+        <Setter Property="Stretch" Value="Fill"/>
+    </Style>
+    <!-- Arrow -->
+    <Style x:Key="Arrow" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
+        <Setter Property="Data" Value="M0,0 8,4 0,8 Z"/>
+    </Style>
+    <!-- Diamond  -->
+    <Style x:Key="Diamond" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
+        <Setter Property="Data" Value="M-5,0 0,-5 5,0 0,5 Z"/>
+    </Style>
+  
     <ContextMenu x:Key="ConnectionContextMenu">
         <MenuItem Header="Удалить" Command="{x:Static ApplicationCommands.Delete}">
             <MenuItem.Icon>
@@ -44,16 +57,58 @@
               CommandParameter="Curved"/>
         </MenuItem>
         <MenuItem Header="Начало линии">
-            <MenuItem Header="нет" Command="s:Connection.SetSourceArrowCommand" CommandParameter="None" />
-            <MenuItem Header="Стрелка" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Arrow" />
-            <MenuItem Header="Пин" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Diamond" />
+            <MenuItem Header="Без стиля" Command="s:Connection.SetSourceArrowCommand" CommandParameter="None" >
+                
+            </MenuItem>
+            <MenuItem Header="Стрелка" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Arrow" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource Arrow}">
+                                
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Пин" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Diamond" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource Diamond}">
+
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
 
         <!-- Пункт меню для изменения стиля стрелки на приемнике -->
         <MenuItem Header="Конец линии">
             <MenuItem Header="нет" Command="s:Connection.SetSinkArrowCommand" CommandParameter="None" />
-            <MenuItem Header="Стрелка" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Arrow" />
-            <MenuItem Header="Пин" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Diamond" />
+            <MenuItem Header="Стрелка" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Arrow" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource Arrow}">
+
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Пин" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Diamond" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource Diamond}">
+
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
         </MenuItem>
         <MenuItem Header="Стиль линии">
             <MenuItem Header="Сплошная" 
@@ -98,19 +153,7 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-            <!-- base style for all arrow shapes -->
-            <Style x:Key="ArrowSymbolBaseStyle" TargetType="Path">
-                <Setter Property="Fill" Value="{StaticResource SolidBorderBrush}"/>
-                <Setter Property="Stretch" Value="Fill"/>
-            </Style>
-            <!-- Arrow -->
-            <Style x:Key="Arrow" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
-                <Setter Property="Data" Value="M0,0 8,4 0,8 Z"/>
-            </Style>
-            <!-- Diamond  -->
-            <Style x:Key="Diamond" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
-                <Setter Property="Data" Value="M-5,0 0,-5 5,0 0,5 Z"/>
-            </Style>
+         
         </Style.Resources>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Template">

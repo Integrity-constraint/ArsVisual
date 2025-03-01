@@ -28,6 +28,12 @@
                         <Rectangle Width="16" Height="16" Fill="Red"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Белый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+CommandParameter="White">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="White"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
 CommandParameter="Yellow">
                     <MenuItem.Icon>
@@ -62,7 +68,13 @@ CommandParameter="Green">
                             <Rectangle Width="16" Height="16" Fill="Green"/>
                         </MenuItem.Icon>
                     </MenuItem>
-                    <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+                <MenuItem Header="Белый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+CommandParameter="White">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="White"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
  CommandParameter="Red">
                         <MenuItem.Icon>
                             <Rectangle Width="16" Height="16" Fill="Red"/>
@@ -121,7 +133,7 @@ CommandParameter="Purple">
         </MenuItem>
 
         <!-- Изменение семейства шрифтов -->
-        <MenuItem Header="Семейство шрифтов">
+        <MenuItem Header="Шрифты">
             <MenuItem Header="Arial" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Arial"/>
             <MenuItem Header="Times New Roman" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Times New Roman"/>
             <MenuItem Header="Verdana" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Verdana"/>
@@ -129,11 +141,51 @@ CommandParameter="Purple">
             <MenuItem Header="Courier New" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Courier New"/>
         </MenuItem>
         <MenuItem Header="Цвет Шрифта">
-            <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" CommandParameter="Red"/>
-          
-           
-           
-           
+            <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" 
+CommandParameter="Green">
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="Green"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" 
+ CommandParameter="Red">
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="Red"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Белый" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" 
+CommandParameter="White">
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="White"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" 
+CommandParameter="Yellow">
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                </MenuItem.Icon>
+            </MenuItem>
+
+            <MenuItem Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" 
+CommandParameter="Black">
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="Black"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" 
+CommandParameter="Purple">
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="Purple"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Оранжевый" Command="{x:Static m:DesignerItemCommands.ChangeFontForegroundCommand}" 
+CommandParameter="Purple">
+                <MenuItem.Icon>
+                    <Rectangle Width="16" Height="16" Fill="Orange"/>
+                </MenuItem.Icon>
+            </MenuItem>
+
+
         </MenuItem>
         <MenuItem Header="Вырезать" Command="{x:Static ApplicationCommands.Cut}">
             <MenuItem.Icon>
