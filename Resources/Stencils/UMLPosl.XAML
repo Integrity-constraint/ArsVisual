@@ -25,7 +25,15 @@
         <Setter Property="Text" Value="{Binding Text, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="IsHitTestVisible"  Value="{Binding IsHitTestVisible, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+
     </Style>
+    <Style x:Key="TextadapterHit" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
+        <Setter Property="IsHitTestVisible"  Value="False"></Setter>
+
+    </Style>
+    
     <Style x:Key="DesignerUMLChartStyle" TargetType="Path"
        BasedOn="{StaticResource BasicStyle}">
         <Setter Property="Fill" 
@@ -38,7 +46,7 @@
                     FallbackValue={StaticResource LocalStrokeBrush}}"/>
     </Style>
 
-    <Style x:Key="Textadapterboundry" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
+    <Style x:Key="Textadapterboundry" TargetType="TextBox" BasedOn="{StaticResource TextadapterHit}">
 
         <Setter Property="VerticalAlignment" Value="Top"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
@@ -119,7 +127,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>

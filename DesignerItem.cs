@@ -191,6 +191,50 @@ namespace DiagramDesigner
             get { return (Brush)GetValue(ItemStroke); }
             set { SetValue(ItemStroke, value); }
         }
+        public static readonly DependencyProperty IsHitTestVisibleProperty =
+        DependencyProperty.Register(
+            "IsHitTestVisible",
+            typeof(bool),
+            typeof(DesignerItem),
+            new PropertyMetadata(false, OnIsHitTestVisibleChanged));
+
+        // Свойство для управления IsHitTestVisible
+        public bool IsHitTestVisible
+        {
+            get { return (bool)GetValue(IsHitTestVisibleProperty); }
+            set { SetValue(IsHitTestVisibleProperty, value); }
+        }
+        private static void OnIsHitTestVisibleChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var item = d as DesignerItem;
+            if (item != null)
+            {
+                // Здесь можно добавить логику, которая будет выполняться при изменении свойства
+                item.UpdateHitTestVisibility();
+            }
+        }
+        private void UpdateHitTestVisibility()
+        {
+            if (IsHitTestVisible)
+            {
+                // Найти TextBox и установить на него фокус
+                var textBox = FindChild<TextBox>(this);
+                textBox?.Focus();
+            }
+        }
+        public static T FindChild<T>(DependencyObject parent) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(parent); i++)
+            {
+                var child = VisualTreeHelper.GetChild(parent, i);
+                if (child is T result)
+                    return result;
+                var descendant = FindChild<T>(child);
+                if (descendant != null)
+                    return descendant;
+            }
+            return null;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string propertyName)
         {
@@ -212,6 +256,7 @@ namespace DiagramDesigner
            
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemFillCommand, OnChangeItemFill));
             CommandBindings.Add(new CommandBinding(DesignerItemCommands.ChangeItemStrokeCommand, OnChangeItemStroke));
+            this.MouseDoubleClick += DesignerItem_MouseDoubleClick;
         }
 
         public DesignerItem(Guid id)
@@ -221,6 +266,12 @@ namespace DiagramDesigner
             InitializeCommands();
 
         }
+        private void DesignerItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // Изменение свойства IsHitTestVisible при двойном щелчке
+            IsHitTestVisible = !IsHitTestVisible;
+        }
+
         private void OnChangeFontSizeExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (double.TryParse(e.Parameter.ToString(), out double fontSize))

@@ -17,8 +17,13 @@
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="IsHitTestVisible"  Value="{Binding IsHitTestVisible, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+   
     </Style>
+    <Style x:Key="TextadapterHit" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
+<Setter Property="IsHitTestVisible"  Value="False"></Setter>
 
+    </Style>
     <SolidColorBrush x:Key="LocalFillBrush" Color="White"/>
     <SolidColorBrush x:Key="LocalStrokeBrush" Color="Black"/>
 
@@ -301,7 +306,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
                     
                 </TextBox>
             </Grid>
@@ -317,7 +322,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -341,7 +346,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -363,7 +368,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -377,7 +382,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -401,7 +406,7 @@
                     </ControlTemplate>
                 </s:DesignerItem.ConnectorDecoratorTemplate>
             </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -415,7 +420,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -437,7 +442,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -451,7 +456,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -465,7 +470,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -479,7 +484,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -503,7 +508,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -515,7 +520,7 @@
                 </ControlTemplate>
             </s:DesignerItem.DragThumbTemplate>
             </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -529,7 +534,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -543,7 +548,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -557,7 +562,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -571,7 +576,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -585,7 +590,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -609,7 +614,7 @@
                         </ControlTemplate>
                     </s:DesignerItem.ConnectorDecoratorTemplate>
                 </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -623,7 +628,7 @@
                     </ControlTemplate>
                 </s:DesignerItem.DragThumbTemplate>
             </Path>
-                <TextBox Style="{StaticResource Textadapter}">
+                <TextBox Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
