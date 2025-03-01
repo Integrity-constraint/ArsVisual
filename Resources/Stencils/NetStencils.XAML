@@ -2,17 +2,25 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:s="clr-namespace:DiagramDesigner"
                     xmlns:c="clr-namespace:DiagramDesigner.Controls">
-    
+
     <Style x:Key="Textadapter" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
         <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="FontFamily" Value="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="BorderBrush" Value="Transparent"></Setter>
         <Setter Property="AcceptsReturn" Value="True"></Setter>
-        <Setter Property="Text" Value="{Binding QueryString}"></Setter>
+        <Setter Property="Text" Value="{Binding Text, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="VerticalAlignment" Value="Center"></Setter>
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="IsHitTestVisible"  Value="{Binding IsHitTestVisible, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+
     </Style>
-    
+    <Style x:Key="TextadapterHit" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
+        <Setter Property="IsHitTestVisible"  Value="False"></Setter>
+    </Style>
+
     <DrawingImage x:Key="CustomDrawingImage">
         <DrawingImage.Drawing>
             <DrawingGroup ClipGeometry="M0,0 V24 H24 V0 H0 Z">
@@ -926,7 +934,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Image>
-                <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -945,10 +953,11 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-            <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
             </TextBox>
           </Grid>
+            <!--
           <Grid>
 
             <Image Style="{StaticResource UserDrawingImageStyle}"  ToolTip="Пользователь">
@@ -964,11 +973,11 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-            <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
             </TextBox>
           </Grid>
-
+-->
           <Grid>
 
             <Image Style="{StaticResource ContactDrawingImageStyle}"  ToolTip="Контакт">
@@ -984,7 +993,7 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-            <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
             </TextBox>
           </Grid>
@@ -999,7 +1008,7 @@
                 <ControlTemplate>
 
 
-                  <Image Style="{StaticResource PolicyDrawingImage_DragThumb}"/>
+                  <Image  Style="{StaticResource PolicyDrawingImage_DragThumb}"/>
 
 
 
@@ -1007,7 +1016,7 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-            <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
             </TextBox>
           </Grid>
@@ -1027,7 +1036,7 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-            <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
             </TextBox>
           </Grid>
@@ -1047,7 +1056,7 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-            <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
             </TextBox>
           </Grid>
@@ -1067,7 +1076,7 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-            <TextBox  Style="{StaticResource Textadapter}">
+                <TextBox  Style="{StaticResource TextadapterHit}">
 
             </TextBox>
           </Grid>

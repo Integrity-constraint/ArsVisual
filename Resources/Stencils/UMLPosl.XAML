@@ -27,7 +27,7 @@
         <Setter Property="HorizontalAlignment" Value="Center"></Setter>
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
         <Setter Property="IsHitTestVisible"  Value="{Binding IsHitTestVisible, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
-
+      
     </Style>
     <Style x:Key="TextadapterHit" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
         <Setter Property="IsHitTestVisible"  Value="False"></Setter>
@@ -83,7 +83,7 @@
     <!-- System Boundary (Rectangle) -->
     <Style x:Key="SystemBoundary" TargetType="Path" BasedOn="{StaticResource DesignerUMLChartStyle}">
         <Setter Property="Data" Value="M 0,0 H 100 V 50 H 0 Z"/>
-        <Setter Property="Fill" Value="Transparent"></Setter>
+        
     </Style>
 
     <Style x:Key="SystemBoundary_DragThumb" TargetType="Path" BasedOn="{StaticResource SystemBoundary}">
@@ -120,7 +120,7 @@
             <Grid>
 
 
-                <Path Style="{StaticResource Human}" ToolTip="System Boundary">
+                <Path Style="{StaticResource Human}" ToolTip="User">
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
                             <Path Style="{StaticResource Human_DragThumb}"/>

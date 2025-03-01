@@ -189,7 +189,7 @@
                         </Grid>
 
 
-                        <TextBox Text="{Binding Text, RelativeSource={RelativeSource AncestorType=s:Connection}}"  Background="Transparent" BorderBrush="Transparent" IsHitTestVisible="True"  Width="100" Height="35"
+                        <TextBox  Text="{Binding Text, RelativeSource={RelativeSource AncestorType=s:Connection}}"  Background="Transparent" BorderBrush="Transparent" IsHitTestVisible="True"  Width="100" Height="35"
                                        
                                        Canvas.Left="{Binding LabelPosition.X}"
                                        Canvas.Top="{Binding LabelPosition.Y}">
