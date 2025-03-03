@@ -52,5 +52,15 @@ namespace ArsVisual.SettingsMaster
             Application.Current.Resources["FillElement"] = new SolidColorBrush(selectedColor);
            
         }
+
+        private void closesettings(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void Drag(object sender, MouseButtonEventArgs e)
+        {
+            Drag(sender, e);
+        }
     }
 }
