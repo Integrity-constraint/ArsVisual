@@ -64,40 +64,75 @@ namespace DiagramDesigner.Controls
             {
                 double deltaVertical, deltaHorizontal;
 
-                switch (VerticalAlignment)
-                {
-                    case System.Windows.VerticalAlignment.Bottom:
-                        deltaVertical = Math.Min(-e.VerticalChange, this.designerItem.ActualHeight - this.designerItem.MinHeight);
-                        Canvas.SetTop(this.designerItem, Canvas.GetTop(this.designerItem) + (this.transformOrigin.Y * deltaVertical * (1 - Math.Cos(-this.angle))));
-                        Canvas.SetLeft(this.designerItem, Canvas.GetLeft(this.designerItem) - deltaVertical * this.transformOrigin.Y * Math.Sin(-this.angle));
-                        this.designerItem.Height -= deltaVertical;
-                        break;
-                    case System.Windows.VerticalAlignment.Top:
-                        deltaVertical = Math.Min(e.VerticalChange, this.designerItem.ActualHeight - this.designerItem.MinHeight);
-                        Canvas.SetTop(this.designerItem, Canvas.GetTop(this.designerItem) + deltaVertical * Math.Cos(-this.angle) + (this.transformOrigin.Y * deltaVertical * (1 - Math.Cos(-this.angle))));
-                        Canvas.SetLeft(this.designerItem, Canvas.GetLeft(this.designerItem) + deltaVertical * Math.Sin(-this.angle) - (this.transformOrigin.Y * deltaVertical * Math.Sin(-this.angle)));
-                        this.designerItem.Height -= deltaVertical;
-                        break;
-                    default:
-                        break;
-                }
+                IEnumerable<DesignerItem> selectedDesignerItems = GetSelectedDesignerItems();
 
-                switch (HorizontalAlignment)
+                double minLeft, minTop, minDeltaHorizontal, minDeltaVertical;
+
+                CalculateDragLimits(selectedDesignerItems, out minLeft, out minTop, out minDeltaHorizontal, out minDeltaVertical);
+
+                foreach (var item in selectedDesignerItems)
                 {
-                    case System.Windows.HorizontalAlignment.Left:
-                        deltaHorizontal = Math.Min(e.HorizontalChange, this.designerItem.ActualWidth - this.designerItem.MinWidth);
-                        Canvas.SetTop(this.designerItem, Canvas.GetTop(this.designerItem) + deltaHorizontal * Math.Sin(this.angle) - this.transformOrigin.X * deltaHorizontal * Math.Sin(this.angle));
-                        Canvas.SetLeft(this.designerItem, Canvas.GetLeft(this.designerItem) + deltaHorizontal * Math.Cos(this.angle) + (this.transformOrigin.X * deltaHorizontal * (1 - Math.Cos(this.angle))));
-                        this.designerItem.Width -= deltaHorizontal;
-                        break;
-                    case System.Windows.HorizontalAlignment.Right:
-                        deltaHorizontal = Math.Min(-e.HorizontalChange, this.designerItem.ActualWidth - this.designerItem.MinWidth);
-                        Canvas.SetTop(this.designerItem, Canvas.GetTop(this.designerItem) - this.transformOrigin.X * deltaHorizontal * Math.Sin(this.angle));
-                        Canvas.SetLeft(this.designerItem, Canvas.GetLeft(this.designerItem) + (deltaHorizontal * this.transformOrigin.X * (1 - Math.Cos(this.angle))));
-                        this.designerItem.Width -= deltaHorizontal;
-                        break;
-                    default:
-                        break;
+                    double newTop, newLeft;
+
+                    switch (VerticalAlignment)
+                    {
+                        case System.Windows.VerticalAlignment.Bottom:
+                            deltaVertical = Math.Min(-e.VerticalChange, minDeltaVertical);
+                            newTop = Canvas.GetTop(item) + (this.transformOrigin.Y * deltaVertical * (1 - Math.Cos(-this.angle)));
+                            newLeft = Canvas.GetLeft(item) - deltaVertical * this.transformOrigin.Y * Math.Sin(-this.angle);
+
+                            if (IsWithinBounds(newTop, newLeft, item.Width, item.Height - deltaVertical))
+                            {
+                                Canvas.SetTop(item, newTop);
+                                Canvas.SetLeft(item, newLeft);
+                                item.Height -= deltaVertical;
+                            }
+                            break;
+                        case System.Windows.VerticalAlignment.Top:
+                            deltaVertical = Math.Min(Math.Max(-minTop, e.VerticalChange), minDeltaVertical);
+                            newTop = Canvas.GetTop(item) + deltaVertical * Math.Cos(-this.angle) + (this.transformOrigin.Y * deltaVertical * (1 - Math.Cos(-this.angle)));
+                            newLeft = Canvas.GetLeft(item) + deltaVertical * Math.Sin(-this.angle) - (this.transformOrigin.Y * deltaVertical * Math.Sin(-this.angle));
+
+                            if (IsWithinBounds(newTop, newLeft, item.Width, item.Height - deltaVertical))
+                            {
+                                Canvas.SetTop(item, newTop);
+                                Canvas.SetLeft(item, newLeft);
+                                item.Height -= deltaVertical;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+
+                    switch (HorizontalAlignment)
+                    {
+                        case System.Windows.HorizontalAlignment.Left:
+                            deltaHorizontal = Math.Min(Math.Max(-minLeft, e.HorizontalChange), minDeltaHorizontal);
+                            newTop = Canvas.GetTop(item) + deltaHorizontal * Math.Sin(this.angle) - this.transformOrigin.X * deltaHorizontal * Math.Sin(this.angle);
+                            newLeft = Canvas.GetLeft(item) + deltaHorizontal * Math.Cos(this.angle) + (this.transformOrigin.X * deltaHorizontal * (1 - Math.Cos(this.angle)));
+
+                            if (IsWithinBounds(newTop, newLeft, item.Width - deltaHorizontal, item.Height))
+                            {
+                                Canvas.SetTop(item, newTop);
+                                Canvas.SetLeft(item, newLeft);
+                                item.Width -= deltaHorizontal;
+                            }
+                            break;
+                        case System.Windows.HorizontalAlignment.Right:
+                            deltaHorizontal = Math.Min(-e.HorizontalChange, minDeltaHorizontal);
+                            newTop = Canvas.GetTop(item) - this.transformOrigin.X * deltaHorizontal * Math.Sin(this.angle);
+                            newLeft = Canvas.GetLeft(item) + (deltaHorizontal * this.transformOrigin.X * (1 - Math.Cos(this.angle)));
+
+                            if (IsWithinBounds(newTop, newLeft, item.Width - deltaHorizontal, item.Height))
+                            {
+                                Canvas.SetTop(item, newTop);
+                                Canvas.SetLeft(item, newLeft);
+                                item.Width -= deltaHorizontal;
+                            }
+                            break;
+                        default:
+                            break;
+                    }
                 }
             }
 
@@ -117,6 +152,45 @@ namespace DiagramDesigner.Controls
                 this.adorner = null;
             }
         }
+
+        // Метод для получения выбранных элементов DesignerItem
+        private IEnumerable<DesignerItem> GetSelectedDesignerItems()
+        {
+            DesignerCanvas designer = VisualTreeHelper.GetParent(this.designerItem) as DesignerCanvas;
+            if (designer != null)
+            {
+                return designer.SelectionService.CurrentSelection.OfType<DesignerItem>();
+            }
+            return Enumerable.Empty<DesignerItem>();
+        }
+
+        // Метод для проверки границ контейнера
+        private bool IsWithinBounds(double top, double left, double width, double height)
+        {
+            return top >= 0 && left >= 0 && (top + height) <= this.canvas.ActualHeight && (left + width) <= this.canvas.ActualWidth;
+        }
+
+        // Метод для вычисления ограничений перемещения
+        private void CalculateDragLimits(IEnumerable<DesignerItem> selectedItems, out double minLeft, out double minTop, out double minDeltaHorizontal, out double minDeltaVertical)
+        {
+            minLeft = double.MaxValue;
+            minTop = double.MaxValue;
+            minDeltaHorizontal = double.MaxValue;
+            minDeltaVertical = double.MaxValue;
+
+            foreach (DesignerItem item in selectedItems)
+            {
+                double left = Canvas.GetLeft(item);
+                double top = Canvas.GetTop(item);
+
+                minLeft = double.IsNaN(left) ? 0 : Math.Min(left, minLeft);
+                minTop = double.IsNaN(top) ? 0 : Math.Min(top, minTop);
+
+                minDeltaVertical = Math.Min(minDeltaVertical, item.ActualHeight - item.MinHeight);
+                minDeltaHorizontal = Math.Min(minDeltaHorizontal, item.ActualWidth - item.MinWidth);
+            }
+        }
+
     }
 
 
