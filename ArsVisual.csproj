@@ -14,6 +14,12 @@
     <None Remove="icons\collage.gif" />
     <None Remove="icons\folder.gif" />
     <None Remove="icons\integration.png" />
+    <None Remove="Resources\Images\Copy.png" />
+    <None Remove="Resources\Images\Delete.png" />
+    <None Remove="Resources\Images\OpenFolder.png" />
+    <None Remove="Resources\Images\Paste.png" />
+    <None Remove="Resources\Images\photosave.png" />
+    <None Remove="Resources\Images\scissors.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,9 +54,6 @@
     <Content Include="Resources\Images\Copy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Cut.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Resources\Images\Delete.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -72,13 +75,16 @@
     <Content Include="Resources\Images\Paste.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\PasteBig.png">
+    <Content Include="Resources\Images\photosave.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Print.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Save.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\scissors.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\SendBackward.png">

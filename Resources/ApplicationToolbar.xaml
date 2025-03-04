@@ -70,7 +70,7 @@
                                         <ColumnDefinition/>
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
-                                    <Image Source="Images/Save.png" Width="16"/>
+                                    <Image Source="Images/Photosave.png" Width="16"/>
 
                                     <!--  <TextBlock Margin="3,0,3,0" Text="Сохранить" VerticalAlignment="Center" Grid.Column="1"/> -->
                                 </Grid>
@@ -126,7 +126,7 @@
                                 <RowDefinition Height="4*"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
-                            <Image Source="Images/PasteBig.png" Width="45"/>
+                            <Image Source="Images/Paste.png" Width="45"/>
                             <TextBlock Grid.Row="1" Text="Вставить" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
                         </Grid>
                     </Button.Content>
@@ -142,7 +142,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Image Source="Images/Cut.png" Width="16"/>
+                                <Image Source="Images/Scissors.png" Width="16"/>
                                 <TextBlock Margin="3,0,3,0" Text="Вырезать" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
