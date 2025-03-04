@@ -7,57 +7,60 @@
         
         mc:Ignorable="d"
         Title="SettingsMaster" WindowStyle="None" Height="450" Width="600">
-    
-   
-    <Grid Background="Transparent" >
-        
-            
-       
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="50*"></ColumnDefinition>
-            <ColumnDefinition Width="150*"></ColumnDefinition>
-            
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition ></RowDefinition>
-        </Grid.RowDefinitions>
-        <StackPanel MouseLeftButtonDown="Drag" Grid.ColumnSpan="2" Orientation="Horizontal">
-            <Border>
-                <TextBlock Margin="5,0,0,0">Мастер настроек</TextBlock>
-            </Border>
-          
-           
-        </StackPanel>
-        <StackPanel MouseDown="Drag" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Click="closesettings" BorderBrush="Transparent" Background="Transparent">
-                <Button.Content>
-                    <Image Source="/icons/close.png"></Image>
-                </Button.Content>
-            </Button>
-           
-        </StackPanel>
-        <GroupBox Grid.Row="1" Header="Параметры">
-            <TreeView >
-           
-                
-           
-            <TreeViewItem Header="Общее">
-                <TreeViewItem Selected="Palitra" Header="Цвета">
-                    
-                </TreeViewItem>
-            </TreeViewItem>
-            <TreeViewItem Header="Обновления">
-                
-            </TreeViewItem>
-                <TreeViewItem Header="Справка">
 
-                </TreeViewItem>
-            </TreeView>
-        </GroupBox>
-        <Frame Name="OCHKO" Grid.Row="1" Grid.Column="1">
+    <Grid Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
             
-        </Frame>
+            <RowDefinition Height="*" />
+            
+        </Grid.RowDefinitions>
+
+        
+        <Grid  Grid.Row="0" Background="Transparent" MouseLeftButtonDown="Drag">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+           
+            <TextBlock Grid.Column="0" 
+                       Text="Мастер настроек" 
+                       Margin="10, 5" 
+                       VerticalAlignment="Center" />
+
+            
+            <Button Grid.Column="1" 
+                    Click="closesettings" 
+                    BorderBrush="Transparent" 
+                    Background="Transparent" 
+                    Padding="2">
+                <Image Height="20" Width="20" Source="/icons/close.png" />
+            </Button>
+        </Grid>
+
+        
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            
+            <GroupBox Grid.Column="0" Header="Параметры">
+                <TreeView>
+                    <TreeViewItem Header="Общее">
+                        <TreeViewItem Header="Цвета" Selected="Palitra" />
+                    </TreeViewItem>
+                    <TreeViewItem Header="Обновления" />
+                    <TreeViewItem Header="Справка" />
+                </TreeView>
+            </GroupBox>
+
+            
+            <Frame Name="OCHKO" Grid.Column="1" />
+        </Grid>
     </Grid>
-    
+
+
 </Window>

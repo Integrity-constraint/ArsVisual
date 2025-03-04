@@ -104,7 +104,7 @@
                                     <ColumnDefinition/>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
-                                <Image Source="Images/Print.png" Width="16"/>
+                                <Image Source="Images/Settings.png" Width="16"/>
                                 <TextBlock Margin="3,0,3,0" Text="Настройки" VerticalAlignment="Center" Grid.Column="1"/>
                             </Grid>
                         </Button.Content>
@@ -277,7 +277,7 @@
               Margin="3,0,0,0" Grid.Column="1"/>
             </Grid>
         </GroupBox>
--->
+
         <!--Положение-->
         <GroupBox Header="Положение" Foreground="Black" Style="{StaticResource ToolbarGroup}" Margin="3">
             <Grid>

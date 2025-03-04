@@ -14,7 +14,6 @@ using FontFamily = System.Windows.Media.FontFamily;
 
 namespace DiagramDesigner
 {
-    //These attributes identify the types of the named parts that are used for templating
     [TemplatePart(Name = "PART_DragThumb", Type = typeof(MoveThumb))]
     [TemplatePart(Name = "PART_RotateThumb", Type = typeof(RotateThumb))]
     [TemplatePart(Name = "PART_ResizeDecorator", Type = typeof(Control))]
@@ -76,7 +75,7 @@ namespace DiagramDesigner
 
         #region DragThumbTemplate Property
 
-        // can be used to replace the default template for the DragThumb
+        
         public static readonly DependencyProperty DragThumbTemplateProperty =
             DependencyProperty.RegisterAttached("DragThumbTemplate", typeof(ControlTemplate), typeof(DesignerItem));
 
@@ -94,7 +93,7 @@ namespace DiagramDesigner
 
         #region ConnectorDecoratorTemplate Property
 
-        // can be used to replace the default template for the ConnectorDecorator
+       
         public static readonly DependencyProperty ConnectorDecoratorTemplateProperty =
             DependencyProperty.RegisterAttached("ConnectorDecoratorTemplate", typeof(ControlTemplate), typeof(DesignerItem));
 
@@ -112,9 +111,7 @@ namespace DiagramDesigner
 
         #region IsDragConnectionOver
 
-        // while drag connection procedure is ongoing and the mouse moves over 
-        // this item this value is true; if true the ConnectorDecorator is triggered
-        // to be visible, see template
+        
         public bool IsDragConnectionOver
         {
             get { return (bool)GetValue(IsDragConnectionOverProperty); }
@@ -198,7 +195,7 @@ namespace DiagramDesigner
             typeof(DesignerItem),
             new PropertyMetadata(false, OnIsHitTestVisibleChanged));
 
-        // Свойство для управления IsHitTestVisible
+      
         public bool IsHitTestVisible
         {
             get { return (bool)GetValue(IsHitTestVisibleProperty); }
@@ -209,7 +206,7 @@ namespace DiagramDesigner
             var item = d as DesignerItem;
             if (item != null)
             {
-                // Здесь можно добавить логику, которая будет выполняться при изменении свойства
+                
                 item.UpdateHitTestVisibility();
             }
         }
@@ -217,7 +214,7 @@ namespace DiagramDesigner
         {
             if (IsHitTestVisible)
             {
-                // Найти TextBox и установить на него фокус
+               
                 var textBox = FindChild<TextBox>(this);
                 textBox?.Focus();
             }
@@ -242,7 +239,7 @@ namespace DiagramDesigner
         }
         static DesignerItem()
         {
-            // set the key to reference the style for this control
+           
             FrameworkElement.DefaultStyleKeyProperty.OverrideMetadata(
                 typeof(DesignerItem), new FrameworkPropertyMetadata(typeof(DesignerItem)));
 
@@ -268,7 +265,7 @@ namespace DiagramDesigner
         }
         private void DesignerItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            // Изменение свойства IsHitTestVisible при двойном щелчке
+            
             IsHitTestVisible = !IsHitTestVisible;
         }
 
@@ -302,8 +299,7 @@ namespace DiagramDesigner
             {
                 if (e.Parameter is string colorName)
                 {
-                 // var color = (System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorName);
-                 //this.Fill = new SolidColorBrush(color);
+                 
                  this.Fill = (Brush)new BrushConverter().ConvertFromString(colorName);
 
                 }

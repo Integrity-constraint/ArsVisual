@@ -60,7 +60,10 @@ namespace ArsVisual.SettingsMaster
 
         private void Drag(object sender, MouseButtonEventArgs e)
         {
-            Drag(sender, e);
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
         }
     }
 }

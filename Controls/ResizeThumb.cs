@@ -153,7 +153,7 @@ namespace DiagramDesigner.Controls
             }
         }
 
-        // Метод для получения выбранных элементов DesignerItem
+       
         private IEnumerable<DesignerItem> GetSelectedDesignerItems()
         {
             DesignerCanvas designer = VisualTreeHelper.GetParent(this.designerItem) as DesignerCanvas;
@@ -164,13 +164,13 @@ namespace DiagramDesigner.Controls
             return Enumerable.Empty<DesignerItem>();
         }
 
-        // Метод для проверки границ контейнера
+        
         private bool IsWithinBounds(double top, double left, double width, double height)
         {
             return top >= 0 && left >= 0 && (top + height) <= this.canvas.ActualHeight && (left + width) <= this.canvas.ActualWidth;
         }
 
-        // Метод для вычисления ограничений перемещения
+       
         private void CalculateDragLimits(IEnumerable<DesignerItem> selectedItems, out double minLeft, out double minTop, out double minDeltaHorizontal, out double minDeltaVertical)
         {
             minLeft = double.MaxValue;

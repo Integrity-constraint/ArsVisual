@@ -32,7 +32,7 @@ namespace DiagramDesigner.Controls
         {
             if (this.designerItem != null)
             {
-                // Получить все выбранные объекты
+                
                 var designerCanvas = VisualTreeHelper.GetParent(this.designerItem) as DesignerCanvas;
                 if (designerCanvas != null)
                 {

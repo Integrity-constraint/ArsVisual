@@ -11,12 +11,7 @@
 
     <ContextMenu x:Key="DesignerItemContextMenu" 
                  DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
-
-
-
-
-        
-       <MenuItem Header="Цвет элемента" 
+        <MenuItem Header="Цвет элемента" 
    CommandTarget="{Binding PlacementTarget.SelectedItem, 
    RelativeSource={RelativeSource AncestorType=ContextMenu}}">
 
@@ -338,7 +333,6 @@ CommandParameter="Purple">
             </Setter.Value>
         </Setter>
     </Style>
-
     <!-- DesignerItem Style -->
     <Style TargetType="{x:Type s:DesignerItem}">
         <Setter Property="MinWidth" Value="10"/>
@@ -375,18 +369,6 @@ CommandParameter="Purple">
                              Visibility="Hidden"
                              Template="{StaticResource ConnectorDecoratorTemplate}"/>
 
-                        <!-- TextBox -
-                        <TextBox TextWrapping="Wrap" 
-                             FontSize="{Binding FontSize, Mode=TwoWay}" 
-                             FontFamily="{Binding FontFamily, Mode=TwoWay}" 
-                             Name="itemtext"  
-                             TextAlignment="Center" 
-                             Text="{Binding Text, Mode=TwoWay}"  
-                             BorderBrush="Transparent" 
-                             VerticalAlignment="Center" 
-                             HorizontalAlignment="Center" 
-                             Background="Transparent"/>
-                        -->
                     </Grid>
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True" Binding="{Binding RelativeSource={RelativeSource Self},Path=IsGroup}">

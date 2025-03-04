@@ -19,7 +19,9 @@
     <None Remove="Resources\Images\OpenFolder.png" />
     <None Remove="Resources\Images\Paste.png" />
     <None Remove="Resources\Images\photosave.png" />
+    <None Remove="Resources\Images\Print.png" />
     <None Remove="Resources\Images\scissors.png" />
+    <None Remove="Resources\Images\Settings.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -91,6 +93,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\SendToBack.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Settings.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Ungroup.png">
