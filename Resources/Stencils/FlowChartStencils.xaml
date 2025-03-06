@@ -241,7 +241,15 @@
         <Setter Property="Fill" Value="Transparent"/>
         <Setter Property="Stroke" Value="Transparent"/>
     </Style>
-
+    <!-- LoopLimitinv -->
+    <Style x:Key="LoopLimit_Inverted" TargetType="Path" BasedOn="{StaticResource DesignerItemFlowChartStyle}">
+        <Setter Property="Data" Value="M 0 30 L 10,40 H 50 L 60,30 V 0 H 0 Z"/>
+    </Style>
+    <Style x:Key="LoopLimit_DragThumb_Inverted" TargetType="Path" BasedOn="{StaticResource LoopLimit_Inverted}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+        <Setter Property="Fill" Value="Transparent"/>
+        <Setter Property="Stroke" Value="Transparent"/>
+    </Style>
     <!-- Preparation -->
     <Style x:Key="Preparation" TargetType="Path" BasedOn="{StaticResource DesignerItemFlowChartStyle}">
         <Setter Property="Data" Value="M 0,20 L 10,0  H 50 L 60,20 L 50,40 H10 Z"/>
@@ -573,6 +581,20 @@
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
                             <Path Style="{StaticResource LoopLimit_DragThumb}"/>
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+                </Path>
+                <TextBox Style="{StaticResource TextadapterHit}">
+
+                </TextBox>
+            </Grid>
+            <Grid>
+
+
+                <Path Style="{StaticResource LoopLimit_Inverted}" ToolTip="Loop Limit">
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+                            <Path Style="{StaticResource LoopLimit_DragThumb_Inverted}"/>
                         </ControlTemplate>
                     </s:DesignerItem.DragThumbTemplate>
                 </Path>

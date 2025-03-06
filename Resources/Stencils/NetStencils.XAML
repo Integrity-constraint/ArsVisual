@@ -1780,7 +1780,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Image>
-                <TextBox VerticalAlignment="Bottom"  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -1799,7 +1799,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Image>
-                <TextBox VerticalAlignment="Bottom"  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -1818,7 +1818,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Image>
-                <TextBox VerticalAlignment="Bottom"  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -1837,7 +1837,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Image>
-                <TextBox VerticalAlignment="Bottom"  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -1856,7 +1856,7 @@
                     </s:DesignerItem.DragThumbTemplate>
 
                 </Image>
-                <TextBox VerticalAlignment="Bottom"  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
                 </TextBox>
             </Grid>
@@ -1875,10 +1875,10 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-                <TextBox  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
-            </TextBox>
-          </Grid>
+                </TextBox>
+            </Grid>
           
           <Grid>
 
@@ -1895,10 +1895,10 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-                <TextBox  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
-            </TextBox>
-          </Grid>
+                </TextBox>
+            </Grid>
 
 
 
@@ -1918,10 +1918,10 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-                <TextBox  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
-            </TextBox>
-          </Grid>
+                </TextBox>
+            </Grid>
 
           <Grid>
 
@@ -1938,10 +1938,10 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-                <TextBox  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
-            </TextBox>
-          </Grid>
+                </TextBox>
+            </Grid>
 
           <Grid>
 
@@ -1958,10 +1958,10 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-                <TextBox  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
-            </TextBox>
-          </Grid>
+                </TextBox>
+            </Grid>
 
           <Grid>
 
@@ -1978,10 +1978,10 @@
               </s:DesignerItem.DragThumbTemplate>
 
             </Image>
-                <TextBox  Style="{StaticResource TextadapterHit}">
+                <TextBox VerticalAlignment="Bottom" Margin="0,0,0,-20" Style="{StaticResource TextadapterHit}">
 
-            </TextBox>
-          </Grid>
+                </TextBox>
+            </Grid>
         </ItemsControl.Items>
     </s:Toolbox>
 
