@@ -97,6 +97,7 @@
                     <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
            Style="{StaticResource ToolBarButtonBaseStyle}"
            Command="{x:Static s:DesignerCanvas.Settings}"
+                           
            CommandTarget="{Binding ElementName=MyDesigner}">
                         <Button.Content>
                             <Grid>

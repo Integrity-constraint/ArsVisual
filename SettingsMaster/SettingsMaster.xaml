@@ -52,7 +52,7 @@
                     <TreeViewItem Header="Общее">
                         <TreeViewItem Header="Цвета" Selected="Palitra" />
                     </TreeViewItem>
-                    <TreeViewItem Header="Обновления" />
+                    <TreeViewItem Selected="Update_Selected" Header="Обновления" />
                     <TreeViewItem Header="Справка" />
                 </TreeView>
             </GroupBox>

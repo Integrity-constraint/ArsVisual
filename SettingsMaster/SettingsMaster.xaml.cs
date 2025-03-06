@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArsVisual.pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -64,6 +65,16 @@ namespace ArsVisual.SettingsMaster
             {
                 DragMove();
             }
+        }
+
+        private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Update_Selected(object sender, RoutedEventArgs e)
+        {
+            OCHKO.Navigate( new pages.UpdatePage());
         }
     }
 }

@@ -8,9 +8,25 @@
       d:DesignHeight="450" d:DesignWidth="550"
       Title="UpdatePage">
 
-    <Grid>
-        <StackPanel>
-            <TextBlock HorizontalAlignment="Center" FontSize="35">Менеджер Обновлений</TextBlock>
-        </StackPanel>
+    <Grid >
+       
+       
+        <GroupBox Header="Информация по обновлениям" >
+            <Grid>
+                <StackPanel>
+                    <GroupBox   Header="Проверка обновлений">
+                        <StackPanel Orientation="Horizontal">
+                            <GroupItem Margin="10">
+                                <TextBlock Name="Verstext"></TextBlock>
+
+                            </GroupItem>
+                            <GroupItem HorizontalAlignment="Right" Margin="10">
+                                <Button>проверить обновления</Button>
+                            </GroupItem>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
     </Grid>
 </Page>
