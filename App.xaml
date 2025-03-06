@@ -44,8 +44,8 @@
           
             <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
             <tb:TaskbarIcon x:Key="MyNotifyIcon"
-         IconSource="/icons/integration.png"
-         ToolTipText="hello world" />
+         IconSource="/icons/logo.png"
+         ToolTipText="ArsVisual" />
         </ResourceDictionary>
        
   </Application.Resources>

@@ -58,7 +58,7 @@
             </GroupBox>
 
             
-            <Frame Name="OCHKO" Grid.Column="1" />
+            <Frame NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
         </Grid>
     </Grid>
 

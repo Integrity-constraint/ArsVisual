@@ -32,12 +32,10 @@ namespace DiagramDesigner
             base.OnMouseDown(e);
             if (e.Source == this)
             {
-                // in case that this click is the start of a 
-                // drag operation we cache the start point
+               
                 this.rubberbandSelectionStartPoint = new Point?(e.GetPosition(this));
 
-                // if you click directly on the canvas all 
-                // selected items are 'de-selected'
+                
                 SelectionService.ClearSelection();
                 Focus();
                 e.Handled = true;
@@ -48,15 +46,14 @@ namespace DiagramDesigner
         {
             base.OnMouseMove(e);
 
-            // if mouse button is not pressed we have no drag operation, ...
+            
             if (e.LeftButton != MouseButtonState.Pressed)
                 this.rubberbandSelectionStartPoint = null;
 
-            // ... but if mouse button is pressed and start
-            // point value is set we do have one
+            
             if (this.rubberbandSelectionStartPoint.HasValue)
             {
-                // create rubberband adorner
+               
                 AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this);
                 if (adornerLayer != null)
                 {
@@ -105,7 +102,7 @@ namespace DiagramDesigner
                     this.Children.Add(newItem);                    
                     SetConnectorDecoratorTemplate(newItem);
 
-                    //update selection
+                   
                     this.SelectionService.SelectItem(newItem);
                     newItem.Focus();
                 }
@@ -125,7 +122,7 @@ namespace DiagramDesigner
                 left = double.IsNaN(left) ? 0 : left;
                 top = double.IsNaN(top) ? 0 : top;
 
-                //measure desired size for each child
+              
                 element.Measure(constraint);
 
                 Size desiredSize = element.DesiredSize;
@@ -135,7 +132,6 @@ namespace DiagramDesigner
                     size.Height = Math.Max(size.Height, top + desiredSize.Height);
                 }
             }
-            // add margin 
             size.Width += 10;
             size.Height += 10;
             return size;

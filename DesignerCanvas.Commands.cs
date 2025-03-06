@@ -327,7 +327,7 @@ namespace DiagramDesigner
             if (root == null)
                 return;
 
-            // create DesignerItems
+          
             Dictionary<Guid, Guid> mappingOldToNewIDs = new Dictionary<Guid, Guid>();
             List<ISelectable> newItems = new List<ISelectable>();
             IEnumerable<XElement> itemsXML = root.Elements("DesignerItems").Elements("DesignerItem");
@@ -346,7 +346,7 @@ namespace DiagramDesigner
                 newItems.Add(item);
             }
 
-            // update group hierarchy
+            
             SelectionService.ClearSelection();
             foreach (DesignerItem el in newItems)
             {
@@ -363,7 +363,7 @@ namespace DiagramDesigner
                 }
             }
 
-            // create Connections
+           
             IEnumerable<XElement> connectionsXML = root.Elements("Connections").Elements("Connection");
             foreach (XElement connectionXML in connectionsXML)
             {
@@ -391,7 +391,7 @@ namespace DiagramDesigner
 
             DesignerCanvas.BringToFront.Execute(null, this);
 
-            // update paste offset
+            
             root.Attribute("OffsetX").Value = (offsetX + 10).ToString();
             root.Attribute("OffsetY").Value = (offsetY + 10).ToString();
             Clipboard.Clear();

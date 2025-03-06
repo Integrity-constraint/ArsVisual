@@ -1,4 +1,5 @@
 ﻿using ArsVisual.pages;
+using DiagramDesigner;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -21,10 +23,17 @@ namespace ArsVisual.SettingsMaster
     /// </summary>
     public partial class SettingsMaster : Window
     {
+        private Window1 _window1;
+
         public SettingsMaster()
         {
             InitializeComponent();
+
+
+           
         }
+
+       
 
         private void Palitra(object sender, RoutedEventArgs e)
         {
