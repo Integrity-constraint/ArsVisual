@@ -271,7 +271,7 @@ namespace DiagramDesigner
 
         #region Save Command
 
-        private void Save_Executed(object sender, ExecutedRoutedEventArgs e)
+        public void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             IEnumerable<DesignerItem> designerItems = this.Children.OfType<DesignerItem>();
             IEnumerable<Connection> connections = this.Children.OfType<Connection>();
