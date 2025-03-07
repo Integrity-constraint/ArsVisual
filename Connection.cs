@@ -179,10 +179,7 @@ namespace DiagramDesigner
             }
         }
 
-        // between source connector position and the beginning 
-        // of the path geometry we leave some space for visual reasons; 
-        // so the anchor position source really marks the beginning 
-        // of the path geometry on the source side
+      
         private Point anchorPositionSource;
         public Point AnchorPositionSource
         {
@@ -197,8 +194,7 @@ namespace DiagramDesigner
             }
         }
 
-        // slope of the path at the anchor position
-        // needed for the rotation angle of the arrow
+     
         private double anchorAngleSource = 0;
         public double AnchorAngleSource
         {
@@ -213,7 +209,7 @@ namespace DiagramDesigner
             }
         }
 
-        // analogue to source side
+      
         private Point anchorPositionSink;
         public Point AnchorPositionSink
         {
@@ -227,7 +223,7 @@ namespace DiagramDesigner
                 }
             }
         }
-        // analogue to source side
+        
         private double anchorAngleSink = 0;
         public double AnchorAngleSink
         {
@@ -270,7 +266,7 @@ namespace DiagramDesigner
             }
         }
 
-        // specifies a point at half path length
+      
         private Point labelPosition;
         public Point LabelPosition
         {
@@ -285,7 +281,7 @@ namespace DiagramDesigner
             }
         }
 
-        // pattern of dashes and gaps that is used to outline the connection path
+        
         private DoubleCollection strokeDashArray;
         public DoubleCollection StrokeDashArray
         {
@@ -299,7 +295,7 @@ namespace DiagramDesigner
                 }
             }
         }
-        // if connected, the ConnectionAdorner becomes visible
+     
         private bool isSelected;
         public bool IsSelected
         {
@@ -353,7 +349,7 @@ namespace DiagramDesigner
         {
             base.OnMouseDown(e);
 
-            // usual selection business
+            
             DesignerCanvas designer = VisualTreeHelper.GetParent(this) as DesignerCanvas;
             if (designer != null)
             {
