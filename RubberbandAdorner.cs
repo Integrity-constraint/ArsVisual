@@ -45,7 +45,7 @@ namespace DiagramDesigner
 
         protected override void OnMouseUp(System.Windows.Input.MouseButtonEventArgs e)
         {
-           e
+           
             if (this.IsMouseCaptured) this.ReleaseMouseCapture();
 
           

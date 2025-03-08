@@ -27,7 +27,7 @@ namespace DiagramDesigner
                 MessageBoxResult messageBoxResult = MessageBox.Show(
                     "У вас не сохранён проект, сохранить?",
                     "Внимание",
-                    MessageBoxButton.YesNo
+                    MessageBoxButton.YesNoCancel
                 );
 
                 if (messageBoxResult == MessageBoxResult.Yes)
