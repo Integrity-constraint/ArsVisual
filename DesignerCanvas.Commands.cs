@@ -285,7 +285,20 @@ namespace DiagramDesigner
 
             SaveFile(root);
         }
+        public void Save_Executed_auto()
+        {
+            IEnumerable<DesignerItem> designerItems = this.Children.OfType<DesignerItem>();
+            IEnumerable<Connection> connections = this.Children.OfType<Connection>();
 
+            XElement designerItemsXML = SerializeDesignerItems(designerItems);
+            XElement connectionsXML = SerializeConnections(connections);
+
+            XElement root = new XElement("Root");
+            root.Add(designerItemsXML);
+            root.Add(connectionsXML);
+
+            SaveFile(root);
+        }
         #endregion
 
         #region Print Command

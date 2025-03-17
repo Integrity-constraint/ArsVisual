@@ -10,10 +10,15 @@ namespace DiagramDesigner
     {
         private Dictionary<TabItem, DesignerCanvas> _pageCanvases = new Dictionary<TabItem, DesignerCanvas>();
         private Dictionary<TabItem, object> _pageStates = new Dictionary<TabItem, object>();
-
+        DesignerCanvas _canvas;
         public Window1()
         {
             InitializeComponent();
+
+            // Привязка первой вкладки к логике
+            _pageCanvases[(TabItem)MainTabControl.Items[0]] = MyDesignerCanvas;
+
+            
             MainTabControl.SelectionChanged += TabControl_SelectionChanged;
             this.Closing += OnClosing;
         }
@@ -86,12 +91,12 @@ namespace DiagramDesigner
                 if (_pageCanvases.ContainsKey(tabItem) && _pageCanvases[tabItem].Children.Count > 0)
                 {
                     MessageBoxResult messageBoxResult = MessageBox.Show(
-                        "На странице есть схема, удалить страницу?",
+                        "На странице есть схема, сохранить схему?",
                         "Внимание",
-                        MessageBoxButton.OKCancel
+                        MessageBoxButton.YesNoCancel
                     );
 
-                    if (messageBoxResult == MessageBoxResult.OK)
+                    if (messageBoxResult == MessageBoxResult.No)
                     {
                         // Удаляем вкладку
                         MainTabControl.Items.Remove(tabItem);
@@ -100,6 +105,23 @@ namespace DiagramDesigner
                         _pageCanvases.Remove(tabItem);
                         _pageStates.Remove(tabItem);
                     }
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                    {
+                       
+                            if (_pageCanvases.ContainsKey(tabItem))
+                            {
+                                var canvas = _pageCanvases[tabItem];
+                                canvas.Save_Executed(null, null); 
+                        }
+                        
+                    }
+                    if(messageBoxResult == MessageBoxResult.Cancel)
+                    {
+
+                    }
+                   
+
+                    
                 }
                 else
                 {
