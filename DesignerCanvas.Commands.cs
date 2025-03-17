@@ -32,8 +32,9 @@ namespace DiagramDesigner
     {
         TaskbarIcon ts = new TaskbarIcon();
        
+       
 
-        
+
         public static RoutedCommand Group = new RoutedCommand();
         public static RoutedCommand Ungroup = new RoutedCommand();
         public static RoutedCommand BringForward = new RoutedCommand();
@@ -206,66 +207,145 @@ namespace DiagramDesigner
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             XElement root = LoadSerializedDataFromFile();
-
             if (root == null)
                 return;
 
-            this.Children.Clear();
-            this.SelectionService.ClearSelection();
+            // Очищаем только "рабочие" вкладки
+            var tabsToRemove = Window1.MainTabControlReference.Items
+                .OfType<TabItem>()
+                .Where(tab => tab.Header?.ToString() != "+") // Не удаляем вкладку с плюсом
+                .ToList();
 
-            IEnumerable<XElement> itemsXML = root.Elements("DesignerItems").Elements("DesignerItem");
-            foreach (XElement itemXML in itemsXML)
+            foreach (var tab in tabsToRemove)
             {
-                Guid id = new Guid(itemXML.Element("ID").Value);
-                DesignerItem item = DeserializeDesignerItem(itemXML, id, 0, 0);
-                this.Children.Add(item);
-                SetConnectorDecoratorTemplate(item);
+                Window1.MainTabControlReference.Items.Remove(tab);
+                Window1._pageCanvases.Remove(tab);
             }
 
-            this.InvalidateVisual();
-
-            IEnumerable<XElement> connectionsXML = root.Elements("Connections").Elements("Connection");
-            foreach (XElement connectionXML in connectionsXML)
+            foreach (XElement tabXML in root.Elements("Tab"))
             {
-                Guid sourceID = new Guid(connectionXML.Element("SourceID").Value);
-                Guid sinkID = new Guid(connectionXML.Element("SinkID").Value);
-                
-                String sourceConnectorName = connectionXML.Element("SourceConnectorName").Value;
-                String sinkConnectorName = connectionXML.Element("SinkConnectorName").Value;
+                var newTabItem = new TabItem
+                {
+                    Header = tabXML.Element("Header")?.Value,
+                    HeaderTemplate = (DataTemplate)this.FindResource("TabHeaderTemplate")
+                };
 
-                Connector sourceConnector = GetConnector(sourceID, sourceConnectorName);
-                Connector sinkConnector = GetConnector(sinkID, sinkConnectorName);
+                var grid = new Grid();
+                var scrollViewer = new ScrollViewer
+                {
+                    Background = Brushes.Transparent,
+                    HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+                };
 
-                Connection connection = new Connection(sourceConnector, sinkConnector);
-                Canvas.SetZIndex(connection, Int32.Parse(connectionXML.Element("zIndex").Value));
-                connection.Text = connectionXML.Element("Text").Value;
-                // Загружаем тип линии
-                var lineTypeElement = connectionXML.Element("ConnectionLineType");
-                if (lineTypeElement != null && Enum.TryParse(lineTypeElement.Value, out ConnectionLineType lineType))
+                var designerCanvas = new DesignerCanvas
                 {
-                    connection._ConnectionLineType = lineType;
-                }
-                // Загружаем форму стрелок на начале и конце линии
-                var sourceArrowSymbolElement = connectionXML.Element("SourceArrowSymbol");
-                if (sourceArrowSymbolElement != null && Enum.TryParse(sourceArrowSymbolElement.Value, out ArrowSymbol sourceArrowSymbol))
+                    MinHeight = 800,
+                    MinWidth = 1000,
+                    AllowDrop = true,
+                    Background = Brushes.White
+                };
+
+                scrollViewer.Content = designerCanvas;
+
+                var zoomBox = new ZoomBox
                 {
-                    connection.SourceArrowSymbol = sourceArrowSymbol;
+                    Width = 180,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    ScrollViewer = scrollViewer,
+                    Margin = new Thickness(0, 10, 30, 0)
+                };
+
+                grid.Children.Add(scrollViewer);
+                grid.Children.Add(zoomBox);
+
+                newTabItem.Content = grid;
+
+                // Восстанавливаем данные из XML для этого канваса
+                XElement canvasContent = tabXML.Element("CanvasContent");
+                if (canvasContent != null)
+                {
+                    // Восстанавливаем DesignerItems
+                    IEnumerable<XElement> itemsXML = canvasContent.Element("DesignerItems").Elements("DesignerItem");
+                    foreach (XElement itemXML in itemsXML)
+                    {
+                        Guid id = new Guid(itemXML.Element("ID").Value);
+                        DesignerItem item = DeserializeDesignerItem(itemXML, id, 0, 0);
+                        designerCanvas.Children.Add(item);
+                        SetConnectorDecoratorTemplate(item);
+                    }
+
+                    // Восстанавливаем Connections
+                    IEnumerable<XElement> connectionsXML = canvasContent.Element("Connections").Elements("Connection");
+                    foreach (XElement connectionXML in connectionsXML)
+                    {
+                        Guid sourceID = new Guid(connectionXML.Element("SourceID").Value);
+                        Guid sinkID = new Guid(connectionXML.Element("SinkID").Value);
+
+                        string sourceConnectorName = connectionXML.Element("SourceConnectorName").Value;
+                        string sinkConnectorName = connectionXML.Element("SinkConnectorName").Value;
+
+                        Connector sourceConnector = GetConnector(sourceID, sourceConnectorName);
+                        Connector sinkConnector = GetConnector(sinkID, sinkConnectorName);
+
+                        Connection connection = new Connection(sourceConnector, sinkConnector);
+                        Canvas.SetZIndex(connection, int.Parse(connectionXML.Element("zIndex").Value));
+                        connection.Text = connectionXML.Element("Text").Value;
+
+                        designerCanvas.Children.Add(connection);
+                    }
                 }
 
-                var sinkArrowSymbolElement = connectionXML.Element("SinkArrowSymbol");
-                if (sinkArrowSymbolElement != null && Enum.TryParse(sinkArrowSymbolElement.Value, out ArrowSymbol sinkArrowSymbol))
+                // Добавляем вкладку перед вкладкой с плюсом
+                var addTabButton = Window1.MainTabControlReference.Items
+                    .OfType<TabItem>()
+                    .FirstOrDefault(tab => tab.Header?.ToString() == "+");
+
+                if (addTabButton != null)
                 {
-                    connection.SinkArrowSymbol = sinkArrowSymbol;
+                    Window1.MainTabControlReference.Items.Insert(
+                        Window1.MainTabControlReference.Items.IndexOf(addTabButton), newTabItem);
                 }
-                var strokedashArray = connectionXML.Element("StrokeDashArray");
-                if (strokedashArray != null)
+                else
                 {
-                    connection.StrokeDashArray = StringToDoubleCollection(strokedashArray.Value);
+                    // Если вкладка с плюсом отсутствует, добавляем новую страницу в конец
+                    Window1.MainTabControlReference.Items.Add(newTabItem);
                 }
-                this.Children.Add(connection);
+
+                Window1._pageCanvases[newTabItem] = designerCanvas;
             }
+            // Убедимся, что вкладка с плюсом существует
+            EnsureAddTabButtonExists();
         }
+
+            
         
+        private void EnsureAddTabButtonExists()
+{
+    var addTabButton = Window1.MainTabControlReference.Items
+        .OfType<TabItem>()
+        .FirstOrDefault(tab => tab.Header?.ToString() == "+");
+
+    if (addTabButton == null)
+    {
+        // Добавляем вкладку с плюсом в конец, если её нет
+        addTabButton = new TabItem
+        {
+            Header = "+",
+            HeaderTemplate = (DataTemplate)this.FindResource("TabHeaderTemplate")
+        };
+
+        Window1.MainTabControlReference.Items.Add(addTabButton);
+    }
+}
+
+
+
+
+
+
+
 
         #endregion
 
@@ -273,32 +353,31 @@ namespace DiagramDesigner
 
         public void Save_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            IEnumerable<DesignerItem> designerItems = this.Children.OfType<DesignerItem>();
-            IEnumerable<Connection> connections = this.Children.OfType<Connection>();
-
-            XElement designerItemsXML = SerializeDesignerItems(designerItems);
-            XElement connectionsXML = SerializeConnections(connections);
-
             XElement root = new XElement("Root");
-            root.Add(designerItemsXML);
-            root.Add(connectionsXML);
 
-            SaveFile(root);
+            foreach (var tabItem in Window1._pageCanvases.Keys)
+            {
+                var canvas = Window1._pageCanvases[tabItem];
+                IEnumerable<DesignerItem> designerItems = canvas.Children.OfType<DesignerItem>();
+                IEnumerable<Connection> connections = canvas.Children.OfType<Connection>();
+
+                XElement designerItemsXML = SerializeDesignerItems(designerItems);
+                XElement connectionsXML = SerializeConnections(connections);
+
+                XElement tabContent = new XElement("Tab",
+                    new XElement("Header", tabItem.Header.ToString()),
+                    new XElement("CanvasContent",
+                        designerItemsXML,
+                        connectionsXML)
+                );
+
+                root.Add(tabContent);
+            }
+
+            SaveFile(root); // Сохраняем всё дерево XML в файл
         }
-        public void Save_Executed_auto()
-        {
-            IEnumerable<DesignerItem> designerItems = this.Children.OfType<DesignerItem>();
-            IEnumerable<Connection> connections = this.Children.OfType<Connection>();
 
-            XElement designerItemsXML = SerializeDesignerItems(designerItems);
-            XElement connectionsXML = SerializeConnections(connections);
 
-            XElement root = new XElement("Root");
-            root.Add(designerItemsXML);
-            root.Add(connectionsXML);
-
-            SaveFile(root);
-        }
         #endregion
 
         #region Print Command

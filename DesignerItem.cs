@@ -368,7 +368,7 @@ namespace DiagramDesigner
             {
                 ContentPresenter contentPresenter =
                     this.Template.FindName("PART_ContentPresenter", this) as ContentPresenter;
-                if (contentPresenter != null)
+                if (contentPresenter != null && VisualTreeHelper.GetChildrenCount(contentPresenter) > 0) // Проверяем количество детей
                 {
                     UIElement contentVisual = VisualTreeHelper.GetChild(contentPresenter, 0) as UIElement;
                     if (contentVisual != null)
@@ -394,6 +394,7 @@ namespace DiagramDesigner
                 }
             }
         }
+
 
         #region RotateThumbTemplate Property
 

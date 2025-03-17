@@ -16,17 +16,7 @@
             </MenuItem>
             <MenuItem Header="Select All" Command="{x:Static s:DesignerCanvas.SelectAll}"/>
         </ContextMenu>
-        <DataTemplate x:Key="TabHeaderTemplate">
-            <DockPanel>
-               
-                <TextBlock Text="{Binding}" Margin="0,0,5,0"/>
-                
-                <Button Background="Transparent" BorderBrush="Transparent" Content="×" Click="CloseTabClick" 
-                    Width="20" Height="20" Padding="0"
-                    DockPanel.Dock="Right"
-                    Tag="{Binding RelativeSource={RelativeSource AncestorType=TabItem}}"/>
-            </DockPanel>
-        </DataTemplate>
+       
     </Window.Resources>
 
     <Grid  Margin="10">

@@ -15,11 +15,19 @@ namespace DiagramDesigner
     public partial class App : Application
     {
         private TaskbarIcon ts;
-
+      
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
             ts = (TaskbarIcon)FindResource("MyNotifyIcon");
+        }
+
+        private void CloseTabClick(object sender, RoutedEventArgs e)
+        {
+            if (Application.Current.MainWindow is Window1 mainWindow)
+            {
+                mainWindow.CloseTabClick(sender, e);
+            }
         }
     }
 }

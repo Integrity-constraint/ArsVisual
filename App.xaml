@@ -7,10 +7,27 @@
  xmlns:d="clr-namespace:ArsVisual"
  xmlns:c="clr-namespace:DiagramDesigner.Controls">
   <Application.Resources>
-      
-    <ResourceDictionary>
-        
-      <ResourceDictionary.MergedDictionaries>
+       
+       
+        <ResourceDictionary>
+            <Style TargetType="Button" x:Key="CloseButtonStyle">
+                <EventSetter Event="Click" Handler="CloseTabClick" />
+            </Style>
+            <DataTemplate x:Key="TabHeaderTemplate">
+                <DockPanel>
+                    <TextBlock Text="{Binding}" Margin="0,0,5,0"/>
+                    <Button Style="{StaticResource CloseButtonStyle}"  Background="Transparent" BorderBrush="Transparent" Content="×" 
+                        Width="20" Height="20" Padding="0"
+                        DockPanel.Dock="Right"
+                        Tag="{Binding RelativeSource={RelativeSource AncestorType=TabItem}}"/>
+                </DockPanel>
+            </DataTemplate>
+            <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
+            <tb:TaskbarIcon x:Key="MyNotifyIcon"
+IconSource="/icons/logo.png"
+ToolTipText="ArsVisual" />
+            
+            <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="Resources/Styles/Shared.xaml"/>
           <ResourceDictionary Source="Resources/Brushes.xaml"/>
          <ResourceDictionary Source="Resources/Styles/ToolBar.xaml"/>
@@ -31,6 +48,8 @@
          <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/Styles/SettingsTree.xaml"/>
            <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml"/>
+          
+          
                 <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml">
 
                     <Color x:Key="FillElementColor">White</Color>
@@ -42,10 +61,7 @@
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
           
-            <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
-            <tb:TaskbarIcon x:Key="MyNotifyIcon"
-         IconSource="/icons/logo.png"
-         ToolTipText="ArsVisual" />
+           
         </ResourceDictionary>
        
   </Application.Resources>

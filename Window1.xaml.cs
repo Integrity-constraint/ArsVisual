@@ -8,19 +8,21 @@ namespace DiagramDesigner
 {
     public partial class Window1 : Window
     {
-        private Dictionary<TabItem, DesignerCanvas> _pageCanvases = new Dictionary<TabItem, DesignerCanvas>();
-        private Dictionary<TabItem, object> _pageStates = new Dictionary<TabItem, object>();
-        DesignerCanvas _canvas;
+        public static Dictionary<TabItem, DesignerCanvas> _pageCanvases = new Dictionary<TabItem, DesignerCanvas>();
+        public Dictionary<TabItem, object> _pageStates = new Dictionary<TabItem, object>();
+        public static TabControl MainTabControlReference { get; private set; }
+      
         public Window1()
         {
             InitializeComponent();
-
+           
             // Привязка первой вкладки к логике
             _pageCanvases[(TabItem)MainTabControl.Items[0]] = MyDesignerCanvas;
 
             
             MainTabControl.SelectionChanged += TabControl_SelectionChanged;
             this.Closing += OnClosing;
+            MainTabControlReference = MainTabControl;
         }
 
         // Обработчик переключения вкладок
@@ -40,7 +42,7 @@ namespace DiagramDesigner
         }
 
         // Метод для добавления новой страницы
-        private void AddNewPage()
+        public void AddNewPage()
         {
             var newTabItem = new TabItem { Header = $"Страница {MainTabControl.Items.Count}" };
 
@@ -84,7 +86,7 @@ namespace DiagramDesigner
         }
 
         // Обработчик закрытия вкладки
-        private void CloseTabClick(object sender, RoutedEventArgs e)
+        public void CloseTabClick(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is TabItem tabItem)
             {
