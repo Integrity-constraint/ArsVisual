@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 using ArsVisual.NotifyComponents.Not;
+using System.Reflection;
 
 namespace DiagramDesigner
 {
@@ -20,6 +21,8 @@ namespace DiagramDesigner
         {
             base.OnStartup(e);
             ts = (TaskbarIcon)FindResource("MyNotifyIcon");
+
+           
         }
 
         private void CloseTabClick(object sender, RoutedEventArgs e)

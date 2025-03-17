@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoUpdaterDotNET;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
@@ -15,7 +16,7 @@ namespace DiagramDesigner
         public Window1()
         {
             InitializeComponent();
-           
+            AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
             // Привязка первой вкладки к логике
             _pageCanvases[(TabItem)MainTabControl.Items[0]] = MyDesignerCanvas;
 
