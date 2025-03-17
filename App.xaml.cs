@@ -14,7 +14,7 @@ namespace DiagramDesigner
     /// </summary>
     public partial class App : Application
     {
-        private TaskbarIcon ts;
+        public static TaskbarIcon ts;
       
         protected override void OnStartup(StartupEventArgs e)
         {

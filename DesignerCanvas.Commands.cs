@@ -30,11 +30,6 @@ namespace DiagramDesigner
 {
     public partial class DesignerCanvas
     {
-        TaskbarIcon ts = new TaskbarIcon();
-       
-       
-
-
         public static RoutedCommand Group = new RoutedCommand();
         public static RoutedCommand Ungroup = new RoutedCommand();
         public static RoutedCommand BringForward = new RoutedCommand();
@@ -99,7 +94,7 @@ namespace DiagramDesigner
                 messageSave.BalloonText = balloontext;
                 messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
                 messageSave.Headersave = header;
-                ts.ShowCustomBalloon(messageSave, popup, time);
+                App.ts.ShowCustomBalloon(messageSave, popup, time);
             }
            catch(Exception ex)
             {
