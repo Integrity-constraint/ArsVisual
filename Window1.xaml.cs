@@ -17,6 +17,7 @@ namespace DiagramDesigner
         {
             InitializeComponent();
             AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
+          
             // Привязка первой вкладки к логике
             _pageCanvases[(TabItem)MainTabControl.Items[0]] = MyDesignerCanvas;
 

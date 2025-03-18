@@ -21,7 +21,7 @@
 
                             </GroupItem>
                             <GroupItem HorizontalAlignment="Right" Margin="10">
-                                <Button Style="{StaticResource ToolBarButtonBaseStyle}">проверить обновления</Button>
+                                <Button Click="CheckUpdates" Style="{StaticResource ToolBarButtonBaseStyle}">проверить обновления</Button>
                             </GroupItem>
                         </StackPanel>
                     </GroupBox>
