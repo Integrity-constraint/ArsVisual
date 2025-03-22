@@ -140,8 +140,7 @@
   
 <Style x:Key="Wardrobe" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
     <Setter Property="Data" Value="M 10,10 H 70 V 50 H 10 Z M 10,50 H 70 V 55 H 10 Z M 70,30 H 72 V 32 H 70 Z M 70,35 H 72 V 37 H 70 Z"/>
-    <Setter Property="Fill" Value="Beige"/>
-    <Setter Property="Stroke" Value="Black"/>
+   
 </Style>
 <Style x:Key="Wardrobe_DragThumb" TargetType="Path" BasedOn="{StaticResource Wardrobe}">
     <Setter Property="IsHitTestVisible" Value="True"/>
