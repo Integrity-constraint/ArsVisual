@@ -159,19 +159,67 @@
     <Setter Property="Fill" Value="Transparent"/>
     <Setter Property="Stroke" Value="Transparent"/>
 </Style>
-  <Style x:Key="FireExtinguisher" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
-    <Setter Property="Data" Value="
-        M 20,10 C 20,5 40,5 40,10 V 50 C 40,55 20,55 20,50 Z
-        M 20,10 L 15,5
-        M 40,10 L 45,5
-        M 30,5 H 35"/>
+ 
+    <DrawingImage x:Key="FireExtinguisherDrawingImage">
+        <DrawingImage.Drawing>
+            <DrawingGroup ClipGeometry="M0,0 V815.61 H528.773 V0 H0 Z">
+                <DrawingGroup Opacity="1">
+                    <DrawingGroup Opacity="1" Transform="1,0,0,1,110.671,-9.6">
+                        <DrawingGroup Opacity="1" Transform="1,0,0,1,-110.551,-83.0504">
+                            <GeometryDrawing Brush="#FF000000" Geometry="F0 M528.773,815.61z M0,0z M288.27,174.93C231.97,177.76 151.88,175.08 99.39,191.17 63.67,202.13 40.73,221.78 25.74,249.63 -13.98,323.42 2.1,454.74 9.91,544.95 20.84,671.16 15.58,716.89 37.69,815.61L67.17,815.61C62.74,769.27 53.21,737.65 43.55,646.65 42.96,641.06 42.36,635.23 41.82,629.5 35.68,565.04 35.7,512.2 33.2,465.82 30.76,420.68 25.95,381.68 29.06,340.1 31.94,301.58 41.63,260.85 67.57,235.03 106.53,196.24 182.14,191.05 266.16,190.04L288.27,174.93z M289.01,184.96C331.63,133.72,421.72,110.96,509.36,92.77L498.71,112.43C465.75,125.72 446.77,131.9 405.08,142.01 396.54,144.09 387.05,146.32 378.24,148.69 338.36,159.42 312.52,172.87 304.95,194.57L289.01,184.96z M291.22,184.36C369.98,182.87,453.79,172.29,528.53,184.87L517.48,198.46C502.69,199.66 494.2,192.41 457.41,196.5 456.97,196.55 456.53,196.6 456.13,196.64 455.32,196.71 454.68,196.72 454.05,196.72 382.62,197.41 361.23,186.88 291.22,184.36z">
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                        <DrawingGroup Opacity="1">
+                            <GeometryDrawing Brush="#FFFF0000" Geometry="F0 M528.773,815.61z M0,0z M0,815.61L368.5,815.61 368.5,237.07A103.712,103.712,-180,0,0,281.89,186.75A52.8819,52.8819,0,0,1,250.58,146.97L250.58,101.82 117.92,101.82 117.92,146.97A52.8819,52.8819,0,0,1,86.62,186.75A103.712,103.712,-180,0,0,0,237.07L0,815.61z">
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                        <DrawingGroup Opacity="1" Transform="1,0,0,1,14.7402,-261.914">
+                            <GeometryDrawing Brush="#FFFFFFFF">
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                                </GeometryDrawing.Pen>
+                                <GeometryDrawing.Geometry>
+                                    <RectangleGeometry RadiusX="0" RadiusY="0" Rect="0,735.021,339.024,80.589" />
+                                </GeometryDrawing.Geometry>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                        <DrawingGroup Opacity="1" Transform="1,0,0,1,118.822,-647.382">
+                            <GeometryDrawing Brush="#FFFFFFFF" Geometry="F0 M528.773,815.61z M0,0z M0,770.89A65.4299,44.7157,0,0,1,130.86,770.89A65.4299,44.7157,0,0,1,0,770.89z" />
+                            <GeometryDrawing Geometry="F0 M528.773,815.61z M0,0z M58.63,786.4L94.01,754.16">
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                            <GeometryDrawing Geometry="F0 M528.773,815.61z M0,0z M0,770.89A65.4299,44.7157,0,0,1,130.86,770.89A65.4299,44.7157,0,0,1,0,770.89">
+                                <GeometryDrawing.Pen>
+                                    <Pen Brush="#FF000000" Thickness="0.24" StartLineCap="Round" EndLineCap="Round" LineJoin="Round" />
+                                </GeometryDrawing.Pen>
+                            </GeometryDrawing>
+                        </DrawingGroup>
+                    </DrawingGroup>
+                </DrawingGroup>
+            </DrawingGroup>
+        </DrawingImage.Drawing>
+    </DrawingImage>
+
+
+        <Style x:Key="FireExtinguisherDrawingImageImageStyle" TargetType="Image">
+            <Setter Property="Source" Value="{StaticResource FireExtinguisherDrawingImage}"/>
+            <Setter Property="Stretch" Value="Fill"/>
+            <Setter Property="IsHitTestVisible" Value="False"/>
+        </Style>
+    <Style x:Key="FireExtinguisherDrawingImage_DragThumb" TargetType="Image" BasedOn="{StaticResource FireExtinguisherDrawingImageImageStyle}">
+            <Setter Property="IsHitTestVisible" Value="True"/>
+            <Setter Property="Opacity" Value="0"/>
+        </Style>
    
-</Style>
-<Style x:Key="FireExtinguisher_DragThumb" TargetType="Path" BasedOn="{StaticResource FireExtinguisher}">
-    <Setter Property="IsHitTestVisible" Value="True"/>
-    <Setter Property="Fill" Value="Transparent"/>
-    <Setter Property="Stroke" Value="Transparent"/>
-</Style>
+    
   <s:Toolbox x:Key="RoomStencils" ItemSize="60,50" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
     <ItemsControl.Items>
       
@@ -265,14 +313,21 @@
             <TextBox Style="{StaticResource TextadapterHit}"/>
         </Grid>
  <Grid>
-            <Path Style="{StaticResource FireExtinguisher}" ToolTip="Огнетушитель">
-                <s:DesignerItem.DragThumbTemplate>
-                    <ControlTemplate>
-                        <Path Style="{StaticResource FireExtinguisher_DragThumb}"/>
-                    </ControlTemplate>
-                </s:DesignerItem.DragThumbTemplate>
-            </Path>
-            <TextBox Style="{StaticResource TextadapterHit}"/>
+                <Image Style="{StaticResource FireExtinguisherDrawingImageImageStyle}"  ToolTip="Сайт">
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+
+
+                            <Image Style="{StaticResource FireExtinguisherDrawingImage_DragThumb}"/>
+
+
+
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+
+                </Image>
+
+                <TextBox Style="{StaticResource TextadapterHit}"/>
         </Grid>
     </ItemsControl.Items>
 </s:Toolbox>
