@@ -46,6 +46,7 @@
                 
                 <Expander Header="Объекты Active Directory " Content="{StaticResource NetStencils}" IsExpanded="True"/>
                 <Expander Header="Сценарий выполнения UML " Content="{StaticResource UMLPosl}" IsExpanded="True"/>
+                <Expander Header="Сценарий выполнения UML " Content="{StaticResource RoomStencils}" IsExpanded="True"/>
                     
 
 

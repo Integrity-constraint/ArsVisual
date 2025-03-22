@@ -44,6 +44,7 @@ ToolTipText="ArsVisual" />
          <ResourceDictionary Source="Resources/ZoomBox.xaml"/>
           <ResourceDictionary Source="Resources/Connection.xaml"/>
         <ResourceDictionary Source="Resources/Stencils/FlowChartStencils.xaml"/>
+        <ResourceDictionary Source="Resources/Stencils/RoomDescriptStencils.xaml"/>
                 <ResourceDictionary Source="Resources/Stencils/UMLPosl.xaml"/>
          <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/Styles/SettingsTree.xaml"/>

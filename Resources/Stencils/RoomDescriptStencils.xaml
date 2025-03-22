@@ -1,0 +1,280 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:DiagramDesigner"
+                    xmlns:d="clr-namespace:ArsVisual"
+                    xmlns:c="clr-namespace:DiagramDesigner.Controls">
+    
+   <!-- Общий стиль для объектов вида сверху -->
+<Style x:Key="RoomItemStyle" TargetType="Path">
+    <Setter Property="Fill" Value="LightGray"/>
+    <Setter Property="Stroke" Value="Black"/>
+    <Setter Property="StrokeThickness" Value="1"/>
+    <Setter Property="StrokeLineJoin" Value="Round"/>
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="IsHitTestVisible" Value="False"/>
+    <Setter Property="SnapsToDevicePixels" Value="True"/>
+    <!-- Улучшенное масштабирование -->
+    <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
+</Style>
+
+<!-- Стиль для дизайнерского объекта, наследующий базовые параметры -->
+<Style x:Key="DesignerItemRoomStyle" TargetType="Path" BasedOn="{StaticResource RoomItemStyle}">
+    <Setter Property="Fill" Value="{Binding Fill, RelativeSource={RelativeSource AncestorType=s:DesignerItem}, FallbackValue=LightGray}"/>
+    <Setter Property="Stroke" Value="{Binding Stroke, RelativeSource={RelativeSource AncestorType=s:DesignerItem}, FallbackValue=Black}"/>
+</Style>
+
+<!-- Стиль для стола с закруглёнными углами -->
+<Style x:Key="Table" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <!-- Команды арки для создания округлых углов. Остальные линии — дополнительные детали -->
+    <Setter Property="Data" Value="
+        M 10,10 
+        H 50 
+        A 5,5 0 0 1 55,15 
+        V 35 
+        A 5,5 0 0 1 50,40 
+        H 10 
+        A 5,5 0 0 1 5,35 
+        V 15 
+        A 5,5 0 0 1 10,10 
+        Z 
+        M 10,10 V 15 
+        M 50,10 V 15 
+        M 10,40 V 35 
+        M 50,40 V 35"/>
+</Style>
+
+<Style x:Key="Table_DragThumb" TargetType="Path" BasedOn="{StaticResource Table}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+
+<!-- Стиль для освещения с эффектом тени -->
+<Style x:Key="Lighting" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <!-- Сохраняем пропорции -->
+    <Setter Property="Stretch" Value="Fill"/>
+    <Setter Property="Data">
+        <Setter.Value>
+            <GeometryGroup>
+                <!-- Круг с центром (30,30) и радиусом 10 -->
+                <EllipseGeometry Center="30,30" RadiusX="10" RadiusY="10"/>
+                <!-- Горизонтальная линия -->
+                <LineGeometry StartPoint="20,30" EndPoint="40,30"/>
+                <!-- Вертикальная линия -->
+                <LineGeometry StartPoint="30,20" EndPoint="30,40"/>
+            </GeometryGroup>
+        </Setter.Value>
+    </Setter>
+    <Setter Property="Effect">
+        <Setter.Value>
+            <DropShadowEffect Color="Gray" Direction="315" ShadowDepth="2" BlurRadius="4"/>
+        </Setter.Value>
+    </Setter>
+</Style>
+
+
+<Style x:Key="Lighting_DragThumb" TargetType="Path" BasedOn="{StaticResource Lighting}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+
+<!-- Стиль для компьютера с теневым эффектом -->
+<Style x:Key="Computer" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <Setter Property="Data" Value="M 20,10 H 40 V 30 H 20 Z M 25,35 H 35 V 40 H 25 Z"/>
+    <Setter Property="Effect">
+        <Setter.Value>
+            <DropShadowEffect Color="Gray" Direction="315" ShadowDepth="2" BlurRadius="4"/>
+        </Setter.Value>
+    </Setter>
+</Style>
+
+<Style x:Key="Computer_DragThumb" TargetType="Path" BasedOn="{StaticResource Computer}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+
+
+<Style x:Key="Wall" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <Setter Property="Data" Value="M 0,0 H 60 V 5 H 0 Z"/>
+    <Setter Property="StrokeThickness" Value="2"/>
+</Style>
+
+<Style x:Key="Wall_DragThumb" TargetType="Path" BasedOn="{StaticResource Wall}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+  
+<Style x:Key="Door" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+   
+    <Setter Property="Data" Value="
+        M 10,10 H 40 V 60 H 10 Z 
+        M 40,35 H 50 
+        M 10,35 H 0
+        "/>
+  
+    
+  
+
+</Style>
+
+<Style x:Key="Door_DragThumb" TargetType="Path" BasedOn="{StaticResource Door}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+  
+
+<Style x:Key="Window" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <Setter Property="Data" Value="M 0,0 H 20 V 5 H 0 Z M 10,0 V 5"/>
+    <Setter Property="StrokeThickness" Value="1.5"/>
+</Style>
+
+<Style x:Key="Window_DragThumb" TargetType="Path" BasedOn="{StaticResource Window}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+  
+<Style x:Key="Wardrobe" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <Setter Property="Data" Value="M 10,10 H 70 V 50 H 10 Z M 10,50 H 70 V 55 H 10 Z M 70,30 H 72 V 32 H 70 Z M 70,35 H 72 V 37 H 70 Z"/>
+    <Setter Property="Fill" Value="Beige"/>
+    <Setter Property="Stroke" Value="Black"/>
+</Style>
+<Style x:Key="Wardrobe_DragThumb" TargetType="Path" BasedOn="{StaticResource Wardrobe}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    
+</Style>
+<Style x:Key="Nightstand" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <Setter Property="Data" Value="
+       M0,0 L100,0 L100,45 L110,45 L110,55 L100,55 L100,100 L0,100 Z"/>
+
+    <Setter Property="StrokeThickness" Value="1"/>
+</Style>
+
+  
+<Style x:Key="Nightstand_DragThumb" TargetType="Path" BasedOn="{StaticResource Nightstand}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+  <Style x:Key="FireExtinguisher" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">
+    <Setter Property="Data" Value="
+        M 20,10 C 20,5 40,5 40,10 V 50 C 40,55 20,55 20,50 Z
+        M 20,10 L 15,5
+        M 40,10 L 45,5
+        M 30,5 H 35"/>
+   
+</Style>
+<Style x:Key="FireExtinguisher_DragThumb" TargetType="Path" BasedOn="{StaticResource FireExtinguisher}">
+    <Setter Property="IsHitTestVisible" Value="True"/>
+    <Setter Property="Fill" Value="Transparent"/>
+    <Setter Property="Stroke" Value="Transparent"/>
+</Style>
+  <s:Toolbox x:Key="RoomStencils" ItemSize="60,50" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+    <ItemsControl.Items>
+      
+        <Grid>
+            <Path Style="{StaticResource Table}" ToolTip="Стол">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Table_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+
+       
+        <Grid>
+            <Path  Style="{StaticResource Lighting}" ToolTip="Освещение">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Lighting_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+
+       
+        <Grid>
+            <Path Style="{StaticResource Computer}" ToolTip="ПЭВМ">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Computer_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+
+        <Grid>
+            <Path Style="{StaticResource Wall}" ToolTip="Стена">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Wall_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+
+       
+        <Grid>
+            <Path Style="{StaticResource Door}" ToolTip="Дверь">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path  Style="{StaticResource Door_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+
+       
+        <Grid>
+            <Path Style="{StaticResource Window}" ToolTip="Окно">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Window_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+      <Grid>
+            <Path Style="{StaticResource Wardrobe}" ToolTip="Шкаф">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Wardrobe_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+     <Grid>
+            <Path Style="{StaticResource Nightstand}" ToolTip="Тумба">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource Nightstand_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+ <Grid>
+            <Path Style="{StaticResource FireExtinguisher}" ToolTip="Огнетушитель">
+                <s:DesignerItem.DragThumbTemplate>
+                    <ControlTemplate>
+                        <Path Style="{StaticResource FireExtinguisher_DragThumb}"/>
+                    </ControlTemplate>
+                </s:DesignerItem.DragThumbTemplate>
+            </Path>
+            <TextBox Style="{StaticResource TextadapterHit}"/>
+        </Grid>
+    </ItemsControl.Items>
+</s:Toolbox>
+</ResourceDictionary>
