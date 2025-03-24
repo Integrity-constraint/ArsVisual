@@ -394,7 +394,7 @@ namespace DiagramDesigner
                 }
             }
         }
-
+       
 
         #region RotateThumbTemplate Property
 

@@ -41,6 +41,7 @@ namespace ArsVisual.SettingsMaster
             colorChangerPage.ColorItemStrokeSelected += OnColorItemStrokeSelected;
             colorChangerPage.ColorSizeChromeSelected += OnColorSizeChromeSelected;
             colorChangerPage.ColorItemBrushSelected += OnColorItemBrushSelected;
+            colorChangerPage.ColorSnapBrushSelected += OnColorSnapBrushSelected;
             OCHKO.Navigate(colorChangerPage);
         }
 
@@ -62,7 +63,12 @@ namespace ArsVisual.SettingsMaster
             Application.Current.Resources["FillElement"] = new SolidColorBrush(selectedColor);
            
         }
+        private void OnColorSnapBrushSelected(Color selectedColor)
+        {
 
+            Application.Current.Resources["SnapAdornerColor"] = new SolidColorBrush(selectedColor);
+
+        }
         private void closesettings(object sender, RoutedEventArgs e)
         {
             this.Close();

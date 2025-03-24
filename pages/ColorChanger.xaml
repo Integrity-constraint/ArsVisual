@@ -63,6 +63,25 @@
                             <Rectangle Fill="{DynamicResource SizeChromeColor}" Margin="10" Width="50">
                                 
                             </Rectangle>
+                            <ComboBox x:Name="ColorSnapBrushComboBox"
+            Margin="10"
+            SelectionChanged="ColorSnapBrushComboBox_SelectionChanged">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <Rectangle Width="20" Height="20" Margin="5">
+                                                <Rectangle.Fill>
+                                                    <SolidColorBrush Color="{Binding}"/>
+                                                </Rectangle.Fill>
+                                            </Rectangle>
+                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
+                            <Rectangle Fill="{DynamicResource SnapAdornerColor}" Margin="10" Width="50">
+
+                            </Rectangle>
                             <ComboBox x:Name="ColorItemBrushComboBox"
             Margin="10"
             SelectionChanged="ColorComboBoxItemBrush_SelectionChanged">

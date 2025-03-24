@@ -23,6 +23,7 @@
                 </DockPanel>
             </DataTemplate>
             <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
+            <SolidColorBrush x:Key="SnapAdornerColor" Color="Green"/>
             <tb:TaskbarIcon x:Key="MyNotifyIcon"
 IconSource="/icons/logo.png"
 ToolTipText="ArsVisual" />

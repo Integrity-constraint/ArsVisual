@@ -24,6 +24,7 @@ namespace ArsVisual.pages
         public event Action<Color> ColorItemStrokeSelected;
         public event Action<Color> ColorSizeChromeSelected;
         public event Action<Color> ColorItemBrushSelected;
+        public event Action<Color> ColorSnapBrushSelected;
 
         public ColorChanger()
         {
@@ -46,7 +47,7 @@ namespace ArsVisual.pages
 
 
             ColorSizeChromeComboBox.ItemsSource = colors;
-
+            ColorSnapBrushComboBox.ItemsSource = colors;
             ColorItemBrushComboBox.ItemsSource= colors;
             ColorItemOutlineComboBox.ItemsSource=colors;
         }
@@ -80,6 +81,15 @@ namespace ArsVisual.pages
             {
 
                 ColorItemStrokeSelected?.Invoke(selectedColor);
+            }
+        }
+
+        private void ColorSnapBrushComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ColorSnapBrushComboBox.SelectedItem is Color selectedColor)
+            {
+
+                ColorSnapBrushSelected?.Invoke(selectedColor);
             }
         }
     }

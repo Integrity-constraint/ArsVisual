@@ -8,11 +8,15 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
 using System.Xml;
+using ArsVisual.Adorners;
 
 namespace DiagramDesigner
 {
     public partial class DesignerCanvas : Canvas
     {
+        private const double SnapThreshold = 5.0; // Порог притягивания в пикселях
+        private SnapAdorner snapAdorner;
+
         private Point? rubberbandSelectionStartPoint = null;
 
         private SelectionService selectionService;
@@ -26,7 +30,47 @@ namespace DiagramDesigner
                 return selectionService;
             }
         }
+        public void InitializeSnapAdorner()
+        {
+            if (snapAdorner == null)
+            {
+                var adornerLayer = AdornerLayer.GetAdornerLayer(this);
+                if (adornerLayer != null)
+                {
+                    snapAdorner = new SnapAdorner(this);
+                    adornerLayer.Add(snapAdorner);
+                }
+            }
+        }
 
+       
+        public void ClearSnapLines()
+        {
+            snapAdorner?.ClearSnapLines();
+        }
+
+      
+        public void DrawSnapLine(AlignmentType alignmentType, double position)
+        {
+            InitializeSnapAdorner();
+            snapAdorner?.AddSnapLine(alignmentType, position, ActualWidth, ActualHeight);
+        }
+
+     
+        public IEnumerable<UIElement> GetOtherElements(IEnumerable<UIElement> excludeElements)
+        {
+            return Children.Cast<UIElement>().Where(e => e is FrameworkElement && !excludeElements.Contains(e));
+        }
+
+      
+        public double SnapThresholdValue => SnapThreshold;
+
+      
+        public enum AlignmentType
+        {
+            Horizontal,
+            Vertical
+        }
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             base.OnMouseDown(e);
@@ -50,7 +94,11 @@ namespace DiagramDesigner
             if (e.LeftButton != MouseButtonState.Pressed)
                 this.rubberbandSelectionStartPoint = null;
 
-            
+            if (e.LeftButton != MouseButtonState.Pressed)
+            {
+                this.rubberbandSelectionStartPoint = null;
+                ClearSnapLines(); // Очищаем линии, если кнопка мыши отпущена
+            }
             if (this.rubberbandSelectionStartPoint.HasValue)
             {
                

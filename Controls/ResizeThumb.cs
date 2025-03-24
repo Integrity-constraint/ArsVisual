@@ -1,12 +1,13 @@
 ﻿using DiagramDesigner.Adorners;
 using System;
-using System.Windows.Controls.Primitives;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Media;
-using System.Windows;
 using System.Linq;
 using System.Collections.Generic;
+using static DiagramDesigner.DesignerCanvas;
 
 namespace DiagramDesigner.Controls
 {
@@ -17,42 +18,41 @@ namespace DiagramDesigner.Controls
         private Adorner adorner;
         private Point transformOrigin;
         private ContentControl designerItem;
-        private Canvas canvas;
+        private DesignerCanvas designerCanvas;
+        private List<DesignerItem> selectedItems;
+        private bool isSingleItemResizing;
 
         public ResizeThumb()
         {
-            DragStarted += new DragStartedEventHandler(this.ResizeThumb_DragStarted);
-            DragDelta += new DragDeltaEventHandler(this.ResizeThumb_DragDelta);
-            DragCompleted += new DragCompletedEventHandler(this.ResizeThumb_DragCompleted);
+            DragStarted += ResizeThumb_DragStarted;
+            DragDelta += ResizeThumb_DragDelta;
+            DragCompleted += ResizeThumb_DragCompleted;
         }
 
         private void ResizeThumb_DragStarted(object sender, DragStartedEventArgs e)
         {
-            this.designerItem = this.DataContext as ContentControl;
-
-            if (this.designerItem != null)
+            designerItem = DataContext as ContentControl;
+            if (designerItem != null)
             {
-                this.canvas = VisualTreeHelper.GetParent(this.designerItem) as Canvas;
-
-                if (this.canvas != null)
+                designerCanvas = VisualTreeHelper.GetParent(designerItem) as DesignerCanvas;
+                if (designerCanvas != null)
                 {
-                    this.transformOrigin = this.designerItem.RenderTransformOrigin;
-                    this.rotateTransform = this.designerItem.RenderTransform as RotateTransform;
+                    transformOrigin = designerItem.RenderTransformOrigin;
+                    rotateTransform = designerItem.RenderTransform as RotateTransform;
+                    angle = rotateTransform?.Angle * Math.PI / 180.0 ?? 0.0;
 
-                    if (this.rotateTransform != null)
-                    {
-                        this.angle = this.rotateTransform.Angle * Math.PI / 180.0;
-                    }
-                    else
-                    {
-                        this.angle = 0.0d;
-                    }
+                    selectedItems = designerCanvas.SelectionService.CurrentSelection
+                        .OfType<DesignerItem>()
+                        .ToList();
 
-                    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.canvas);
+                    // Определяем, работает ли с одним элементом или с группой
+                    isSingleItemResizing = selectedItems.Count == 1;
+
+                    AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(designerCanvas);
                     if (adornerLayer != null)
                     {
-                        this.adorner = new SizeAdorner(this.designerItem);
-                        adornerLayer.Add(this.adorner);
+                        adorner = new SizeAdorner(designerItem);
+                        adornerLayer.Add(adorner);
                     }
                 }
             }
@@ -60,125 +60,253 @@ namespace DiagramDesigner.Controls
 
         private void ResizeThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
-            if (this.designerItem != null)
+            if (designerItem == null || designerCanvas == null) return;
+
+            designerCanvas.ClearSnapLines();
+
+            double minLeft, minTop, minDeltaHorizontal, minDeltaVertical;
+            CalculateDragLimits(selectedItems, out minLeft, out minTop, out minDeltaHorizontal, out minDeltaVertical);
+
+            foreach (var item in selectedItems)
             {
-                double deltaVertical, deltaHorizontal;
+                double originalWidth = item.Width;
+                double originalHeight = item.Height;
+                double originalLeft = Canvas.GetLeft(item);
+                double originalTop = Canvas.GetTop(item);
 
-                IEnumerable<DesignerItem> selectedDesignerItems = GetSelectedDesignerItems();
-
-                double minLeft, minTop, minDeltaHorizontal, minDeltaVertical;
-
-                CalculateDragLimits(selectedDesignerItems, out minLeft, out minTop, out minDeltaHorizontal, out minDeltaVertical);
-
-                foreach (var item in selectedDesignerItems)
+                // Обработка вертикального изменения размера
+                if (VerticalAlignment == VerticalAlignment.Top || VerticalAlignment == VerticalAlignment.Bottom)
                 {
-                    double newTop, newLeft;
+                    double deltaVertical = 0;
+                    double newTop = originalTop;
+                    double newHeight = originalHeight;
 
-                    switch (VerticalAlignment)
+                    if (VerticalAlignment == VerticalAlignment.Bottom)
                     {
-                        case System.Windows.VerticalAlignment.Bottom:
-                            deltaVertical = Math.Min(-e.VerticalChange, minDeltaVertical);
-                            newTop = Canvas.GetTop(item) + (this.transformOrigin.Y * deltaVertical * (1 - Math.Cos(-this.angle)));
-                            newLeft = Canvas.GetLeft(item) - deltaVertical * this.transformOrigin.Y * Math.Sin(-this.angle);
+                        deltaVertical = Math.Min(-e.VerticalChange, minDeltaVertical);
+                        newTop = originalTop + (transformOrigin.Y * deltaVertical * (1 - Math.Cos(-angle)));
+                        newHeight = originalHeight - deltaVertical;
 
-                            if (IsWithinBounds(newTop, newLeft, item.Width, item.Height - deltaVertical))
-                            {
-                                Canvas.SetTop(item, newTop);
-                                Canvas.SetLeft(item, newLeft);
-                                item.Height -= deltaVertical;
-                            }
-                            break;
-                        case System.Windows.VerticalAlignment.Top:
-                            deltaVertical = Math.Min(Math.Max(-minTop, e.VerticalChange), minDeltaVertical);
-                            newTop = Canvas.GetTop(item) + deltaVertical * Math.Cos(-this.angle) + (this.transformOrigin.Y * deltaVertical * (1 - Math.Cos(-this.angle)));
-                            newLeft = Canvas.GetLeft(item) + deltaVertical * Math.Sin(-this.angle) - (this.transformOrigin.Y * deltaVertical * Math.Sin(-this.angle));
+                        // Выравнивание только для одиночного элемента
+                        if (isSingleItemResizing)
+                        {
+                            SnapBottomEdge(designerCanvas, item, newTop + newHeight, ref newHeight);
+                        }
+                    }
+                    else if (VerticalAlignment == VerticalAlignment.Top)
+                    {
+                        deltaVertical = Math.Min(Math.Max(-minTop, e.VerticalChange), minDeltaVertical);
+                        newTop = originalTop + deltaVertical * Math.Cos(-angle) +
+                                (transformOrigin.Y * deltaVertical * (1 - Math.Cos(-angle)));
+                        newHeight = originalHeight - deltaVertical;
 
-                            if (IsWithinBounds(newTop, newLeft, item.Width, item.Height - deltaVertical))
-                            {
-                                Canvas.SetTop(item, newTop);
-                                Canvas.SetLeft(item, newLeft);
-                                item.Height -= deltaVertical;
-                            }
-                            break;
-                        default:
-                            break;
+                        // Выравнивание только для одиночного элемента
+                        if (isSingleItemResizing)
+                        {
+                            SnapTopEdge(designerCanvas, item, newTop, ref newTop, ref newHeight);
+                        }
                     }
 
-                    switch (HorizontalAlignment)
+                    if (IsWithinBounds(newTop, originalLeft, originalWidth, newHeight))
                     {
-                        case System.Windows.HorizontalAlignment.Left:
-                            deltaHorizontal = Math.Min(Math.Max(-minLeft, e.HorizontalChange), minDeltaHorizontal);
-                            newTop = Canvas.GetTop(item) + deltaHorizontal * Math.Sin(this.angle) - this.transformOrigin.X * deltaHorizontal * Math.Sin(this.angle);
-                            newLeft = Canvas.GetLeft(item) + deltaHorizontal * Math.Cos(this.angle) + (this.transformOrigin.X * deltaHorizontal * (1 - Math.Cos(this.angle)));
+                        item.Height = newHeight;
+                        Canvas.SetTop(item, newTop);
+                    }
+                }
 
-                            if (IsWithinBounds(newTop, newLeft, item.Width - deltaHorizontal, item.Height))
-                            {
-                                Canvas.SetTop(item, newTop);
-                                Canvas.SetLeft(item, newLeft);
-                                item.Width -= deltaHorizontal;
-                            }
-                            break;
-                        case System.Windows.HorizontalAlignment.Right:
-                            deltaHorizontal = Math.Min(-e.HorizontalChange, minDeltaHorizontal);
-                            newTop = Canvas.GetTop(item) - this.transformOrigin.X * deltaHorizontal * Math.Sin(this.angle);
-                            newLeft = Canvas.GetLeft(item) + (deltaHorizontal * this.transformOrigin.X * (1 - Math.Cos(this.angle)));
+                // Обработка горизонтального изменения размера
+                if (HorizontalAlignment == HorizontalAlignment.Left || HorizontalAlignment == HorizontalAlignment.Right)
+                {
+                    double deltaHorizontal = 0;
+                    double newLeft = originalLeft;
+                    double newWidth = originalWidth;
 
-                            if (IsWithinBounds(newTop, newLeft, item.Width - deltaHorizontal, item.Height))
-                            {
-                                Canvas.SetTop(item, newTop);
-                                Canvas.SetLeft(item, newLeft);
-                                item.Width -= deltaHorizontal;
-                            }
-                            break;
-                        default:
-                            break;
+                    if (HorizontalAlignment == HorizontalAlignment.Left)
+                    {
+                        deltaHorizontal = Math.Min(Math.Max(-minLeft, e.HorizontalChange), minDeltaHorizontal);
+                        newLeft = originalLeft + deltaHorizontal * Math.Cos(angle) +
+                                 (transformOrigin.X * deltaHorizontal * (1 - Math.Cos(angle)));
+                        newWidth = originalWidth - deltaHorizontal;
+
+                        // Выравнивание только для одиночного элемента
+                        if (isSingleItemResizing)
+                        {
+                            SnapLeftEdge(designerCanvas, item, newLeft, ref newLeft, ref newWidth);
+                        }
+                    }
+                    else if (HorizontalAlignment == HorizontalAlignment.Right)
+                    {
+                        deltaHorizontal = Math.Min(-e.HorizontalChange, minDeltaHorizontal);
+                        newWidth = originalWidth - deltaHorizontal;
+
+                        // Выравнивание только для одиночного элемента
+                        if (isSingleItemResizing)
+                        {
+                            SnapRightEdge(designerCanvas, item, newLeft + newWidth, ref newWidth);
+                        }
+                    }
+
+                    if (IsWithinBounds(originalTop, newLeft, newWidth, originalHeight))
+                    {
+                        item.Width = newWidth;
+                        Canvas.SetLeft(item, newLeft);
+                    }
+                }
+            }
+        }
+
+        #region Snap Methods (for single item only)
+        private void SnapBottomEdge(DesignerCanvas canvas, DesignerItem item, double bottomEdge, ref double height)
+        {
+            var otherElements = canvas.GetOtherElements(selectedItems);
+            double bestDiff = canvas.SnapThresholdValue;
+            double bestTarget = bottomEdge;
+            bool foundSnap = false;
+
+            foreach (var other in otherElements)
+            {
+                double otherTop = Canvas.GetTop(other);
+                double otherBottom = otherTop + other.RenderSize.Height;
+
+                foreach (var target in new[] { otherTop, otherBottom })
+                {
+                    double diff = Math.Abs(bottomEdge - target);
+                    if (diff < bestDiff)
+                    {
+                        bestDiff = diff;
+                        bestTarget = target;
+                        foundSnap = true;
                     }
                 }
             }
 
-            e.Handled = true;
+            if (foundSnap)
+            {
+                canvas.DrawSnapLine(AlignmentType.Horizontal, bestTarget);
+                height = bestTarget - Canvas.GetTop(item);
+            }
         }
+
+        private void SnapTopEdge(DesignerCanvas canvas, DesignerItem item, double topEdge, ref double top, ref double height)
+        {
+            var otherElements = canvas.GetOtherElements(selectedItems);
+            double bestDiff = canvas.SnapThresholdValue;
+            double bestTarget = topEdge;
+            bool foundSnap = false;
+
+            foreach (var other in otherElements)
+            {
+                double otherTop = Canvas.GetTop(other);
+                double otherBottom = otherTop + other.RenderSize.Height;
+
+                foreach (var target in new[] { otherTop, otherBottom })
+                {
+                    double diff = Math.Abs(topEdge - target);
+                    if (diff < bestDiff)
+                    {
+                        bestDiff = diff;
+                        bestTarget = target;
+                        foundSnap = true;
+                    }
+                }
+            }
+
+            if (foundSnap)
+            {
+                canvas.DrawSnapLine(AlignmentType.Horizontal, bestTarget);
+                height += top - bestTarget;
+                top = bestTarget;
+            }
+        }
+
+        private void SnapLeftEdge(DesignerCanvas canvas, DesignerItem item, double leftEdge, ref double left, ref double width)
+        {
+            var otherElements = canvas.GetOtherElements(selectedItems);
+            double bestDiff = canvas.SnapThresholdValue;
+            double bestTarget = leftEdge;
+            bool foundSnap = false;
+
+            foreach (var other in otherElements)
+            {
+                double otherLeft = Canvas.GetLeft(other);
+                double otherRight = otherLeft + other.RenderSize.Width;
+
+                foreach (var target in new[] { otherLeft, otherRight })
+                {
+                    double diff = Math.Abs(leftEdge - target);
+                    if (diff < bestDiff)
+                    {
+                        bestDiff = diff;
+                        bestTarget = target;
+                        foundSnap = true;
+                    }
+                }
+            }
+
+            if (foundSnap)
+            {
+                canvas.DrawSnapLine(AlignmentType.Vertical, bestTarget);
+                width += left - bestTarget;
+                left = bestTarget;
+            }
+        }
+
+        private void SnapRightEdge(DesignerCanvas canvas, DesignerItem item, double rightEdge, ref double width)
+        {
+            var otherElements = canvas.GetOtherElements(selectedItems);
+            double bestDiff = canvas.SnapThresholdValue;
+            double bestTarget = rightEdge;
+            bool foundSnap = false;
+
+            foreach (var other in otherElements)
+            {
+                double otherLeft = Canvas.GetLeft(other);
+                double otherRight = otherLeft + other.RenderSize.Width;
+
+                foreach (var target in new[] { otherLeft, otherRight })
+                {
+                    double diff = Math.Abs(rightEdge - target);
+                    if (diff < bestDiff)
+                    {
+                        bestDiff = diff;
+                        bestTarget = target;
+                        foundSnap = true;
+                    }
+                }
+            }
+
+            if (foundSnap)
+            {
+                canvas.DrawSnapLine(AlignmentType.Vertical, bestTarget);
+                width = bestTarget - Canvas.GetLeft(item);
+            }
+        }
+        #endregion
 
         private void ResizeThumb_DragCompleted(object sender, DragCompletedEventArgs e)
         {
-            if (this.adorner != null)
+            if (adorner != null)
             {
-                AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(this.canvas);
-                if (adornerLayer != null)
-                {
-                    adornerLayer.Remove(this.adorner);
-                }
-
-                this.adorner = null;
+                AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(designerCanvas);
+                adornerLayer?.Remove(adorner);
+                adorner = null;
             }
         }
 
-       
-        private IEnumerable<DesignerItem> GetSelectedDesignerItems()
-        {
-            DesignerCanvas designer = VisualTreeHelper.GetParent(this.designerItem) as DesignerCanvas;
-            if (designer != null)
-            {
-                return designer.SelectionService.CurrentSelection.OfType<DesignerItem>();
-            }
-            return Enumerable.Empty<DesignerItem>();
-        }
-
-        
         private bool IsWithinBounds(double top, double left, double width, double height)
         {
-            return top >= 0 && left >= 0 && (top + height) <= this.canvas.ActualHeight && (left + width) <= this.canvas.ActualWidth;
+            return top >= 0 && left >= 0 &&
+                   (top + height) <= designerCanvas.ActualHeight &&
+                   (left + width) <= designerCanvas.ActualWidth;
         }
 
-       
-        private void CalculateDragLimits(IEnumerable<DesignerItem> selectedItems, out double minLeft, out double minTop, out double minDeltaHorizontal, out double minDeltaVertical)
+        private void CalculateDragLimits(IEnumerable<DesignerItem> items,
+                                       out double minLeft, out double minTop,
+                                       out double minDeltaHorizontal, out double minDeltaVertical)
         {
-            minLeft = double.MaxValue;
-            minTop = double.MaxValue;
-            minDeltaHorizontal = double.MaxValue;
-            minDeltaVertical = double.MaxValue;
+            minLeft = minTop = minDeltaHorizontal = minDeltaVertical = double.MaxValue;
 
-            foreach (DesignerItem item in selectedItems)
+            foreach (var item in items)
             {
                 double left = Canvas.GetLeft(item);
                 double top = Canvas.GetTop(item);
@@ -190,8 +318,5 @@ namespace DiagramDesigner.Controls
                 minDeltaHorizontal = Math.Min(minDeltaHorizontal, item.ActualWidth - item.MinWidth);
             }
         }
-
     }
-
-
 }
