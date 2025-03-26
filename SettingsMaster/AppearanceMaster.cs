@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,7 @@ namespace ArsVisual.SettingsMaster
 {
     public class AppearanceMaster
     {
+      
         private const string ConfigFilePath = "ViewConfigs.txt";
 
         public static void SaveColors()
@@ -32,21 +34,43 @@ namespace ArsVisual.SettingsMaster
         {
             if (!File.Exists(ConfigFilePath)) return;
 
-            var lines = File.ReadAllLines(ConfigFilePath);
-            foreach (var line in lines)
+            try
             {
-                var parts = line.Split('=');
-                if (parts.Length == 2)
+                var lines = File.ReadAllLines(ConfigFilePath);
+                foreach (var line in lines)
                 {
-                    var colorName = parts[0];
-                    var colorValue = parts[1];
-
-                    if (ColorConverter.ConvertFromString(colorValue) is Color color)
+                    var parts = line.Split('=');
+                    if (parts.Length == 2)
                     {
-                        Application.Current.Resources[colorName] = new SolidColorBrush(color);
+                        var colorName = parts[0];
+                        var colorValue = parts[1];
+
+                        if (ColorConverter.ConvertFromString(colorValue) is Color color)
+                        {
+                            Application.Current.Resources[colorName] = new SolidColorBrush(color);
+                        }
                     }
                 }
             }
+            catch(Exception ex) 
+            {
+                MessageBox.Show($"Ошибка загрузки цветовых схем: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+              
+
+                RestoreDefaultColors();
+            }
+          
+        }
+
+        private static void RestoreDefaultColors()
+        {
+            
+            
+                Application.Current.Resources["SnapAdornerColor"] = new SolidColorBrush(Colors.Red);
+                Application.Current.Resources["SizeChromeColor"] = new SolidColorBrush(Colors.Blue);
+            
+          
+           
         }
     }
 }
