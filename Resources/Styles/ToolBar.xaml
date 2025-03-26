@@ -5,7 +5,7 @@
     <ResourceDictionary Source="Shared.xaml" />
   </ResourceDictionary.MergedDictionaries>
 
-  <!-- SimpleStyles: ToolBarGroupBox -->
+  
   <Style x:Key="ToolbarGroup"  TargetType="GroupBox">
     <Setter Property="Foreground" Value="{DynamicResource ToolbarTextBrush}"/>
     <Setter Property="Template">
@@ -19,7 +19,7 @@
             <Rectangle Stroke="GhostWhite" StrokeThickness="1" Margin="1,1,-1,0" RadiusX="3" RadiusY="3" Grid.RowSpan="2"/>
             <Border Grid.Row="0"
                     BorderBrush="{StaticResource ToolbarBorderBrush}"
-                    BorderThickness="1,1,1,0"
+                    BorderThickness="0.5"
                     CornerRadius="3,3,0,0" >
               <ContentPresenter Margin="4" />
             </Border>
@@ -40,7 +40,7 @@
     </Setter>
   </Style>
 
-  <!-- SimpleStyles: ToolBar -->
+ 
   <Style x:Key="ToolBarButtonBaseStyle" TargetType="{x:Type ButtonBase}">
     <Setter Property="SnapsToDevicePixels" Value="true"/>
     <Setter Property="OverridesDefaultStyle" Value="true"/>

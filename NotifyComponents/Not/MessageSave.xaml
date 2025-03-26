@@ -92,7 +92,7 @@
     <Border Background="White"  HorizontalAlignment="Stretch"
                 Margin="5,5,5,5"
                 BorderThickness="1,1,1,1"
-                BorderBrush="#FF997137">
+                BorderBrush="#FFD5E0ED">
       <Border.Effect>
         <DropShadowEffect Color="#FF747474" />
       </Border.Effect>
@@ -112,7 +112,7 @@
             <Run Text="{Binding Path=BalloonText, ElementName=me, Mode=Default}"/>
 
     </TextBlock>
-    <Path Fill="#FFFFFFFF"
+        <Path Fill="#FFD5E0ED"
               Stretch="Fill"
               Margin="72,38.2,34,0"
               VerticalAlignment="Top"
@@ -122,9 +122,9 @@
       <Path.Stroke>
         <LinearGradientBrush EndPoint="0.973,0.5"
                                      StartPoint="0.005,0.5">
-          <GradientStop Color="#00ECAD25"
+                    <GradientStop Color="#FFD5E0ED"
                                   Offset="1" />
-          <GradientStop Color="#87ECAD25"
+                    <GradientStop Color="#FFD5E0ED"
                                   Offset="0" />
         </LinearGradientBrush>
       </Path.Stroke>

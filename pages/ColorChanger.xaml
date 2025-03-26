@@ -43,83 +43,55 @@
                         
                     </GroupBox>
                     <GroupBox   Header="Настройка слоя разметки">
-                        <StackPanel Orientation="Horizontal">
-                            <ComboBox x:Name="ColorSizeChromeComboBox"
-                                      Margin="10"
-                                      SelectionChanged="ColorComboBoxSizeChrome_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Rectangle Width="20" Height="20" Margin="5">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Color="{Binding}"/>
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Rectangle Fill="{DynamicResource SizeChromeColor}" Margin="10" Width="50">
-                                
-                            </Rectangle>
-                            <ComboBox x:Name="ColorSnapBrushComboBox"
-            Margin="10"
-            SelectionChanged="ColorSnapBrushComboBox_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Rectangle Width="20" Height="20" Margin="5">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Color="{Binding}"/>
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Rectangle Fill="{DynamicResource SnapAdornerColor}" Margin="10" Width="50">
+                        
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Margin="2" HorizontalAlignment="Center">Слой масштабирования</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="ColorSizeChromeComboBox"
+             Margin="5"
+             SelectionChanged="ColorComboBoxSizeChrome_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Rectangle Width="20" Height="20" Margin="5">
+                                                    <Rectangle.Fill>
+                                                        <SolidColorBrush Color="{Binding}"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Rectangle Fill="{DynamicResource SizeChromeColor}" Margin="10" Width="50">
 
-                            </Rectangle>
-                            <ComboBox x:Name="ColorItemBrushComboBox"
-            Margin="10"
-            SelectionChanged="ColorComboBoxItemBrush_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Rectangle Width="20" Height="20" Margin="5">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Color="{Binding}"/>
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Rectangle Fill="{DynamicResource ItemBrush}" Margin="10" Width="50">
-                                
-                            </Rectangle>
-                            <ComboBox x:Name="ColorItemOutlineComboBox"
-Margin="10"
-SelectionChanged="ColorComboBoxItemOutline_SelectionChanged">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                            <Rectangle Width="20" Height="20" Margin="5">
-                                                <Rectangle.Fill>
-                                                    <SolidColorBrush Color="{Binding}"/>
-                                                </Rectangle.Fill>
-                                            </Rectangle>
-                                            <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                            </ComboBox>
-                            <Rectangle Fill="{DynamicResource ItemStroke}" Margin="10" Width="50">
+                                </Rectangle>
+                            </StackPanel>
+                            <TextBlock Margin="2" HorizontalAlignment="Center">Слой линий выравнивания</TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <ComboBox x:Name="ColorSnapBrushComboBox"
+Margin="5"
+SelectionChanged="ColorSnapBrushComboBox_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Rectangle Width="20" Height="20" Margin="5">
+                                                    <Rectangle.Fill>
+                                                        <SolidColorBrush Color="{Binding}"/>
+                                                    </Rectangle.Fill>
+                                                </Rectangle>
+                                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                                <Rectangle Fill="{DynamicResource SnapAdornerColor}" Margin="10" Width="50">
 
-                            </Rectangle>
+                                </Rectangle>
+                            </StackPanel>
+                          
+                           
+                         
                         </StackPanel>
 
                     </GroupBox>

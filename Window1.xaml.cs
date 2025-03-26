@@ -1,4 +1,5 @@
-﻿using AutoUpdaterDotNET;
+﻿using ArsVisual.SettingsMaster;
+using AutoUpdaterDotNET;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,6 +10,7 @@ namespace DiagramDesigner
 {
     public partial class Window1 : Window
     {
+        AppearanceMaster app = new();
         public static Dictionary<TabItem, DesignerCanvas> _pageCanvases = new Dictionary<TabItem, DesignerCanvas>();
         public Dictionary<TabItem, object> _pageStates = new Dictionary<TabItem, object>();
         public static TabControl MainTabControlReference { get; private set; }
@@ -16,6 +18,7 @@ namespace DiagramDesigner
         public Window1()
         {
             InitializeComponent();
+            AppearanceMaster.LoadColors();
             AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
           
             // Привязка первой вкладки к логике

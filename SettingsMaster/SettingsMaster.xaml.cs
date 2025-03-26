@@ -29,27 +29,27 @@ namespace ArsVisual.SettingsMaster
         {
             InitializeComponent();
 
+            AppearanceMaster.LoadColors();
 
-           
         }
 
-       
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            AppearanceMaster.SaveColors(); 
+        }
 
         private void Palitra(object sender, RoutedEventArgs e)
         {
             var colorChangerPage = new pages.ColorChanger();
-            colorChangerPage.ColorItemStrokeSelected += OnColorItemStrokeSelected;
+           
             colorChangerPage.ColorSizeChromeSelected += OnColorSizeChromeSelected;
-            colorChangerPage.ColorItemBrushSelected += OnColorItemBrushSelected;
+           
             colorChangerPage.ColorSnapBrushSelected += OnColorSnapBrushSelected;
             OCHKO.Navigate(colorChangerPage);
         }
 
-        private void OnColorItemStrokeSelected(Color selectedColor)
-        {
-           
-            Application.Current.Resources["StrokeElement"] = new SolidColorBrush(selectedColor);
-        }
+     
         private void OnColorSizeChromeSelected(Color selectedColor)
         {
            
@@ -57,12 +57,7 @@ namespace ArsVisual.SettingsMaster
           
         }
 
-        private void OnColorItemBrushSelected(Color selectedColor)
-        {
-           
-            Application.Current.Resources["FillElement"] = new SolidColorBrush(selectedColor);
-           
-        }
+      
         private void OnColorSnapBrushSelected(Color selectedColor)
         {
 

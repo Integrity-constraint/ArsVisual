@@ -5,7 +5,7 @@
         xmlns:c="clr-namespace:DiagramDesigner.Controls"
         WindowStartupLocation="CenterScreen"
         Title="ArsVisual"
-        Height="850" Width="1000" WindowState="Maximized" Icon="/icons/logo.png" Background="#B0C4DE">
+        Height="850" Width="1000" WindowState="Maximized" Icon="/icons/logo.png" Background="#FFE3E6EC">
 
     <Window.Resources>
         <ContextMenu x:Key="DesignerCanvasContextMenu">
@@ -46,7 +46,7 @@
                 
                 <Expander Header="Объекты Active Directory " Content="{StaticResource NetStencils}" IsExpanded="True"/>
                 <Expander Header="Сценарий выполнения UML " Content="{StaticResource UMLPosl}" IsExpanded="True"/>
-                <Expander Header="Описания рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"/>
+                <Expander Header="Описание рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"/>
                     
 
 
@@ -97,7 +97,7 @@
                     </TabItem>
 
                     <!-- Вкладка с плюсом -->
-                    <TabItem x:Name="AddTabButton" Header="+">
+                    <TabItem Background="White" x:Name="AddTabButton" Header="+">
                         <TabItem.HeaderTemplate>
                             <DataTemplate>
                                 <TextBlock Text="+" FontSize="16" FontWeight="Bold"/>

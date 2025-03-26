@@ -20,7 +20,7 @@ namespace ArsVisual.pages
     /// </summary>
     public partial class ColorChanger : Page
     {
-       
+
         public event Action<Color> ColorItemStrokeSelected;
         public event Action<Color> ColorSizeChromeSelected;
         public event Action<Color> ColorItemBrushSelected;
@@ -34,27 +34,37 @@ namespace ArsVisual.pages
 
         private void LoadColors()
         {
-            
             var colors = new List<Color>
-            {
-                Colors.Red,
-                Colors.Green,
-                Colors.Blue,
-                Colors.Yellow,
-                Colors.Orange,
-                Colors.Purple
-            };
-
+        {
+            Colors.Red,
+            Colors.Green,
+            Colors.Blue,
+            Colors.Yellow,
+            Colors.Orange,
+            Colors.Purple,
+            Colors.White,
+            Colors.Black
+        };
 
             ColorSizeChromeComboBox.ItemsSource = colors;
             ColorSnapBrushComboBox.ItemsSource = colors;
-            ColorItemBrushComboBox.ItemsSource= colors;
-            ColorItemOutlineComboBox.ItemsSource=colors;
+           
+
+            // Установка текущих значений из ресурсов
+            SetCurrentColor(ColorSizeChromeComboBox, "SizeChromeColor");
+            SetCurrentColor(ColorSnapBrushComboBox, "SnapAdornerColor");
+           
         }
 
-       
 
-       
+
+        private void SetCurrentColor(ComboBox comboBox, string resourceKey)
+        {
+            if (Application.Current.Resources[resourceKey] is SolidColorBrush brush)
+            {
+                comboBox.SelectedItem = brush.Color;
+            }
+        }
 
         private void ColorComboBoxSizeChrome_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -66,23 +76,6 @@ namespace ArsVisual.pages
 
         }
 
-        private void ColorComboBoxItemBrush_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ColorItemBrushComboBox.SelectedItem is Color selectedColor)
-            {
-
-                ColorItemBrushSelected?.Invoke(selectedColor);
-            }
-        }
-
-        private void ColorComboBoxItemOutline_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (ColorItemOutlineComboBox.SelectedItem is Color selectedColor)
-            {
-
-                ColorItemStrokeSelected?.Invoke(selectedColor);
-            }
-        }
 
         private void ColorSnapBrushComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
