@@ -1,4 +1,4 @@
-﻿using DiagramDesigner.Controls;
+﻿using ArsVisual.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows;
 
-namespace DiagramDesigner.Adorners
+namespace ArsVisual.Adorners
 {
     public class SizeAdorner : Adorner
     {

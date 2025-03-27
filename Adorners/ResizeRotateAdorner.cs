@@ -8,7 +8,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows;
 
-namespace DiagramDesigner.Adorners
+namespace ArsVisual.Adorners
 {
     public class ResizeRotateAdorner : Adorner
     {

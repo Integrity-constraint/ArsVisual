@@ -21,12 +21,12 @@ using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows.Controls.Primitives;
 using ArsVisual.NotifyComponents.Error;
 using System.Security.Cryptography;
-using static DiagramDesigner.Connection;
+using static ArsVisual.Connection;
 using ArsVisual.Helpers;
 
 
 
-namespace DiagramDesigner
+namespace ArsVisual
 {
     public partial class DesignerCanvas
     {

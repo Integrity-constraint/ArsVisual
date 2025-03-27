@@ -38,6 +38,8 @@
             </GradientStopCollection>
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
+    <SolidColorBrush x:Key="ToolbarSelectedBackgroundBrush" Color="#FFD5E0ED"/>
+    <!-- 
     <LinearGradientBrush x:Key="ToolbarSelectedBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientBrush.GradientStops>
             <GradientStopCollection>
@@ -50,7 +52,7 @@
             </GradientStopCollection>
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
-
+    -->
     <LinearGradientBrush x:Key="ToolbarPressedBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientBrush.GradientStops>
             <GradientStopCollection>

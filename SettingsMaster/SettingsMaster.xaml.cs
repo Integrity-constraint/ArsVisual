@@ -1,5 +1,5 @@
 ﻿using ArsVisual.pages;
-using DiagramDesigner;
+using ArsVisual;
 using System;
 using System.Collections.Generic;
 using System.Linq;

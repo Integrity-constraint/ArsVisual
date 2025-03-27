@@ -5,7 +5,7 @@ using System.Text;
 using System.Windows.Controls;
 using System.Windows;
 
-namespace DiagramDesigner.Controls
+namespace ArsVisual.Controls
 {
     public class ResizeChrome : Control
     {

@@ -4,10 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArsVisual.SettingsMaster"
-        
+        AllowsTransparency="True"
         mc:Ignorable="d"
-        Title="SettingsMaster" WindowStyle="None" Height="450" Width="600">
+        Title="SettingsMaster" Background="Transparent" WindowStyle="None" Height="450" Width="600">
 
+    <Border BorderBrush="Black" Background="White" BorderThickness="0.5" CornerRadius="15">
+        
+   
     <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -17,7 +20,7 @@
         </Grid.RowDefinitions>
 
         
-        <Grid  Grid.Row="0" Background="Transparent" MouseLeftButtonDown="Drag">
+        <Grid Grid.Row="0" Margin="5,5,5,0"  Background="White" MouseLeftButtonDown="Drag">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -29,25 +32,29 @@
                        Margin="10, 5" 
                        VerticalAlignment="Center" />
 
-            
-            <Button Grid.Column="1" 
-                    Click="closesettings" 
-                    BorderBrush="Transparent" 
-                    Background="Transparent" 
-                    Padding="2">
-                <Image Height="20" Width="20" Source="/icons/close.png" />
-            </Button>
-        </Grid>
+
+                <Button VerticalAlignment="Top" HorizontalAlignment="Center" Cursor="Hand" Style="{StaticResource RoundIconButton}" Grid.Column="1" 
+        Click="closesettings" 
+        BorderBrush="Transparent" 
+        Background="Transparent" 
+        Padding="0" 
+        Width="16" Height="16">
+                   
+                        <Image Source="/icons/close.png" 
+               Width="16" Height="16" />
+                    
+                </Button>
+            </Grid>
 
         
-        <Grid Grid.Row="1">
+        <Grid Background="Transparent" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
             
-            <GroupBox Grid.Column="0" Header="Параметры">
+            <GroupBox Margin="4,0,0,5" Grid.Column="0" Header="Параметры">
                 <TreeView>
                     <TreeViewItem Header="Общее">
                         <TreeViewItem Header="Цвета" Selected="Palitra" />
@@ -58,9 +65,9 @@
             </GroupBox>
 
             
-            <Frame NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
+            <Frame Background="White" NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
         </Grid>
     </Grid>
 
-
+    </Border>
 </Window>

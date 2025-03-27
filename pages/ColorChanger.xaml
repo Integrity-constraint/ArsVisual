@@ -16,78 +16,27 @@
                     <RowDefinition Height="19*"/>
                 </Grid.RowDefinitions>
                 <StackPanel >
-                    <TextBlock Margin="10">
-                        Стандартные темы
-                    </TextBlock>
-                    <GroupBox   Header="Предложенные темы">
-                        <StackPanel Orientation="Horizontal">
-                            <GroupItem Margin="10">
-                                <CheckBox Content="Арбуз"></CheckBox>
-                                
-                            </GroupItem>
-                            <GroupItem Margin="10">
-                            <CheckBox Content="1с"></CheckBox>
-                            </GroupItem>
-                        </StackPanel>
-                    </GroupBox>
-                    <GroupBox   Header="Настройка стилей кнопок">
-                        <StackPanel Orientation="Horizontal">
-                            <GroupItem Margin="10">
-                                <CheckBox Content="Арбуз"></CheckBox>
-
-                            </GroupItem>
-                            <GroupItem Margin="10">
-                                <CheckBox Content="1с"></CheckBox>
-                            </GroupItem>
-                        </StackPanel>
-                        
-                    </GroupBox>
+                   
                     <GroupBox   Header="Настройка слоя разметки">
                         
                         <StackPanel Orientation="Vertical">
                             <TextBlock Margin="2" HorizontalAlignment="Center">Слой масштабирования</TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox x:Name="ColorSizeChromeComboBox"
-             Margin="5"
-             SelectionChanged="ColorComboBoxSizeChrome_SelectionChanged">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Rectangle Width="20" Height="20" Margin="5">
-                                                    <Rectangle.Fill>
-                                                        <SolidColorBrush Color="{Binding}"/>
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                                <Rectangle Fill="{DynamicResource SizeChromeColor}" Margin="10" Width="50">
+                            <StackPanel Margin="10" HorizontalAlignment="Center" Orientation="Horizontal">
+                               
+                              
 
-                                </Rectangle>
+
+                                <Border   MouseDown="ChangeResizeStyle" MinHeight="50" Width="100" CornerRadius="10" Background="{DynamicResource SizeChromeColor}">
+                                    
+                                </Border>
                             </StackPanel>
                             <TextBlock Margin="2" HorizontalAlignment="Center">Слой линий выравнивания</TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <ComboBox x:Name="ColorSnapBrushComboBox"
-Margin="5"
-SelectionChanged="ColorSnapBrushComboBox_SelectionChanged">
-                                    <ComboBox.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Rectangle Width="20" Height="20" Margin="5">
-                                                    <Rectangle.Fill>
-                                                        <SolidColorBrush Color="{Binding}"/>
-                                                    </Rectangle.Fill>
-                                                </Rectangle>
-                                                <TextBlock Text="{Binding}" VerticalAlignment="Center" Margin="5"/>
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </ComboBox.ItemTemplate>
-                                </ComboBox>
-                                <Rectangle Fill="{DynamicResource SnapAdornerColor}" Margin="10" Width="50">
+                            <StackPanel Margin="10" HorizontalAlignment="Center" Orientation="Horizontal">
 
-                                </Rectangle>
+
+                                <Border MouseDown="ChangeSnapeStyle" MinHeight="50" Width="100" CornerRadius="10" Background="{DynamicResource SnapAdornerColor}">
+
+                                </Border>
                             </StackPanel>
                           
                            

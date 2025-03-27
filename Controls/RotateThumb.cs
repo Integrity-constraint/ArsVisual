@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System;
 
-namespace DiagramDesigner.Controls
+namespace ArsVisual.Controls
 {
    
     public class RotateThumb : Thumb

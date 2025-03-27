@@ -8,7 +8,7 @@ using System.Windows.Media;
 using System.Windows;
 using ArsVisual.NotifyComponents.Error;
 
-namespace DiagramDesigner
+namespace ArsVisual
 {
     public class ZoomBox : Control
     {

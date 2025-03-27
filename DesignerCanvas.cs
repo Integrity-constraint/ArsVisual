@@ -10,7 +10,7 @@ using System.Windows.Markup;
 using System.Xml;
 using ArsVisual.Adorners;
 
-namespace DiagramDesigner
+namespace ArsVisual
 {
     public partial class DesignerCanvas : Canvas
     {

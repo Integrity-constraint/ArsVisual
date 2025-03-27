@@ -7,12 +7,12 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using ArsVisual;
-using DiagramDesigner.Controls;
+using ArsVisual.Controls;
 using Brush = System.Windows.Media.Brush;
 using FontFamily = System.Windows.Media.FontFamily;
 
 
-namespace DiagramDesigner
+namespace ArsVisual
 {
     [TemplatePart(Name = "PART_DragThumb", Type = typeof(MoveThumb))]
     [TemplatePart(Name = "PART_RotateThumb", Type = typeof(RotateThumb))]

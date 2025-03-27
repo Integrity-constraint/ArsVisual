@@ -8,7 +8,7 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows;
 
-namespace DiagramDesigner.Adorners
+namespace ArsVisual.Adorners
 {
     public class SizeChrome : Control
     {

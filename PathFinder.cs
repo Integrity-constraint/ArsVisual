@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DiagramDesigner
+namespace ArsVisual
 {
     
     internal class PathFinder

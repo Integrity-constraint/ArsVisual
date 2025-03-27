@@ -1,8 +1,8 @@
-﻿<Window x:Class="DiagramDesigner.Window1"
+﻿<Window x:Class="ArsVisual.Window1"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:s="clr-namespace:DiagramDesigner"
-        xmlns:c="clr-namespace:DiagramDesigner.Controls"
+        xmlns:s="clr-namespace:ArsVisual"
+        xmlns:c="clr-namespace:ArsVisual.Controls"
         WindowStartupLocation="CenterScreen"
         Title="ArsVisual"
         Height="850" Width="1000" WindowState="Maximized" Icon="/icons/logo.png" Background="#FFE3E6EC">
@@ -46,8 +46,8 @@
                 
                 <Expander Header="Объекты Active Directory " Content="{StaticResource NetStencils}" IsExpanded="True"/>
                 <Expander Header="Сценарий выполнения UML " Content="{StaticResource UMLPosl}" IsExpanded="True"/>
-                <Expander Header="Описание рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"/>
-                    
+                    <Expander  Header="Описание рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"></Expander>
+
 
 
 
@@ -59,7 +59,7 @@
             <!-- GridSplitter -->
             <GridSplitter Focusable="False" Width="2" Background="LightGray"
                     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-            <!-- Designer -->
+          
             <!-- Designer -->
             <GroupBox Grid.Column="1" Header="Диаграмма">
                 <TabControl x:Name="MainTabControl" SelectionChanged="PageSwitch">

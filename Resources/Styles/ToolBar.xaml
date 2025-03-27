@@ -19,14 +19,14 @@
             <Rectangle Stroke="GhostWhite" StrokeThickness="1" Margin="1,1,-1,0" RadiusX="3" RadiusY="3" Grid.RowSpan="2"/>
             <Border Grid.Row="0"
                     BorderBrush="{StaticResource ToolbarBorderBrush}"
-                    BorderThickness="0.5"
+                    BorderThickness="0.2"
                     CornerRadius="3,3,0,0" >
               <ContentPresenter Margin="4" />
             </Border>
             <Border Grid.Row="1"
                     Background="{StaticResource ToolbarGroupHeaderBrush}"
                     BorderBrush="{StaticResource ToolbarBorderBrush}"
-                    BorderThickness="1,0,1,1"
+                    BorderThickness="0.5"
                     CornerRadius="0,0,3,3" >
               <ContentPresenter HorizontalAlignment="Center"
                                 Margin="4"
@@ -209,7 +209,7 @@
         <ControlTemplate TargetType="{x:Type ToolBar}">
           <Border x:Name="Border"
             CornerRadius="2"
-            BorderThickness="1"
+            
             Background="{StaticResource ToolbarBrush}"
             BorderBrush="{StaticResource ToolbarDarkBorderBrush}">
             <DockPanel >

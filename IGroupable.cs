@@ -1,6 +1,7 @@
 ﻿using System;
 
-namespace DiagramDesigner
+namespace ArsVisual 
+
 {
     public interface IGroupable
     {

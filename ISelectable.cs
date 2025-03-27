@@ -1,5 +1,5 @@
 ﻿
-namespace DiagramDesigner
+namespace ArsVisual
 {
     
     public interface ISelectable

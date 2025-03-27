@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace DiagramDesigner
+namespace ArsVisual
 {
     public partial class Window1 : Window
     {

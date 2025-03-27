@@ -8,7 +8,8 @@ using System.Windows;
 using ArsVisual.NotifyComponents.Not;
 using System.Reflection;
 
-namespace DiagramDesigner
+namespace ArsVisual 
+
 {
     /// <summary>
     /// Interaction logic for App.xaml

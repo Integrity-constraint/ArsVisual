@@ -1,4 +1,4 @@
-﻿using DiagramDesigner.Adorners;
+﻿using ArsVisual.Adorners;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows;
 
-namespace DiagramDesigner
+namespace ArsVisual
 {
     public class DesignerItemDecorator : Control
     {

@@ -3,7 +3,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace DiagramDesigner.Controls
+namespace ArsVisual.Controls
 {
     public class RelativePositionPanel : Panel
     {

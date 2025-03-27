@@ -1,4 +1,4 @@
-﻿using DiagramDesigner.Adorners;
+﻿using ArsVisual.Adorners;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -7,9 +7,9 @@ using System.Windows.Documents;
 using System.Windows.Media;
 using System.Linq;
 using System.Collections.Generic;
-using static DiagramDesigner.DesignerCanvas;
+using static ArsVisual.DesignerCanvas;
 
-namespace DiagramDesigner.Controls
+namespace ArsVisual.Controls
 {
     public class ResizeThumb : Thumb
     {

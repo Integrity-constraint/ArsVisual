@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ArsVisual.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -46,14 +48,9 @@ namespace ArsVisual.pages
             Colors.Black
         };
 
-            ColorSizeChromeComboBox.ItemsSource = colors;
-            ColorSnapBrushComboBox.ItemsSource = colors;
-           
+         
 
-            // Установка текущих значений из ресурсов
-            SetCurrentColor(ColorSizeChromeComboBox, "SizeChromeColor");
-            SetCurrentColor(ColorSnapBrushComboBox, "SnapAdornerColor");
-           
+            
         }
 
 
@@ -66,24 +63,33 @@ namespace ArsVisual.pages
             }
         }
 
-        private void ColorComboBoxSizeChrome_SelectionChanged(object sender, SelectionChangedEventArgs e)
+       
+
+        private void ChangeResizeStyle(object sender, MouseButtonEventArgs e)
         {
-            if (ColorSizeChromeComboBox.SelectedItem is Color selectedColor)
-            {
-
-                ColorSizeChromeSelected?.Invoke(selectedColor);
-            }
-
+            ChangeColor("SizeChromeColor");
+        }
+        private void ChangeSnapeStyle(object sender, MouseButtonEventArgs e)
+        {
+            ChangeColor("SnapAdornerColor");
         }
 
-
-        private void ColorSnapBrushComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ChangeColor(string resourceKey)
         {
-            if (ColorSnapBrushComboBox.SelectedItem is Color selectedColor)
+            if (Application.Current.Resources[resourceKey] is SolidColorBrush currentBrush)
             {
+               
+                if (ColorPickerWindow.ShowColorPicker(out Color selectedColor, initialColor: currentBrush.Color))
+                {
 
-                ColorSnapBrushSelected?.Invoke(selectedColor);
+                   
+                    var newBrush = new SolidColorBrush(selectedColor);
+                    Application.Current.Resources[resourceKey] = newBrush;
+
+
+                }
             }
         }
+      
     }
 }
