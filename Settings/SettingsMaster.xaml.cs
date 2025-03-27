@@ -16,14 +16,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ArsVisual.SettingsMaster
+
+
+namespace ArsVisual.Settings
 {
     /// <summary>
     /// Логика взаимодействия для SettingsMaster.xaml
     /// </summary>
     public partial class SettingsMaster : Window
     {
-        private Window1 _window1;
+        
 
         public SettingsMaster()
         {
@@ -46,7 +48,7 @@ namespace ArsVisual.SettingsMaster
             colorChangerPage.ColorSizeChromeSelected += OnColorSizeChromeSelected;
            
             colorChangerPage.ColorSnapBrushSelected += OnColorSnapBrushSelected;
-            OCHKO.Navigate(colorChangerPage);
+           OCHKO.Navigate(colorChangerPage);
         }
 
      

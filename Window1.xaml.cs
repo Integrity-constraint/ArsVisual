@@ -1,4 +1,5 @@
-﻿using ArsVisual.SettingsMaster;
+﻿using ArsVisual.Settings;
+
 using AutoUpdaterDotNET;
 using System;
 using System.Collections.Generic;

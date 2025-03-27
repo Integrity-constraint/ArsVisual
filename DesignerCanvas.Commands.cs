@@ -15,7 +15,7 @@ using System.Xml;
 using System.Xml.Linq;
 using ArsVisual.NotifyComponents.Not;
 using ArsVisual.pages;
-using ArsVisual.SettingsMaster;
+using ArsVisual.Settings;
 using Microsoft.Win32;
 using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows.Controls.Primitives;
@@ -23,6 +23,7 @@ using ArsVisual.NotifyComponents.Error;
 using System.Security.Cryptography;
 using static ArsVisual.Connection;
 using ArsVisual.Helpers;
+using ArsVisual.Settings;
 
 
 
@@ -191,8 +192,8 @@ namespace ArsVisual
 
         private void opensettings(object sender, ExecutedRoutedEventArgs e)
         {
-            Window settings = new SettingsMaster();
-            settings.Show();
+            Window settings = new  SettingsMaster();
+          settings.Show();
         }
 
         #endregion

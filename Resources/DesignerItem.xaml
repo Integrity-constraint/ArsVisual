@@ -56,13 +56,13 @@ CommandParameter="Purple">
             </MenuItem>
 
             <MenuItem Header="Обводка" >
-               
-                    <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+
+                <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Green">
-                        <MenuItem.Icon>
-                            <Rectangle Width="16" Height="16" Fill="Green"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Green"/>
+                    </MenuItem.Icon>
+                </MenuItem>
                 <MenuItem Header="Белый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="White">
                     <MenuItem.Icon>
@@ -71,41 +71,41 @@ CommandParameter="White">
                 </MenuItem>
                 <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
  CommandParameter="Red">
-                        <MenuItem.Icon>
-                            <Rectangle Width="16" Height="16" Fill="Red"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Red"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Yellow">
-                        <MenuItem.Icon>
-                            <Rectangle Width="16" Height="16" Fill="Yellow"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                    </MenuItem.Icon>
+                </MenuItem>
 
-                    <MenuItem Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+                <MenuItem Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Black">
-                        <MenuItem.Icon>
-                            <Rectangle Width="16" Height="16" Fill="Black"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Black"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Purple">
-                        <MenuItem.Icon>
-                            <Rectangle Width="16" Height="16" Fill="Purple"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Оранжевый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Purple"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+                <MenuItem Header="Оранжевый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Purple">
-                        <MenuItem.Icon>
-                            <Rectangle Width="16" Height="16" Fill="Orange"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                
-                
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16" Fill="Orange"/>
+                    </MenuItem.Icon>
+                </MenuItem>
+
+
             </MenuItem>
         </MenuItem>
-        
-        
+
+
 
 
         <MenuItem Header="Размер шрифта">
@@ -239,18 +239,18 @@ CommandParameter="Purple">
         </MenuItem>
     </ContextMenu>
 
-   
+
 
 
     <!-- Connector Style -->
-    <Style TargetType="{x:Type s:Connector}">
+    <Style TargetType="{x:Type m:Connector}">
         <Setter Property="Width" Value="8"/>
         <Setter Property="Height" Value="8"/>
         <Setter Property="Cursor" Value="Cross"/>
         <Setter Property="SnapsToDevicePixels" Value="true"/>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type s:Connector}">
+                <ControlTemplate TargetType="{x:Type m:Connector}">
                     <Grid>
                         <!-- transparent extra space makes connector easier to hit -->
                         <Rectangle Fill="Transparent" Margin="-2"/>
@@ -270,7 +270,7 @@ CommandParameter="Purple">
             <m:Connector x:Name="Bottom" Orientation="Bottom" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         </Grid>
     </ControlTemplate>
-    
+
     <Style x:Key="CornerResizeThumbStyle" TargetType="{x:Type c:ResizeThumb}">
         <Setter Property="Template">
             <Setter.Value>
@@ -285,19 +285,19 @@ CommandParameter="Purple">
     <ControlTemplate x:Key="ResizeDecoratorTemplate" TargetType="{x:Type Control}">
         <Grid Opacity="0.7" SnapsToDevicePixels="true">
             <!-- Верхний ResizeThumb -->
-            <m:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
-             m   VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
+            <c:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 -4 0 0"
+    VerticalAlignment="Top" HorizontalAlignment="Stretch"/>
             <!-- Левый ResizeThumb -->
-            <m:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
-             m   VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
+            <c:ResizeThumb Width="3" Cursor="SizeWE" Margin="-4 0 0 0"
+    VerticalAlignment="Stretch" HorizontalAlignment="Left"/>
             <!-- Правый ResizeThumb -->
-            <m:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
-             m   VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
+            <c:ResizeThumb Width="3" Cursor="SizeWE" Margin="0 0 -4 0"
+     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
             <!-- Нижний ResizeThumb -->
-            <m:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
-             m   VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
+            <c:ResizeThumb Height="3" Cursor="SizeNS" Margin="0 0 0 -4"
+     VerticalAlignment="Bottom" HorizontalAlignment="Stretch"/>
             <!-- Угловые ResizeThumb -->
-            <m:ResizeThumb Width="8" Height="8" Cursor="SizeNWSE" Margin="-6 -6 0 0"
+            <c:ResizeThumb Width="8" Height="8" Cursor="SizeNWSE" Margin="-6 -6 0 0"
                  VerticalAlignment="Top" HorizontalAlignment="Left"
                  Style="{StaticResource CornerResizeThumbStyle}"/>
             <c:ResizeThumb Width="8" Height="8" Cursor="SizeNESW" Margin="0 -6 -6 0"
@@ -313,10 +313,10 @@ CommandParameter="Purple">
     </ControlTemplate>
 
     <!-- DragThumb Default Template -->
-    <Style TargetType="{x:Type m:MoveThumb}">
+    <Style TargetType="{x:Type c:MoveThumb}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type m:MoveThumb}">
+                <ControlTemplate TargetType="{x:Type c:MoveThumb}">
                     <Rectangle Fill="Transparent"/>
                 </ControlTemplate>
             </Setter.Value>
@@ -324,7 +324,7 @@ CommandParameter="Purple">
     </Style>
 
     <!-- RotateThumb Default Template -->
-    <Style TargetType="{x:Type m:RotateThumb}">
+    <Style TargetType="{x:Type c:RotateThumb}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type c:RotateThumb}">
@@ -341,7 +341,7 @@ CommandParameter="Purple">
         <Setter Property="RotationAngle"  Value="0"></Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type s:DesignerItem}">
+                <ControlTemplate TargetType="{x:Type m:DesignerItem}">
                     <Grid DataContext="{Binding RelativeSource={RelativeSource TemplatedParent}}"
                       ContextMenu="{StaticResource DesignerItemContextMenu}">
 
@@ -373,7 +373,7 @@ CommandParameter="Purple">
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="True" Binding="{Binding RelativeSource={RelativeSource Self},Path=IsGroup}">
                             <Setter TargetName="PART_DragThumb" Property="Visibility" Value="Collapsed"/>
-                           
+
                         </DataTrigger>
                         <MultiDataTrigger>
                             <MultiDataTrigger.Conditions>
@@ -397,6 +397,6 @@ CommandParameter="Purple">
             </Setter.Value>
         </Setter>
     </Style>
-   
+
 
 </ResourceDictionary>
