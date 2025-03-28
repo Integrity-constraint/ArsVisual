@@ -7,387 +7,224 @@
         <ResourceDictionary Source="Styles/ToolBar.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <ToolBar  BorderThickness="0.5" x:Key="MyToolbar" Height="150">
-        <!--Файл-->
-        <GroupBox Header="Файл" Style="{StaticResource ToolbarGroup}" Foreground="Black" Margin="5,3,3,3">
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Margin="3" Width="55" Style="{StaticResource ToolBarButtonBaseStyle}"
-                        HorizontalContentAlignment="Center"
-                        Command="{x:Static ApplicationCommands.New}"
-                        CommandTarget="{Binding ElementName=MyDesigner}">
-                    <Button.Content>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Image Source="Images/GenericDocument.png" Width="45"/>
-                            <TextBlock Grid.Row="1" Text="Новый" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Button.Content>
+    <ToolBar BorderThickness="0.5" x:Key="MyToolbar" Height="100">
+        <!-- Редактирование -->
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static ApplicationCommands.Paste}"
+                CommandTarget="{Binding ElementName=MyDesigner}">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Image Source="Images/Paste.png" Height="56" />
+                        <TextBlock Text="Вставить" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
+                    </StackPanel>
                 </Button>
-                <StackPanel Orientation="Vertical" Margin="0,2,0,2">
-                    <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static ApplicationCommands.Open}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition/>
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/OpenFolder.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Открыть" VerticalAlignment="Center"  Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
+
+                <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static ApplicationCommands.Copy}"
+                CommandTarget="{Binding ElementName=MyDesigner}">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Image Height="56"  Source="Images/Copy.png" />
+                        <TextBlock Text="Копировать" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static ApplicationCommands.Cut}"
+                CommandTarget="{Binding ElementName=MyDesigner}">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Image Height="56" Source="Images/Scissors.png" />
+                        <TextBlock Text="Вырезать" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static ApplicationCommands.Delete}"
+                CommandTarget="{Binding ElementName=MyDesigner}">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Image Height="56" Source="Images/Delete.png" />
+                        <TextBlock Text="Удалить" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <TextBlock Text="Редактирование:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
+        </StackPanel>
+
+        <!-- Разделитель -->
+        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="Gray" Margin="5,0"/>
+
+        <!-- Выравнивание -->
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <!-- Горизонтальное выравнивание (3 сверху) -->
                     <StackPanel Orientation="Horizontal">
-                        <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                       Style="{StaticResource ToolBarButtonBaseStyle}"
-                       Command="{x:Static ApplicationCommands.Save}"
-                       CommandTarget="{Binding ElementName=MyDesigner}">
-                                 <Button.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="Images/Save.png" Width="16"/>
-                                
-                              <!--  <TextBlock Margin="3,0,3,0" Text="Сохранить" VerticalAlignment="Center" Grid.Column="1"/> -->
-                                </Grid>
-                            </Button.Content>
+                        <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                        Command="{x:Static s:DesignerCanvas.AlignLeft}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        ToolTip="Выровнять по левому краю">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Image Source="Images/AlignObjectsLeft.png" Width="20"/>
+                                <TextBlock Text="Влево" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                            </StackPanel>
                         </Button>
 
-                        <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                 Style="{StaticResource ToolBarButtonBaseStyle}"
-                 Command="{x:Static s:DesignerCanvas.SaveTOpng}"
-                 CommandTarget="{Binding ElementName=MyDesigner}">
-                            <Button.Content>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Image Source="Images/Photosave.png" Width="16"/>
+                        <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                        Command="{x:Static s:DesignerCanvas.AlignHorizontalCenters}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        ToolTip="Выровнять по центру горизонтально">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Image Source="Images/AlignObjectsCenteredHorizontal.png" Width="20"/>
+                                <TextBlock Text="Гор. центр" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                            </StackPanel>
+                        </Button>
 
-                                    <!--  <TextBlock Margin="3,0,3,0" Text="Сохранить" VerticalAlignment="Center" Grid.Column="1"/> -->
-                                </Grid>
-                            </Button.Content>
+                        <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                        Command="{x:Static s:DesignerCanvas.AlignRight}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        ToolTip="Выровнять по правому краю">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Image Source="Images/AlignObjectsRight.png" Width="20"/>
+                                <TextBlock Text="Вправо" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                            </StackPanel>
                         </Button>
                     </StackPanel>
-                   
-                    <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static ApplicationCommands.Print}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Print.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Печать" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                        
+
+                    <!-- Вертикальное выравнивание (3 снизу) -->
+                    <StackPanel Orientation="Horizontal">
+                        <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                        Command="{x:Static s:DesignerCanvas.AlignTop}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        ToolTip="Выровнять по верхнему краю">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Image Source="Images/AlignObjectsTop.png" Width="20"/>
+                                <TextBlock Text="Вверх" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                        Command="{x:Static s:DesignerCanvas.AlignVerticalCenters}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        ToolTip="Выровнять по центру вертикально">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Image Source="Images/AlignObjectsCenteredVertical.png" Width="20"/>
+                                <TextBlock Text="Верт. центр" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                            </StackPanel>
+                        </Button>
+
+                        <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                        Command="{x:Static s:DesignerCanvas.AlignBottom}"
+                        CommandTarget="{Binding ElementName=MyDesigner}"
+                        ToolTip="Выровнять по нижнему краю">
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                <Image Source="Images/AlignObjectsBottom.png" Width="20"/>
+                                <TextBlock Text="Вниз" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+
+                <!-- Распределение (остается в одном ряду) -->
+                <StackPanel Orientation="Horizontal">
+                    <Button Margin="5" Width="70" Style="{StaticResource ToolBarButtonBaseStyle}"
+                    Command="{x:Static s:DesignerCanvas.DistributeHorizontal}"
+                    CommandTarget="{Binding ElementName=MyDesigner}"
+                    ToolTip="Распределить горизонтально">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <Image Source="Images/DistributeObjectsHorizontal.png" Width="20"/>
+                            <TextBlock Text="Горизонтально" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                        </StackPanel>
                     </Button>
-                    <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-           Style="{StaticResource ToolBarButtonBaseStyle}"
-           Command="{x:Static s:DesignerCanvas.Settings}"
-                           
-           CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Settings.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Настройки" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
+
+                    <Button Margin="5" Width="70" Style="{StaticResource ToolBarButtonBaseStyle}"
+                    Command="{x:Static s:DesignerCanvas.DistributeVertical}"
+                    CommandTarget="{Binding ElementName=MyDesigner}"
+                    ToolTip="Распределить вертикально">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                            <Image Source="Images/DistributeObjectsVertical.png" Width="20"/>
+                            <TextBlock Text="Вертикально" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                        </StackPanel>
                     </Button>
                 </StackPanel>
             </StackPanel>
-        </GroupBox>
+            <TextBlock Text="Выравнивание:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
+        </StackPanel>
 
-        <!--Редактирование-->
-        <GroupBox Header="Редактирование" Style="{StaticResource ToolbarGroup}" Foreground="Black" Margin="3">
-            <StackPanel Grid.Row="1" Orientation="Horizontal">
-                <Button Margin="3" Width="55"
-                        Style="{StaticResource ToolBarButtonBaseStyle}"
-                        Command="{x:Static ApplicationCommands.Paste}"
-                        CommandTarget="{Binding ElementName=MyDesigner}">
-                    <Button.Content>
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="4*"/>
-                                <RowDefinition Height="1*"/>
-                            </Grid.RowDefinitions>
-                            <Image Source="Images/Paste.png" Width="45"/>
-                            <TextBlock Grid.Row="1" Text="Вставить" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-                        </Grid>
-                    </Button.Content>
+        <!-- Разделитель -->
+        <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="Gray" Margin="5,0"/>
+
+        <!-- Положение -->
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <!-- Группировка -->
+                <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static s:DesignerCanvas.Group}"
+                CommandTarget="{Binding ElementName=MyDesigner}"
+                ToolTip="Группировать">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Path Fill="#6C9DD7" Height="56" Data="M5 6.25H6.25V5H16.25V11.25H17.5V3.75H6.25V2.5H2.5V6.25H3.75V17.5H11.25V16.25H5V6.25ZM3.75 3.75H5V5H3.75V3.75ZM2.5 27.5H6.25V23.75H2.5V27.5ZM3.75 25H5V26.25H3.75V25ZM23.75 2.5V6.25H27.5V2.5H23.75ZM26.25 5H25V3.75H26.25V5ZM26.25 12.5H12.5V26.25H23.75V27.5H27.5V23.75H26.25V12.5ZM23.75 25H13.75V13.75H25V23.75H23.75V25ZM26.25 26.25H25V25H26.25V26.25Z" 
+                      Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock Text="Группа" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
                 </Button>
-                <StackPanel Orientation="Vertical" Margin="0,2,0,2">
-                    <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static ApplicationCommands.Cut}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Scissors.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Вырезать" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                    <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static ApplicationCommands.Copy}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Copy.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Копировать" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                    <Button Margin="1" Padding="2" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static ApplicationCommands.Delete}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Delete.png" Width="16"/>
-                                <TextBlock Margin="3,0,3,0" Text="Удалить" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
+
+                <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static s:DesignerCanvas.Ungroup}"
+                CommandTarget="{Binding ElementName=MyDesigner}"
+                ToolTip="Разгруппировать">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Path Fill="#6C9DD7" Height="56" Data="M12.5 12.5V7.5H11.875C11.5298 7.5 11.25 7.22018 11.25 6.875V4.375C11.25 4.02982 11.5298 3.75 11.875 3.75H14.375C14.7202 3.75 15 4.02982 15 4.375V5H22.5V4.375C22.5 4.02982 22.7798 3.75 23.125 3.75H25.625C25.9702 3.75 26.25 4.02982 26.25 4.375V6.875C26.25 7.22018 25.9702 7.5 25.625 7.5H25V15H25.625C25.9702 15 26.25 15.2798 26.25 15.625V18.125C26.25 18.4702 25.9702 18.75 25.625 18.75H23.125C22.7798 18.75 22.5 18.4702 22.5 18.125V17.5H17.5V22.5H18.125C18.4702 22.5 18.75 22.7798 18.75 23.125V25.625C18.75 25.9702 18.4702 26.25 18.125 26.25H15.625C15.2798 26.25 15 25.9702 15 25.625V25H7.5V25.625C7.5 25.9702 7.22018 26.25 6.875 26.25H4.375C4.02982 26.25 3.75 25.9702 3.75 25.625V23.125C3.75 22.7798 4.02982 22.5 4.375 22.5H5V15H4.375C4.02982 15 3.75 14.7202 3.75 14.375V11.875C3.75 11.5298 4.02982 11.25 4.375 11.25H6.875C7.22018 11.25 7.5 11.5298 7.5 11.875V12.5H12.5ZM12.5 13.75H7.5V14.375C7.5 14.7202 7.22018 15 6.875 15H6.25V22.5H6.875C7.22018 22.5 7.5 22.7798 7.5 23.125V23.75H15V23.125C15 22.7798 15.2798 22.5 15.625 22.5H16.25V17.5H15V18.125C15 18.4702 14.7202 18.75 14.375 18.75H11.875C11.5298 18.75 11.25 18.4702 11.25 18.125V15.625C11.25 15.2798 11.5298 15 11.875 15H12.5V13.75ZM13.75 7.5V15H14.375C14.7202 15 15 15.2798 15 15.625V16.25H22.5V15.625C22.5 15.2798 22.7798 15 23.125 15H23.75V7.5H23.125C22.7798 7.5 22.5 7.22018 22.5 6.875V6.25H15V6.875C15 7.22018 14.7202 7.5 14.375 7.5H13.75ZM12.5 5V6.25H13.75V5H12.5ZM23.75 5V6.25H25V5H23.75ZM23.75 16.25V17.5H25V16.25H23.75ZM12.5 16.25V17.5H13.75V16.25H12.5ZM5 12.5V13.75H6.25V12.5H5ZM5 23.75V25H6.25V23.75H5ZM16.25 23.75V25H17.5V23.75H16.25Z" 
+                      Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock Text="Разгруп." HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Положение по Z-порядку -->
+                <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static s:DesignerCanvas.BringForward}"
+                CommandTarget="{Binding ElementName=MyDesigner}"
+                ToolTip="Переместить вперед">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Path Fill="#6C9DD7" Height="56" Data="M28.5863 13.9228L15.4613 8.29781C15.3253 8.23781 15.1669 8.20312 15 8.20312C14.8331 8.20312 14.6747 8.23781 14.5312 8.30062L14.5388 8.29781L1.41375 13.9228C0.992813 14.1066 0.703125 14.52 0.703125 15C0.703125 15.48 0.991875 15.8934 1.40625 16.0744L1.41375 16.0772L14.5388 21.7013C14.6747 21.7613 14.8331 21.7969 15 21.7969C15.1669 21.7969 15.3253 21.7622 15.4688 21.6984L15.4613 21.7013L28.5863 16.0772C29.0072 15.8934 29.2969 15.48 29.2969 15C29.2969 14.52 29.0081 14.1066 28.5938 13.9256L28.5863 13.9228ZM15 19.3509L4.84969 15L15 10.65L25.1494 15L15 19.3509ZM28.5863 21.4237L24.8363 19.8159C24.7003 19.7559 24.5419 19.7212 24.375 19.7212C23.7281 19.7212 23.2041 20.2453 23.2041 20.8922C23.2041 21.3722 23.4928 21.7847 23.9062 21.9656L23.9137 21.9684L25.1512 22.4991L15 26.85L4.84969 22.4991L6.08625 21.9684C6.50719 21.7847 6.79594 21.3722 6.79594 20.8922C6.79594 20.2453 6.27187 19.7212 5.625 19.7212C5.45813 19.7212 5.29969 19.7559 5.15625 19.8187L5.16375 19.8159L1.41375 21.4237C0.992813 21.6075 0.703125 22.02 0.703125 22.5C0.703125 22.98 0.991875 23.3934 1.40625 23.5734L1.41375 23.5763L14.5388 29.2013C14.6747 29.2613 14.8331 29.2969 15 29.2969C15.1669 29.2969 15.3253 29.2622 15.4688 29.1984L15.4613 29.2013L28.5863 23.5763C29.0072 23.3925 29.2969 22.98 29.2969 22.5C29.2969 22.02 29.0081 21.6066 28.5938 21.4266L28.5863 21.4237ZM22.2909 5.96344H24.0356V7.70719C24.0356 8.35406 24.5606 8.87906 25.2075 8.87906C25.8544 8.87906 26.3794 8.35406 26.3794 7.70719V5.96344H28.1241C28.7709 5.96344 29.2959 5.43844 29.2959 4.79156C29.2959 4.14469 28.7709 3.61969 28.1241 3.61969H26.3794V1.875C26.3794 1.22812 25.8544 0.703125 25.2075 0.703125C24.5606 0.703125 24.0356 1.22812 24.0356 1.875V3.61969H22.2909C21.6441 3.61969 21.1191 4.14469 21.1191 4.79156C21.1191 5.43844 21.6441 5.96344 22.2909 5.96344Z"
+                      Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock Text="Вперед" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="2" Width="60" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static s:DesignerCanvas.SendBackward}"
+                CommandTarget="{Binding ElementName=MyDesigner}"
+                ToolTip="Переместить назад">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Path Fill="#6C9DD7" Height="56" Data="M28.5863 13.9228L15.4613 8.29775C15.3253 8.23775 15.1669 8.20307 15 8.20307C14.8331 8.20307 14.6747 8.23775 14.5312 8.30057L14.5388 8.29775L1.41375 13.9228C0.992813 14.1065 0.703125 14.5199 0.703125 14.9999C0.703125 15.4799 0.991875 15.8934 1.40625 16.0743L1.41375 16.0771L14.5388 21.7012C14.6747 21.7612 14.8331 21.7968 15 21.7968C15.1669 21.7968 15.3253 21.7621 15.4688 21.6984L15.4613 21.7012L28.5863 16.0771C29.0072 15.8934 29.2969 15.4799 29.2969 14.9999C29.2969 14.5199 29.0081 14.1065 28.5938 13.9256L28.5863 13.9228ZM15 19.3509L4.84969 14.9999L15 10.6499L25.1494 14.9999L15 19.3509ZM28.5863 21.4237L24.8363 19.8159C24.7003 19.7559 24.5419 19.7212 24.375 19.7212C23.7281 19.7212 23.2041 20.2453 23.2041 20.8921C23.2041 21.3721 23.4928 21.7846 23.9062 21.9656L23.9137 21.9684L25.1512 22.499L15 26.8499L4.84969 22.499L6.08625 21.9684C6.50719 21.7846 6.79594 21.3721 6.79594 20.8921C6.79594 20.2453 6.27187 19.7212 5.625 19.7212C5.45813 19.7212 5.29969 19.7559 5.15625 19.8187L5.16375 19.8159L1.41375 21.4237C0.992813 21.6074 0.703125 22.0199 0.703125 22.4999C0.703125 22.9799 0.991875 23.3934 1.40625 23.5734L1.41375 23.5762L14.5388 29.2012C14.6747 29.2612 14.8331 29.2968 15 29.2968C15.1669 29.2968 15.3253 29.2621 15.4688 29.1984L15.4613 29.2012L28.5863 23.5762C29.0072 23.3924 29.2969 22.9799 29.2969 22.4999C29.2969 22.0199 29.0081 21.6065 28.5938 21.4265L28.5863 21.4237ZM22.2909 5.96338H28.125C28.7719 5.96338 29.2969 5.43838 29.2969 4.7915C29.2969 4.14463 28.7719 3.61963 28.125 3.61963H22.2909C21.6441 3.61963 21.1191 4.14463 21.1191 4.7915C21.1191 5.43838 21.6441 5.96338 22.2909 5.96338Z"
+                      Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock Text="Назад" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="2" Width="70" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static s:DesignerCanvas.BringToFront}"
+                CommandTarget="{Binding ElementName=MyDesigner}"
+                ToolTip="На передний план">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Path Height="56" Fill="#6C9DD7" Data="M15 5.9375C13.6745 5.9375 12.6134 6.34745 10.0823 7.35986L6.57171 8.7641C5.30867 9.26931 4.43346 9.62074 3.86619 9.91814C3.81075 9.9472 3.76079 9.97449 3.71584 10C3.76079 10.0255 3.81075 10.0528 3.86619 10.0819C4.43346 10.3793 5.30867 10.7307 6.57171 11.2359L10.0823 12.6401C12.6134 13.6525 13.6745 14.0625 15 14.0625C16.3255 14.0625 17.3866 13.6525 19.9177 12.6401L23.4282 11.2359C24.6914 10.7307 25.5665 10.3793 26.1339 10.0819C26.1892 10.0528 26.2392 10.0255 26.2841 10C26.2392 9.97449 26.1892 9.9472 26.1339 9.91814C25.5665 9.62074 24.6914 9.26931 23.4282 8.7641L19.9177 7.35986C17.3866 6.34745 16.3255 5.9375 15 5.9375ZM9.53052 5.56113C11.8765 4.62245 13.276 4.0625 15 4.0625C16.724 4.0625 18.1235 4.62245 20.4695 5.56113C20.5173 5.58025 20.5655 5.59953 20.614 5.61896L24.1814 7.04588C25.3745 7.52314 26.341 7.9097 27.0044 8.25751C27.3401 8.43354 27.6654 8.6331 27.9162 8.87367C28.174 9.12085 28.4375 9.49573 28.4375 10C28.4375 10.5043 28.174 10.8791 27.9162 11.1263C27.6654 11.3669 27.3401 11.5665 27.0044 11.7425C26.5649 11.9729 25.9922 12.2204 25.3087 12.5C25.9922 12.7796 26.5649 13.027 27.0044 13.2575C27.3401 13.4335 27.6654 13.6331 27.9162 13.8736C28.174 14.1209 28.4375 14.4958 28.4375 15C28.4375 15.5042 28.174 15.8791 27.9162 16.1264C27.6654 16.3669 27.3401 16.5665 27.0044 16.7425C26.5649 16.973 25.9922 17.2204 25.3087 17.5C25.9922 17.7796 26.5649 18.027 27.0044 18.2575C27.3401 18.4335 27.6654 18.6331 27.9162 18.8736C28.174 19.1209 28.4375 19.4958 28.4375 20C28.4375 20.5042 28.174 20.8791 27.9162 21.1264C27.6654 21.3669 27.3401 21.5665 27.0044 21.7425C26.341 22.0902 25.3746 22.4769 24.1814 22.9541L20.614 24.381C20.5655 24.4005 20.5173 24.4198 20.4695 24.4389C18.1235 25.3775 16.724 25.9375 15 25.9375C13.276 25.9375 11.8765 25.3775 9.53054 24.4389C9.48274 24.4198 9.43454 24.4005 9.38594 24.381L5.81862 22.9541C4.62542 22.4769 3.659 22.0902 2.99559 21.7425C2.65982 21.5665 2.33456 21.3669 2.08376 21.1264C1.82606 20.8791 1.5625 20.5042 1.5625 20C1.5625 19.4958 1.82606 19.1209 2.08376 18.8736C2.33456 18.6331 2.65982 18.4335 2.99559 18.2575C3.43516 18.027 4.00776 17.7796 4.69124 17.5C4.00776 17.2204 3.43516 16.973 2.99559 16.7425C2.65982 16.5665 2.33456 16.3669 2.08376 16.1264C1.82606 15.8791 1.5625 15.5042 1.5625 15C1.5625 14.4958 1.82606 14.1209 2.08376 13.8736C2.33456 13.6331 2.65982 13.4335 2.99559 13.2575C3.43516 13.027 4.00776 12.7796 4.69124 12.5C4.00776 12.2204 3.43516 11.9729 2.99559 11.7425C2.65982 11.5665 2.33456 11.3669 2.08376 11.1263C1.82606 10.8791 1.5625 10.5043 1.5625 10C1.5625 9.49573 1.82606 9.12085 2.08376 8.87367C2.33456 8.6331 2.65982 8.43354 2.99559 8.25751C3.65901 7.9097 4.62546 7.52314 5.8187 7.04586L9.38594 5.61896C9.43454 5.59953 9.48272 5.58025 9.53052 5.56113ZM7.20766 13.5098L6.57171 13.7641C5.30867 14.2692 4.43346 14.6207 3.86619 14.9181C3.81075 14.9472 3.76079 14.9745 3.71585 15C3.76079 15.0255 3.81075 15.0528 3.86619 15.0819C4.43346 15.3793 5.30867 15.7306 6.57171 16.2359L10.0823 17.6401C12.6134 18.6525 13.6745 19.0625 15 19.0625C16.3255 19.0625 17.3866 18.6525 19.9177 17.6401L23.4282 16.2359C24.6914 15.7306 25.5665 15.3793 26.1339 15.0819C26.1892 15.0528 26.2392 15.0255 26.2841 15C26.2392 14.9745 26.1892 14.9472 26.1339 14.9181C25.5665 14.6207 24.6914 14.2692 23.4282 13.7641L22.7924 13.5098L20.614 14.381C20.5655 14.4005 20.5173 14.4197 20.4695 14.4389C18.1235 15.3775 16.724 15.9375 15 15.9375C13.276 15.9375 11.8765 15.3775 9.53054 14.4389C9.48274 14.4197 9.43454 14.4005 9.38594 14.381L7.20766 13.5098ZM7.20766 18.5098L6.57171 18.7641C5.30867 19.2692 4.43347 19.6207 3.86619 19.9181C3.81075 19.9472 3.76079 19.9745 3.71585 20C3.76079 20.0255 3.81075 20.0528 3.86619 20.0819C4.43346 20.3792 5.30867 20.7306 6.57171 21.2359L10.0823 22.6401C12.6134 23.6525 13.6745 24.0625 15 24.0625C16.3255 24.0625 17.3866 23.6525 19.9177 22.6401L23.4282 21.2359C24.6914 20.7306 25.5665 20.3792 26.1339 20.0819C26.1892 20.0528 26.2392 20.0255 26.2841 20C26.2392 19.9745 26.1892 19.9472 26.1339 19.9181C25.5665 19.6207 24.6914 19.2692 23.4282 18.7641L22.7924 18.5098L20.614 19.381C20.5655 19.4005 20.5173 19.4197 20.4695 19.4389C18.1235 20.3775 16.724 20.9375 15 20.9375C13.276 20.9375 11.8765 20.3775 9.53054 19.4389C9.48274 19.4197 9.43454 19.4005 9.38594 19.381L7.20766 18.5098Z"
+                      Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock Text="На передний" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Margin="2" Width="70" Style="{StaticResource ToolBarButtonBaseStyle}"
+                Command="{x:Static s:DesignerCanvas.SendToBack}"
+                CommandTarget="{Binding ElementName=MyDesigner}"
+                ToolTip="На задний план">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Path Fill="#6C9DD7" Height="56" Data="M15 5.9375C13.6745 5.9375 12.6134 6.34745 10.0823 7.35986L6.57171 8.7641C5.30867 9.26931 4.43346 9.62074 3.86619 9.91814C3.81075 9.9472 3.76079 9.97449 3.71584 10C3.76079 10.0255 3.81075 10.0528 3.86619 10.0819C4.43346 10.3793 5.30867 10.7307 6.57171 11.2359L10.0823 12.6401C12.6134 13.6525 13.6745 14.0625 15 14.0625C16.3255 14.0625 17.3866 13.6525 19.9177 12.6401L23.4282 11.2359C24.6914 10.7307 25.5665 10.3793 26.1339 10.0819C26.1892 10.0528 26.2392 10.0255 26.2841 10C26.2392 9.97449 26.1892 9.9472 26.1339 9.91814C25.5665 9.62074 24.6914 9.26931 23.4282 8.7641L19.9177 7.35986C17.3866 6.34745 16.3255 5.9375 15 5.9375ZM9.53052 5.56113C11.8765 4.62245 13.276 4.0625 15 4.0625C16.724 4.0625 18.1235 4.62245 20.4695 5.56113C20.5173 5.58025 20.5655 5.59953 20.614 5.61896L24.1814 7.04588C25.3745 7.52314 26.341 7.9097 27.0044 8.25751C27.3401 8.43354 27.6654 8.6331 27.9162 8.87367C28.174 9.12085 28.4375 9.49573 28.4375 10C28.4375 10.5043 28.174 10.8791 27.9162 11.1263C27.6654 11.3669 27.3401 11.5665 27.0044 11.7425C26.5649 11.9729 25.9922 12.2204 25.3087 12.5C25.9922 12.7796 26.5649 13.027 27.0044 13.2575C27.3401 13.4335 27.6654 13.6331 27.9162 13.8736C28.174 14.1209 28.4375 14.4958 28.4375 15C28.4375 15.5042 28.174 15.8791 27.9162 16.1264C27.6654 16.3669 27.3401 16.5665 27.0044 16.7425C26.5649 16.973 25.9922 17.2204 25.3087 17.5C25.9922 17.7796 26.5649 18.027 27.0044 18.2575C27.3401 18.4335 27.6654 18.6331 27.9162 18.8736C28.174 19.1209 28.4375 19.4958 28.4375 20C28.4375 20.5042 28.174 20.8791 27.9162 21.1264C27.6654 21.3669 27.3401 21.5665 27.0044 21.7425C26.341 22.0902 25.3746 22.4769 24.1814 22.9541L20.614 24.381C20.5655 24.4005 20.5173 24.4198 20.4695 24.4389C18.1235 25.3775 16.724 25.9375 15 25.9375C13.276 25.9375 11.8765 25.3775 9.53054 24.4389C9.48274 24.4198 9.43454 24.4005 9.38594 24.381L5.81862 22.9541C4.62542 22.4769 3.659 22.0902 2.99559 21.7425C2.65982 21.5665 2.33456 21.3669 2.08376 21.1264C1.82606 20.8791 1.5625 20.5042 1.5625 20C1.5625 19.4958 1.82606 19.1209 2.08376 18.8736C2.33456 18.6331 2.65982 18.4335 2.99559 18.2575C3.43516 18.027 4.00776 17.7796 4.69124 17.5C4.00776 17.2204 3.43516 16.973 2.99559 16.7425C2.65982 16.5665 2.33456 16.3669 2.08376 16.1264C1.82606 15.8791 1.5625 15.5042 1.5625 15C1.5625 14.4958 1.82606 14.1209 2.08376 13.8736C2.33456 13.6331 2.65982 13.4335 2.99559 13.2575C3.43516 13.027 4.00776 12.7796 4.69124 12.5C4.00776 12.2204 3.43516 11.9729 2.99559 11.7425C2.65982 11.5665 2.33456 11.3669 2.08376 11.1263C1.82606 10.8791 1.5625 10.5043 1.5625 10C1.5625 9.49573 1.82606 9.12085 2.08376 8.87367C2.33456 8.6331 2.65982 8.43354 2.99559 8.25751C3.65901 7.9097 4.62546 7.52314 5.8187 7.04586L9.38594 5.61896C9.43454 5.59953 9.48272 5.58025 9.53052 5.56113ZM7.20766 13.5098L6.57171 13.7641C5.30867 14.2692 4.43346 14.6207 3.86619 14.9181C3.81075 14.9472 3.76079 14.9745 3.71585 15C3.76079 15.0255 3.81075 15.0528 3.86619 15.0819C4.43346 15.3793 5.30867 15.7306 6.57171 16.2359L10.0823 17.6401C12.6134 18.6525 13.6745 19.0625 15 19.0625C16.3255 19.0625 17.3866 18.6525 19.9177 17.6401L23.4282 16.2359C24.6914 15.7306 25.5665 15.3793 26.1339 15.0819C26.1892 15.0528 26.2392 15.0255 26.2841 15C26.2392 14.9745 26.1892 14.9472 26.1339 14.9181C25.5665 14.6207 24.6914 14.2692 23.4282 13.7641L22.7924 13.5098L20.614 14.381C20.5655 14.4005 20.5173 14.4197 20.4695 14.4389C18.1235 15.3775 16.724 15.9375 15 15.9375C13.276 15.9375 11.8765 15.3775 9.53054 14.4389C9.48274 14.4197 9.43454 14.4005 9.38594 14.381L7.20766 13.5098ZM7.20766 18.5098L6.57171 18.7641C5.30867 19.2692 4.43347 19.6207 3.86619 19.9181C3.81075 19.9472 3.76079 19.9745 3.71585 20C3.76079 20.0255 3.81075 20.0528 3.86619 20.0819C4.43346 20.3792 5.30867 20.7306 6.57171 21.2359L10.0823 22.6401C12.6134 23.6525 13.6745 24.0625 15 24.0625C16.3255 24.0625 17.3866 23.6525 19.9177 22.6401L23.4282 21.2359C24.6914 20.7306 25.5665 20.3792 26.1339 20.0819C26.1892 20.0528 26.2392 20.0255 26.2841 20C26.2392 19.9745 26.1892 19.9472 26.1339 19.9181C25.5665 19.6207 24.6914 19.2692 23.4282 18.7641L22.7924 18.5098L20.614 19.381C20.5655 19.4005 20.5173 19.4197 20.4695 19.4389C18.1235 20.3775 16.724 20.9375 15 20.9375C13.276 20.9375 11.8765 20.3775 9.53054 19.4389C9.48274 19.4197 9.43454 19.4005 9.38594 19.381L7.20766 18.5098Z"
+                      Stretch="Uniform" VerticalAlignment="Center"/>
+                        <TextBlock Text="На задний" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                </Button>
             </StackPanel>
-        </GroupBox>
-
-        <!--Выравнивание-->
-        
-        <GroupBox Header="Выравнивание" Style="{StaticResource ToolbarGroup}" Margin="3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0" Orientation="Vertical">
-                    <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
-                        <StackPanel Orientation="Horizontal">
-                            <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
-                                    Command="{x:Static s:DesignerCanvas.AlignLeft}"
-                                    CommandTarget="{Binding ElementName=MyDesigner}">
-                                <Button.Content>
-                                    <Image Source="Images/AlignObjectsLeft.png" Width="16"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
-                                    Command="{x:Static s:DesignerCanvas.AlignHorizontalCenters}"
-                                    CommandTarget="{Binding ElementName=MyDesigner}">
-                                <Button.Content>
-                                    <Image Source="Images/AlignObjectsCenteredHorizontal.png" Width="16"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
-                                    Command="{x:Static s:DesignerCanvas.AlignRight}"
-                                    CommandTarget="{Binding ElementName=MyDesigner}">
-                                <Button.Content>
-                                    <Image Source="Images/AlignObjectsRight.png" Width="16"/>
-                                </Button.Content>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                    <Border BorderBrush="{StaticResource ToolbarBorderBrush}" BorderThickness="1" CornerRadius="2" Margin="3">
-                        <StackPanel Orientation="Horizontal">
-                            <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
-                                    Command="{x:Static s:DesignerCanvas.AlignTop}"
-                                    CommandTarget="{Binding ElementName=MyDesigner}">
-                                <Button.Content>
-                                    <Image Source="Images/AlignObjectsTop.png" Width="16"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
-                                    Command="{x:Static s:DesignerCanvas.AlignVerticalCenters}"
-                                    CommandTarget="{Binding ElementName=MyDesigner}">
-                                <Button.Content>
-                                    <Image Source="Images/AlignObjectsCenteredVertical.png" Width="16"/>
-                                </Button.Content>
-                            </Button>
-                            <Button Padding="5" Style="{StaticResource ToolBarButtonBaseStyle}"
-                                    Command="{x:Static s:DesignerCanvas.AlignBottom}"
-                                    CommandTarget="{Binding ElementName=MyDesigner}">
-                                <Button.Content>
-                                    <Image Source="Images/AlignObjectsBottom.png" Width="16"/>
-                                </Button.Content>
-                            </Button>
-                        </StackPanel>
-                    </Border>
-                </StackPanel>
-                <StackPanel Grid.Column="1" Orientation="Vertical" Margin="5,0,0,0">
-                    <Button Margin="3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.DistributeHorizontal}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/DistributeObjectsHorizontal.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Горизонтально" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                    <Button Margin="3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.DistributeVertical}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/DistributeObjectsVertical.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Вертикально" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
-                <Line Stroke="{StaticResource ToolbarBorderBrush}" StrokeThickness="1" X1="0" Y1="0" X2="0" Y2="20" Stretch="Fill" HorizontalAlignment="Left"
-              Margin="3,0,0,0" Grid.Column="1"/>
-            </Grid>
-        </GroupBox>
-
-        <!--Положение-->
-        <GroupBox Header="Положение" Foreground="Black" Style="{StaticResource ToolbarGroup}" Margin="3">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <StackPanel>
-                    <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.Group}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Group.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Группа" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                    <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.Ungroup}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/Ungroup.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Разгруппировать" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
-                <StackPanel Grid.Column="1" Margin="7,0,0,0">
-                    <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.BringForward}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/BringForward.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Вперёд" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                    <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.BringToFront}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/BringToFront.png" Width="16"/>
-                                <TextBlock Margin="3" Text="На передний" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
-                <Line Stroke="{StaticResource ToolbarBorderBrush}" 
-                      StrokeThickness="1" X1="0" Y1="0" X2="0" Y2="20" 
-                      Stretch="Fill" HorizontalAlignment="Left"
-                      Grid.Column="1" Margin="3,0,0,0"/>
-                <StackPanel Grid.Column="2">
-                    <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.SendBackward}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/SendBackward.png" Width="16"/>
-                                <TextBlock Margin="3" Text="Назад" VerticalAlignment="Center"  Grid.Column="1"/>
-                             </Grid>
-                        </Button.Content>
-                    </Button>
-                    <Button Margin="0,3,0,3" Padding="5" HorizontalContentAlignment="Left"
-                            Style="{StaticResource ToolBarButtonBaseStyle}"
-                            Command="{x:Static s:DesignerCanvas.SendToBack}"
-                            CommandTarget="{Binding ElementName=MyDesigner}">
-                        <Button.Content>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition/>
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Image Source="Images/SendToBack.png" Width="16"/>
-                                <TextBlock Margin="3" Text="На задний" VerticalAlignment="Center" Grid.Column="1"/>
-                            </Grid>
-                        </Button.Content>
-                    </Button>
-                </StackPanel>
-            </Grid>
-        </GroupBox>
+            <TextBlock Text="Положение:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
+        </StackPanel>
     </ToolBar>
 </ResourceDictionary>
