@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using ArsVisual;
 using ArsVisual.Controls;
+using ArsVisual.Resources;
 using Brush = System.Windows.Media.Brush;
 using FontFamily = System.Windows.Media.FontFamily;
 
@@ -299,9 +300,20 @@ namespace ArsVisual
             {
                 if (e.Parameter is string colorName)
                 {
-                 
-                 this.Fill = (Brush)new BrushConverter().ConvertFromString(colorName);
+                    if (colorName == "Custom")
+                    {
+                       
+                        if (ColorPickerWindow.ShowColorPicker(out System.Windows.Media.Color selectedColor))
+                        {
+                            
+                            string hexColor = $"#{selectedColor.A:X2}{selectedColor.R:X2}{selectedColor.G:X2}{selectedColor.B:X2}";
+                            this.Fill = new SolidColorBrush(selectedColor);
+                        }
+                        return;
+                    }
 
+                   
+                    this.Fill = (Brush)new BrushConverter().ConvertFromString(colorName);
                 }
             }
             catch (Exception ex)
@@ -312,11 +324,28 @@ namespace ArsVisual
 
         private void OnChangeItemStroke(object sender, ExecutedRoutedEventArgs e)
         {
-            if (e.Parameter is string colorName)
+            try
             {
-                this.Stroke = (Brush)new BrushConverter().ConvertFromString(colorName);
+                if (e.Parameter is string colorName)
+                {
+                    if (colorName == "Custom")
+                    {
+                      
+                        if (ColorPickerWindow.ShowColorPicker(out System.Windows.Media.Color selectedColor))
+                        {
+                            string hexColor = $"#{selectedColor.A:X2}{selectedColor.R:X2}{selectedColor.G:X2}{selectedColor.B:X2}";
+                            this.Stroke = new SolidColorBrush(selectedColor);
+                        }
+                        return;
+                    }
+
                
-              
+                    this.Stroke = (Brush)new BrushConverter().ConvertFromString(colorName);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
         private void CanExecuteChangeItemFill(object sender, CanExecuteRoutedEventArgs e)

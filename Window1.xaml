@@ -5,7 +5,7 @@
         xmlns:c="clr-namespace:ArsVisual.Controls"
         WindowStartupLocation="CenterScreen"
         Title="ArsVisual"
-        Height="850" Width="1000" WindowState="Maximized" Icon="/icons/logo.png" Background="#FF37383A">
+        Height="850" Width="1000" WindowState="Maximized" Icon="/icons/logo.png" WindowStyle="None" Background="#FF37383A">
 
     <Window.Resources>
         <ContextMenu x:Key="DesignerCanvasContextMenu">
@@ -16,97 +16,119 @@
             </MenuItem>
             <MenuItem Header="Select All" Command="{x:Static m:DesignerCanvas.SelectAll}"/>
         </ContextMenu>
-       
     </Window.Resources>
 
-    <Grid  Margin="10">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="239*"/>
-            <ColumnDefinition Width="6*"/>
-        </Grid.ColumnDefinitions>
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="32" ResizeBorderThickness="5"/>
+    </WindowChrome.WindowChrome>
+
+    <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <ContentControl Content="{StaticResource MyToolbar}" Grid.ColumnSpan="2"/>
-
-        <Grid  Grid.Row="1" Margin="0,10,0,0" Grid.ColumnSpan="2">
+        <!-- Кастомная панель заголовка -->
+        <Grid Grid.Row="0" Background="Transparent">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="265"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <!-- Toolbox -->
-            <ScrollViewer VerticalScrollBarVisibility="Auto" >
-                
-          
-            <StackPanel Grid.Column="0" Margin="0,0,5,0">
 
-                    <Expander Background="#1B1B1B" Header="Простая Блок-схема" Content="{StaticResource FlowChartStencils}"  IsExpanded="True" />
+            <TextBlock Grid.Column="0" Text="ArsVisual" 
+                   VerticalAlignment="Center" Margin="10,0,0,0"
+                   Foreground="White" FontSize="14"/>
 
-                    <Expander  Background="#1B1B1B" Header="Объекты Active Directory " Content="{StaticResource NetStencils}" IsExpanded="True"/>
-                    <Expander Background="#1B1B1B" Header="Сценарий выполнения UML " Content="{StaticResource UMLPosl}"  IsExpanded="True"/>
-                    <Expander Background="#1B1B1B" Header="Описание рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"></Expander>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Click="Minimize"
+                    Content="🗕" ToolTip="Свернуть"
+                  />
+                <Button Click="Open"
+                    Content="🗖" ToolTip="Развернуть"
+                  />
+                <Button Name="btnshut"
+                    Content="✕" ToolTip="Закрыть"
+                  />
+            </StackPanel>
+        </Grid>
 
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="239*"/>
+                <ColumnDefinition Width="6*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <ContentControl Content="{StaticResource MyToolbar}" Grid.ColumnSpan="2"/>
 
-
-
-
-
-                </StackPanel>
-            </ScrollViewer>
-            <!-- GridSplitter -->
-            <GridSplitter Focusable="False" Width="2" Background="LightGray"
+            <Grid Grid.Row="1" Margin="0,10,0,0" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="265"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!-- Toolbox -->
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Grid.Column="0" Margin="0,0,5,0">
+                        <Expander Background="#1B1B1B" Header="Простая Блок-схема" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
+                        <Expander Background="#1B1B1B" Header="Объекты Active Directory" Content="{StaticResource NetStencils}" IsExpanded="True"/>
+                        <Expander Background="#1B1B1B" Header="Сценарий выполнения UML" Content="{StaticResource UMLPosl}" IsExpanded="True"/>
+                        <Expander Background="#1B1B1B" Header="Описание рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"/>
+                    </StackPanel>
+                </ScrollViewer>
+                <!-- GridSplitter -->
+                <GridSplitter Focusable="False" Width="2" Background="LightGray"
                     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
-          
-            <!-- Designer -->
-            <GroupBox  Grid.Column="1" >
-                <TabControl x:Name="MainTabControl" SelectionChanged="PageSwitch">
-                    <!-- Первая страница по умолчанию -->
-                    <TabItem Header="Страница 1">
-                        <TabItem.HeaderTemplate>
-                            <DataTemplate>
-                                <DockPanel>
-                                    <TextBlock Text="Страница 1"/>
-                                    <Button Background="Transparent" BorderBrush="Transparent" Content="×" Click="CloseTabClick" 
+
+                <!-- Designer -->
+                <GroupBox Grid.Column="1">
+                    <TabControl x:Name="MainTabControl" SelectionChanged="PageSwitch">
+                        <!-- Первая страница по умолчанию -->
+                        <TabItem Header="Страница 1">
+                            <TabItem.HeaderTemplate>
+                                <DataTemplate>
+                                    <DockPanel>
+                                        <TextBlock Text="Страница 1"/>
+                                        <Button Background="Transparent" BorderBrush="Transparent" Content="×" Click="CloseTabClick" 
                                             Width="20" Height="20" Padding="0"
                                             DockPanel.Dock="Right"
                                             Tag="{Binding RelativeSource={RelativeSource AncestorType=TabItem}}"/>
-                                </DockPanel>
-                            </DataTemplate>
-                        </TabItem.HeaderTemplate>
-                        <Grid>
-                            <ScrollViewer Name="DesignerScrollViewer"
+                                    </DockPanel>
+                                </DataTemplate>
+                            </TabItem.HeaderTemplate>
+                            <Grid>
+                                <ScrollViewer Name="DesignerScrollViewer"
                     Background="Transparent"
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
-                                <m:DesignerCanvas x:Name="MyDesignerCanvas"
-                           MinHeight="800"
-                           MinWidth="1000"
-                           AllowDrop="True"
-                           Background="White">
-                           </m:DesignerCanvas>
-                            </ScrollViewer>
-                            <m:ZoomBox Width="180"
-           HorizontalAlignment="Right"
-           VerticalAlignment="Top"
-           ScrollViewer="{Binding ElementName=DesignerScrollViewer}"
-           Margin="0,10,30,0"/>
-                        </Grid>
-                    </TabItem>
+                                    <m:DesignerCanvas x:Name="MyDesignerCanvas"
+                         MinHeight="800"
+                         MinWidth="1000"
+                         AllowDrop="True"
+                         Background="White">
+                                    </m:DesignerCanvas>
+                                </ScrollViewer>
+                                <m:ZoomBox Width="180"
+             HorizontalAlignment="Right"
+             VerticalAlignment="Top"
+             ScrollViewer="{Binding ElementName=DesignerScrollViewer}"
+             Margin="0,10,30,0"/>
+                            </Grid>
+                        </TabItem>
 
-                    <!-- Вкладка с плюсом -->
-                    <TabItem Background="White" x:Name="AddTabButton" Header="+">
-                        <TabItem.HeaderTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="+" FontSize="16" FontWeight="Bold"/>
-                            </DataTemplate>
-                        </TabItem.HeaderTemplate>
-                    </TabItem>
-                </TabControl>
-            </GroupBox>
-
+                        <!-- Вкладка с плюсом -->
+                        <TabItem Background="White" x:Name="AddTabButton" Header="+">
+                            <TabItem.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="+" FontSize="16" FontWeight="Bold"/>
+                                </DataTemplate>
+                            </TabItem.HeaderTemplate>
+                        </TabItem>
+                    </TabControl>
+                </GroupBox>
+            </Grid>
         </Grid>
     </Grid>
 </Window>

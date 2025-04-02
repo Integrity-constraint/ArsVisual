@@ -53,6 +53,19 @@ CommandParameter="Purple">
                         <Rectangle Width="16" Height="16" Fill="Purple"/>
                     </MenuItem.Icon>
                 </MenuItem>
+                <MenuItem Header="Свой" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+CommandParameter="Custom">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="Black"/>
+                                    <GradientStop Color="#FFEDDADA" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
             </MenuItem>
 
             <MenuItem Header="Обводка" >
@@ -100,7 +113,19 @@ CommandParameter="Purple">
                         <Rectangle Width="16" Height="16" Fill="Orange"/>
                     </MenuItem.Icon>
                 </MenuItem>
-
+                <MenuItem Header="Свой" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
+CommandParameter="Custom">
+                    <MenuItem.Icon>
+                        <Rectangle Width="16" Height="16">
+                            <Rectangle.Fill>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="Black"/>
+                                    <GradientStop Color="#FFEDDADA" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </MenuItem.Icon>
+                </MenuItem>
 
             </MenuItem>
         </MenuItem>

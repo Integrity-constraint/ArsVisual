@@ -27,7 +27,9 @@ namespace ArsVisual
 
             
             MainTabControl.SelectionChanged += TabControl_SelectionChanged;
+          
             this.Closing += OnClosing;
+           
             MainTabControlReference = MainTabControl;
         }
 
@@ -201,7 +203,7 @@ namespace ArsVisual
                 }
                 else if (messageBoxResult == MessageBoxResult.No)
                 {
-                    // Закрываем приложение
+                   
                     Application.Current.Shutdown();
                 }
                 else
@@ -210,6 +212,21 @@ namespace ArsVisual
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void Minimize(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void Open(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Normal;
+        }
+
+        private void Clostw(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }
