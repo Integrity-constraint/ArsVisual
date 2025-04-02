@@ -16,18 +16,54 @@
     <None Remove="icons\collage.gif" />
     <None Remove="icons\folder.gif" />
     <None Remove="icons\integration.png" />
+    <None Remove="Resources\Images\align1_icon.png" />
+    <None Remove="Resources\Images\align2_icon.png" />
+    <None Remove="Resources\Images\align3_icon.png" />
+    <None Remove="Resources\Images\align4_icon.png" />
+    <None Remove="Resources\Images\align5_icon.png" />
+    <None Remove="Resources\Images\align6_icon.png" />
+    <None Remove="Resources\Images\back_layer_icon.png" />
     <None Remove="Resources\Images\Copy.png" />
+    <None Remove="Resources\Images\copy_icon.png" />
+    <None Remove="Resources\Images\cut_icon.png" />
     <None Remove="Resources\Images\Delete.png" />
+    <None Remove="Resources\Images\delete_icon.png" />
+    <None Remove="Resources\Images\front_layer_icon.png" />
+    <None Remove="Resources\Images\group_icon.png" />
+    <None Remove="Resources\Images\horizontal_align_icon.png" />
+    <None Remove="Resources\Images\layers_minus_icon.png" />
+    <None Remove="Resources\Images\layers_plus_icon.png" />
     <None Remove="Resources\Images\OpenFolder.png" />
     <None Remove="Resources\Images\Paste.png" />
+    <None Remove="Resources\Images\paste_icon.png" />
     <None Remove="Resources\Images\photosave.png" />
     <None Remove="Resources\Images\Print.png" />
     <None Remove="Resources\Images\scissors.png" />
     <None Remove="Resources\Images\Settings.png" />
+    <None Remove="Resources\Images\ungroup_icon.png" />
+    <None Remove="Resources\Images\vertical_align_icon.png" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="icons\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\align1_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\align2_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\align3_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\align4_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\align5_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\align6_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\AlignObjectsBottom.png">
@@ -48,6 +84,9 @@
     <Content Include="Resources\Images\AlignObjectsTop.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\back_layer_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\BringForward.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Generator></Generator>
@@ -58,7 +97,16 @@
     <Content Include="Resources\Images\Copy.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\copy_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\cut_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\Delete.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\delete_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\DistributeObjectsHorizontal.png">
@@ -67,16 +115,34 @@
     <Content Include="Resources\Images\DistributeObjectsVertical.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\front_layer_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\GenericDocument.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Group.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\group_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\horizontal_align_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\layers_minus_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\layers_plus_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\OpenFolder.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Paste.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\paste_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\photosave.png">
@@ -101,6 +167,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\Ungroup.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\ungroup_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\vertical_align_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

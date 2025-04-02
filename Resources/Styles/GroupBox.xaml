@@ -6,36 +6,44 @@
   </ResourceDictionary.MergedDictionaries>
 
   <!-- SimpleStyles: GroupBox -->
-  <Style TargetType="GroupBox">
-    <Setter Property="Control.Foreground" Value="#4C4C4C"/>
-    <Setter Property="Template">
-      <Setter.Value>
-        <ControlTemplate TargetType="GroupBox">
-          <Grid>
-            <Grid.RowDefinitions>
-              <RowDefinition Height="Auto"/>
-              <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Border Grid.Row="0" 
-                    Background="{StaticResource LightBrush}"
-                    BorderBrush="{StaticResource NormalBorderBrush}"
-                    BorderThickness="1" 
-                    CornerRadius="2,2,0,0" >
-              <ContentPresenter Margin="4"
-                                HorizontalAlignment="Center"
-                                ContentSource="Header" 
-                                RecognizesAccessKey="True" />
-            </Border>
-            <Border Grid.Row="1" 
-                    Background="{StaticResource WindowBackgroundBrush}"
-                    BorderBrush="{StaticResource SolidBorderBrush}" 
-                    BorderThickness="1,0,1,1" 
-                    CornerRadius="0,0,2,2" >
-              <ContentPresenter Margin="4" />
-            </Border>
-          </Grid>
-        </ControlTemplate>
-      </Setter.Value>
-    </Setter>
-  </Style>
+    <Style TargetType="GroupBox">
+        
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Margin" Value="0 0 0 8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="GroupBox">
+                    <Border Background="#FF232527"
+                       
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="4"
+                        Padding="{TemplateBinding Padding}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <!-- Header -->
+                            <Border Grid.Row="0"
+                                Background="Transparent"
+                                Padding="0 0 0 8">
+                                <ContentPresenter ContentSource="Header"
+                                            RecognizesAccessKey="True"
+                                            Margin="4 0 0 0"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"/>
+                            </Border>
+
+                            <!-- Content -->
+                            <ContentPresenter Grid.Row="1"
+                                          Margin="0"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 </ResourceDictionary>

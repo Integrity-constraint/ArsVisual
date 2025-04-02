@@ -61,7 +61,7 @@
                     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
           
             <!-- Designer -->
-            <GroupBox Background="#000000" Grid.Column="1" Header="Диаграмма">
+            <GroupBox  Grid.Column="1" >
                 <TabControl x:Name="MainTabControl" SelectionChanged="PageSwitch">
                     <!-- Первая страница по умолчанию -->
                     <TabItem Header="Страница 1">

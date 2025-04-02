@@ -38,7 +38,7 @@
             </GradientStopCollection>
         </GradientBrush.GradientStops>
     </LinearGradientBrush>
-    <SolidColorBrush x:Key="ToolbarSelectedBackgroundBrush" Color="#FFD5E0ED"/>
+    <SolidColorBrush x:Key="ToolbarSelectedBackgroundBrush" Color="#FF757474"/>
     <!-- 
     <LinearGradientBrush x:Key="ToolbarSelectedBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
         <GradientBrush.GradientStops>
@@ -140,7 +140,7 @@
 
     <SolidColorBrush x:Key="DisabledForegroundBrush" Color="#888" />
 
-    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#D3D3D3" />
+    <SolidColorBrush x:Key="DisabledBackgroundBrush" Color="#FF556271" />
 
     <SolidColorBrush x:Key="WindowBackgroundBrush" Color="#FFF" />
 
