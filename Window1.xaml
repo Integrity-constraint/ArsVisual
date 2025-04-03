@@ -16,40 +16,78 @@
             </MenuItem>
             <MenuItem Header="Select All" Command="{x:Static m:DesignerCanvas.SelectAll}"/>
         </ContextMenu>
+        <Style x:Key="TextButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+           
+            <Setter Property="Cursor" Value="Hand"/>
+           
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <ContentPresenter/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
 
-    <WindowChrome.WindowChrome>
-        <WindowChrome CaptionHeight="32" ResizeBorderThickness="5"/>
-    </WindowChrome.WindowChrome>
+  
 
-    <Grid Margin="10">
+    <Grid MouseDown="Drag" Margin="2">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!-- Кастомная панель заголовка -->
-        <Grid Grid.Row="0" Background="Transparent">
+     
+        <Grid Grid.Row="0" Background="Transparent" Cursor="">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition  Height="*"/>
+                <RowDefinition  Height="*"/>
+            </Grid.RowDefinitions>
 
-            <TextBlock Grid.Column="0" Text="ArsVisual" 
+            <TextBlock  Grid.Column="0" Text="ArsVisual" 
                    VerticalAlignment="Center" Margin="10,0,0,0"
                    Foreground="White" FontSize="14"/>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Click="Minimize"
+            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Cursor="Hand">
+                <Button Width="40" Cursor="Hand" Click="Minimize"
                     Content="🗕" ToolTip="Свернуть"
                   />
-                <Button Click="Open"
+                <Button  Width="40"  Cursor="Hand"  Click="Open"
                     Content="🗖" ToolTip="Развернуть"
                   />
-                <Button Name="btnshut"
+                <Button  Width="40"  Click="Clostw" Cursor="Hand"  Name="btnshut"
                     Content="✕" ToolTip="Закрыть"
                   />
             </StackPanel>
+            <Button Grid.Row="1" Click="OpenPopup" Margin="10,0,0,0" HorizontalAlignment="Left">Popup</Button>
+            <Popup x:Name="MyPopup" Placement="Bottom" StaysOpen="False">
+                <Border  Background="#333333" BorderBrush="Black" BorderThickness="1" 
+                    Padding="1" CornerRadius="10">
+                    <StackPanel >
+                        <Button Content="Открыть проект" Command="{x:Static ApplicationCommands.Open}"
+ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
+                        <Button Content="Новый файл" Command="{x:Static ApplicationCommands.New}"
+ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
+                        <Button Content="Сохранить проект" Command="{x:Static ApplicationCommands.Save}"
+CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
+                        <Button Content="Настройки" Command="{x:Static m:DesignerCanvas.Settings}"
+ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
+                        <Button Content="Экспорт" Command="{x:Static m:DesignerCanvas.SaveTOpng}"
+CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
+                        <Button Content="Печать" Command="{x:Static ApplicationCommands.Print}"
+CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
+
+                    </StackPanel>
+                </Border>
+            </Popup>
         </Grid>
 
         <Grid Grid.Row="1" Margin="10">
@@ -69,7 +107,7 @@
                     <ColumnDefinition Width="265"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <!-- Toolbox -->
+             
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Grid.Column="0" Margin="0,0,5,0">
                         <Expander Background="#1B1B1B" Header="Простая Блок-схема" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
@@ -78,14 +116,13 @@
                         <Expander Background="#1B1B1B" Header="Описание рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"/>
                     </StackPanel>
                 </ScrollViewer>
-                <!-- GridSplitter -->
+              
                 <GridSplitter Focusable="False" Width="2" Background="LightGray"
                     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
 
-                <!-- Designer -->
                 <GroupBox Grid.Column="1">
                     <TabControl x:Name="MainTabControl" SelectionChanged="PageSwitch">
-                        <!-- Первая страница по умолчанию -->
+                       
                         <TabItem Header="Страница 1">
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>
@@ -118,7 +155,7 @@
                             </Grid>
                         </TabItem>
 
-                        <!-- Вкладка с плюсом -->
+                       
                         <TabItem Background="White" x:Name="AddTabButton" Header="+">
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>

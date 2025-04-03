@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ArsVisual
 {
@@ -22,7 +23,7 @@ namespace ArsVisual
             AppearanceMaster.LoadColors();
             AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
           
-            // Привязка первой вкладки к логике
+          
             _pageCanvases[(TabItem)MainTabControl.Items[0]] = MyDesignerCanvas;
 
             
@@ -33,28 +34,28 @@ namespace ArsVisual
             MainTabControlReference = MainTabControl;
         }
 
-        // Обработчик переключения вкладок
+       
         private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (MainTabControl.SelectedItem == AddTabButton)
             {
-                // Добавляем новую страницу
+              
                 AddNewPage();
-                MainTabControl.SelectedIndex = MainTabControl.Items.Count - 2; // Переключаемся на новую страницу
+                MainTabControl.SelectedIndex = MainTabControl.Items.Count - 2; 
             }
             else
             {
-                // Сохраняем и восстанавливаем состояние страниц
+                
                 PageSwitch(sender, e);
             }
         }
 
-        // Метод для добавления новой страницы
+        
         public void AddNewPage()
         {
             var newTabItem = new TabItem { Header = $"Страница {MainTabControl.Items.Count}" };
 
-            // Устанавливаем шаблон заголовка с кнопкой закрытия
+           
             newTabItem.HeaderTemplate = (DataTemplate)FindResource("TabHeaderTemplate");
 
             var grid = new Grid();
@@ -108,10 +109,10 @@ namespace ArsVisual
 
                     if (messageBoxResult == MessageBoxResult.No)
                     {
-                        // Удаляем вкладку
+                      
                         MainTabControl.Items.Remove(tabItem);
 
-                        // Очищаем данные
+                        
                         _pageCanvases.Remove(tabItem);
                         _pageStates.Remove(tabItem);
                     }
@@ -135,7 +136,7 @@ namespace ArsVisual
                 }
                 else
                 {
-                    // Если на странице нет схемы, просто удаляем вкладку
+                   
                     MainTabControl.Items.Remove(tabItem);
                     _pageCanvases.Remove(tabItem);
                     _pageStates.Remove(tabItem);
@@ -143,12 +144,12 @@ namespace ArsVisual
             }
         }
 
-        // Обработчик переключения страниц
+      
         private void PageSwitch(object sender, SelectionChangedEventArgs e)
         {
             if (MainTabControl.SelectedItem is TabItem currentTab && currentTab != AddTabButton)
             {
-                // Сохраняем состояние предыдущей страницы
+               
                 if (MainTabControl.SelectedIndex > 0)
                 {
                     var previousTab = MainTabControl.Items[MainTabControl.SelectedIndex - 1] as TabItem;
@@ -158,7 +159,7 @@ namespace ArsVisual
                     }
                 }
 
-                // Восстанавливаем состояние текущей страницы
+               
                 if (_pageStates.ContainsKey(currentTab))
                 {
                     RestoreCanvasState(_pageCanvases[currentTab], _pageStates[currentTab]);
@@ -166,22 +167,20 @@ namespace ArsVisual
             }
         }
 
-        // Метод для сохранения состояния канваса
+     
         private object SaveCanvasState(DesignerCanvas canvas)
         {
-            // Здесь реализуйте логику сохранения состояния канваса
-            // Например, сериализация элементов диаграммы
-            return null; // Замените на реальные данные
+           
+            return null; 
         }
 
-        // Метод для восстановления состояния канваса
+      
         private void RestoreCanvasState(DesignerCanvas canvas, object state)
         {
-            // Здесь реализуйте логику восстановления состояния канваса
-            // Например, десериализация элементов диаграммы
+           
         }
 
-        // Обработчик закрытия окна
+    
         private void OnClosing(object sender, CancelEventArgs e)
         {
             if (_pageCanvases.Values.Any(canvas => canvas.Children.Count > 0))
@@ -208,7 +207,7 @@ namespace ArsVisual
                 }
                 else
                 {
-                    // Отменяем закрытие
+                    
                     e.Cancel = true;
                 }
             }
@@ -221,12 +220,29 @@ namespace ArsVisual
 
         private void Open(object sender, RoutedEventArgs e)
         {
-            this.WindowState = WindowState.Normal;
-        }
+            this.WindowState = this.WindowState == WindowState.Maximized
+               ? WindowState.Normal
+               : WindowState.Maximized;
+         }
 
         private void Clostw(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
+
+        private void OpenPopup(object sender, RoutedEventArgs e)
+        {
+            MyPopup.IsOpen = true;
+        }
+
+        private void Drag(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
+            }
+        }
+
+        
     }
 }
