@@ -45,6 +45,7 @@
 
     <Style TargetType="Expander">
         <Setter Property="Control.Foreground" Value="White"/>
+        
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Expander">
@@ -70,6 +71,7 @@
                                 <ContentPresenter Grid.Column="1"
                                             Margin="8,6" 
                                             ContentSource="Header" 
+                                                
                                             RecognizesAccessKey="True" />
                             </Grid>
                         </Border>

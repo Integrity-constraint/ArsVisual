@@ -469,7 +469,7 @@ namespace ArsVisual
 
             return point;
         }
-        private void UpdatePathGeometry()
+        public void UpdatePathGeometry()
         {
             if (Source != null && Sink != null)
             {

@@ -9,7 +9,7 @@
                     xmlns:pages="clr-namespace:ArsVisual.pages" xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
 
 
-    <ContextMenu x:Key="DesignerItemContextMenu" 
+    <ContextMenu  x:Key="DesignerItemContextMenu" 
                  DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
         <MenuItem Header="Цвет элемента" 
    CommandTarget="{Binding PlacementTarget.SelectedItem, 
@@ -209,56 +209,56 @@ CommandParameter="Purple">
         </MenuItem>
         <MenuItem Header="Вырезать" Command="{x:Static ApplicationCommands.Cut}">
             <MenuItem.Icon>
-                <Image Source="Images/Cut.png" Width="16"/>
+                <Image Source="Images/cut_icon.png" Width="16"/>
             </MenuItem.Icon>
         </MenuItem>
         <MenuItem Header="Копировать" Command="{x:Static ApplicationCommands.Copy}">
             <MenuItem.Icon>
-                <Image Source="Images/Copy.png" Width="16"/>
+                <Image Source="Images/copy_icon.png" Width="16"/>
             </MenuItem.Icon>
         </MenuItem>
         <MenuItem Header="Вставить" Command="{x:Static ApplicationCommands.Paste}">
             <MenuItem.Icon>
-                <Image Source="Images/Paste.png" Width="16"/>
+                <Image Source="Images/paste_icon.png" Width="16"/>
             </MenuItem.Icon>
         </MenuItem>
         <MenuItem Header="Удалить" Command="{x:Static ApplicationCommands.Delete}">
             <MenuItem.Icon>
-                <Image Source="Images/Delete.png" Width="16"/>
+                <Image Source="Images/delete_icon.png" Width="16"/>
             </MenuItem.Icon>
         </MenuItem>
         <Separator/>
         <MenuItem Header="Группировать">
             <MenuItem Header="Группа" Command="{x:Static m:DesignerCanvas.Group}">
                 <MenuItem.Icon>
-                    <Image Source="Images/Group.png" Width="16"/>
+                    <Image Source="Images/group_icon.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Разгруппировать" Command="{x:Static m:DesignerCanvas.Ungroup}">
                 <MenuItem.Icon>
-                    <Image Source="Images/Ungroup.png" Width="16"/>
+                    <Image Source="Images/ungroup_icon.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>
         <MenuItem Header="Порядок">
             <MenuItem Header="Вперёд" Command="{x:Static m:DesignerCanvas.BringForward}">
                 <MenuItem.Icon>
-                    <Image Source="Images/BringForward.png" Width="16"/>
+                    <Image Source="Images/layers_plus_icon.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="На передний план" Command="{x:Static m:DesignerCanvas.BringToFront}">
                 <MenuItem.Icon>
-                    <Image Source="Images/BringToFront.png" Width="16"/>
+                    <Image Source="Images/front_layer_icon.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Назад" Command="{x:Static m:DesignerCanvas.SendBackward}">
                 <MenuItem.Icon>
-                    <Image Source="Images/SendBackward.png" Width="16"/>
+                    <Image Source="Images/layers_minus_icon.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="На задний план" Command="{x:Static m:DesignerCanvas.SendToBack}">
                 <MenuItem.Icon>
-                    <Image Source="Images/SendToBack.png" Width="16"/>
+                    <Image Source="Images/back_layer_icon.png" Width="16"/>
                 </MenuItem.Icon>
             </MenuItem>
         </MenuItem>

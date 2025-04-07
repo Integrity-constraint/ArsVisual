@@ -6,27 +6,27 @@
       xmlns:local="clr-namespace:ArsVisual.pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="550"
-      Title="UpdatePage">
+      Title="UpdatePage"  >
 
     <Grid >
-       
-       
-        <GroupBox Header="Информация по обновлениям" >
-            <Grid>
+        <Border Background="Gray" CornerRadius="15">
+            <Border CornerRadius="10,10,10,10"  Background="#FF2D2C2C" Margin="10" Height="100" VerticalAlignment="Top">
                 <StackPanel>
-                    <GroupBox   Header="Проверка обновлений">
-                        <StackPanel Orientation="Horizontal">
-                            <GroupItem Margin="10">
-                                <TextBlock Name="Verstext"></TextBlock>
-
-                            </GroupItem>
-                            <GroupItem HorizontalAlignment="Right" Margin="10">
-                                <Button Click="CheckUpdates" Style="{StaticResource ToolBarButtonBaseStyle}">проверить обновления</Button>
-                            </GroupItem>
-                        </StackPanel>
-                    </GroupBox>
+                    <Border Background="Black" CornerRadius="10,10,0,0" Height="30">
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White" FontFamily="Century Gothic">
+                            Проверка обновлений
+                        </TextBlock>
+                    </Border>
+                    <TextBlock Margin="10" Foreground="White" Name="Verstext" FontFamily="Century Gothic">
+                        
+                    </TextBlock>
+                    <Button Style="{StaticResource TextButtonStyle}" Click="CheckUpdates" Margin="10,0,0,0" HorizontalAlignment="Left" BorderBrush="Transparent" Foreground="White" Background="Transparent" FontFamily="Century Gothic">
+                        Проверить обновления
+                    </Button>
                 </StackPanel>
-            </Grid>
-        </GroupBox>
+            </Border>
+        </Border>
+       
+       
     </Grid>
 </Page>

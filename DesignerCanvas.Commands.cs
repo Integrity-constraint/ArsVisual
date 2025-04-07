@@ -19,11 +19,14 @@ using ArsVisual.Settings;
 using Microsoft.Win32;
 using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows.Controls.Primitives;
-using ArsVisual.NotifyComponents.Error;
+
 using System.Security.Cryptography;
 using static ArsVisual.Connection;
 using ArsVisual.Helpers;
 using ArsVisual.Settings;
+using System.Windows.Threading;
+using System.Diagnostics;
+using ArsVisual.NotifyComponents.MsgBox;
 
 
 
@@ -49,7 +52,7 @@ namespace ArsVisual
         public static RoutedCommand Settings = new RoutedCommand();
         public static RoutedCommand SaveTOpng = new RoutedCommand();
         public static RoutedCommand ColorChange = new RoutedCommand();
-        public static  RoutedCommand ChangeColorCommand = new RoutedCommand();
+       
       
         public DesignerCanvas()
         {
@@ -99,29 +102,12 @@ namespace ArsVisual
             }
            catch(Exception ex)
             {
-                ErrorTrace error = new ErrorTrace(ex.ToString());
-                error.Show();
+                NotifyBox.Show(ex.Message, ex.StackTrace, MessageBoxButton.OK);
             }
         }
         #endregion
         #region ColoRCHANGE
 
-        private void ChangeColorCommand_Executed(object sender, ExecutedRoutedEventArgs e)
-        { if (e.Parameter is string colorName) 
-            { var color = (Color)ColorConverter.ConvertFromString(colorName);
-                ChangeSelectedItemsColor(color); } }
-        public void ChangeSelectedItemsColor(Color color) 
-        { foreach (var item in SelectionService.CurrentSelection) 
-            { if (item is DesignerItem designerItem && designerItem.Content is Grid grid)
-                { foreach (var child in grid.Children.OfType<System.Windows.Shapes.Path>())
-                    { child.Fill = new SolidColorBrush(color); } } } } 
-        
-        private void ColorComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) 
-        { if (sender is ComboBox comboBox && comboBox.SelectedItem is ComboBoxItem selectedItem) 
-            { var colorName = selectedItem.Tag as string; 
-                ChangeColorCommand.Execute(colorName, this);
-            }
-        }
         #endregion
         #region New Command
 
@@ -199,17 +185,75 @@ namespace ArsVisual
         #endregion
 
         #region Open Command
-
+        
+      //  private void RestoreConnections(DesignerCanvas canvas, XElement connectionsXML, Dictionary<Guid, DesignerItem> itemsDict)
+      //  {
+      //      foreach (XElement connectionXML in connectionsXML.Elements("Connection"))
+      //      {
+      //          try
+      //          {
+      //              Guid sourceId = new Guid(connectionXML.Element("SourceID").Value);
+      //              Guid sinkId = new Guid(connectionXML.Element("SinkID").Value);
+      //
+      //              if (sourceId == Guid.Empty || sinkId == Guid.Empty)
+      //                  continue;
+      //
+      //              string sourceConnectorName = connectionXML.Element("SourceConnectorName").Value;
+      //              string sinkConnectorName = connectionXML.Element("SinkConnectorName").Value;
+      //
+      //              if (itemsDict.TryGetValue(sourceId, out var sourceItem) &&
+      //                  itemsDict.TryGetValue(sinkId, out var sinkItem))
+      //              {
+      //                  
+      //                  Dispatcher.CurrentDispatcher.BeginInvoke(new Action(() =>
+      //                  {
+      //                      try
+      //                      {
+      //                          SetConnectorDecoratorTemplate(sourceItem);
+      //                          SetConnectorDecoratorTemplate(sinkItem);
+      //
+      //                          sourceItem.ApplyTemplate();
+      //                          sinkItem.ApplyTemplate();
+      //
+      //                          var sourceConn = Window1. FindConnectorInItem(sourceItem, sourceConnectorName);
+      //                          var sinkConn = Window1.FindConnectorInItem(sinkItem, sinkConnectorName);
+      //
+      //                          if (sourceConn != null && sinkConn != null)
+      //                          {
+      //                              var connection = new Connection(sourceConn, sinkConn)
+      //                              {
+      //                                  SourceArrowSymbol = (ArrowSymbol)Enum.Parse(typeof(ArrowSymbol), connectionXML.Element("SourceArrowSymbol").Value),
+      //                                  SinkArrowSymbol = (ArrowSymbol)Enum.Parse(typeof(ArrowSymbol), connectionXML.Element("SinkArrowSymbol").Value),
+      //                                  StrokeDashArray = StringToDoubleCollection(connectionXML.Element("StrokeDashArray").Value),
+      //                                  Text = connectionXML.Element("Text").Value,
+      //                                  _ConnectionLineType = (ConnectionLineType)Enum.Parse(typeof(ConnectionLineType), connectionXML.Element("ConnectionLineType").Value)
+      //                              };
+      //                              Canvas.SetZIndex(connection, int.Parse(connectionXML.Element("zIndex").Value));
+      //                              canvas.Children.Add(connection);
+      //                          }
+      //                      }
+      //                      catch (Exception ex)
+      //                      {
+      //                          Debug.WriteLine($"Ошибка восстановления соединения: {ex.Message}");
+      //                      }
+      //                  }), DispatcherPriority.Loaded);
+      //              }
+      //          }
+      //          catch (Exception ex)
+      //          {
+      //              Debug.WriteLine($"Ошибка обработки соединения: {ex.Message}");
+      //          }
+      //      }
+      //  }
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             XElement root = LoadSerializedDataFromFile();
-            if (root == null)
-                return;
+            if (root == null) return;
 
-            // Очищаем только "рабочие" вкладки
+           
             var tabsToRemove = Window1.MainTabControlReference.Items
                 .OfType<TabItem>()
-                .Where(tab => tab.Header?.ToString() != "+") // Не удаляем вкладку с плюсом
+                .Where(tab => tab.Header?.ToString() != "+")
                 .ToList();
 
             foreach (var tab in tabsToRemove)
@@ -218,12 +262,13 @@ namespace ArsVisual
                 Window1._pageCanvases.Remove(tab);
             }
 
+          
             foreach (XElement tabXML in root.Elements("Tab"))
             {
                 var newTabItem = new TabItem
                 {
                     Header = tabXML.Element("Header")?.Value,
-                    HeaderTemplate = (DataTemplate)this.FindResource("TabHeaderTemplate")
+                    HeaderTemplate = (DataTemplate)FindResource("TabHeaderTemplate")
                 };
 
                 var grid = new Grid();
@@ -255,68 +300,96 @@ namespace ArsVisual
 
                 grid.Children.Add(scrollViewer);
                 grid.Children.Add(zoomBox);
-
                 newTabItem.Content = grid;
 
-                // Восстанавливаем данные из XML для этого канваса
-                XElement canvasContent = tabXML.Element("CanvasContent");
-                if (canvasContent != null)
-                {
-                    // Восстанавливаем DesignerItems
-                    IEnumerable<XElement> itemsXML = canvasContent.Element("DesignerItems").Elements("DesignerItem");
-                    foreach (XElement itemXML in itemsXML)
-                    {
-                        Guid id = new Guid(itemXML.Element("ID").Value);
-                        DesignerItem item = DeserializeDesignerItem(itemXML, id, 0, 0);
-                        designerCanvas.Children.Add(item);
-                        SetConnectorDecoratorTemplate(item);
-                    }
-
-                    // Восстанавливаем Connections
-                    IEnumerable<XElement> connectionsXML = canvasContent.Element("Connections").Elements("Connection");
-                    foreach (XElement connectionXML in connectionsXML)
-                    {
-                        Guid sourceID = new Guid(connectionXML.Element("SourceID").Value);
-                        Guid sinkID = new Guid(connectionXML.Element("SinkID").Value);
-
-                        string sourceConnectorName = connectionXML.Element("SourceConnectorName").Value;
-                        string sinkConnectorName = connectionXML.Element("SinkConnectorName").Value;
-
-                        Connector sourceConnector = GetConnector(sourceID, sourceConnectorName);
-                        Connector sinkConnector = GetConnector(sinkID, sinkConnectorName);
-
-                        Connection connection = new Connection(sourceConnector, sinkConnector);
-                        Canvas.SetZIndex(connection, int.Parse(connectionXML.Element("zIndex").Value));
-                        connection.Text = connectionXML.Element("Text").Value;
-
-                        designerCanvas.Children.Add(connection);
-                    }
-                }
-
-                // Добавляем вкладку перед вкладкой с плюсом
+              
                 var addTabButton = Window1.MainTabControlReference.Items
                     .OfType<TabItem>()
                     .FirstOrDefault(tab => tab.Header?.ToString() == "+");
 
-                if (addTabButton != null)
-                {
-                    Window1.MainTabControlReference.Items.Insert(
-                        Window1.MainTabControlReference.Items.IndexOf(addTabButton), newTabItem);
-                }
-                else
-                {
-                    // Если вкладка с плюсом отсутствует, добавляем новую страницу в конец
-                    Window1.MainTabControlReference.Items.Add(newTabItem);
-                }
+                int insertIndex = addTabButton != null
+                    ? Window1.MainTabControlReference.Items.IndexOf(addTabButton)
+                    : Window1.MainTabControlReference.Items.Count;
 
+                Window1.MainTabControlReference.Items.Insert(insertIndex, newTabItem);
                 Window1._pageCanvases[newTabItem] = designerCanvas;
+
+          
+                XElement canvasContent = tabXML.Element("CanvasContent");
+                if (canvasContent != null)
+                {
+                    var itemsDict = new Dictionary<Guid, DesignerItem>();
+
+                    // Сначала создаем все элементы
+                    foreach (XElement itemXML in canvasContent.Element("DesignerItems").Elements("DesignerItem"))
+                    {
+                        Guid id = new Guid(itemXML.Element("ID").Value);
+                        DesignerItem item = DeserializeDesignerItem(itemXML, id, 0, 0);
+                        designerCanvas.Children.Add(item);
+                        itemsDict[id] = item;
+                    }
+
+                   
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        try
+                        {
+                            foreach (XElement connectionXML in canvasContent.Element("Connections").Elements("Connection"))
+                            {
+                                try
+                                {
+                                    Guid sourceID = new Guid(connectionXML.Element("SourceID").Value);
+                                    Guid sinkID = new Guid(connectionXML.Element("SinkID").Value);
+
+                                    if (itemsDict.TryGetValue(sourceID, out var sourceItem) &&
+                                        itemsDict.TryGetValue(sinkID, out var sinkItem))
+                                    {
+                                        // Принудительно применяем шаблоны
+                                        SetConnectorDecoratorTemplate(sourceItem);
+                                        SetConnectorDecoratorTemplate(sinkItem);
+                                        sourceItem.ApplyTemplate();
+                                        sinkItem.ApplyTemplate();
+
+                                        string sourceConnectorName = connectionXML.Element("SourceConnectorName").Value;
+                                        string sinkConnectorName = connectionXML.Element("SinkConnectorName").Value;
+
+                                        var sourceConn = Window1.FindConnectorInItem(sourceItem, sourceConnectorName);
+                                        var sinkConn = Window1.FindConnectorInItem(sinkItem, sinkConnectorName);
+
+                                        if (sourceConn != null && sinkConn != null)
+                                        {
+                                            var connection = new Connection(sourceConn, sinkConn)
+                                            {
+                                                SourceArrowSymbol = (ArrowSymbol)Enum.Parse(typeof(ArrowSymbol), connectionXML.Element("SourceArrowSymbol").Value),
+                                                SinkArrowSymbol = (ArrowSymbol)Enum.Parse(typeof(ArrowSymbol), connectionXML.Element("SinkArrowSymbol").Value),
+                                                StrokeDashArray = StringToDoubleCollection(connectionXML.Element("StrokeDashArray").Value),
+                                                Text = connectionXML.Element("Text").Value,
+                                                _ConnectionLineType = (ConnectionLineType)Enum.Parse(typeof(ConnectionLineType), connectionXML.Element("ConnectionLineType").Value)
+                                            };
+                                            Canvas.SetZIndex(connection, int.Parse(connectionXML.Element("zIndex").Value));
+                                            designerCanvas.Children.Add(connection);
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    Debug.WriteLine($"Ошибка восстановления соединения: {ex.Message}");
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            Debug.WriteLine($"Ошибка при восстановлении соединений: {ex.Message}");
+                        }
+                    }, DispatcherPriority.ContextIdle);
+                }
             }
-            // Убедимся, что вкладка с плюсом существует
+
             EnsureAddTabButtonExists();
         }
 
-            
-        
+
+
         private void EnsureAddTabButtonExists()
 {
     var addTabButton = Window1.MainTabControlReference.Items
@@ -325,7 +398,7 @@ namespace ArsVisual
 
     if (addTabButton == null)
     {
-        // Добавляем вкладку с плюсом в конец, если её нет
+        
         addTabButton = new TabItem
         {
             Header = "+",
@@ -353,9 +426,13 @@ namespace ArsVisual
 
             foreach (var tabItem in Window1._pageCanvases.Keys)
             {
+               
+                tabItem.IsSelected = true;
+                Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => { }));
+
                 var canvas = Window1._pageCanvases[tabItem];
-                IEnumerable<DesignerItem> designerItems = canvas.Children.OfType<DesignerItem>();
-                IEnumerable<Connection> connections = canvas.Children.OfType<Connection>();
+                var designerItems = canvas.Children.OfType<DesignerItem>().ToList();
+                var connections = canvas.Children.OfType<Connection>().ToList();
 
                 XElement designerItemsXML = SerializeDesignerItems(designerItems);
                 XElement connectionsXML = SerializeConnections(connections);
@@ -370,7 +447,7 @@ namespace ArsVisual
                 root.Add(tabContent);
             }
 
-            SaveFile(root); // Сохраняем всё дерево XML в файл
+            SaveFile(root);
         }
 
 
@@ -1044,10 +1121,9 @@ namespace ArsVisual
                 }
                 catch (Exception e)
                 {
-                   // MessageBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                    NotifyBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK);
 
-                    ErrorTrace errorTrace = new ErrorTrace(e.StackTrace);
-                    errorTrace.Show();
+                   
                 }
             }
 
@@ -1109,26 +1185,25 @@ namespace ArsVisual
         }
         private XElement SerializeConnections(IEnumerable<Connection> connections)
         {
-            var serializedConnections = new XElement("Connections",
+            return new XElement("Connections",
                 from connection in connections
+                let sourceId = connection.Source?.ParentDesignerItem?.ID ?? Guid.Empty
+                let sinkId = connection.Sink?.ParentDesignerItem?.ID ?? Guid.Empty
+                let sourceName = connection.Source?.Name ?? "Unknown"
+                let sinkName = connection.Sink?.Name ?? "Unknown"
+                where sourceId != Guid.Empty && sinkId != Guid.Empty // Сохраняем только валидные соединения
                 select new XElement("Connection",
-                    new XElement("SourceID", connection.Source.ParentDesignerItem.ID),
-                    new XElement("SinkID", connection.Sink.ParentDesignerItem.ID),
-                    new XElement("SourceConnectorName", connection.Source.Name),
-                    new XElement("SinkConnectorName", connection.Sink.Name),
+                    new XElement("SourceID", sourceId),
+                    new XElement("SinkID", sinkId),
+                    new XElement("SourceConnectorName", sourceName),
+                    new XElement("SinkConnectorName", sinkName),
                     new XElement("SourceArrowSymbol", connection.SourceArrowSymbol.ToString()),
                     new XElement("SinkArrowSymbol", connection.SinkArrowSymbol.ToString()),
                     new XElement("ConnectionLineType", connection._ConnectionLineType.ToString()),
-                  new XElement("StrokeDashArray", DoubleCollectionToString(connection.StrokeDashArray)),
-                  new XElement("Text", connection.Text),
-
-
+                    new XElement("StrokeDashArray", DoubleCollectionToString(connection.StrokeDashArray)),
+                    new XElement("Text", connection.Text ?? string.Empty),
                     new XElement("zIndex", Canvas.GetZIndex(connection))
             ));
-
-           
-
-            return serializedConnections;
         }
 
         private static DesignerItem DeserializeDesignerItem(XElement itemXML, Guid id, double OffsetX, double OffsetY)

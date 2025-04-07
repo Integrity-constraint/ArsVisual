@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         Title="SettingsMaster" Background="Transparent" WindowStyle="None" Height="450" Width="600">
 
-    <Border BorderBrush="Black" Background="White" BorderThickness="0.5" CornerRadius="15">
+    <Border BorderBrush="Black" Background="#FF1B1B1B" BorderThickness="0.5" CornerRadius="15">
         
    
     <Grid Background="Transparent">
@@ -20,7 +20,7 @@
         </Grid.RowDefinitions>
 
         
-        <Grid Grid.Row="0" Margin="5,5,5,0"  Background="White" MouseLeftButtonDown="Drag">
+        <Grid Grid.Row="0" Margin="5,5,5,0"  Background="Transparent" MouseLeftButtonDown="Drag">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -30,7 +30,7 @@
             <TextBlock Grid.Column="0" 
                        Text="Мастер настроек" 
                        Margin="10, 5" 
-                       VerticalAlignment="Center" />
+                       VerticalAlignment="Center" Foreground="White" />
 
 
                 <Button VerticalAlignment="Top" HorizontalAlignment="Center" Cursor="Hand" Style="{StaticResource RoundIconButton}" Grid.Column="1" 
@@ -54,18 +54,32 @@
             </Grid.ColumnDefinitions>
 
             
-            <GroupBox Margin="4,0,0,5" Grid.Column="0" Header="Параметры">
-                <TreeView>
-                    <TreeViewItem Header="Общее">
-                        <TreeViewItem Header="Цвета" Selected="Palitra" />
-                    </TreeViewItem>
-                    <TreeViewItem Selected="Update_Selected" Header="Обновления" />
-                    <TreeViewItem Header="Справка" />
-                </TreeView>
-            </GroupBox>
+            <GroupBox Margin="4,0,0,5" Grid.Column="0"  Header="Параметры" Foreground="White">
+                    <TreeView Background="#FF4E4D4D">
+                        <TreeView.Resources>
+                            <Style TargetType="{x:Type TreeViewItem}">
+                                <Style.Resources>
+                                   
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="#FF333131"/>
+                                   
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White"/>
+                                    
+                                    <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightBrushKey}" Color="Transparent"/>
+                                </Style.Resources>
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                        </TreeView.Resources>
+
+                        <TreeViewItem Header="Общее">
+                            <TreeViewItem Header="Цвета" Selected="Palitra" />
+                        </TreeViewItem>
+                        <TreeViewItem Selected="Update_Selected" Header="Обновления" />
+                        <TreeViewItem Header="Справка" />
+                    </TreeView>
+                </GroupBox>
 
             
-            <Frame Background="White" NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
+            <Frame Background="gray" NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
         </Grid>
     </Grid>
 

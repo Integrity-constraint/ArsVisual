@@ -5,7 +5,7 @@
         xmlns:c="clr-namespace:ArsVisual.Controls"
         WindowStartupLocation="CenterScreen"
         Title="ArsVisual"
-        Height="850" Width="1000" WindowState="Maximized" Icon="/icons/logo.png" WindowStyle="None" Background="#FF37383A">
+        Height="850" Width="1000"  WindowState="Maximized" Icon="/icons/logo.png" AllowsTransparency="True" WindowStyle="None" Background="#FF37383A">
 
     <Window.Resources>
         <ContextMenu x:Key="DesignerCanvasContextMenu">
@@ -16,21 +16,7 @@
             </MenuItem>
             <MenuItem Header="Select All" Command="{x:Static m:DesignerCanvas.SelectAll}"/>
         </ContextMenu>
-        <Style x:Key="TextButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="BorderBrush" Value="Transparent"/>
-           
-            <Setter Property="Cursor" Value="Hand"/>
-           
-            <Setter Property="Foreground" Value="White"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <ContentPresenter/>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+      
     </Window.Resources>
 
   
@@ -53,10 +39,10 @@
             </Grid.RowDefinitions>
 
             <TextBlock  Grid.Column="0" Text="ArsVisual" 
-                   VerticalAlignment="Center" Margin="10,0,0,0"
-                   Foreground="White" FontSize="14"/>
+                   VerticalAlignment="Center" Margin="10,3,0,0"
+                   Foreground="White" FontSize="14" FontFamily="Century Gothic"/>
 
-            <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Cursor="Hand">
+            <StackPanel Grid.Column="1" Margin="0,2,2,0"  Orientation="Horizontal" HorizontalAlignment="Right" Cursor="Hand">
                 <Button Width="40" Cursor="Hand" Click="Minimize"
                     Content="🗕" ToolTip="Свернуть"
                   />
@@ -67,22 +53,28 @@
                     Content="✕" ToolTip="Закрыть"
                   />
             </StackPanel>
-            <Button Grid.Row="1" Click="OpenPopup" Margin="10,0,0,0" HorizontalAlignment="Left">Popup</Button>
-            <Popup x:Name="MyPopup" Placement="Bottom" StaysOpen="False">
-                <Border  Background="#333333" BorderBrush="Black" BorderThickness="1" 
+            <Button Style="{StaticResource TextButtonStyle}" Grid.Row="1" Click="OpenPopup" Margin="10,2,0,0" HorizontalAlignment="Left">
+                <Button.Content>
+                    <Image Height="30"  Source="/icons/TreyPop2.png"></Image>
+                </Button.Content>
+            </Button>
+            <Popup   AllowsTransparency="True"  x:Name="MyPopup" Placement="Bottom" StaysOpen="False" PopupAnimation="Slide">
+                <Border Background="#FF37383A"  BorderBrush="Black" BorderThickness="1" 
                     Padding="1" CornerRadius="10">
-                    <StackPanel >
-                        <Button Content="Открыть проект" Command="{x:Static ApplicationCommands.Open}"
+                    <StackPanel  Background="Transparent" >
+                        <Button Margin="5" Content="Открыть проект" Command="{x:Static ApplicationCommands.Open}"
  CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
-                        <Button Content="Новый файл" Command="{x:Static ApplicationCommands.New}"
+                        <Button Margin="5" Content="Новый файл" Command="{x:Static ApplicationCommands.New}"
  CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
-                        <Button Content="Сохранить проект" Command="{x:Static ApplicationCommands.Save}"
+                        <Button Margin="5" Content="Сохранить проект" Command="{x:Static ApplicationCommands.Save}"
 CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
-                        <Button Content="Настройки" Command="{x:Static m:DesignerCanvas.Settings}"
+                       
+                        <Button Margin="5" Content="Настройки" Command="{x:Static m:DesignerCanvas.Settings}"
  CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
-                        <Button Content="Экспорт" Command="{x:Static m:DesignerCanvas.SaveTOpng}"
+                            
+                        <Button Margin="5" Content="Экспорт" Command="{x:Static m:DesignerCanvas.SaveTOpng}"
 CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
-                        <Button Content="Печать" Command="{x:Static ApplicationCommands.Print}"
+                        <Button Margin="5" Content="Печать" Command="{x:Static ApplicationCommands.Print}"
 CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
 
                     </StackPanel>
@@ -110,7 +102,7 @@ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource Te
              
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                        <Expander Background="#1B1B1B" Header="Простая Блок-схема" Content="{StaticResource FlowChartStencils}" IsExpanded="True"/>
+                        <Expander Background="#1B1B1B" Header="Простая Блок-схема" Content="{StaticResource FlowChartStencils}" IsExpanded="True"  />
                         <Expander Background="#1B1B1B" Header="Объекты Active Directory" Content="{StaticResource NetStencils}" IsExpanded="True"/>
                         <Expander Background="#1B1B1B" Header="Сценарий выполнения UML" Content="{StaticResource UMLPosl}" IsExpanded="True"/>
                         <Expander Background="#1B1B1B" Header="Описание рабочих областей Офисов/комнат" Content="{StaticResource RoomStencils}" IsExpanded="True"/>
@@ -121,9 +113,9 @@ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource Te
                     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
 
                 <GroupBox Grid.Column="1">
-                    <TabControl x:Name="MainTabControl" SelectionChanged="PageSwitch">
+                    <TabControl x:Name="MainTabControl" SelectionChanged="TabControl_SelectionChanged" >
                        
-                        <TabItem Header="Страница 1">
+                        <TabItem Header="Страница 1" >
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>
                                     <DockPanel>

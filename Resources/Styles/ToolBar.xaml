@@ -40,7 +40,8 @@
     </Setter>
   </Style>
 
- 
+   
+   
   <Style x:Key="ToolBarButtonBaseStyle" TargetType="{x:Type ButtonBase}">
     <Setter Property="SnapsToDevicePixels" Value="true"/>
     <Setter Property="OverridesDefaultStyle" Value="true"/>
@@ -88,7 +89,7 @@
       </Setter.Value>
     </Setter>
   </Style>
-
+ 
   <Style x:Key="{x:Static ToolBar.ButtonStyleKey}"
          BasedOn="{StaticResource ToolBarButtonBaseStyle}"
          TargetType="{x:Type Button}"/>
@@ -102,6 +103,8 @@
          BasedOn="{StaticResource ToolBarButtonBaseStyle}"
          TargetType="{x:Type RadioButton}"/>
 
+  
+    
   <Style x:Key="{x:Static ToolBar.TextBoxStyleKey}" TargetType="{x:Type TextBox}">
     <Setter Property="SnapsToDevicePixels" Value="True"/>
     <Setter Property="OverridesDefaultStyle" Value="True"/>

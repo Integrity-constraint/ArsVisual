@@ -16,6 +16,7 @@
     <None Remove="icons\collage.gif" />
     <None Remove="icons\folder.gif" />
     <None Remove="icons\integration.png" />
+    <None Remove="icons\TreyPop2.png" />
     <None Remove="Resources\Images\align1_icon.png" />
     <None Remove="Resources\Images\align2_icon.png" />
     <None Remove="Resources\Images\align3_icon.png" />
@@ -46,6 +47,9 @@
 
   <ItemGroup>
     <Content Include="icons\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\TreyPop2.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\align1_icon.png">

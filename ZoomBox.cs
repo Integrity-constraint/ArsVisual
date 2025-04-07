@@ -6,7 +6,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows;
-using ArsVisual.NotifyComponents.Error;
+
 
 namespace ArsVisual
 {
@@ -65,8 +65,6 @@ namespace ArsVisual
             catch (Exception ex) 
             {
 
-                ErrorTrace error = new ErrorTrace(ex.ToString());
-                error.Show();
             }
            
         }

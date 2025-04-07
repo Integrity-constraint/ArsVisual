@@ -15,25 +15,25 @@
                 Command="{x:Static ApplicationCommands.Paste}"
                 CommandTarget="{Binding ElementName=MyDesigner}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Source="Images/Paste_icon.png" Height="56" />
+                        <Image Source="Images/copy_icon.png" Height="40" />
                         <TextBlock Text="Вставить" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
                     </StackPanel>
                 </Button>
-
+                
                 <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
                 Command="{x:Static ApplicationCommands.Copy}"
                 CommandTarget="{Binding ElementName=MyDesigner}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Height="56"  Source="Images/copy_icon.png" />
+                        <Image Height="40"  Source="Images/copy_icon.png" />
                         <TextBlock Text="Копировать" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
                     </StackPanel>
                 </Button>
-
+    
                 <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
                 Command="{x:Static ApplicationCommands.Cut}"
                 CommandTarget="{Binding ElementName=MyDesigner}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Height="56" Source="Images/cut_icon.png" />
+                        <Image Height="40"  Source="Images/cut_icon.png" />
                         <TextBlock Text="Вырезать" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
                     </StackPanel>
                 </Button>
@@ -42,7 +42,7 @@
                 Command="{x:Static ApplicationCommands.Delete}"
                 CommandTarget="{Binding ElementName=MyDesigner}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Height="56" Source="Images/delete_icon.png" />
+                        <Image Height="40"  Source="Images/delete_icon.png" />
                         <TextBlock Text="Удалить" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
                     </StackPanel>
                 </Button>
@@ -131,8 +131,8 @@
                     CommandTarget="{Binding ElementName=MyDesigner}"
                     ToolTip="Распределить горизонтально">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <Image Source="Images/horizontal_align_icon.png" Width="20"/>
-                            <TextBlock Text="Горизонтально" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                            <Image Source="Images/horizontal_align_icon.png" Height="40" />
+                            <TextBlock  Text="Горизонтально" HorizontalAlignment="Center" Foreground="White" FontSize="9"/>
                         </StackPanel>
                     </Button>
 
@@ -141,7 +141,7 @@
                     CommandTarget="{Binding ElementName=MyDesigner}"
                     ToolTip="Распределить вертикально">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                            <Image Source="Images/vertical_align_icon.png" Width="20"/>
+                            <Image Source="Images/vertical_align_icon.png" Height="40" />
                             <TextBlock Text="Вертикально" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                         </StackPanel>
                     </Button>
@@ -162,7 +162,7 @@
                 CommandTarget="{Binding ElementName=MyDesigner}"
                 ToolTip="Группировать">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Source="Images/group_icon.png" Width="56"/>
+                        <Image Source="Images/group_icon.png" Height="40" />
                         <TextBlock Text="Группа" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                 </Button>
@@ -172,7 +172,7 @@
                 CommandTarget="{Binding ElementName=MyDesigner}"
                 ToolTip="Разгруппировать">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Source="Images/ungroup_icon.png" Width="56"/>
+                        <Image Source="Images/ungroup_icon.png" Height="40" />
                         <TextBlock Text="Разгруп." HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                 </Button>
@@ -183,7 +183,7 @@
                 CommandTarget="{Binding ElementName=MyDesigner}"
                 ToolTip="Переместить вперед">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Source="Images/layers_plus_icon.png" Width="56"/>
+                        <Image Source="Images/layers_plus_icon.png" Height="40" />
                         <TextBlock Text="Вперед" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                 </Button>
@@ -193,7 +193,7 @@
                 CommandTarget="{Binding ElementName=MyDesigner}"
                 ToolTip="Переместить назад">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Source="Images/layers_minus_icon.png" Width="56"/>
+                        <Image Source="Images/layers_minus_icon.png" Height="40" />
                         <TextBlock Text="Назад" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                 </Button>
@@ -203,7 +203,7 @@
                 CommandTarget="{Binding ElementName=MyDesigner}"
                 ToolTip="На передний план">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Source="Images/front_layer_icon.png" Width="56"/>
+                        <Image Source="Images/front_layer_icon.png" Height="40" />
                         <TextBlock Text="На передний" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                 </Button>
@@ -213,7 +213,7 @@
                 CommandTarget="{Binding ElementName=MyDesigner}"
                 ToolTip="На задний план">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Image Source="Images/back_layer_icon.png" Width="56"/>
+                        <Image Source="Images/back_layer_icon.png" Height="40" />
                         <TextBlock Text="На задний" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
                     </StackPanel>
                 </Button>
