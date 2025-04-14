@@ -118,7 +118,7 @@ namespace ArsVisual
                     MessageBoxResult messageBoxResult = NotifyBox.Show(
                         "На странице есть схема, сохранить схему?",
                         "Внимание",
-                        MessageBoxButton.YesNoCancel
+                        MessageBoxButton.YesNoCancel, MessageBoxImage.Warning
                     );
 
                     if (messageBoxResult == MessageBoxResult.No)
@@ -324,9 +324,9 @@ namespace ArsVisual
             if (_pageCanvases.Values.Any(canvas => canvas.Children.Count > 0))
             {
                 MessageBoxResult messageBoxResult = NotifyBox.Show(
-                    "Внимание",
                     "У вас не сохранён проект, сохранить?",
-                    MessageBoxButton.YesNoCancel);
+                    "Внимание",
+                    MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
 
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {

@@ -13,7 +13,7 @@
             <Border CornerRadius="10,10,10,10"  Background="#FF2D2C2C" Margin="10" Height="100" VerticalAlignment="Top">
                 <StackPanel>
                     <Border Background="Black" CornerRadius="10,10,0,0" Height="30">
-                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White" FontFamily="Century Gothic">
+                        <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Foreground="White" FontFamily="Century Gothic" FontSize="16">
                             Проверка обновлений
                         </TextBlock>
                     </Border>

@@ -109,11 +109,11 @@ namespace ArsVisual
 
         private void InvalidateScale(out double scale, out double xOffset, out double yOffset)
         {
-            // designer canvas size
+          
             double w = this.designerCanvas.ActualWidth * this.scaleTransform.ScaleX;
             double h = this.designerCanvas.ActualHeight * this.scaleTransform.ScaleY;
 
-            // zoom canvas size
+            
             double x = this.zoomCanvas.ActualWidth;
             double y = this.zoomCanvas.ActualHeight;
 

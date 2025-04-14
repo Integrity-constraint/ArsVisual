@@ -19,7 +19,6 @@ using ArsVisual.Settings;
 using Microsoft.Win32;
 using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows.Controls.Primitives;
-
 using System.Security.Cryptography;
 using static ArsVisual.Connection;
 using ArsVisual.Helpers;
@@ -102,7 +101,7 @@ namespace ArsVisual
             }
            catch(Exception ex)
             {
-                NotifyBox.Show(ex.Message, ex.StackTrace, MessageBoxButton.OK);
+                NotifyBox.Show(ex.Message, ex.StackTrace, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         #endregion
@@ -320,7 +319,7 @@ namespace ArsVisual
                 {
                     var itemsDict = new Dictionary<Guid, DesignerItem>();
 
-                    // Сначала создаем все элементы
+                   
                     foreach (XElement itemXML in canvasContent.Element("DesignerItems").Elements("DesignerItem"))
                     {
                         Guid id = new Guid(itemXML.Element("ID").Value);
@@ -373,13 +372,13 @@ namespace ArsVisual
                                 }
                                 catch (Exception ex)
                                 {
-                                    Debug.WriteLine($"Ошибка восстановления соединения: {ex.Message}");
+                                    NotifyBox.Show($"Ошибка восстановления соединения", "Ошибка", MessageBoxButton.OK,MessageBoxImage.Error);
                                 }
                             }
                         }
                         catch (Exception ex)
                         {
-                            Debug.WriteLine($"Ошибка при восстановлении соединений: {ex.Message}");
+                            NotifyBox.Show($"Ошибка восстановления соединений", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }, DispatcherPriority.ContextIdle);
                 }
@@ -705,7 +704,7 @@ namespace ArsVisual
 
         private void Order_Enabled(object sender, CanExecuteRoutedEventArgs e)
         {
-            //e.CanExecute = SelectionService.CurrentSelection.Count() > 0;
+            e.CanExecute = SelectionService.CurrentSelection.Count() > 0;
             e.CanExecute = true;
         }
 
@@ -829,12 +828,12 @@ namespace ArsVisual
 
         private void Align_Enabled(object sender, CanExecuteRoutedEventArgs e)
         {
-            //var groupedItem = from item in SelectionService.CurrentSelection.OfType<DesignerItem>()
-            //                  where item.ParentID == Guid.Empty
-            //                  select item;
+            var groupedItem = from item in SelectionService.CurrentSelection.OfType<DesignerItem>()
+                              where item.ParentID == Guid.Empty
+                              select item;
 
 
-            //e.CanExecute = groupedItem.Count() > 1;
+            e.CanExecute = groupedItem.Count() > 1;
             e.CanExecute = true;
         }
 
@@ -1004,12 +1003,12 @@ namespace ArsVisual
 
         private void Distribute_Enabled(object sender, CanExecuteRoutedEventArgs e)
         {
-            //var groupedItem = from item in SelectionService.CurrentSelection.OfType<DesignerItem>()
-            //                  where item.ParentID == Guid.Empty
-            //                  select item;
+            var groupedItem = from item in SelectionService.CurrentSelection.OfType<DesignerItem>()
+                              where item.ParentID == Guid.Empty
+                              select item;
 
 
-            //e.CanExecute = groupedItem.Count() > 1;
+            e.CanExecute = groupedItem.Count() > 1;
             e.CanExecute = true;
         }
 
@@ -1078,7 +1077,7 @@ namespace ArsVisual
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                    NotifyBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
@@ -1102,7 +1101,7 @@ namespace ArsVisual
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+                    NotifyBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
         }
@@ -1191,7 +1190,7 @@ namespace ArsVisual
                 let sinkId = connection.Sink?.ParentDesignerItem?.ID ?? Guid.Empty
                 let sourceName = connection.Source?.Name ?? "Unknown"
                 let sinkName = connection.Sink?.Name ?? "Unknown"
-                where sourceId != Guid.Empty && sinkId != Guid.Empty // Сохраняем только валидные соединения
+                where sourceId != Guid.Empty && sinkId != Guid.Empty 
                 select new XElement("Connection",
                     new XElement("SourceID", sourceId),
                     new XElement("SinkID", sinkId),
