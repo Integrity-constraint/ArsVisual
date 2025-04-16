@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ArsVisual.Resources"
       
         mc:Ignorable="d"
-        Title="Message Box" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None"  ResizeMode="NoResize" Height="150" Width="300">
+        Title="Message Box" Background="Transparent" AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None"  ResizeMode="NoResize" Height="150" Width="300">
     <Border MouseLeftButtonDown="Drag" BorderBrush="White" BorderThickness="1" ClipToBounds="True" Background="#FF37383A" CornerRadius="15">
         <Grid>
             <Grid.RowDefinitions>

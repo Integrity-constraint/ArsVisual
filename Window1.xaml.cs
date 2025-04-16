@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -14,14 +15,32 @@ using static ArsVisual.Connection;
 
 namespace ArsVisual
 {
-    public partial class Window1 : Window
+    public partial class Window1 : Window, INotifyPropertyChanged
     {
         AppearanceMaster app = new();
         public static Dictionary<TabItem, DesignerCanvas> _pageCanvases = new Dictionary<TabItem, DesignerCanvas>();
         private static Dictionary<TabItem, object> _pageStates = new Dictionary<TabItem, object>();
         public static TabControl MainTabControlReference { get; private set; }
 
-       
+        private string _fileName = "Новый проект";
+         public string FileName
+         {
+             get => _fileName;
+             set
+             {
+                 if (_fileName != value)
+                 {
+                     _fileName = value;
+                     OnPropertyChanged(nameof(FileName)); 
+                 }
+             }
+         }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+         protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
+         {
+             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+         }
         public static void SavePageState(TabItem tabItem, object state)
         {
             _pageStates[tabItem] = state;

@@ -16,7 +16,17 @@
             </MenuItem>
             <MenuItem Header="Select All" Command="{x:Static m:DesignerCanvas.SelectAll}"/>
         </ContextMenu>
-      
+        
+        <DataTemplate x:Key="TabHeaderTemplate">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="{Binding Header, RelativeSource={RelativeSource AncestorType=TabItem}}" />
+                <Button Background="Transparent" BorderBrush="Transparent" Content="×" Click="CloseTabClick" 
+     Width="20" Height="20" Padding="0"
+     DockPanel.Dock="Right"
+     Tag="{Binding RelativeSource={RelativeSource AncestorType=TabItem}}"/>
+            </StackPanel>
+        </DataTemplate>
+        
     </Window.Resources>
 
   
@@ -41,6 +51,9 @@
             <TextBlock  Grid.Column="0" Text="ArsVisual" 
                    VerticalAlignment="Center" Margin="10,3,0,0"
                    Foreground="White" FontSize="14" FontFamily="Century Gothic"/>
+            <TextBlock  Grid.Column="0" Text="{Binding FileName}" 
+        VerticalAlignment="Center" HorizontalAlignment="Center" Margin="30,0,0,0"
+        Foreground="White" FontSize="14" FontFamily="Century Gothic"/>
 
             <StackPanel Grid.Column="1" Margin="0,2,2,0"  Orientation="Horizontal" HorizontalAlignment="Right" Cursor="Hand">
                 <Button Width="40" Cursor="Hand" Click="Minimize"

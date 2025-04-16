@@ -246,10 +246,11 @@ namespace ArsVisual
       //  }
         private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            XElement root = LoadSerializedDataFromFile();
+            XElement root = LoadSerializedDataFromFile(out string filePath);
             if (root == null) return;
 
-           
+            var window = Application.Current.Windows.OfType<Window1>().FirstOrDefault();
+             window.FileName = $"{filePath}";
             var tabsToRemove = Window1.MainTabControlReference.Items
                 .OfType<TabItem>()
                 .Where(tab => tab.Header?.ToString() != "+")
@@ -267,7 +268,7 @@ namespace ArsVisual
                 var newTabItem = new TabItem
                 {
                     Header = tabXML.Element("Header")?.Value,
-                    HeaderTemplate = (DataTemplate)FindResource("TabHeaderTemplate")
+                    HeaderTemplate = (DataTemplate)window.FindResource("TabHeaderTemplate")
                 };
 
                 var grid = new Grid();
@@ -343,7 +344,7 @@ namespace ArsVisual
                                     if (itemsDict.TryGetValue(sourceID, out var sourceItem) &&
                                         itemsDict.TryGetValue(sinkID, out var sinkItem))
                                     {
-                                        // Принудительно применяем шаблоны
+                                       
                                         SetConnectorDecoratorTemplate(sourceItem);
                                         SetConnectorDecoratorTemplate(sinkItem);
                                         sourceItem.ApplyTemplate();
@@ -1064,8 +1065,9 @@ namespace ArsVisual
 
         #region Helper Methods
 
-        private XElement LoadSerializedDataFromFile()
+        private XElement LoadSerializedDataFromFile(out string fileName)
         {
+            fileName = null;
             OpenFileDialog openFile = new OpenFileDialog();
             openFile.Filter = "Designer Files (*.xml)|*.xml|All Files (*.*)|*.*";
 
@@ -1073,6 +1075,7 @@ namespace ArsVisual
             {
                 try
                 {
+                    fileName = openFile.FileName;
                     return XElement.Load(openFile.FileName);
                 }
                 catch (Exception e)

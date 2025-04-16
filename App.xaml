@@ -10,7 +10,7 @@
        
        
         <ResourceDictionary>
-            
+           
             <Style x:Key="TextButtonStyle" TargetType="Button">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="BorderBrush" Value="Transparent"/>
@@ -30,15 +30,7 @@
             <Style TargetType="Button" x:Key="CloseButtonStyle">
                 <EventSetter Event="Click" Handler="CloseTabClick" />
             </Style>
-            <DataTemplate x:Key="TabHeaderTemplate">
-                <DockPanel>
-                    <TextBlock Text="{Binding}" Margin="0,0,5,0"/>
-                    <Button Style="{StaticResource CloseButtonStyle}"  Background="Transparent" BorderBrush="Transparent" Content="×" 
-                        Width="20" Height="20" Padding="0"
-                        DockPanel.Dock="Right"
-                        Tag="{Binding RelativeSource={RelativeSource AncestorType=TabItem}}"/>
-                </DockPanel>
-            </DataTemplate>
+           
             <SolidColorBrush x:Key="SizeChromeColor" Color="Red"/>
             <SolidColorBrush x:Key="SnapAdornerColor" Color="Green"/>
             <tb:TaskbarIcon x:Key="MyNotifyIcon"
