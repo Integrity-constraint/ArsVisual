@@ -31,37 +31,12 @@ namespace ArsVisual.pages
         public ColorChanger()
         {
             InitializeComponent();
-            LoadColors();
+           
         }
 
-        private void LoadColors()
-        {
-            var colors = new List<Color>
-        {
-            Colors.Red,
-            Colors.Green,
-            Colors.Blue,
-            Colors.Yellow,
-            Colors.Orange,
-            Colors.Purple,
-            Colors.White,
-            Colors.Black
-        };
-
-         
-
-            
-        }
+      
 
 
-
-        private void SetCurrentColor(ComboBox comboBox, string resourceKey)
-        {
-            if (Application.Current.Resources[resourceKey] is SolidColorBrush brush)
-            {
-                comboBox.SelectedItem = brush.Color;
-            }
-        }
 
        
 

@@ -28,7 +28,7 @@ namespace ArsVisual
 
         private void CloseTabClick(object sender, RoutedEventArgs e)
         {
-            if (Application.Current.MainWindow is Window1 mainWindow)
+            if (Application.Current.MainWindow is WorkWindow mainWindow)
             {
                 mainWindow.CloseTabClick(sender, e);
             }

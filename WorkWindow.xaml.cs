@@ -1,7 +1,7 @@
 ﻿using ArsVisual.Helpers;
 using ArsVisual.NotifyComponents.MsgBox;
 using ArsVisual.Settings;
-
+using ArsVisual;
 using AutoUpdaterDotNET;
 using System;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ using static ArsVisual.Connection;
 
 namespace ArsVisual
 {
-    public partial class Window1 : Window, INotifyPropertyChanged
+    public partial class WorkWindow : Window, INotifyPropertyChanged
     {
         AppearanceMaster app = new();
         public static Dictionary<TabItem, DesignerCanvas> _pageCanvases = new Dictionary<TabItem, DesignerCanvas>();
@@ -50,13 +50,13 @@ namespace ArsVisual
         {
             return _pageStates;
         }
-        public Window1()
+        public WorkWindow()
         {
             InitializeComponent();
             AppearanceMaster.LoadColors();
             AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
-          
-          
+
+            DataContext = this;
             _pageCanvases[(TabItem)MainTabControl.Items[0]] = MyDesignerCanvas;
 
             

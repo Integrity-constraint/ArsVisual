@@ -73,8 +73,8 @@
                         <TreeViewItem Header="Общее">
                             <TreeViewItem Header="Цвета" Selected="Palitra" />
                         </TreeViewItem>
-                        <TreeViewItem Selected="Update_Selected" Header="Обновления" />
-                        <TreeViewItem Header="Справка" />
+                        <TreeViewItem Selected="TreeViewItem_Selected" Header="Обновления" />
+                        <TreeViewItem Selected="TreeViewItem_Selected" Header="Справка" />
                     </TreeView>
                 </GroupBox>
 

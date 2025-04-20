@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArsVisual.NotifyComponents.MsgBox;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -54,7 +55,7 @@ namespace ArsVisual.Settings
             }
             catch(Exception ex) 
             {
-                MessageBox.Show($"Ошибка загрузки цветовых схем: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                NotifyBox.Show($"Ошибка загрузки цветовых схем: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
               
 
                 RestoreDefaultColors();

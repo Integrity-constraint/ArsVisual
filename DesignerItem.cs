@@ -8,6 +8,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using ArsVisual;
 using ArsVisual.Controls;
+using ArsVisual.NotifyComponents.MsgBox;
 using ArsVisual.Resources;
 using Brush = System.Windows.Media.Brush;
 using FontFamily = System.Windows.Media.FontFamily;
@@ -281,7 +282,7 @@ namespace ArsVisual
                 }
                 else
                 {
-                    MessageBox.Show("Размер шрифта должен быть больше 0.");
+                    NotifyBox.Show("Размер шрифта должен быть больше 0.","Внимание", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 }
             }
         }
@@ -318,7 +319,7 @@ namespace ArsVisual
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка: {ex.Message}");
+                NotifyBox.Show($"{ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -345,7 +346,7 @@ namespace ArsVisual
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка: {ex.Message}");
+                NotifyBox.Show($"{ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         private void CanExecuteChangeItemFill(object sender, CanExecuteRoutedEventArgs e)
@@ -369,7 +370,7 @@ namespace ArsVisual
             base.OnPreviewMouseDown(e);
             DesignerCanvas designer = VisualTreeHelper.GetParent(this) as DesignerCanvas;
 
-            // update selection
+           
             if (designer != null)
             {
                 if ((Keyboard.Modifiers & (ModifierKeys.Shift | ModifierKeys.Control)) != ModifierKeys.None)
@@ -427,7 +428,7 @@ namespace ArsVisual
 
         #region RotateThumbTemplate Property
 
-        // can be used to replace the default template for the RotateThumb
+     
         public static readonly DependencyProperty RotateThumbTemplateProperty =
             DependencyProperty.RegisterAttached("RotateThumbTemplate", typeof(ControlTemplate), typeof(DesignerItem));
 

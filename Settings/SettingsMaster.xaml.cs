@@ -81,12 +81,27 @@ namespace ArsVisual.Settings
 
         private void TreeViewItem_Selected(object sender, RoutedEventArgs e)
         {
+            if (sender is TreeViewItem tree && tree.Header != null)
+            {
+                string itemName = tree.Header.ToString();
 
+                switch (itemName)
+                {
+                    case "Обновления":
+                        OCHKO.Navigate(new pages.UpdatePage());
+                        break;
+                    case "Справка":
+                        OCHKO.Navigate(new pages.InfoPage());
+                        break;
+                    case "Цвета":
+                        OCHKO.Navigate(new pages.ColorChanger());
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
-        private void Update_Selected(object sender, RoutedEventArgs e)
-        {
-            OCHKO.Navigate( new pages.UpdatePage());
-        }
+       
     }
 }

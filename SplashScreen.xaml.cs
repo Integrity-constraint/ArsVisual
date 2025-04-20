@@ -72,7 +72,7 @@ namespace ArsVisual
                 return;
             }
 
-            var mainWindow = new Window1();
+            var mainWindow = new WorkWindow();
             mainWindow.Show();
             Close();
         }
