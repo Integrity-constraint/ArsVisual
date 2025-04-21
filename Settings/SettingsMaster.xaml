@@ -79,7 +79,7 @@
                 </GroupBox>
 
             
-            <Frame Background="gray" NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
+            <Frame  Background="gray" NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
         </Grid>
     </Grid>
 

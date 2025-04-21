@@ -8,52 +8,155 @@
                     xmlns:m="clr-namespace:ArsVisual" 
                     xmlns:pages="clr-namespace:ArsVisual.pages" xmlns:i="http://schemas.microsoft.com/xaml/behaviors">
 
+    <Style TargetType="ContextMenu" x:Key="DarkContextMenuStyle">
+        <Setter Property="Background" Value="#FF2D2D2D"/>
+      
+        <Setter Property="BorderBrush" Value="#FF555555"/>
+      
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Foreground" Value="#FFE0E0E0"/>
+       
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ContextMenu">
+                    <Border CornerRadius="10" Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <StackPanel IsItemsHost="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
-    <ContextMenu  x:Key="DesignerItemContextMenu" 
+    <Style TargetType="MenuItem" x:Key="DarkMenuItemStyle">
+        <Setter Property="Background" Value="#FF2D2D2D"/>
+      
+        <Setter Property="Foreground" Value="#FFE0E0E0"/>
+       
+        <Setter Property="Padding" Value="8,4"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Border CornerRadius="10" x:Name="Bg" Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="0">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="Icon"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="Shortcut"/>
+                                <ColumnDefinition Width="Auto" SharedSizeGroup="Arrow"/>
+                            </Grid.ColumnDefinitions>
+                           
+                            <ContentPresenter x:Name="Icon" Content="{TemplateBinding Icon}"
+                                         Margin="4,0,6,0" VerticalAlignment="Center"/>
+                        
+                            <ContentPresenter Grid.Column="1" Content="{TemplateBinding Header}"
+                                         Margin="{TemplateBinding Padding}"
+                                         VerticalAlignment="Center"/>
+                           
+                            <Popup x:Name="SubMenu" Grid.ColumnSpan="4"
+                               IsOpen="{TemplateBinding IsSubmenuOpen}"
+                               Placement="Right"
+                               Focusable="False"
+                               AllowsTransparency="True">
+                                <Border CornerRadius="10" Background="#FF2D2D2D" BorderBrush="#FF555555" BorderThickness="1">
+                                    <StackPanel IsItemsHost="True"/>
+                                </Border>
+                            </Popup>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                       
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Bg" Property="Background" Value="#FF3F3F3F"/>
+                        </Trigger>
+                     
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Foreground" Value="#FF808080"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ContextMenu Style="{StaticResource DarkContextMenuStyle}"  x:Key="DesignerItemContextMenu" 
                  DataContext="{Binding PlacementTarget, RelativeSource={RelativeSource Self}}">
+        <ContextMenu.Resources>
+            <Style TargetType="MenuItem" BasedOn="{StaticResource DarkMenuItemStyle}"/>
+        </ContextMenu.Resources>
         <MenuItem Header="Цвет элемента" 
    CommandTarget="{Binding PlacementTarget.SelectedItem, 
    RelativeSource={RelativeSource AncestorType=ContextMenu}}">
 
             <MenuItem Header="Основной" >
-
-                <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+               
+                <MenuItem Margin="2" Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
  CommandParameter="Red">
                     <MenuItem.Icon>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+                            
+                       
                         <Rectangle Width="16" Height="16" Fill="Red"/>
+                        </Border>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Белый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+                <MenuItem Margin="2" Header="Белый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
 CommandParameter="White">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="White"/>
+                        <Border BorderBrush="Black" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="White"/>
+                        </Border>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+                <MenuItem Margin="2" Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
 CommandParameter="Yellow">
+                
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+                            <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                        </Border>
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+                <MenuItem Margin="2" Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
 CommandParameter="Green">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Green"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Green"/>
+                        </Border>
+                        
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+                <MenuItem Margin="2" Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
 CommandParameter="Black">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Black"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Black"/>
+                        </Border>
+                        
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+                <MenuItem Margin="2" Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
 CommandParameter="Purple">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Purple"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Purple"/>
+                        </Border>
+                     
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="Свой" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
+                <MenuItem Margin="2" Header="Свой" Command="{x:Static m:DesignerItemCommands.ChangeItemFillCommand}" 
 CommandParameter="Custom">
                     <MenuItem.Icon>
                         <Rectangle Width="16" Height="16">
@@ -73,44 +176,79 @@ CommandParameter="Custom">
                 <MenuItem Header="Зелёный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Green">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Green"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Green"/>
+                        </Border>
+                      
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Белый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="White">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="White"/>
+                        <Border BorderBrush="Black" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="White"/>
+                        </Border>
+                       
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Красный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
  CommandParameter="Red">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Red"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Red"/>
+                        </Border>
+                        
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Жёлтый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Yellow">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Yellow"/>
+                        </Border>
+                      
                     </MenuItem.Icon>
                 </MenuItem>
 
                 <MenuItem Header="Чёрный" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Black">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Black"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Black"/>
+                        </Border>
+                       
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Фиолетовый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Purple">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Purple"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Purple"/>
+                        </Border>
+                   
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Оранжевый" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
 CommandParameter="Purple">
                     <MenuItem.Icon>
-                        <Rectangle Width="16" Height="16" Fill="Orange"/>
+                        <Border BorderBrush="White" BorderThickness="0.7">
+
+
+                            <Rectangle Width="16" Height="16" Fill="Orange"/>
+                        </Border>
+                        
                     </MenuItem.Icon>
                 </MenuItem>
                 <MenuItem Header="Свой" Command="{x:Static m:DesignerItemCommands.ChangeItemStrokeCommand}" 
@@ -152,7 +290,7 @@ CommandParameter="Custom">
             </MenuItem>
         </MenuItem>
 
-        <!-- Изменение семейства шрифтов -->
+      
         <MenuItem Header="Шрифты">
             <MenuItem Header="Arial" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Arial"/>
             <MenuItem Header="Times New Roman" Command="{x:Static m:DesignerItemCommands.ChangeFontFamilyCommand}" CommandParameter="Times New Roman"/>

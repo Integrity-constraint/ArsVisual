@@ -25,6 +25,7 @@ using static ArsVisual.Connection;
 using System.Windows.Threading;
 
 using ArsVisual.NotifyComponents.MsgBox;
+using ArsVisual.Resources;
 
 
 
@@ -376,13 +377,12 @@ namespace ArsVisual
 
                 XElement designerItemsXML = SerializeDesignerItems(designerItems);
                 XElement connectionsXML = SerializeConnections(connections);
-
                 XElement tabContent = new XElement("Tab",
-                    new XElement("Header", tabItem.Header.ToString()),
-                    new XElement("CanvasContent",
-                        designerItemsXML,
-                        connectionsXML)
-                );
+                     new XElement("Header", tabItem.Header.ToString()),
+                     new XElement("CanvasContent",
+                         designerItemsXML,
+                         connectionsXML)
+                 );
 
                 root.Add(tabContent);
             }

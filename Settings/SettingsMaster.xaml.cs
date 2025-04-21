@@ -25,7 +25,8 @@ namespace ArsVisual.Settings
     /// </summary>
     public partial class SettingsMaster : Window
     {
-        
+        public Frame Frame { get; set; }
+
 
         public SettingsMaster()
         {
@@ -33,6 +34,7 @@ namespace ArsVisual.Settings
 
             AppearanceMaster.LoadColors();
 
+            Frame = OCHKO;
         }
 
         protected override void OnClosed(EventArgs e)

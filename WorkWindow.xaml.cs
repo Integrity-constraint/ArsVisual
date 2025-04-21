@@ -1,27 +1,24 @@
 ﻿using ArsVisual.Helpers;
 using ArsVisual.NotifyComponents.MsgBox;
 using ArsVisual.Settings;
-using ArsVisual;
 using AutoUpdaterDotNET;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using static ArsVisual.Connection;
+using ArsVisual.Resources;
 
 namespace ArsVisual
 {
     public partial class WorkWindow : Window, INotifyPropertyChanged
     {
-        AppearanceMaster app = new();
+        
         public static Dictionary<TabItem, DesignerCanvas> _pageCanvases = new Dictionary<TabItem, DesignerCanvas>();
         private static Dictionary<TabItem, object> _pageStates = new Dictionary<TabItem, object>();
         public static TabControl MainTabControlReference { get; private set; }
 
+        public static RoutedCommand OpenFaq = new RoutedCommand();
         private string _fileName = "Новый проект";
          public string FileName
          {
@@ -54,6 +51,7 @@ namespace ArsVisual
         {
             InitializeComponent();
             AppearanceMaster.LoadColors();
+            OpenFaq.InputGestures.Add(new KeyGesture(Key.F1));
             AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
 
             DataContext = this;
@@ -65,6 +63,8 @@ namespace ArsVisual
             this.Closing += OnClosing;
            
             MainTabControlReference = MainTabControl;
+          
+
         }
 
        
@@ -83,14 +83,14 @@ namespace ArsVisual
             }
         }
 
-        
         public void AddNewPage()
         {
             var newTabItem = new TabItem { Header = $"Страница {MainTabControl.Items.Count}" };
 
-           
+
             newTabItem.HeaderTemplate = (DataTemplate)FindResource("TabHeaderTemplate");
 
+           
             var grid = new Grid();
             var scrollViewer = new ScrollViewer
             {
@@ -118,16 +118,28 @@ namespace ArsVisual
                 Margin = new Thickness(0, 10, 30, 0)
             };
 
+           
             grid.Children.Add(scrollViewer);
             grid.Children.Add(zoomBox);
-
             newTabItem.Content = grid;
-            MainTabControl.Items.Insert(MainTabControl.Items.Count - 1, newTabItem); 
 
+            if (MainTabControl.Items.Count == 0)
+            {
+                MainTabControl.Items.Add(newTabItem); 
+            }
+            else
+            {
+                MainTabControl.Items.Insert(MainTabControl.Items.Count - 1, newTabItem); 
+            }
+
+      
             _pageCanvases[newTabItem] = designerCanvas;
-        }
 
         
+            MainTabControl.SelectedItem = newTabItem;
+        }
+
+
         public void CloseTabClick(object sender, RoutedEventArgs e)
         {
             if (sender is Button button && button.Tag is TabItem tabItem)
@@ -399,7 +411,22 @@ namespace ArsVisual
                 DragMove();
             }
         }
+        private void OpenFaqExecuted(object sender, ExecutedRoutedEventArgs e)
+        {
+          
+            SettingsMaster settings = new SettingsMaster();
 
-        
+            if(settings.IsActive == true)
+            {
+                settings.Focus();
+            }
+            if (settings.IsActive == false) 
+            {
+                settings.Show();
+                settings.Frame.NavigationService.Navigate(new pages.InfoPage());
+            }
+
+        }
+       
     }
 }
