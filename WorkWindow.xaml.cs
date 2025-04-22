@@ -427,6 +427,21 @@ namespace ArsVisual
             }
 
         }
+
+        private void show(object sender, MouseEventArgs e)
+        {
+            NotifyBox.Show("чпоку", "вапку", MessageBoxButton.OK);
+        }
+
+        private void EnableEdit(object sender, MouseButtonEventArgs e)
+        {
+            if (sender is TextBox text && text.IsEnabled == false) { 
+            
+            text.IsEnabled = true;
+            
+            }
+        }
+
        
     }
 }

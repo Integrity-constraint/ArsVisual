@@ -135,7 +135,7 @@ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource Te
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>
                                     <DockPanel>
-                                        <TextBox BorderBrush="Transparent" Text="Страница 1"/>
+                                        <TextBox  BorderBrush="Transparent" Text="Страница 1"/>
                                         <Button  Background="Transparent" BorderBrush="Transparent" Content="×" Click="CloseTabClick" 
                                             Width="20" Height="20" Padding="0"
                                             DockPanel.Dock="Right"
