@@ -14,6 +14,7 @@
   <ItemGroup>
     <None Remove="icons\attention_icon.png" />
     <None Remove="icons\close.png" />
+    <None Remove="icons\cloud-computing.gif" />
     <None Remove="icons\collage.gif" />
     <None Remove="icons\critical_icon.png" />
     <None Remove="icons\exception_icon.png" />
@@ -33,6 +34,7 @@
     <None Remove="Resources\Images\delete_icon.png" />
     <None Remove="Resources\Images\front_layer_icon.png" />
     <None Remove="Resources\Images\group_icon.png" />
+    <None Remove="Resources\Images\Hive.PNG" />
     <None Remove="Resources\Images\horizontal_align_icon.png" />
     <None Remove="Resources\Images\layers_minus_icon.png" />
     <None Remove="Resources\Images\layers_plus_icon.png" />
@@ -44,6 +46,9 @@
 
   <ItemGroup>
     <Resource Include="icons\attention_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="icons\cloud-computing.gif">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="icons\critical_icon.png">
@@ -95,6 +100,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\group_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\Hive.PNG">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\horizontal_align_icon.png">

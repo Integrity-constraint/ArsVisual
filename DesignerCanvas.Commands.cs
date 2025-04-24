@@ -25,7 +25,8 @@ using static ArsVisual.Connection;
 using System.Windows.Threading;
 
 using ArsVisual.NotifyComponents.MsgBox;
-using ArsVisual.Resources;
+using ArsVisual.NetService;
+
 
 
 
@@ -87,27 +88,25 @@ namespace ArsVisual
             this.AllowDrop = true;
             Clipboard.Clear();
         }
-        #region NotifyMethod
+       
 
-        private void NotifyUser(string balloontext, string header,string imgtext,int time, PopupAnimation popup )
-        {
-            try
-            {
-                MessageSave messageSave = new MessageSave();
-                messageSave.BalloonText = balloontext;
-                messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
-                messageSave.Headersave = header;
-                App.ts.ShowCustomBalloon(messageSave, popup, time);
-            }
-           catch(Exception ex)
-            {
-                NotifyBox.Show(ex.Message, ex.StackTrace, MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-        }
-        #endregion
-        #region ColoRCHANGE
-
-        #endregion
+      // private void NotifyUser(string balloontext, string header,string imgtext,int time, PopupAnimation popup )
+      // {
+      //     try
+      //     {
+      //         MessageSave messageSave = new MessageSave();
+      //         messageSave.BalloonText = balloontext;
+      //         messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
+      //         messageSave.Headersave = header;
+      //         App.ts.ShowCustomBalloon(messageSave, popup, time);
+      //     }
+      //    catch(Exception ex)
+      //     {
+      //         NotifyBox.Show(ex.Message, ex.StackTrace, MessageBoxButton.OK, MessageBoxImage.Error);
+      //     }
+      // }
+   
+      
         #region New Command
 
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)
@@ -165,7 +164,7 @@ namespace ArsVisual
 
                 }
 
-                NotifyUser(saveFileDialog.FileName.ToString(), "Изображение сохранено", "collage.gif",4000, PopupAnimation.Slide );
+               App.NotifyUser(saveFileDialog.FileName.ToString(), "Изображение сохранено", "collage.gif",4000, PopupAnimation.Slide );
 
             }
 
@@ -351,12 +350,6 @@ namespace ArsVisual
 }
 
 
-
-
-
-
-
-
         #endregion
 
         #region Save Command
@@ -367,7 +360,7 @@ namespace ArsVisual
 
             foreach (var tabItem in WorkWindow._pageCanvases.Keys)
             {
-               
+
                 tabItem.IsSelected = true;
                 Application.Current.Dispatcher.Invoke(DispatcherPriority.Background, new Action(() => { }));
 
@@ -386,8 +379,27 @@ namespace ArsVisual
 
                 root.Add(tabContent);
             }
+            
+            MessageBoxResult messageBoxResult =  NotifyBox.Show("Сохранить проект локально \n локально - да \n В облаке - нет", "Внимание", MessageBoxButton.YesNoCancel);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
 
-            SaveFile(root);
+                SaveFile(root);
+
+            }
+            else if (messageBoxResult == MessageBoxResult.No)
+            {
+               
+                SaveFileToCloud(root);
+            }
+            else
+            {
+             
+            }
+
+           
+
+
         }
 
 
@@ -1027,8 +1039,11 @@ namespace ArsVisual
             return null;
         }
 
+        
         void SaveFile(XElement xElement)
         {
+         
+
             SaveFileDialog saveFile = new SaveFileDialog();
             saveFile.Filter = "Files (*.xml)|*.xml|All Files (*.*)|*.*";
             if (saveFile.ShowDialog() == true)
@@ -1038,7 +1053,7 @@ namespace ArsVisual
                     xElement.Save(saveFile.FileName);
 
 
-                    NotifyUser(saveFile.FileName.ToString(), "Файл проекта сохранён", "folder.gif", 4000, PopupAnimation.Slide);
+                    App.NotifyUser(saveFile.FileName.ToString(), "Файл проекта сохранён", "folder.gif", 4000, PopupAnimation.Slide);
 
 
                 }
@@ -1047,6 +1062,13 @@ namespace ArsVisual
                     NotifyBox.Show(ex.StackTrace, ex.Message, MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+        void SaveFileToCloud(XElement xElement)
+        {
+            DigitalHiveLoginForm loginForm = new DigitalHiveLoginForm(xElement); 
+            loginForm.ShowDialog(); 
+                 
+            
         }
 
         private XElement LoadSerializedDataFromClipBoard()

@@ -7,6 +7,9 @@ using System.Linq;
 using System.Windows;
 using ArsVisual.NotifyComponents.Not;
 using System.Reflection;
+using ArsVisual.NotifyComponents.MsgBox;
+using System.Windows.Controls.Primitives;
+using System.Windows.Media.Imaging;
 
 namespace ArsVisual 
 
@@ -31,6 +34,23 @@ namespace ArsVisual
             if (Application.Current.MainWindow is WorkWindow mainWindow)
             {
                 mainWindow.CloseTabClick(sender, e);
+            }
+        }
+
+
+       public static void NotifyUser(string balloontext, string header, string imgtext, int time, PopupAnimation popup)
+        {
+            try
+            {
+                MessageSave messageSave = new MessageSave();
+                messageSave.BalloonText = balloontext;
+                messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
+                messageSave.Headersave = header;
+                App.ts.ShowCustomBalloon(messageSave, popup, time);
+            }
+            catch (Exception ex)
+            {
+                NotifyBox.Show(ex.Message, ex.StackTrace, MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
