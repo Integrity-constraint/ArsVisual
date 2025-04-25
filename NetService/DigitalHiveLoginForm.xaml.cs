@@ -49,7 +49,7 @@ namespace ArsVisual.NetService
         {
            
             string  email = EmailBox.Text;
-           string fileName = NameBox.Text;
+            string fileName = NameBox.Text;
             string Password = SecureStringToString(PassBox.SecurePassword);
 
 
@@ -71,11 +71,8 @@ namespace ArsVisual.NetService
                 CheckTextboxOutline(NameBox);
             }
             if (string.IsNullOrEmpty(fileName))
-            {
-                PassBox.Password  = "Имя файла пустое";
-                PassBox.Foreground = new SolidColorBrush(Colors.Red);
-
-                
+            {              
+                PassBox.Foreground = new SolidColorBrush(Colors.Red);               
             }
             else 
             {

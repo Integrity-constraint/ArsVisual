@@ -72,8 +72,13 @@ namespace ArsVisual.NetService
                     throw new HttpRequestException($"Ошибка загрузки: {response.StatusCode} - {errorMessage}");
                 }
 
-  
-               
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+                var responseJson = JsonSerializer.Deserialize<UploadResponce>(
+                    responseBody,
+                    new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
+                );
+
             }
             catch (Exception ex)
             {
