@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item>
-    <version>1.0.7</version>
-    <url>https://github.com/Integrity-constraint/ArsVisual/releases/download/v1.0.7/ArsVisual.zip</url>
-    <changelog>https://github.com/Integrity-constraint/ArsVisual/releases/tag/v1.0.7</changelog>
+    <version>1.0.8</version>
+    <url>https://github.com/Integrity-constraint/ArsVisual/releases/download/v1.0.8/ArsVisual.zip</url>
+    <changelog>https://github.com/Integrity-constraint/ArsVisual/releases/tag/v1.0.8</changelog>
    <mandatory>true</mandatory>
 </item>
