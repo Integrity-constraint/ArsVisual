@@ -52,7 +52,7 @@ namespace ArsVisual
         {
             InitializeComponent();
            
-            AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
+            AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/ArsVisual/master/Update.xml");
             AppearanceMaster.LoadColors();
             OpenFaq.InputGestures.Add(new KeyGesture(Key.F1));
             DataContext = this;
