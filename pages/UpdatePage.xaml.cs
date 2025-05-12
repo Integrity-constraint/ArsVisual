@@ -37,7 +37,7 @@ namespace ArsVisual.pages
 
         private void CheckUpdates(object sender, RoutedEventArgs e)
         {
-            AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
+            AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/ArsVisual/master/Update.xml");
 
            
         }
