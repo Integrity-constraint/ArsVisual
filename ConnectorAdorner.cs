@@ -103,9 +103,7 @@ namespace ArsVisual
             base.OnRender(dc);
             dc.DrawGeometry(null, drawingPen, this.pathGeometry);
 
-            // without a background the OnMouseMove event would not be fired
-            // Alternative: implement a Canvas as a child of this adorner, like
-            // the ConnectionAdorner does.
+            
             dc.DrawRectangle(Brushes.Transparent, null, new Rect(RenderSize));
         }
 

@@ -31,7 +31,7 @@
         <Setter Property="Fill" Value="Orange"/>
         
         <Setter Property="Stroke" Value="red"/>
-      
+        <Setter Property="Cursor" Value="Hand"></Setter>
         <Setter Property="StrokeThickness" Value="1"/>
         <Setter Property="StrokeLineJoin" Value="Round"/>
         <Setter Property="Stretch" Value="Fill"/>

@@ -6,7 +6,7 @@
         xmlns:c="clr-namespace:ArsVisual.Controls"
         WindowStartupLocation="CenterScreen"
         Title="ArsVisual"
-        Height="850" Width="1000"  WindowState="Maximized" Icon="/icons/logo.png" AllowsTransparency="True" WindowStyle="None" Background="#FF37383A">
+        Height="850" Width="1000" ResizeMode="CanResizeWithGrip" Icon="/icons/logo.png" AllowsTransparency="True" WindowStyle="None" Background="#FF37383A" WindowState="Maximized">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static m:WorkWindow.OpenFaq}" 
                      Executed="OpenFaqExecuted"/>
@@ -22,7 +22,10 @@
         </ContextMenu>
         <DataTemplate x:Key="TabHeaderTemplate">
             <StackPanel Orientation="Horizontal">
-                <TextBox BorderBrush="Transparent" Text="{Binding Header, RelativeSource={RelativeSource AncestorType=TabItem}}" />
+                <TextBox  BorderBrush="Transparent" Background="Transparent" Text="{Binding Header, RelativeSource={RelativeSource AncestorType=TabItem}}" FontFamily="Century Gothic" >
+
+                  
+                </TextBox>
                 <Button Background="Transparent" BorderBrush="Transparent" Content="×" Click="CloseTabClick" 
      Width="20" Height="20" Padding="0"
      DockPanel.Dock="Right"
@@ -59,15 +62,28 @@
         Foreground="White" FontSize="14" FontFamily="Century Gothic"/>
 
             <StackPanel Grid.Column="1" Margin="0,2,2,0"  Orientation="Horizontal" HorizontalAlignment="Right" Cursor="Hand">
-                <Button Width="40" Cursor="Hand" Click="Minimize"
-                    Content="🗕" ToolTip="Свернуть"
-                  />
-                <Button  Width="40"  Cursor="Hand"  Click="Open"
-                    Content="🗖" ToolTip="Развернуть"
-                  />
-                <Button  Width="40"  Click="Clostw" Cursor="Hand"  Name="btnshut"
-                    Content="✕" ToolTip="Закрыть"
-                  />
+                <Button Style="{StaticResource TextButtonStyle}"  BorderBrush="Transparent" Background="Transparent" Cursor="Hand" Click="Minimize"
+                     ToolTip="Свернуть"
+                  >
+                    <Image Height="20" Source="/icons/minimize_icon.png">
+                        
+                    </Image>
+                    
+                </Button>
+
+                <Button Style="{StaticResource TextButtonStyle}"  Cursor="Hand"  Click="Open"
+                    ToolTip="Развернуть">
+                    <Image Height="20" Source="/icons/window_icon.png">
+
+                    </Image>
+                </Button>
+                <Button Style="{StaticResource TextButtonStyle}"  Click="Clostw" Cursor="Hand"  Name="btnshut"
+                     ToolTip="Закрыть">
+
+                    <Image Height="20" Source="/icons/close_icon.png">
+
+                    </Image>
+                </Button>
             </StackPanel>
             <Button Style="{StaticResource TextButtonStyle}" Grid.Row="1" Click="OpenPopup" Margin="10,2,0,0" HorizontalAlignment="Left">
                 <Button.Content>
@@ -80,6 +96,7 @@
                     <StackPanel  Background="Transparent" >
                         <Button Margin="5" Content="Открыть проект" Command="{x:Static ApplicationCommands.Open}"
  CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
+                        <Button Margin="5" Content="Выгрузить с облака" Click="GetFilesFromCloud" Style="{StaticResource TextButtonStyle}"/>
                         <Button Margin="5" Content="Новый файл" Command="{x:Static ApplicationCommands.New}"
  CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource TextButtonStyle}"/>
                         <Button Margin="5" Content="Сохранить проект" Command="{x:Static ApplicationCommands.Save}"
@@ -118,14 +135,14 @@ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource Te
              
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                        <Expander Background="#1B1B1B" Header="Простая Блок-схема" Content="{StaticResource FlowChartStencils}" IsExpanded="True"  />
-                        <Expander Background="#1B1B1B" Header="Объекты Active Directory" Content="{StaticResource NetStencils}" IsExpanded="True"/>
-                        <Expander Background="#1B1B1B" Header="Сценарий выполнения UML" Content="{StaticResource UMLPosl}" IsExpanded="True"/>
-                        <Expander Background="#1B1B1B" Header="Рабочие области Офисы/комнаты" Content="{StaticResource RoomStencils}" IsExpanded="True"/>
+                        <Expander Background="#1B1B1B" Header="Простая Блок-схема" Content="{StaticResource FlowChartStencils}" IsExpanded="True" FontFamily="Century Gothic"  />
+                        <Expander Background="#1B1B1B" Header="Объекты Active Directory" Content="{StaticResource NetStencils}" IsExpanded="True" FontFamily="Century Gothic"/>
+                        <Expander Background="#1B1B1B" Header="Сценарий выполнения UML" Content="{StaticResource UMLPosl}" IsExpanded="True" FontFamily="Century Gothic"/>
+                        <Expander Background="#1B1B1B" Header="Рабочие области Офисы/комнаты" Content="{StaticResource RoomStencils}" IsExpanded="True" FontFamily="Century Gothic"/>
                     </StackPanel>
                 </ScrollViewer>
               
-                <GridSplitter Focusable="False" Width="2" Background="LightGray"
+                <GridSplitter  Width="2" Background="LightGray"
                     VerticalAlignment="Stretch" HorizontalAlignment="Right"/>
 
                 <GroupBox Grid.Column="1">
@@ -135,7 +152,7 @@ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource Te
                             <TabItem.HeaderTemplate>
                                 <DataTemplate>
                                     <DockPanel>
-                                        <TextBox  BorderBrush="Transparent" Text="Страница 1"/>
+                                        <TextBox    Background="Transparent" BorderBrush="Transparent" Text="Страница 1" FontFamily="Century Gothic"/>
                                         <Button  Background="Transparent" BorderBrush="Transparent" Content="×" Click="CloseTabClick" 
                                             Width="20" Height="20" Padding="0"
                                             DockPanel.Dock="Right"

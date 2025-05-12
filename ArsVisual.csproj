@@ -14,6 +14,7 @@
   <ItemGroup>
     <None Remove="icons\attention_icon.png" />
     <None Remove="icons\close.png" />
+    <None Remove="icons\close_icon.png" />
     <None Remove="icons\cloud-computing.gif" />
     <None Remove="icons\collage.gif" />
     <None Remove="icons\critical_icon.png" />
@@ -21,7 +22,10 @@
     <None Remove="icons\folder.gif" />
     <None Remove="icons\info_icon.png" />
     <None Remove="icons\integration.png" />
+    <None Remove="icons\logo.png" />
+    <None Remove="icons\minimize_icon.png" />
     <None Remove="icons\TreyPop2.png" />
+    <None Remove="icons\window_icon.png" />
     <None Remove="Resources\Images\align1_icon.png" />
     <None Remove="Resources\Images\align2_icon.png" />
     <None Remove="Resources\Images\align3_icon.png" />
@@ -34,7 +38,7 @@
     <None Remove="Resources\Images\delete_icon.png" />
     <None Remove="Resources\Images\front_layer_icon.png" />
     <None Remove="Resources\Images\group_icon.png" />
-    <None Remove="Resources\Images\Hive.PNG" />
+    <None Remove="Resources\Images\HiveLogo.png" />
     <None Remove="Resources\Images\horizontal_align_icon.png" />
     <None Remove="Resources\Images\layers_minus_icon.png" />
     <None Remove="Resources\Images\layers_plus_icon.png" />
@@ -60,10 +64,19 @@
     <Resource Include="icons\info_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
+    <Content Include="icons\close_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="icons\minimize_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="icons\TreyPop2.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\window_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\align1_icon.png">
@@ -102,7 +115,7 @@
     <Content Include="Resources\Images\group_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Resources\Images\Hive.PNG">
+    <Content Include="Resources\Images\HiveLogo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\horizontal_align_icon.png">
@@ -148,6 +161,12 @@
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
     <PackageReference Include="WPFThemes.DarkBlend" Version="1.0.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="NetService\DigitalHiveGetFilesLogin.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>

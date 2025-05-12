@@ -1723,9 +1723,9 @@
     </Style>
     <s:Toolbox x:Key="NetStencils" ItemSize="60,60" SnapsToDevicePixels="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
-            <Grid>
+            <Grid ToolTip="Пользователь">
 
-                <Image Style="{StaticResource UserDrawingImageStyle}"  ToolTip="Пользователь">
+                <Image Style="{StaticResource UserDrawingImageStyle}"  >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 
@@ -1742,7 +1742,7 @@
 
                 </TextBox>
             </Grid>
-            <Grid>
+            <Grid ToolTip="Веб-ресурс">
                
                
                 <Image Style="{StaticResource SiteImageStyle}"  ToolTip="Сайт">
@@ -1765,9 +1765,9 @@
 
                 </TextBox>
             </Grid>
-            <Grid>
+            <Grid ToolTip="ЭВМ">
 
-                <Image Style="{StaticResource ComputerImageStyle}"  ToolTip="Компьютер">
+                <Image Style="{StaticResource ComputerImageStyle}"  >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 
@@ -1784,9 +1784,9 @@
 
                 </TextBox>
             </Grid>
-            <Grid>
+            <Grid ToolTip="Сервер">
 
-                <Image Style="{StaticResource ServerImageStyle}"  ToolTip="Сервер">
+                <Image Style="{StaticResource ServerImageStyle}"  >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 
@@ -1803,9 +1803,9 @@
 
                 </TextBox>
             </Grid>
-            <Grid>
+            <Grid ToolTip="Том/инструкция">
 
-                <Image  Style="{StaticResource TomeDrawingImageStyle}"  ToolTip="Том">
+                <Image  Style="{StaticResource TomeDrawingImageStyle}"  >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 
@@ -1822,9 +1822,9 @@
 
                 </TextBox>
             </Grid>
-            <Grid>
+            <Grid ToolTip="Группа пользователей">
 
-                <Image Style="{StaticResource UserGroupDrawingImageStyle}"  ToolTip="Пользователь">
+                <Image Style="{StaticResource UserGroupDrawingImageStyle}" >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 
@@ -1841,9 +1841,9 @@
 
                 </TextBox>
             </Grid>
-            <Grid>
+            <Grid ToolTip="Процесс">
 
-                <Image Style="{StaticResource CustomDrawingImageStyle}"  ToolTip="Process">
+                <Image Style="{StaticResource CustomDrawingImageStyle}"  >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 
@@ -1860,9 +1860,9 @@
 
                 </TextBox>
             </Grid>
-          <Grid>
+            <Grid ToolTip="Домен">
 
-            <Image Style="{StaticResource ServerDrawingImageStyle}"  ToolTip="Домен">
+            <Image Style="{StaticResource ServerDrawingImageStyle}"  >
               <s:DesignerItem.DragThumbTemplate>
                 <ControlTemplate>
 
@@ -1879,10 +1879,10 @@
 
                 </TextBox>
             </Grid>
-          
-          <Grid>
 
-            <Image Style="{StaticResource ContactDrawingImageStyle}"  ToolTip="Контакт">
+            <Grid  ToolTip="Контакт">
+
+            <Image Style="{StaticResource ContactDrawingImageStyle}" >
               <s:DesignerItem.DragThumbTemplate>
                 <ControlTemplate>
 
@@ -1903,9 +1903,9 @@
 
 
 
-          <Grid>
+            <Grid ToolTip="Документ">
 
-            <Image Style="{StaticResource PolicyDrawingImageStyle}"  ToolTip="Политика">
+            <Image Style="{StaticResource PolicyDrawingImageStyle}"  >
               <s:DesignerItem.DragThumbTemplate>
                 <ControlTemplate>
 
@@ -1923,9 +1923,9 @@
                 </TextBox>
             </Grid>
 
-          <Grid>
+            <Grid ToolTip="Подразделение">
 
-            <Image Style="{StaticResource PdrzDrawingImageStyle}"  ToolTip="Подразделение">
+            <Image Style="{StaticResource PdrzDrawingImageStyle}"  >
               <s:DesignerItem.DragThumbTemplate>
                 <ControlTemplate>
 
@@ -1943,9 +1943,9 @@
                 </TextBox>
             </Grid>
 
-          <Grid>
+            <Grid ToolTip="Контейнер">
 
-            <Image Style="{StaticResource ContainerDrawingImageStyle}"  ToolTip="Контейнер">
+            <Image Style="{StaticResource ContainerDrawingImageStyle}"  >
               <s:DesignerItem.DragThumbTemplate>
                 <ControlTemplate>
 
@@ -1965,7 +1965,7 @@
 
           <Grid>
 
-            <Image Style="{StaticResource UniversalDrawingImageStyle}"  ToolTip="Контейнер">
+            <Image Style="{StaticResource UniversalDrawingImageStyle}"  >
               <s:DesignerItem.DragThumbTemplate>
                 <ControlTemplate>
 

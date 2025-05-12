@@ -6,12 +6,12 @@
         ContentRendered="Window_ContentRendered"
         xmlns:local="clr-namespace:ArsVisual" WindowStartupLocation="CenterScreen"
         mc:Ignorable="d"
-        Title="SplashScreen" WindowStyle="None" AllowsTransparency="True" Height="230" Width="400">
+        Title="SplashScreen" WindowStyle="None" Icon="/icons/logo.png"  AllowsTransparency="True" Height="230" Width="400">
     <Grid Background="Transparent">
         <Image Margin="-3,0,0,0" Height="235" Width="406" Stretch="Fill" Source="Resources\Images\Splash.png"  >
             
         </Image>
-        <ProgressBar  Maximum="100" Minimum="0" Name="StartupBar" VerticalAlignment="Top" Background="White" Height="5">
+        <ProgressBar Foreground="#5F5BE9" Maximum="100" Minimum="0" Name="StartupBar" VerticalAlignment="Bottom" Background="White" Height="5">
             
         </ProgressBar>
     </Grid>

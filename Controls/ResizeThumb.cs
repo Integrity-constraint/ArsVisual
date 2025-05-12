@@ -45,7 +45,7 @@ namespace ArsVisual.Controls
                         .OfType<DesignerItem>()
                         .ToList();
 
-                    // Определяем, работает ли с одним элементом или с группой
+                   
                     isSingleItemResizing = selectedItems.Count == 1;
 
                     AdornerLayer adornerLayer = AdornerLayer.GetAdornerLayer(designerCanvas);
@@ -74,7 +74,7 @@ namespace ArsVisual.Controls
                 double originalLeft = Canvas.GetLeft(item);
                 double originalTop = Canvas.GetTop(item);
 
-                // Обработка вертикального изменения размера
+               
                 if (VerticalAlignment == VerticalAlignment.Top || VerticalAlignment == VerticalAlignment.Bottom)
                 {
                     double deltaVertical = 0;
@@ -87,7 +87,7 @@ namespace ArsVisual.Controls
                         newTop = originalTop + (transformOrigin.Y * deltaVertical * (1 - Math.Cos(-angle)));
                         newHeight = originalHeight - deltaVertical;
 
-                        // Выравнивание только для одиночного элемента
+                    
                         if (isSingleItemResizing)
                         {
                             SnapBottomEdge(designerCanvas, item, newTop + newHeight, ref newHeight);
@@ -100,7 +100,7 @@ namespace ArsVisual.Controls
                                 (transformOrigin.Y * deltaVertical * (1 - Math.Cos(-angle)));
                         newHeight = originalHeight - deltaVertical;
 
-                        // Выравнивание только для одиночного элемента
+                    
                         if (isSingleItemResizing)
                         {
                             SnapTopEdge(designerCanvas, item, newTop, ref newTop, ref newHeight);
@@ -114,7 +114,7 @@ namespace ArsVisual.Controls
                     }
                 }
 
-                // Обработка горизонтального изменения размера
+            
                 if (HorizontalAlignment == HorizontalAlignment.Left || HorizontalAlignment == HorizontalAlignment.Right)
                 {
                     double deltaHorizontal = 0;
@@ -128,7 +128,7 @@ namespace ArsVisual.Controls
                                  (transformOrigin.X * deltaHorizontal * (1 - Math.Cos(angle)));
                         newWidth = originalWidth - deltaHorizontal;
 
-                        // Выравнивание только для одиночного элемента
+                      
                         if (isSingleItemResizing)
                         {
                             SnapLeftEdge(designerCanvas, item, newLeft, ref newLeft, ref newWidth);
@@ -139,7 +139,7 @@ namespace ArsVisual.Controls
                         deltaHorizontal = Math.Min(-e.HorizontalChange, minDeltaHorizontal);
                         newWidth = originalWidth - deltaHorizontal;
 
-                        // Выравнивание только для одиночного элемента
+                       
                         if (isSingleItemResizing)
                         {
                             SnapRightEdge(designerCanvas, item, newLeft + newWidth, ref newWidth);

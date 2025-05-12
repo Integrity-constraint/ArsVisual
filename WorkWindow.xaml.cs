@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using ArsVisual.Resources;
+using ArsVisual.NetService;
 
 namespace ArsVisual
 {
@@ -50,10 +51,10 @@ namespace ArsVisual
         public WorkWindow()
         {
             InitializeComponent();
+           
+            AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
             AppearanceMaster.LoadColors();
             OpenFaq.InputGestures.Add(new KeyGesture(Key.F1));
-            AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/Lazar/master/Update.xml");
-
             DataContext = this;
             _pageCanvases[(TabItem)MainTabControl.Items[0]] = MyDesignerCanvas;
 
@@ -350,6 +351,8 @@ namespace ArsVisual
             }
         }
 
+
+
         private async void OnClosing(object sender, CancelEventArgs e)
         {
             if (_pageCanvases.Values.Any(canvas => canvas.Children.Count > 0))
@@ -428,20 +431,11 @@ namespace ArsVisual
 
         }
 
-        private void show(object sender, MouseEventArgs e)
+        private void GetFilesFromCloud(object sender, RoutedEventArgs e)
         {
-            NotifyBox.Show("чпоку", "вапку", MessageBoxButton.OK);
-        }
+            DigitalHiveGetFilesLogin login = new DigitalHiveGetFilesLogin();
 
-        private void EnableEdit(object sender, MouseButtonEventArgs e)
-        {
-            if (sender is TextBox text && text.IsEnabled == false) { 
-            
-            text.IsEnabled = true;
-            
-            }
+            login.Show();
         }
-
-       
     }
 }

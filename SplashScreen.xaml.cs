@@ -52,7 +52,7 @@ namespace ArsVisual
                 }
 
                
-                Thread.Sleep(70);
+                Thread.Sleep(50);
                 worker.ReportProgress(i);
             }
         }

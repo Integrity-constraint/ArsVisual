@@ -7,6 +7,11 @@
         <ResourceDictionary Source="Styles/ToolBar.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="DownHeader" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Century Gothic">
+            
+        </Setter>
+    </Style>
     <ToolBar BorderThickness="0.5" x:Key="MyToolbar" Height="100">
         <!-- Редактирование -->
         <StackPanel Orientation="Vertical">
@@ -47,7 +52,7 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-            <TextBlock Text="Редактирование:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
+            <TextBlock Style="{StaticResource DownHeader}" Text="Редактирование:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
         </StackPanel>
 
         <!-- Разделитель -->
@@ -147,7 +152,7 @@
                     </Button>
                 </StackPanel>
             </StackPanel>
-            <TextBlock Text="Выравнивание:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
+            <TextBlock Style="{StaticResource DownHeader}"  Text="Выравнивание:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
         </StackPanel>
 
         <!-- Разделитель -->
@@ -218,7 +223,7 @@
                     </StackPanel>
                 </Button>
             </StackPanel>
-            <TextBlock Text="Положение:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
+            <TextBlock Style="{StaticResource DownHeader}"  Text="Положение:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
         </StackPanel>
     </ToolBar>
 </ResourceDictionary>

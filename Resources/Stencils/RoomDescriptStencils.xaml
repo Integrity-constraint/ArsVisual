@@ -21,7 +21,8 @@
 <Style x:Key="DesignerItemRoomStyle" TargetType="Path" BasedOn="{StaticResource RoomItemStyle}">
     <Setter Property="Fill" Value="{Binding Fill, RelativeSource={RelativeSource AncestorType=s:DesignerItem}, FallbackValue=LightGray}"/>
     <Setter Property="Stroke" Value="{Binding Stroke, RelativeSource={RelativeSource AncestorType=s:DesignerItem}, FallbackValue=Black}"/>
-</Style>
+        <Setter Property="Cursor" Value="Hand"></Setter>
+    </Style>
 
 <!-- Стиль для стола с закруглёнными углами -->
 <Style x:Key="Table" TargetType="Path" BasedOn="{StaticResource DesignerItemRoomStyle}">

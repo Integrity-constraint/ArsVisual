@@ -10,7 +10,7 @@ namespace ArsVisual
    
     public class ToolboxItem : ContentControl
     {
-        // caches the start point of the drag operation
+        
         private Point? dragStartPoint = null;
 
         static ToolboxItem()

@@ -14,6 +14,7 @@
         <Setter Property="Stretch" Value="Fill"/>
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Cursor" Value="Hand"></Setter>
     </Style>
     <Style x:Key="Textadapter" TargetType="TextBox">
         <Setter Property="TextWrapping" Value="Wrap"></Setter>
@@ -36,6 +37,7 @@
     
     <Style x:Key="DesignerUMLChartStyle" TargetType="Path"
        BasedOn="{StaticResource BasicStyle}">
+        <Setter Property="Cursor" Value="Hand"></Setter>
         <Setter Property="Fill" 
             Value="{Binding Fill, 
                     RelativeSource={RelativeSource AncestorType=s:DesignerItem},

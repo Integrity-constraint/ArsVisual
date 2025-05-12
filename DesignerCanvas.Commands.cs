@@ -10,20 +10,15 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
 using System.Xml;
 using System.Xml.Linq;
 using ArsVisual.NotifyComponents.Not;
-
 using ArsVisual.Settings;
 using Microsoft.Win32;
 using Hardcodet.Wpf.TaskbarNotification;
 using System.Windows.Controls.Primitives;
-
 using static ArsVisual.Connection;
-
 using System.Windows.Threading;
-
 using ArsVisual.NotifyComponents.MsgBox;
 using ArsVisual.NetService;
 
@@ -88,31 +83,33 @@ namespace ArsVisual
             this.AllowDrop = true;
             Clipboard.Clear();
         }
-       
 
-      // private void NotifyUser(string balloontext, string header,string imgtext,int time, PopupAnimation popup )
-      // {
-      //     try
-      //     {
-      //         MessageSave messageSave = new MessageSave();
-      //         messageSave.BalloonText = balloontext;
-      //         messageSave.Iconmsg = new BitmapImage(new Uri($"pack://application:,,,/icons/{imgtext}"));
-      //         messageSave.Headersave = header;
-      //         App.ts.ShowCustomBalloon(messageSave, popup, time);
-      //     }
-      //    catch(Exception ex)
-      //     {
-      //         NotifyBox.Show(ex.Message, ex.StackTrace, MessageBoxButton.OK, MessageBoxImage.Error);
-      //     }
-      // }
-   
-      
+        private WorkWindow _workWindow;
+
+        private WorkWindow WorkWindow
+        {
+            get
+            {
+                if (_workWindow == null)
+                {
+                    _workWindow = Application.Current.Windows.OfType<WorkWindow>().FirstOrDefault();
+                }
+                return _workWindow;
+            }
+        }
+
+
+
+
         #region New Command
 
         private void New_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             this.Children.Clear();
             this.SelectionService.ClearSelection();
+
+            WorkWindow.FileName = "Новый проект";
+
         }
 
         #endregion
@@ -184,13 +181,14 @@ namespace ArsVisual
 
         #region Open Command
       
-        private void Open_Executed(object sender, ExecutedRoutedEventArgs e)
+        public void Open_Executed(object sender, ExecutedRoutedEventArgs e)
         {
             XElement root = LoadSerializedDataFromFile(out string filePath);
             if (root == null) return;
 
-            var window = Application.Current.Windows.OfType<WorkWindow>().FirstOrDefault();
-             window.FileName = $"{filePath}";
+            // var window = Application.Current.Windows.OfType<WorkWindow>().FirstOrDefault();
+            //  window.FileName = $"{filePath}";
+            WorkWindow.FileName = $"{filePath}";
             var tabsToRemove = WorkWindow.MainTabControlReference.Items
                 .OfType<TabItem>()
                 .Where(tab => tab.Header?.ToString() != "+")
@@ -208,7 +206,7 @@ namespace ArsVisual
                 var newTabItem = new TabItem
                 {
                     Header = tabXML.Element("Header")?.Value,
-                    HeaderTemplate = (DataTemplate)window.FindResource("TabHeaderTemplate")
+                    HeaderTemplate = (DataTemplate)WorkWindow.FindResource("TabHeaderTemplate")
                 };
 
                 var grid = new Grid();
@@ -327,10 +325,154 @@ namespace ArsVisual
 
             EnsureAddTabButtonExists();
         }
+        #endregion
+        #region FromCloudLoad Command
+        public void Open_FromCloud(object sender, ExecutedRoutedEventArgs e, string selecteditem)
+        {
+            XElement root = LoadSerializedDataFromCloud(out string fileName, selecteditem);
+            if (root == null) return;
+
+            // var window = Application.Current.Windows.OfType<WorkWindow>().FirstOrDefault();
+            //  window.FileName = $"{filePath}";
+            WorkWindow.FileName = $"{fileName}";
+            var tabsToRemove = WorkWindow.MainTabControlReference.Items
+                .OfType<TabItem>()
+                .Where(tab => tab.Header?.ToString() != "+")
+                .ToList();
+
+            foreach (var tab in tabsToRemove)
+            {
+                WorkWindow.MainTabControlReference.Items.Remove(tab);
+                WorkWindow._pageCanvases.Remove(tab);
+            }
 
 
+            foreach (XElement tabXML in root.Elements("Tab"))
+            {
+                var newTabItem = new TabItem
+                {
+                    Header = tabXML.Element("Header")?.Value,
+                    HeaderTemplate = (DataTemplate)WorkWindow.FindResource("TabHeaderTemplate")
+                };
 
-        private void EnsureAddTabButtonExists()
+                var grid = new Grid();
+                var scrollViewer = new ScrollViewer
+                {
+                    Background = Brushes.Transparent,
+                    HorizontalScrollBarVisibility = ScrollBarVisibility.Auto,
+                    VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+                };
+
+                var designerCanvas = new DesignerCanvas
+                {
+                    MinHeight = 800,
+                    MinWidth = 1000,
+                    AllowDrop = true,
+                    Background = Brushes.White
+                };
+
+                scrollViewer.Content = designerCanvas;
+
+                var zoomBox = new ZoomBox
+                {
+                    Width = 180,
+                    HorizontalAlignment = HorizontalAlignment.Right,
+                    VerticalAlignment = VerticalAlignment.Top,
+                    ScrollViewer = scrollViewer,
+                    Margin = new Thickness(0, 10, 30, 0)
+                };
+
+                grid.Children.Add(scrollViewer);
+                grid.Children.Add(zoomBox);
+                newTabItem.Content = grid;
+
+
+                var addTabButton = WorkWindow.MainTabControlReference.Items
+                    .OfType<TabItem>()
+                    .FirstOrDefault(tab => tab.Header?.ToString() == "+");
+
+                int insertIndex = addTabButton != null
+                    ? WorkWindow.MainTabControlReference.Items.IndexOf(addTabButton)
+                    : WorkWindow.MainTabControlReference.Items.Count;
+
+                WorkWindow.MainTabControlReference.Items.Insert(insertIndex, newTabItem);
+                WorkWindow._pageCanvases[newTabItem] = designerCanvas;
+
+
+                XElement canvasContent = tabXML.Element("CanvasContent");
+                if (canvasContent != null)
+                {
+                    var itemsDict = new Dictionary<Guid, DesignerItem>();
+
+
+                    foreach (XElement itemXML in canvasContent.Element("DesignerItems").Elements("DesignerItem"))
+                    {
+                        Guid id = new Guid(itemXML.Element("ID").Value);
+                        DesignerItem item = DeserializeDesignerItem(itemXML, id, 0, 0);
+                        designerCanvas.Children.Add(item);
+                        itemsDict[id] = item;
+                    }
+
+
+                    Dispatcher.BeginInvoke(() =>
+                    {
+                        try
+                        {
+                            foreach (XElement connectionXML in canvasContent.Element("Connections").Elements("Connection"))
+                            {
+                                try
+                                {
+                                    Guid sourceID = new Guid(connectionXML.Element("SourceID").Value);
+                                    Guid sinkID = new Guid(connectionXML.Element("SinkID").Value);
+
+                                    if (itemsDict.TryGetValue(sourceID, out var sourceItem) &&
+                                        itemsDict.TryGetValue(sinkID, out var sinkItem))
+                                    {
+
+                                        SetConnectorDecoratorTemplate(sourceItem);
+                                        SetConnectorDecoratorTemplate(sinkItem);
+                                        sourceItem.ApplyTemplate();
+                                        sinkItem.ApplyTemplate();
+
+                                        string sourceConnectorName = connectionXML.Element("SourceConnectorName").Value;
+                                        string sinkConnectorName = connectionXML.Element("SinkConnectorName").Value;
+
+                                        var sourceConn = WorkWindow.FindConnectorInItem(sourceItem, sourceConnectorName);
+                                        var sinkConn = WorkWindow.FindConnectorInItem(sinkItem, sinkConnectorName);
+
+                                        if (sourceConn != null && sinkConn != null)
+                                        {
+                                            var connection = new Connection(sourceConn, sinkConn)
+                                            {
+                                                SourceArrowSymbol = (ArrowSymbol)Enum.Parse(typeof(ArrowSymbol), connectionXML.Element("SourceArrowSymbol").Value),
+                                                SinkArrowSymbol = (ArrowSymbol)Enum.Parse(typeof(ArrowSymbol), connectionXML.Element("SinkArrowSymbol").Value),
+                                                StrokeDashArray = StringToDoubleCollection(connectionXML.Element("StrokeDashArray").Value),
+                                                Text = connectionXML.Element("Text").Value,
+                                                _ConnectionLineType = (ConnectionLineType)Enum.Parse(typeof(ConnectionLineType), connectionXML.Element("ConnectionLineType").Value)
+                                            };
+                                            Canvas.SetZIndex(connection, int.Parse(connectionXML.Element("zIndex").Value));
+                                            designerCanvas.Children.Add(connection);
+                                        }
+                                    }
+                                }
+                                catch (Exception ex)
+                                {
+                                    NotifyBox.Show($"Ошибка восстановления соединения", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                                }
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            NotifyBox.Show($"Ошибка восстановления соединений", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                        }
+                    }, DispatcherPriority.ContextIdle);
+                }
+            }
+
+            EnsureAddTabButtonExists();
+        }
+        #endregion
+   private void EnsureAddTabButtonExists()
 {
     var addTabButton = WorkWindow.MainTabControlReference.Items
         .OfType<TabItem>()
@@ -350,7 +492,7 @@ namespace ArsVisual
 }
 
 
-        #endregion
+      
 
         #region Save Command
 
@@ -1038,8 +1180,26 @@ namespace ArsVisual
 
             return null;
         }
+        public static XElement LoadSerializedDataFromCloud(out string fileName, string filepath )
+        {
+            fileName = null;
 
-        
+            try
+            {
+                fileName = filepath;
+                return XElement.Load(filepath);
+
+            }
+            catch(Exception e)
+            {
+                NotifyBox.Show(e.StackTrace, e.Message, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+
+            return null;
+        }
+        //
+
         void SaveFile(XElement xElement)
         {
          

@@ -64,18 +64,18 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="Button">
                                     <Border 
-                    x:Name="border"
-                    CornerRadius="10"  
-                                        Background="{TemplateBinding Background}"
-                    BorderBrush="{TemplateBinding BorderBrush}"
-                    BorderThickness="{TemplateBinding BorderThickness}"
-                    Width="{TemplateBinding Width}"
-                    Height="{TemplateBinding Height}"
-                    MinWidth="{TemplateBinding MinWidth}"
-                    MinHeight="{TemplateBinding MinHeight}">
+                                     x:Name="border"
+                                     CornerRadius="10"  
+                                                         Background="{TemplateBinding Background}"
+                                     BorderBrush="{TemplateBinding BorderBrush}"
+                                     BorderThickness="{TemplateBinding BorderThickness}"
+                                     Width="{TemplateBinding Width}"
+                                     Height="{TemplateBinding Height}"
+                                     MinWidth="{TemplateBinding MinWidth}"
+                                     MinHeight="{TemplateBinding MinHeight}">
                                         <ContentPresenter 
-                        HorizontalAlignment="Center"
-                        VerticalAlignment="Center"/>
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
                                     </Border>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsMouseOver" Value="True">

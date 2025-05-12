@@ -1,11 +1,11 @@
-﻿<Window x:Class="ArsVisual.NetService.DigitalHiveLoginForm"
+﻿<Window x:Class="ArsVisual.NetService.DigitalHiveGetFilesLogin"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArsVisual.NetService"
         mc:Ignorable="d"
-             Title="DigitalHiveLogin" Background="Transparent" Icon="/icons/logo.png"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None"  ResizeMode="NoResize" Height="450" Width="350">
+             Title="DigitalHiveLogin" Background="Transparent" Icon="/icons/logo.png"  AllowsTransparency="True" WindowStartupLocation="CenterScreen" WindowStyle="None"  ResizeMode="NoResize" Height="400" Width="350">
     <Window.Resources>
         <Style TargetType="TextBox">
             <Setter Property="Background" Value="Transparent" />
@@ -85,7 +85,7 @@
                     </Image>
                 </StackPanel>
                 <TextBlock Foreground="White" VerticalAlignment="Top" HorizontalAlignment="Center" FontSize="20">
-                    Сохранение файла
+                    Войдите для получения файлов
                 </TextBlock>
                 <GridSplitter Background="#FFB369 " Margin="10" Height="2" HorizontalAlignment="Center" Width="80">
                   
@@ -107,15 +107,13 @@
                     </StackPanel>
                    
                     
-                    <TextBlock  Margin="0,10,0,5" Foreground="White" FontSize="16">Имя файла</TextBlock>
+                   
 
-                    <TextBox x:Name="NameBox" Height="30">
-
-                    </TextBox>
+                  
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="20">
-                    <Button Click="SaveToCloud" Foreground="Black" Background="#FFB369 " Width="150" Height="35">
-                       Сохранить
+                    <Button Click="LoginGetFiles" Foreground="Black" Background="#FFB369 " Width="150" Height="35">
+                       Войти
                     </Button>
                     <Button Click="Cancel" Foreground="White" Background="Transparent" BorderBrush="#FFB369" Margin="0,5,0,0" Width="150" Height="35">
                           Отмена
