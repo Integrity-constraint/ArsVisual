@@ -1,4 +1,5 @@
-﻿using AutoUpdaterDotNET;
+﻿using ArsVisual.NotifyComponents.MsgBox;
+using AutoUpdaterDotNET;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -49,7 +50,7 @@ namespace ArsVisual.pages
                 if (args.IsUpdateAvailable)
                 {
                    
-                    MessageBoxResult messageBoxResult = MessageBox.Show(
+                    MessageBoxResult messageBoxResult = NotifyBox.Show(
                         $"Доступна новая версия {args.CurrentVersion}. Хотите загрузить?",
                         "Внимание",
                         MessageBoxButton.YesNo,
@@ -67,15 +68,15 @@ namespace ArsVisual.pages
                         }
                         catch (Exception exception)
                         {
-                            MessageBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
+                            NotifyBox.Show(exception.Message, exception.GetType().ToString(), MessageBoxButton.OK, MessageBoxImage.Error);
                         }
                     }
                    
                 }
                 else
                 {
-                  
-                    MessageBox.Show(
+
+                    NotifyBox.Show(
                         $"У вас уже установлена последняя версия: {Assembly.GetExecutingAssembly().GetName().Version}",
                         "Информация",
                         MessageBoxButton.OK,
@@ -85,7 +86,7 @@ namespace ArsVisual.pages
             }
             else
             {
-                MessageBox.Show("Не удалось проверить обновления. Проверьте подключение к интернету.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                NotifyBox.Show("Не удалось проверить обновления. Проверьте подключение к интернету.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
