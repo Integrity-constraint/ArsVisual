@@ -16,10 +16,7 @@ namespace ArsVisual.NetService
 {
     public class FileUploader
     {
-        private static readonly HttpClient _httpClient = new HttpClient
-        {
-            BaseAddress = new Uri("https://digitalhive74.ru/")
-        };
+       
 
         async public void UploadFileAsync(string filePath, string email, string password)
         {
@@ -53,12 +50,12 @@ namespace ArsVisual.NetService
                 formContent.Add(fileContent, "file", Path.GetFileName(filePath));
 
              
-                _httpClient.DefaultRequestHeaders.Clear();
-                _httpClient.DefaultRequestHeaders.Add("email", email);
-                _httpClient.DefaultRequestHeaders.Add("password", password);
+                FileInfo._httpClient.DefaultRequestHeaders.Clear();
+                FileInfo._httpClient.DefaultRequestHeaders.Add("email", email);
+                FileInfo._httpClient.DefaultRequestHeaders.Add("password", password);
 
                
-                var response = await _httpClient.PostAsync("api/files/upload-by-api", formContent);
+                var response = await FileInfo._httpClient.PostAsync("api/files/upload-by-api", formContent);
 
               
                 if (!response.IsSuccessStatusCode)

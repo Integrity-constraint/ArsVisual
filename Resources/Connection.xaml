@@ -11,11 +11,26 @@
     <Style x:Key="Arrow" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
         <Setter Property="Data" Value="M0,0 8,4 0,8 Z"/>
     </Style>
+    <Style x:Key="HollowArrow" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
+        <Setter Property="Data" Value="M0,0 8,4 0,8 Z"/>
+
+        <Setter Property="Fill" Value="Transparent"/>
+        <Setter Property="Stroke" Value="{StaticResource SolidBorderBrush}"/>
+     
+    </Style>
+
     <!-- Diamond  -->
     <Style x:Key="Diamond" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
         <Setter Property="Data" Value="M-5,0 0,-5 5,0 0,5 Z"/>
     </Style>
-  
+ 
+<Style x:Key="HollowDiamond" TargetType="Path" BasedOn="{StaticResource ArrowSymbolBaseStyle}">
+    <Setter Property="Data" Value="M-5,0 0,-5 5,0 0,5 Z"/>
+    <Setter Property="Fill" Value="Transparent"/> 
+    <Setter Property="Stroke" Value="{StaticResource SolidBorderBrush}"/> 
+    <Setter Property="StrokeThickness" Value="2"/> 
+</Style>
+
     <ContextMenu x:Key="ConnectionContextMenu">
         <MenuItem Header="Удалить" Command="{x:Static ApplicationCommands.Delete}">
             <MenuItem.Icon>
@@ -71,6 +86,17 @@
                     </Path>
                 </MenuItem.Icon>
             </MenuItem>
+            <MenuItem Header="Пустая стрелка" Command="s:Connection.SetSourceArrowCommand" CommandParameter="HollowArrow" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource HollowArrow}">
+
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
             <MenuItem Header="Пин" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Diamond" >
                 <MenuItem.Icon>
                     <Path >
@@ -82,16 +108,38 @@
                     </Path>
                 </MenuItem.Icon>
             </MenuItem>
-        </MenuItem>
+            <MenuItem Header="Пустой пин" Command="s:Connection.SetSourceArrowCommand" CommandParameter="HollowDiamond" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource HollowDiamond}">
 
-        <!-- Пункт меню для изменения стиля стрелки на приемнике -->
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
+        </MenuItem>
+     
+       
         <MenuItem Header="Конец линии">
             <MenuItem Header="нет" Command="s:Connection.SetSinkArrowCommand" CommandParameter="None" />
-            <MenuItem Header="Стрелка" Command="s:Connection.SetSinkArrowCommand" CommandParameter="Arrow" >
+            <MenuItem Header="Стрелка" Command="s:Connection.SetSourceArrowCommand" CommandParameter="Arrow" >
                 <MenuItem.Icon>
                     <Path >
                         <Path.Style>
                             <Style TargetType="Path" BasedOn="{StaticResource Arrow}">
+
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Пустая стрелка" Command="s:Connection.SetSinkArrowCommand" CommandParameter="HollowArrow" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource HollowArrow}">
 
                             </Style>
                         </Path.Style>
@@ -103,6 +151,17 @@
                     <Path >
                         <Path.Style>
                             <Style TargetType="Path" BasedOn="{StaticResource Diamond}">
+
+                            </Style>
+                        </Path.Style>
+                    </Path>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Пустой пин" Command="s:Connection.SetSinkArrowCommand" CommandParameter="HollowDiamond" >
+                <MenuItem.Icon>
+                    <Path >
+                        <Path.Style>
+                            <Style TargetType="Path" BasedOn="{StaticResource HollowDiamond}">
 
                             </Style>
                         </Path.Style>
@@ -207,15 +266,28 @@
                         <DataTrigger Value="Arrow" Binding="{Binding RelativeSource={RelativeSource Self},Path=SourceArrowSymbol}">
                             <Setter TargetName="PART_SourceAnchorPath" Property="Style" Value="{StaticResource Arrow}"/>
                         </DataTrigger>
-                        <DataTrigger Value="Diamond" Binding="{Binding RelativeSource={RelativeSource Self},Path=SourceArrowSymbol}">
-                            <Setter TargetName="PART_SourceAnchorPath" Property="Style" Value="{StaticResource Diamond}"/>
-                        </DataTrigger>
                         <DataTrigger Value="Arrow" Binding="{Binding RelativeSource={RelativeSource Self},Path=SinkArrowSymbol}">
                             <Setter TargetName="PART_SinkAnchorPath" Property="Style" Value="{StaticResource Arrow}"/>
+                        </DataTrigger>
+                        <DataTrigger Value="HollowArrow" Binding="{Binding RelativeSource={RelativeSource Self},Path=SinkArrowSymbol}">
+                            <Setter TargetName="PART_SinkAnchorPath" Property="Style" Value="{StaticResource HollowArrow}"/>
+                        </DataTrigger>
+                        <DataTrigger Value="HollowArrow" Binding="{Binding RelativeSource={RelativeSource Self},Path=SourceArrowSymbol}">
+                            <Setter TargetName="PART_SourceAnchorPath" Property="Style" Value="{StaticResource HollowArrow}"/>
+                        </DataTrigger>
+                        <DataTrigger Value="Diamond" Binding="{Binding RelativeSource={RelativeSource Self},Path=SourceArrowSymbol}">
+                            <Setter TargetName="PART_SourceAnchorPath" Property="Style" Value="{StaticResource Diamond}"/>
                         </DataTrigger>
                         <DataTrigger Value="Diamond" Binding="{Binding RelativeSource={RelativeSource Self},Path=SinkArrowSymbol}">
                             <Setter TargetName="PART_SinkAnchorPath" Property="Style" Value="{StaticResource Diamond}"/>
                         </DataTrigger>
+                        <DataTrigger Value="HollowDiamond" Binding="{Binding RelativeSource={RelativeSource Self},Path=SourceArrowSymbol}">
+                            <Setter TargetName="PART_SourceAnchorPath" Property="Style" Value="{StaticResource HollowDiamond}"/>
+                        </DataTrigger>
+                        <DataTrigger Value="HollowDiamond" Binding="{Binding RelativeSource={RelativeSource Self},Path=SinkArrowSymbol}">
+                            <Setter TargetName="PART_SinkAnchorPath" Property="Style" Value="{StaticResource HollowDiamond}"/>
+                        </DataTrigger>
+
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

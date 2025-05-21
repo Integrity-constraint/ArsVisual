@@ -103,6 +103,8 @@ ToolTipText="ArsVisual" />
                 <ResourceDictionary Source="Resources/Stencils/UMLPosl.xaml"/>
          <ResourceDictionary Source="Resources/Stencils/ShapeStencils.xaml"/>
         <ResourceDictionary Source="Resources/Styles/SettingsTree.xaml"/>
+                <ResourceDictionary Source="Resources/Stencils/BPMNStencils.xaml"/>
+                <ResourceDictionary Source="Resources/Stencils/UMLCLassStencils.xaml"/>
            <ResourceDictionary Source="Resources/Stencils/NetStencils.xaml"/>
           
           

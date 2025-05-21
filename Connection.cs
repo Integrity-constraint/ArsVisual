@@ -88,7 +88,6 @@ namespace ArsVisual
 
         }
 
-        // Обработчик команды для изменения стиля стрелки на приемнике
         private void OnSetSinkArrowCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
             if (e.Parameter is string arrowSymbol)
@@ -322,7 +321,7 @@ namespace ArsVisual
             this.Source = source;
             this.Sink = sink;
 
-            // Регистрируем обработчики команд
+         
             CommandBindings.Add(new CommandBinding(SetSourceArrowCommand, OnSetSourceArrowCommandExecuted));
             CommandBindings.Add(new CommandBinding(SetSinkArrowCommand, OnSetSinkArrowCommandExecuted));
             CommandBindings.Add(new CommandBinding(SetLineTypeCommand, OnSetLineTypeCommandExecuted));
@@ -479,17 +478,17 @@ namespace ArsVisual
                 switch (_ConnectionLineType)
                 {
                     case ConnectionLineType.Straight:
-                        // Прямая линия
+                     
                         linePoints = PathFinder.GetStraightConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
                         break;
 
                     case ConnectionLineType.Orthogonal:
-                        // Ортогональная линия
+                    
                         linePoints = PathFinder.GetConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
                         break;
 
                     case ConnectionLineType.Curved:
-                        // Кривая линия
+                 
                         linePoints = GetCurvedConnectionLine(Source.GetInfo(), Sink.GetInfo());
                         break;
 
@@ -516,17 +515,16 @@ namespace ArsVisual
             Point pathEndPoint, pathTangentAtEndPoint;
             Point pathMidPoint, pathTangentAtMidPoint;
 
-            // the PathGeometry.GetPointAtFractionLength method gets the point and a tangent vector 
-            // on PathGeometry at the specified fraction of its length
+         
             this.PathGeometry.GetPointAtFractionLength(0, out pathStartPoint, out pathTangentAtStartPoint);
             this.PathGeometry.GetPointAtFractionLength(1, out pathEndPoint, out pathTangentAtEndPoint);
             this.PathGeometry.GetPointAtFractionLength(0.5, out pathMidPoint, out pathTangentAtMidPoint);
 
-            // get angle from tangent vector
+      
             this.AnchorAngleSource = Math.Atan2(-pathTangentAtStartPoint.Y, -pathTangentAtStartPoint.X) * (180 / Math.PI);
             this.AnchorAngleSink = Math.Atan2(pathTangentAtEndPoint.Y, pathTangentAtEndPoint.X) * (180 / Math.PI);
 
-            // add some margin on source and sink side for visual reasons only
+         
             pathStartPoint.Offset(-pathTangentAtStartPoint.X * 5, -pathTangentAtStartPoint.Y * 5);
             pathEndPoint.Offset(pathTangentAtEndPoint.X * 5, pathTangentAtEndPoint.Y * 5);
 
@@ -537,7 +535,7 @@ namespace ArsVisual
 
         private void ShowAdorner()
         {
-            // the ConnectionAdorner is created once for each Connection
+        
             if (this.connectionAdorner == null)
             {
                 DesignerCanvas designer = VisualTreeHelper.GetParent(this) as DesignerCanvas;
@@ -601,6 +599,8 @@ namespace ArsVisual
     {
         None,
         Arrow,
-        Diamond
+        Diamond,
+        HollowDiamond,
+        HollowArrow
     }
 }

@@ -6,7 +6,7 @@
         xmlns:c="clr-namespace:ArsVisual.Controls"
         WindowStartupLocation="CenterScreen"
         Title="ArsVisual"
-        Height="850" Width="1000" ResizeMode="CanResizeWithGrip" Icon="/icons/logo.png" AllowsTransparency="True" WindowStyle="None" Background="#FF37383A" WindowState="Maximized">
+        Height="850" Width="1000" ResizeMode="CanResizeWithGrip" Icon="/icons/logo.png" AllowsTransparency="True" WindowStyle="None" Background="#FF37383A" WindowState="Normal">
     <Window.CommandBindings>
         <CommandBinding Command="{x:Static m:WorkWindow.OpenFaq}" 
                      Executed="OpenFaqExecuted"/>
@@ -139,6 +139,8 @@ CommandTarget="{Binding ElementName=MyDesignerCanvas}" Style="{StaticResource Te
                         <Expander Background="#1B1B1B" Header="Объекты Active Directory" Content="{StaticResource NetStencils}" IsExpanded="True" FontFamily="Century Gothic"/>
                         <Expander Background="#1B1B1B" Header="Сценарий выполнения UML" Content="{StaticResource UMLPosl}" IsExpanded="True" FontFamily="Century Gothic"/>
                         <Expander Background="#1B1B1B" Header="Рабочие области Офисы/комнаты" Content="{StaticResource RoomStencils}" IsExpanded="True" FontFamily="Century Gothic"/>
+                        <Expander Background="#1B1B1B" Header="BPMN" Content="{StaticResource BPMNStencils}" IsExpanded="True" FontFamily="Century Gothic"/>
+                        <Expander Background="#1B1B1B" Header="UML классы" Content="{StaticResource UMLClasstencils}" IsExpanded="True" FontFamily="Century Gothic"/>
                     </StackPanel>
                 </ScrollViewer>
               

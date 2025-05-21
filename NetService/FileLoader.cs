@@ -14,7 +14,7 @@ namespace ArsVisual.NetService
 {
    public class FileLoader
     {
-        private static readonly HttpClient _httpClient = new HttpClient();
+        
      
         private const string ApiUrl = "https://digitalhive74.ru/api/files/get-by-id-api/";
 
@@ -23,7 +23,7 @@ namespace ArsVisual.NetService
             try
             {
                 string requestUrl = $"{ApiUrl}{FileId}";
-                using HttpResponseMessage response = await _httpClient.GetAsync(requestUrl);
+                using HttpResponseMessage response = await FileInfo._httpClient.GetAsync(requestUrl);
 
                 if (!response.IsSuccessStatusCode)
                 {

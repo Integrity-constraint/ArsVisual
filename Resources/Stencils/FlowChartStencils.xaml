@@ -301,7 +301,7 @@
             <Grid >
                 
          
-                <Path Style="{StaticResource Process}"  ToolTip="Process">
+                <Path Style="{StaticResource Process}"  >
                     <s:DesignerItem.DragThumbTemplate>
                         <ControlTemplate>
 

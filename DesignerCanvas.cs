@@ -14,7 +14,7 @@ namespace ArsVisual
 {
     public partial class DesignerCanvas : Canvas
     {
-        private const double SnapThreshold = 5.0; // Порог притягивания в пикселях
+        private const double SnapThreshold = 5.0; 
         private SnapAdorner snapAdorner;
 
         private Point? rubberbandSelectionStartPoint = null;
@@ -97,7 +97,7 @@ namespace ArsVisual
             if (e.LeftButton != MouseButtonState.Pressed)
             {
                 this.rubberbandSelectionStartPoint = null;
-                ClearSnapLines(); // Очищаем линии, если кнопка мыши отпущена
+                ClearSnapLines(); 
             }
             if (this.rubberbandSelectionStartPoint.HasValue)
             {

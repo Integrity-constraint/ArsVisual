@@ -1,0 +1,123 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:s="clr-namespace:ArsVisual"
+                    xmlns:c="clr-namespace:ArsVisual.Controls">
+
+
+
+    <Style x:Key="Textadapter" TargetType="TextBox">
+        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="FontFamily" Value="{Binding FontFamily, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="BorderBrush" Value="Transparent"></Setter>
+        <Setter Property="AcceptsReturn" Value="True"></Setter>
+        <Setter Property="Text" Value="{Binding Text, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+        <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+        <Setter Property="IsHitTestVisible"  Value="{Binding IsHitTestVisible, RelativeSource={RelativeSource AncestorType=s:DesignerItem}}"></Setter>
+
+    </Style>
+    <Style x:Key="TextadapterHit" TargetType="TextBox" BasedOn="{StaticResource Textadapter}">
+        <Setter Property="IsHitTestVisible"  Value="False"></Setter>
+
+    </Style>
+    <SolidColorBrush x:Key="LocalFillBrush" Color="White"/>
+    <SolidColorBrush x:Key="LocalStrokeBrush" Color="Black"/>
+
+   
+    <Style x:Key="DesignerItemFlowChartStyle" TargetType="Path"
+           BasedOn="{StaticResource FlowChartItemStyle}">
+        <Setter Property="Fill" 
+                Value="{Binding Fill, 
+                        RelativeSource={RelativeSource AncestorType=s:DesignerItem},
+                        FallbackValue={StaticResource LocalFillBrush}}"/>
+        <Setter Property="Stroke" 
+                Value="{Binding Stroke, 
+                        RelativeSource={RelativeSource AncestorType=s:DesignerItem},
+                        FallbackValue={StaticResource LocalStrokeBrush}}"/>
+    </Style>
+
+
+
+    <Style x:Key="UMLClass" TargetType="Path" BasedOn="{StaticResource DesignerItemFlowChartStyle}">
+        <Setter Property="Data" Value="M 20,10 
+                               H 180 A 10,10 0 0 1 190,20 
+                               V 90 A 10,10 0 0 1 180,100 
+                               H 20 A 10,10 0 0 1 10,90 
+                               V 20 A 10,10 0 0 1 20,10 
+                               Z
+                               M 10,30 H 190"/>
+
+
+        <Setter Property="StrokeThickness" Value="2"/>
+    </Style>
+
+    <Style x:Key="UMLClass_DragThumb" TargetType="Path" BasedOn="{StaticResource UMLClass}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+    </Style>
+    <Style x:Key="Separator" TargetType="Path" BasedOn="{StaticResource DesignerItemFlowChartStyle}">
+        <Setter Property="Data" Value="M 10,50 H 190"/>
+        <Setter Property="StrokeDashArray" Value="5,3"/>
+        <Setter Property="StrokeThickness" Value="1"/>
+
+
+        <Setter Property="StrokeThickness" Value="2"/>
+    </Style>
+    <Style x:Key="Separator_DragThumb" TargetType="Path" BasedOn="{StaticResource Separator}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+    </Style>
+    <Style x:Key="Packet" TargetType="Path"  BasedOn="{StaticResource DesignerItemFlowChartStyle}">
+        <Setter Property="Data" Value="M 0,0 H 60 V40 H 0 Z"/>
+      
+      
+
+    </Style>
+
+
+    <Style x:Key="Packet_DragThumb" TargetType="Path" BasedOn="{StaticResource Packet}">
+        <Setter Property="IsHitTestVisible" Value="true"/>
+      
+    </Style>
+    <s:Toolbox x:Key="UMLClasstencils" ItemSize="60,50" SnapsToDevicePixels="True"
+             ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+        <ItemsControl.Items>
+
+            
+            <Grid ToolTip="UML CLass">
+                <Path Style="{StaticResource UMLClass}" >
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+                            <Path Style="{StaticResource UMLClass_DragThumb}"/>
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+                </Path>
+                <TextBox TextWrapping="Wrap" VerticalAlignment="Top" 
+Style="{StaticResource TextadapterHit}"/>
+            </Grid>
+            <Grid ToolTip="Separator">
+                <Path Style="{StaticResource Separator}" >
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+                            <Path Style="{StaticResource Separator_DragThumb}"/>
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+                </Path>
+                
+            </Grid>
+            <Grid ToolTip="Packet">
+                <Path Style="{StaticResource Packet}" >
+                    <s:DesignerItem.DragThumbTemplate>
+                        <ControlTemplate>
+                            <Path Style="{StaticResource Packet_DragThumb}"/>
+                        </ControlTemplate>
+                    </s:DesignerItem.DragThumbTemplate>
+                </Path>
+                <TextBox TextWrapping="Wrap"
+Style="{StaticResource TextadapterHit}"/>
+            </Grid>
+            
+        </ItemsControl.Items>
+    </s:Toolbox>
+</ResourceDictionary>

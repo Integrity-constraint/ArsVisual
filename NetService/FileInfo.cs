@@ -19,9 +19,8 @@ namespace ArsVisual.NetService
         public long fileSize { get; set; }
         public string fileType { get; set; }
         public DateTime lastModified { get; set; }
-
-
-        private static readonly HttpClient _httpClient = new HttpClient
+      
+        public static readonly HttpClient _httpClient = new HttpClient
         {
             BaseAddress = new Uri("https://digitalhive74.ru/")
         };

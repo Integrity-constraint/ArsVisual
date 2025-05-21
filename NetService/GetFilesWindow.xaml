@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ArsVisual.NetService"
         mc:Ignorable="d"
-        Title="GetFilesWindow" Icon="/icons/logo.png"  WindowStyle="None" Background="Transparent" AllowsTransparency="True" Height="450" Width="520">
+        Title="GetFilesWindow" WindowStartupLocation="CenterScreen" Icon="/icons/logo.png"  WindowStyle="None" Background="Transparent" AllowsTransparency="True" Height="460" Width="550">
     <Border  MouseLeftButtonDown="Drag" CornerRadius="15" BorderThickness="1" ClipToBounds="True" BorderBrush="#FFB369" Background="#171717" >
         <Grid >
             <StackPanel Background="Transparent">
@@ -62,7 +62,17 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
+                                <GridViewColumn >
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button  Click="DeleteFile" Style="{StaticResource TextButtonStyle}" >
+                                                удалить
+                                            </Button>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
                             </GridView>
+                            
                         </ListView.View>
 
          
@@ -110,6 +120,7 @@
                                     <Trigger Property="IsSelected" Value="True">
                                         <Setter Property="Background" Value="#FFB369"/>
                                         <Setter Property="Foreground" Value="Black"/>
+                                       
                                     </Trigger>
                                     <Trigger Property="IsMouseOver" Value="True">
                                         <Setter Property="Background" Value="#FFB369"/>
@@ -219,12 +230,19 @@
                             <TextBox  Name="pathcurrent" Foreground="White"  IsReadOnly="True" SelectionBrush="#FFB369" SelectionTextBrush="Transparent" BorderBrush="Transparent" Background="Transparent" >
 
                             </TextBox>
+                            
                         </Border>
+                        <CheckBox Name="CheckToLoad" Foreground="White">
+                            Открыть проект после загрузки ?
+                        </CheckBox>
                     </StackPanel>
-                    <Button Click="ChoosePath" Margin="4,15,0,0" Style="{StaticResource TextButtonStyle}" Height="20">
-                       Выбрать путь
-                    </Button>
-                  
+                    <StackPanel>
+                        <Button Click="ChoosePath" Margin="4,15,0,0" Style="{StaticResource TextButtonStyle}" Height="20">
+                            Выбрать путь
+                        </Button>
+                       
+                    </StackPanel>
+                   
                 </StackPanel>
                 
             </StackPanel>

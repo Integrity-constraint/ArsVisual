@@ -51,6 +51,7 @@ namespace ArsVisual
         public WorkWindow()
         {
             InitializeComponent();
+            AutoUpdater.HttpUserAgent = "AutoUpdater";
            
             AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/ArsVisual/master/Update.xml");
             AppearanceMaster.LoadColors();
@@ -392,10 +393,17 @@ namespace ArsVisual
 
         private void Open(object sender, RoutedEventArgs e)
         {
-            this.WindowState = this.WindowState == WindowState.Maximized
-               ? WindowState.Normal
-               : WindowState.Maximized;
-         }
+            if (this.WindowState == WindowState.Maximized)
+            {
+                this.WindowState = WindowState.Normal;
+            }
+            else
+            {
+                this.WindowState = WindowState.Maximized;
+     
+                this.MaxHeight = SystemParameters.MaximizedPrimaryScreenHeight;
+            }
+        }
 
         private void Clostw(object sender, RoutedEventArgs e)
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArsVisual.NotifyComponents.MsgBox;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -56,7 +57,12 @@ namespace ArsVisual.NetService
                 {
                     DesignerCanvas canvas = new DesignerCanvas();
                     bool cloudload = true;
-                    canvas.Open_FromCloud(null, null, filePath);
+
+                    if (CheckToLoad.IsChecked == true)
+                    {
+                        canvas.Open_FromCloud(null, null, filePath);
+                    }
+                   
                 }
             }
         }
@@ -91,6 +97,32 @@ namespace ArsVisual.NetService
         private void Clostw(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+       async private void DeleteFile(object sender, RoutedEventArgs e)
+        {
+          
+            var userData = UserData.GetInstance();
+            var selecteditem = FileList.SelectedItem as FileInfo;
+            if (selecteditem != null)
+            {
+                MessageBoxResult result = NotifyBox.Show("Вы хотите удалить файл?", "Внимание", MessageBoxButton.YesNo);
+                if (result == MessageBoxResult.Yes)
+                {
+
+                    FileRemover.DeleteFileAsync(selecteditem.idApi, userData.Email, userData.Password);
+                    FileList.Items.Clear();
+                    FileList.ItemsSource = Files;
+                }
+                if (result == MessageBoxResult.No) { }
+            }
+            else 
+            {
+                NotifyBox.Show("Файл не выбран", "Ошибка", MessageBoxButton.OK);
+            }
+          
+           
+          
         }
     }
 }
