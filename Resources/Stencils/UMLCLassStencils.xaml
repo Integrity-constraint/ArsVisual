@@ -80,6 +80,16 @@
         <Setter Property="IsHitTestVisible" Value="true"/>
       
     </Style>
+
+    <Style x:Key="TextadapterPreview" TargetType="TextBox" BasedOn="{StaticResource TextadapterHit}">
+        <Setter Property="Background" Value="White"/>
+
+     
+
+        <Setter Property="BorderThickness" Value="1"/>
+   
+    </Style>
+
     <s:Toolbox x:Key="UMLClasstencils" ItemSize="60,50" SnapsToDevicePixels="True"
              ScrollViewer.HorizontalScrollBarVisibility="Disabled">
         <ItemsControl.Items>
@@ -117,7 +127,8 @@ Style="{StaticResource TextadapterHit}"/>
                 <TextBox TextWrapping="Wrap"
 Style="{StaticResource TextadapterHit}"/>
             </Grid>
-            
+            <TextBox ToolTip="Текст" Style="{StaticResource TextadapterPreview}" Text="Example"/>
+
         </ItemsControl.Items>
     </s:Toolbox>
 </ResourceDictionary>
