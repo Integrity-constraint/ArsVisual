@@ -21,6 +21,8 @@ using static ArsVisual.Connection;
 using System.Windows.Threading;
 using ArsVisual.NotifyComponents.MsgBox;
 using ArsVisual.NetService;
+using ArsVisual.Helpers;
+using System.Diagnostics;
 
 
 
@@ -47,8 +49,8 @@ namespace ArsVisual
         public static RoutedCommand Settings = new RoutedCommand();
         public static RoutedCommand SaveTOpng = new RoutedCommand();
         public static RoutedCommand ColorChange = new RoutedCommand();
-       
-      
+        public static RoutedCommand UndoFunck = new RoutedCommand();
+        private Stack<UndoState> undoStack = new Stack<UndoState>(10);
         public DesignerCanvas()
         {
             this.CommandBindings.Add(new CommandBinding(ApplicationCommands.New, New_Executed));
@@ -76,9 +78,11 @@ namespace ArsVisual
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.DistributeVertical, DistributeVertical_Executed, Distribute_Enabled));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SelectAll, SelectAll_Executed));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Settings, opensettings));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.UndoFunck, Undo));
                  
 
         SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
+            UndoFunck.InputGestures.Add(new KeyGesture(Key.Z, ModifierKeys.Control));
 
             this.AllowDrop = true;
             Clipboard.Clear();
@@ -169,6 +173,185 @@ namespace ArsVisual
             surface.LayoutTransform = transform;
         }
         #endregion
+
+        private UndoState SaveCurrentState()
+        {
+            var state = new UndoState();
+
+            foreach (var child in this.Children)
+            {
+                if (child is DesignerItem item)
+                {
+                    state.Items.Add(new DesignerItemState
+                    {
+                        ID = item.ID,
+                        Left = Canvas.GetLeft(item),
+                        Top = Canvas.GetTop(item),
+                        Width = item.Width,
+                        Height = item.Height,
+                        ZIndex = Canvas.GetZIndex(item),
+                        ContentXaml = XamlWriter.Save(item.Content),
+                        RotationAngle = item.RotationAngle,
+                        StrokeColor = (item.Stroke as SolidColorBrush)?.Color ?? Colors.Black,
+                        FillColor = (item.Fill as SolidColorBrush)?.Color ?? Colors.White,
+                        FontSize = item.FontSize,
+                        FontFamily = item.FontFamily.ToString(),
+                        ForegroundColor = (item.Foreground as SolidColorBrush)?.Color ?? Colors.Black
+                    });
+                }
+                else if (child is Connection connection)
+                {
+                    var connState = new ConnectionState
+                    {
+                        SourceId = connection.Source?.ParentDesignerItem?.ID ?? Guid.Empty,
+                        SinkId = connection.Sink?.ParentDesignerItem?.ID ?? Guid.Empty,
+                        SourceConnectorName = connection.Source?.Name,
+                        SinkConnectorName = connection.Sink?.Name,
+                        SourceArrowSymbol = connection.SourceArrowSymbol,
+                        SinkArrowSymbol = connection.SinkArrowSymbol,
+                        StrokeDashArray = connection.StrokeDashArray,
+                        Text = connection.Text,
+                        ZIndex = Canvas.GetZIndex(connection),
+                        LineType = connection._ConnectionLineType,
+                        SourceOrientation = connection.Source?.Orientation ?? ConnectorOrientation.None,
+                        SinkOrientation = connection.Sink?.Orientation ?? ConnectorOrientation.None
+                    };
+                    state.Connections.Add(connState);
+
+                     }
+            }
+
+         
+            return state;
+        }
+        private void RestoreState(UndoState state)
+        {
+            this.Children.Clear();
+            var itemDict = new Dictionary<Guid, DesignerItem>();
+
+          
+            foreach (var itemState in state.Items)
+            {
+                var item = new DesignerItem(itemState.ID)
+                {
+                    Width = itemState.Width,
+                    Height = itemState.Height,
+                    RotationAngle = itemState.RotationAngle,
+                    Stroke = new SolidColorBrush(itemState.StrokeColor),
+                    Fill = new SolidColorBrush(itemState.FillColor),
+                    FontSize = itemState.FontSize,
+                    FontFamily = new FontFamily(itemState.FontFamily),
+                    Foreground = new SolidColorBrush(itemState.ForegroundColor)
+                };
+
+                Canvas.SetLeft(item, itemState.Left);
+                Canvas.SetTop(item, itemState.Top);
+                Canvas.SetZIndex(item, itemState.ZIndex);
+
+                using (var stringReader = new StringReader(itemState.ContentXaml))
+                using (var xmlReader = XmlReader.Create(stringReader))
+                {
+                    item.Content = XamlReader.Load(xmlReader);
+                }
+
+                // Принудительно загружаем шаблон
+                item.ApplyTemplate();
+                this.Children.Add(item);
+                itemDict[itemState.ID] = item;
+              
+            }
+
+            // Восстановление Connection
+            foreach (var connState in state.Connections)
+            {
+                if (itemDict.TryGetValue(connState.SourceId, out var sourceItem) &&
+                    itemDict.TryGetValue(connState.SinkId, out var sinkItem))
+                {
+                    var sourceConnector = FindConnector(sourceItem, connState.SourceConnectorName);
+                    var sinkConnector = FindConnector(sinkItem, connState.SinkConnectorName);
+                    if (sourceConnector != null && sinkConnector != null)
+                    {
+                        sourceConnector.Orientation = connState.SourceOrientation;
+                        sinkConnector.Orientation = connState.SinkOrientation;
+
+                        var connection = new Connection(sourceConnector, sinkConnector)
+                        {
+                            SourceArrowSymbol = connState.SourceArrowSymbol,
+                            SinkArrowSymbol = connState.SinkArrowSymbol,
+                            StrokeDashArray = connState.StrokeDashArray,
+                            Text = connState.Text,
+                            _ConnectionLineType = connState.LineType
+                        };
+                        Canvas.SetZIndex(connection, connState.ZIndex);
+                        this.Children.Add(connection);
+                    }
+                    else
+                    {
+                    }
+                }
+                else
+                {
+                }
+            }
+        }
+        private Connector FindConnector(DesignerItem item, string name)
+        {
+            if (string.IsNullOrEmpty(name))
+            {
+                return null;
+            }
+
+     
+            item.ApplyTemplate();
+
+     
+            var connectorDecorator = item.Template.FindName("PART_ConnectorDecorator", item) as Control;
+            if (connectorDecorator == null)
+            {
+                return null;
+            }
+
+    
+            connectorDecorator.ApplyTemplate();
+
+        
+            var connector = connectorDecorator.Template.FindName(name, connectorDecorator) as Connector;
+            if (connector == null)
+            {
+                Debug.WriteLine($"Connector {name} not found in PART_ConnectorDecorator of item {item.ID}");
+              
+                var templateContent = connectorDecorator.Template?.LoadContent();
+                if (templateContent is FrameworkElement fe)
+                {
+                    var names = new List<string>();
+                    foreach (var child in LogicalTreeHelper.GetChildren(fe))
+                    {
+                        if (child is FrameworkElement childFe && !string.IsNullOrEmpty(childFe.Name))
+                        {
+                            names.Add(childFe.Name);
+                        }
+                    }
+                }
+            }
+            else
+            {
+            }
+            return connector;
+        }
+        public void SaveUndoState()
+        {
+            var state = SaveCurrentState();
+            undoStack.Push(state);
+        }
+
+        public void Undo(object sender, ExecutedRoutedEventArgs e)
+        {
+            if (undoStack.Count > 0)
+            {
+                var state = undoStack.Pop();
+                RestoreState(state);
+            }
+        }
         #region settings Command
 
         private void opensettings(object sender, ExecutedRoutedEventArgs e)
@@ -668,6 +851,7 @@ namespace ArsVisual
 
         private void Delete_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+        
             DeleteCurrentSelection();
         }
 
@@ -682,6 +866,7 @@ namespace ArsVisual
 
         private void Cut_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+          
             CopyCurrentSelection();
             DeleteCurrentSelection();
         }
@@ -697,6 +882,7 @@ namespace ArsVisual
 
         private void Group_Executed(object sender, ExecutedRoutedEventArgs e)
         {
+            SaveUndoState();
             var items = from item in this.SelectionService.CurrentSelection.OfType<DesignerItem>()
                         where item.ParentID == Guid.Empty
                         select item;
@@ -1497,5 +1683,10 @@ namespace ArsVisual
         }
 
         #endregion
+
+
+
+       
+
     }
 }

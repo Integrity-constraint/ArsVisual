@@ -9,11 +9,13 @@ using System.Windows.Input;
 using System.Windows.Markup;
 using System.Xml;
 using ArsVisual.Adorners;
+using ArsVisual.Helpers;
 
 namespace ArsVisual
 {
     public partial class DesignerCanvas : Canvas
     {
+       
         private const double SnapThreshold = 5.0; 
         private SnapAdorner snapAdorner;
 
@@ -126,6 +128,7 @@ namespace ArsVisual
 
                 if (content != null)
                 {
+                    SaveUndoState();
                     newItem = new DesignerItem();
                     newItem.Content = content;
 
@@ -196,4 +199,6 @@ namespace ArsVisual
             }
         }
     }
+
+
 }

@@ -84,8 +84,12 @@ namespace ArsVisual
 
             base.Unloaded += new RoutedEventHandler(ConnectionAdorner_Unloaded);
         }
-                
 
+        public void SaveStateInitialize()
+        {
+            var canvas = VisualTreeHelper.GetParent(this) as DesignerCanvas;
+            canvas?.SaveUndoState();
+        }
         void AnchorPositionChanged(object sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName.Equals("AnchorPositionSource"))
@@ -107,6 +111,7 @@ namespace ArsVisual
             {
                 if (connection != null)
                 {
+                    SaveStateInitialize();
                     if (connection.Source == fixConnector)
                         connection.Sink = this.HitConnector;
                     else

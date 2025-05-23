@@ -14,7 +14,12 @@ namespace ArsVisual
         public static readonly RoutedUICommand SetSourceArrowCommand = new RoutedUICommand("Set Source Arrow", "SetSourceArrow", typeof(Connection));
         public static readonly RoutedUICommand SetSinkArrowCommand = new RoutedUICommand("Set Sink Arrow", "SetSinkArrow", typeof(Connection));
         public static readonly RoutedUICommand SetLineStyleCommand = new RoutedUICommand("Set Line Style","SetLineStyle", typeof(Connection));
-       
+
+        public void SaveStateInitialize()
+        {
+            var canvas = VisualTreeHelper.GetParent(this) as DesignerCanvas;
+            canvas?.SaveUndoState();
+        }
         public enum ConnectionLineType
         {
             Straight,   
@@ -27,6 +32,7 @@ namespace ArsVisual
             get { return _connectionLineType; }
             set
             {
+               
                 if (_connectionLineType != value)
                 {
                     _connectionLineType = value;
@@ -60,6 +66,7 @@ namespace ArsVisual
         }
         private void OnSetSourceArrowCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+           SaveStateInitialize();
             if (e.Parameter is string arrowSymbol)
             {
                 if (Enum.TryParse(arrowSymbol, out ArrowSymbol symbol))
@@ -70,6 +77,7 @@ namespace ArsVisual
         }
         private void OnSetLineStyleCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+          
             if (e.Parameter is string style)
             {
                 switch (style)
@@ -90,6 +98,7 @@ namespace ArsVisual
 
         private void OnSetSinkArrowCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+          
             if (e.Parameter is string arrowSymbol)
             {
                 if (Enum.TryParse(arrowSymbol, out ArrowSymbol symbol))
@@ -321,7 +330,7 @@ namespace ArsVisual
             this.Source = source;
             this.Sink = sink;
 
-         
+            DataContext = this;
             CommandBindings.Add(new CommandBinding(SetSourceArrowCommand, OnSetSourceArrowCommandExecuted));
             CommandBindings.Add(new CommandBinding(SetSinkArrowCommand, OnSetSinkArrowCommandExecuted));
             CommandBindings.Add(new CommandBinding(SetLineTypeCommand, OnSetLineTypeCommandExecuted));
@@ -334,6 +343,7 @@ namespace ArsVisual
 
         private void OnSetLineTypeCommandExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            
             if (e.Parameter is string lineType)
             {
                 if (Enum.TryParse(lineType, out ConnectionLineType type))
@@ -346,6 +356,7 @@ namespace ArsVisual
 
         protected override void OnMouseDown(System.Windows.Input.MouseButtonEventArgs e)
         {
+          SaveStateInitialize();
             base.OnMouseDown(e);
 
             
@@ -375,7 +386,7 @@ namespace ArsVisual
         {
             if (e.PropertyName.Equals("Position"))
             {
-                UpdatePathGeometry(); // Учитывает IsStraightLine
+                UpdatePathGeometry(); 
             }
         }
         private List<Point> GetCurvedConnectionLine(ConnectorInfo sourceInfo, ConnectorInfo sinkInfo)
@@ -470,6 +481,7 @@ namespace ArsVisual
         }
         public void UpdatePathGeometry()
         {
+        
             if (Source != null && Sink != null)
             {
                 PathGeometry geometry = new PathGeometry();
@@ -477,18 +489,19 @@ namespace ArsVisual
 
                 switch (_ConnectionLineType)
                 {
+                   
                     case ConnectionLineType.Straight:
-                     
+                 
                         linePoints = PathFinder.GetStraightConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
                         break;
 
                     case ConnectionLineType.Orthogonal:
-                    
+           
                         linePoints = PathFinder.GetConnectionLine(Source.GetInfo(), Sink.GetInfo(), true);
                         break;
 
                     case ConnectionLineType.Curved:
-                 
+                   
                         linePoints = GetCurvedConnectionLine(Source.GetInfo(), Sink.GetInfo());
                         break;
 
@@ -558,13 +571,11 @@ namespace ArsVisual
 
         void Connection_Unloaded(object sender, RoutedEventArgs e)
         {
-            // do some housekeeping when Connection is unloaded
-
-            // remove event handler
+           
             this.Source = null;
             this.Sink = null;
 
-            // remove adorner
+          
             if (this.connectionAdorner != null)
             {
                 DesignerCanvas designer = VisualTreeHelper.GetParent(this) as DesignerCanvas;

@@ -4,6 +4,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Controls;
+using System.Diagnostics;
 
 namespace ArsVisual 
 
@@ -56,7 +57,11 @@ namespace ArsVisual
             drawingPen.LineJoin = PenLineJoin.Round;
             this.Cursor = Cursors.Cross;
         }
-
+        public void SaveStateInitialize()
+        {
+            var canvas = VisualTreeHelper.GetParent(this) as DesignerCanvas;
+            canvas?.SaveUndoState();
+        }
         protected override void OnMouseUp(MouseButtonEventArgs e)
         {
             if (HitConnector != null)
@@ -64,10 +69,11 @@ namespace ArsVisual
                 Connector sourceConnector = this.sourceConnector;
                 Connector sinkConnector = this.HitConnector;
                 Connection newConnection = new Connection(sourceConnector, sinkConnector);
-
+               Debug.WriteLine("Saving state before creating connection...");
+                SaveStateInitialize();
                 Canvas.SetZIndex(newConnection, designerCanvas.Children.Count);
                 this.designerCanvas.Children.Add(newConnection);
-                
+                Debug.WriteLine($"Connection created: Source={sourceConnector.Name}, Sink={sinkConnector.Name}");
             }
             if (HitDesignerItem != null)
             {

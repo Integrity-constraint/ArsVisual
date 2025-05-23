@@ -19,17 +19,24 @@ namespace ArsVisual.Controls
             DragDelta += MoveThumb_DragDelta;
         }
 
+        public void SaveUndofunc()
+        {
+            var canvas = VisualTreeHelper.GetParent(this.designerItem) as DesignerCanvas;
+            canvas?.SaveUndoState();
+        }
         private void MoveThumb_DragStarted(object sender, DragStartedEventArgs e)
         {
             this.designerItem = DataContext as ContentControl;
             if (this.designerItem != null)
             {
                 this.rotateTransform = this.designerItem.RenderTransform as RotateTransform;
+              SaveUndofunc();
             }
         }
 
         private void MoveThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
+          
             if (this.designerItem != null)
             {
                 var designerCanvas = VisualTreeHelper.GetParent(this.designerItem) as DesignerCanvas;
@@ -38,29 +45,27 @@ namespace ArsVisual.Controls
                     var selectedItems = designerCanvas.GetSelectedItems().ToList();
                     designerCanvas.ClearSnapLines();
 
-                    // Calculate base movement vector
+                  
                     Point dragDelta = new Point(e.HorizontalChange, e.VerticalChange);
                     if (this.rotateTransform != null)
                     {
                         dragDelta = this.rotateTransform.Transform(dragDelta);
                     }
 
-                    // Get the bounds of the entire selection
                     Rect selectionBounds = GetSelectionBounds(selectedItems);
 
-                    // Calculate proposed new position for the entire selection
+              
                     double newLeft = selectionBounds.Left + dragDelta.X;
                     double newTop = selectionBounds.Top + dragDelta.Y;
 
-                    // Snap the entire selection as a group
+             
                     SnapSelectionToAlignment(designerCanvas, selectedItems, ref newLeft, ref newTop,
                                             selectionBounds.Width, selectionBounds.Height);
 
-                    // Calculate final delta after snapping
+       
                     double finalDeltaX = newLeft - selectionBounds.Left;
                     double finalDeltaY = newTop - selectionBounds.Top;
 
-                    // Apply movement to all selected items
                     foreach (var item in selectedItems)
                     {
                         if (item is ContentControl control)
@@ -100,11 +105,11 @@ namespace ArsVisual.Controls
         {
             var otherElements = canvas.GetOtherElements(selectedItems);
 
-            // Check horizontal alignment (top, bottom, center)
+    
             CheckGroupAlignment(canvas, otherElements, ref newTop, selectionHeight,
                                DesignerCanvas.AlignmentType.Horizontal);
 
-            // Check vertical alignment (left, right, center)
+     
             CheckGroupAlignment(canvas, otherElements, ref newLeft, selectionWidth,
                                DesignerCanvas.AlignmentType.Vertical);
         }
@@ -122,7 +127,7 @@ namespace ArsVisual.Controls
                     ? other.RenderSize.Height
                     : other.RenderSize.Width;
 
-                // Варианты выравнивания: край к краю и центр к центру
+           
                 var alignmentOptions = new List<(double referencePos, double targetPos, string type)>
         {
             // Левый/верхний край с левым/верхним краем
@@ -171,61 +176,7 @@ namespace ArsVisual.Controls
                 }
             }
         }
-        private void CheckAlignment(DesignerCanvas canvas, ref double newLeft, ref double newTop,
-            double draggedWidth, double draggedHeight, IEnumerable<UIElement> otherElements,
-            DesignerCanvas.AlignmentType alignmentType)
-        {
-            double draggedPos = alignmentType == DesignerCanvas.AlignmentType.Horizontal ? newTop : newLeft;
-            double draggedSize = alignmentType == DesignerCanvas.AlignmentType.Horizontal ? draggedHeight : draggedWidth;
-
-            foreach (var other in otherElements)
-            {
-                double otherLeft = Canvas.GetLeft(other);
-                double otherTop = Canvas.GetTop(other);
-                double otherWidth = other.RenderSize.Width;
-                double otherHeight = other.RenderSize.Height;
-
-                List<(double target, string type)> targets = new List<(double, string)>();
-                if (alignmentType == DesignerCanvas.AlignmentType.Horizontal)
-                {
-                    targets.Add((otherTop, "top"));
-                    targets.Add((otherTop + otherHeight, "bottom"));
-                    targets.Add((otherTop + otherHeight / 2, "center"));
-                }
-                else
-                {
-                    targets.Add((otherLeft, "left"));
-                    targets.Add((otherLeft + otherWidth, "right"));
-                    targets.Add((otherLeft + otherWidth / 2, "center"));
-                }
-
-                foreach (var (target, type) in targets)
-                {
-                    double currentPos = draggedPos;
-                    if (type == "bottom") currentPos += draggedSize;
-                    else if (type == "center") currentPos += draggedSize / 2;
-
-                    double diff = Math.Abs(currentPos - target);
-                    if (diff < canvas.SnapThresholdValue)
-                    {
-                        if (alignmentType == DesignerCanvas.AlignmentType.Horizontal)
-                        {
-                            newTop = type == "top" ? target
-                                : type == "bottom" ? target - draggedSize
-                                : target - draggedSize / 2;
-                            canvas.DrawSnapLine(alignmentType, target);
-                        }
-                        else
-                        {
-                            newLeft = type == "left" ? target
-                                : type == "right" ? target - draggedSize
-                                : target - draggedSize / 2;
-                            canvas.DrawSnapLine(alignmentType, target);
-                        }
-                        break;
-                    }
-                }
-            }
-        }
+       
+        
     }
 }
