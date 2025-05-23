@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
+using static ArsVisual.Connection;
 
 namespace ArsVisual.Helpers
 {
@@ -18,6 +19,8 @@ namespace ArsVisual.Helpers
         public DoubleCollection StrokeDashArray { get; set; }
         public string Text { get; set; }
         public int ZIndex { get; set; }
-        public Color StrokeColor { get; set; }
+        public ConnectionLineType LineType { get; set; }
+        public ConnectorOrientation SourceOrientation { get; set; }
+        public ConnectorOrientation SinkOrientation { get; set; }
     }
 }

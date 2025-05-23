@@ -265,6 +265,11 @@ namespace ArsVisual
             InitializeCommands();
 
         }
+        public void SaveUndofunc()
+        {
+            var canvas = VisualTreeHelper.GetParent(this) as DesignerCanvas;
+            canvas?.SaveUndoState();
+        }
         private void DesignerItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             
@@ -273,11 +278,13 @@ namespace ArsVisual
 
         private void OnChangeFontSizeExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            SaveUndofunc();
             if (double.TryParse(e.Parameter.ToString(), out double fontSize))
             {
                 
                 if (fontSize > 0)
                 {
+                   
                     FontSize = fontSize;
                 }
                 else
@@ -289,16 +296,19 @@ namespace ArsVisual
 
         private void OnChangeFontFamilyExecuted(object sender, ExecutedRoutedEventArgs e)
         {
+            SaveUndofunc();
             FontFamily = new FontFamily(e.Parameter.ToString());
         }
         private void OnChangeFontForegroubd(object sender, ExecutedRoutedEventArgs e)
         {
+            SaveUndofunc();
             Foreground = new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(e.Parameter.ToString()));
         }
         private void OnChangeItemFill(object sender, ExecutedRoutedEventArgs e)
         {
             try
             {
+                SaveUndofunc();
                 if (e.Parameter is string colorName)
                 {
                     if (colorName == "Custom")

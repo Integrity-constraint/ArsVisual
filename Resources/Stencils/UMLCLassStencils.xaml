@@ -127,7 +127,7 @@ Style="{StaticResource TextadapterHit}"/>
                 <TextBox TextWrapping="Wrap"
 Style="{StaticResource TextadapterHit}"/>
             </Grid>
-            <TextBox ToolTip="Текст" Style="{StaticResource TextadapterPreview}" Text="Example"/>
+            <TextBox  Style="{StaticResource TextadapterPreview}" Text="Example"/>
 
         </ItemsControl.Items>
     </s:Toolbox>
