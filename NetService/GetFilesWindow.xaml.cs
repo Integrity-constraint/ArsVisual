@@ -111,7 +111,7 @@ namespace ArsVisual.NetService
                 {
 
                     FileRemover.DeleteFileAsync(selecteditem.idApi, userData.Email, userData.Password);
-                    FileList.Items.Clear();
+                  FileList.Items.Refresh();
                     FileList.ItemsSource = Files;
                 }
                 if (result == MessageBoxResult.No) { }
