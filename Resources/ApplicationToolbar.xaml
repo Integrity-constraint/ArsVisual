@@ -225,5 +225,63 @@
             </StackPanel>
             <TextBlock Style="{StaticResource DownHeader}"  Text="Положение:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
         </StackPanel>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal">
+                <!-- 
+                <ToggleButton x:Name="GridToggleButton" Margin="2" Width="60" 
+                  Command="{x:Static s:DesignerCanvas.GridToggle}"
+                  CommandTarget="{Binding ElementName=MyDesigner}"
+                  ToolTip="Сетка">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Image x:Name="GridImage" Source="Images/GridOnOff.png" Height="40" />
+                        <TextBlock x:Name="GridText" Text="Сетка вкл" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                    <ToggleButton.Style>
+                        <Style TargetType="ToggleButton" BasedOn="{StaticResource ToolBarButtonBaseStyle}">
+                            <Setter Property="ContentTemplate">
+                                <Setter.Value>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                                            <Image x:Name="GridImage" Source="Images/GridOnOff.png" Height="40" />
+                                            <TextBlock x:Name="GridText" Text="Сетка вкл" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                                        </StackPanel>
+                                        <DataTemplate.Triggers>
+                                            <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="True">
+                                                <Setter TargetName="GridImage" Property="Source" Value="Images/GridOnOff.png" />
+                                                <Setter TargetName="GridText" Property="Text" Value="Сетка вкл" />
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource AncestorType=ToggleButton}}" Value="False">
+                                                <Setter TargetName="GridImage" Property="Source" Value="Images/GridOnOff.png" />
+                                                <Setter TargetName="GridText" Property="Text" Value="Сетка выкл" />
+                                            </DataTrigger>
+                                        </DataTemplate.Triggers>
+                                    </DataTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ToggleButton.Style>
+                </ToggleButton>
+                -->
+                <Button Margin="2" Width="70" Style="{StaticResource ToolBarButtonBaseStyle}"
+ Command="{x:Static s:DesignerCanvas.GridToggle}"
+ CommandTarget="{Binding ElementName=MyDesigner}"
+ ToolTip="На передний план">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Image Source="Images/GridOnOff.png" Height="40" />
+                        <TextBlock Text="Сетка ВКЛ" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                </Button>
+                <Button Margin="2" Width="70" Style="{StaticResource ToolBarButtonBaseStyle}"
+Command="{x:Static s:DesignerCanvas.GridOff}"
+CommandTarget="{Binding ElementName=MyDesigner}"
+ToolTip="На передний план">
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Image Source="Images/GridOnOff.png" Height="40" />
+                        <TextBlock Text="Сетка ВЫКЛ" HorizontalAlignment="Center" Foreground="White" FontSize="10"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <TextBlock Style="{StaticResource DownHeader}"  Text="Дополнительно:" HorizontalAlignment="Center" Margin="5,2,5,0" Foreground="White"/>
+        </StackPanel>
     </ToolBar>
 </ResourceDictionary>

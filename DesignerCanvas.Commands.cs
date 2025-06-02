@@ -50,6 +50,8 @@ namespace ArsVisual
         public static RoutedCommand SaveTOpng = new RoutedCommand();
         public static RoutedCommand ColorChange = new RoutedCommand();
         public static RoutedCommand UndoFunck = new RoutedCommand();
+        public static RoutedCommand GridToggle = new RoutedCommand();
+        public static RoutedCommand GridOff = new RoutedCommand();
         private Stack<UndoState> undoStack = new Stack<UndoState>(10);
         public DesignerCanvas()
         {
@@ -79,9 +81,13 @@ namespace ArsVisual
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.SelectAll, SelectAll_Executed));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.Settings, opensettings));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.UndoFunck, Undo));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.GridToggle, gridToggle));
+            this.CommandBindings.Add(new CommandBinding(DesignerCanvas.GridOff, gridToggleOff));
                  
 
         SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
+        GridToggle.InputGestures.Add(new KeyGesture(Key.G, ModifierKeys.Control));
+       GridOff.InputGestures.Add(new KeyGesture(Key.G, ModifierKeys.Alt));
             UndoFunck.InputGestures.Add(new KeyGesture(Key.Z, ModifierKeys.Control));
 
             this.AllowDrop = true;
@@ -1686,7 +1692,13 @@ namespace ArsVisual
 
 
 
-       
-
+        private void gridToggle(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.AddGridAdorner(this);
+        }
+        private void gridToggleOff(object sender, ExecutedRoutedEventArgs e)
+        {
+            this.RemoveGridAdorner(this);
+        }
     }
 }

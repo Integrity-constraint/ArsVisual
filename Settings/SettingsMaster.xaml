@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ArsVisual.Settings"
         AllowsTransparency="True"
         mc:Ignorable="d"
-        Title="SettingsMaster" WindowStartupLocation="CenterScreen" Background="Transparent" WindowStyle="None" Height="450" Width="600">
+        Title="SettingsMaster" ResizeMode="CanResizeWithGrip" WindowStartupLocation="CenterScreen" Background="Transparent" WindowStyle="None" Height="450" Width="600">
 
     <Border BorderBrush="Black" Background="#FF1B1B1B" BorderThickness="0.5" CornerRadius="15">
         
@@ -79,7 +79,7 @@
                 </GroupBox>
 
             
-            <Frame  Background="gray" NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
+            <Frame Margin="2" Background="gray" NavigationUIVisibility="Hidden" Name="OCHKO" Grid.Column="1" />
         </Grid>
     </Grid>
 

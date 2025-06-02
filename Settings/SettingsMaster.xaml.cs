@@ -50,6 +50,7 @@ namespace ArsVisual.Settings
             colorChangerPage.ColorSizeChromeSelected += OnColorSizeChromeSelected;
            
             colorChangerPage.ColorSnapBrushSelected += OnColorSnapBrushSelected;
+            colorChangerPage.ColorGridSelected += OnColorGridSelected;
            OCHKO.Navigate(colorChangerPage);
         }
 
@@ -66,6 +67,12 @@ namespace ArsVisual.Settings
         {
 
             Application.Current.Resources["SnapAdornerColor"] = new SolidColorBrush(selectedColor);
+
+        }
+        private void OnColorGridSelected(Color selectedColor)
+        {
+
+            Application.Current.Resources["GridLayer"] = new SolidColorBrush(selectedColor);
 
         }
         private void closesettings(object sender, RoutedEventArgs e)

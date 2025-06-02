@@ -27,6 +27,7 @@ namespace ArsVisual.pages
         public event Action<Color> ColorSizeChromeSelected;
         public event Action<Color> ColorItemBrushSelected;
         public event Action<Color> ColorSnapBrushSelected;
+        public event Action<Color> ColorGridSelected;
 
         public ColorChanger()
         {
@@ -47,6 +48,10 @@ namespace ArsVisual.pages
         private void ChangeSnapeStyle(object sender, MouseButtonEventArgs e)
         {
             ChangeColor("SnapAdornerColor");
+        }
+        private void ChangeGridLayer(object sender, MouseButtonEventArgs e)
+        {
+            ChangeColor("GridLayer");
         }
 
         private void ChangeColor(string resourceKey)

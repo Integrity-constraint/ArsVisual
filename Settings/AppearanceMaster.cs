@@ -24,6 +24,7 @@ namespace ArsVisual.Settings
             {"SnapAdornerColor", ((SolidColorBrush)Application.Current.Resources["SnapAdornerColor"]).Color.ToString()},
           
             {"SizeChromeColor", ((SolidColorBrush)Application.Current.Resources["SizeChromeColor"]).Color.ToString()},
+            {"GridLayer", ((SolidColorBrush)Application.Current.Resources["GridLayer"]).Color.ToString()},
           
         };
 
@@ -69,6 +70,7 @@ namespace ArsVisual.Settings
             
                 Application.Current.Resources["SnapAdornerColor"] = new SolidColorBrush(Colors.Red);
                 Application.Current.Resources["SizeChromeColor"] = new SolidColorBrush(Colors.Blue);
+                Application.Current.Resources["GridLayer"] = new SolidColorBrush(Colors.LightBlue);
             
           
            

@@ -37,6 +37,7 @@
     <None Remove="Resources\Images\cut_icon.png" />
     <None Remove="Resources\Images\delete_icon.png" />
     <None Remove="Resources\Images\front_layer_icon.png" />
+    <None Remove="Resources\Images\GridOnOff.png" />
     <None Remove="Resources\Images\group_icon.png" />
     <None Remove="Resources\Images\HiveLogo.png" />
     <None Remove="Resources\Images\horizontal_align_icon.png" />
@@ -112,6 +113,9 @@
     <Content Include="Resources\Images\front_layer_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\GridOnOff.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Images\group_icon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -160,7 +164,6 @@
     <PackageReference Include="Hardcodet.NotifyIcon.Wpf" Version="2.0.1" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
-    <PackageReference Include="WPFThemes.DarkBlend" Version="1.0.8" />
   </ItemGroup>
 
   <ItemGroup>

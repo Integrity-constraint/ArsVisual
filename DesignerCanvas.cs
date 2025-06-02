@@ -10,6 +10,7 @@ using System.Windows.Markup;
 using System.Xml;
 using ArsVisual.Adorners;
 using ArsVisual.Helpers;
+using System.Diagnostics;
 
 namespace ArsVisual
 {
@@ -45,7 +46,49 @@ namespace ArsVisual
             }
         }
 
-       
+        public void AddGridAdorner(Canvas canvas)
+        {
+            AdornerLayer layer = AdornerLayer.GetAdornerLayer(canvas);
+            if (layer != null)
+            {
+             
+                Adorner[] adorners = layer.GetAdorners(canvas);
+                if (adorners != null)
+                {
+                    foreach (Adorner adorner in adorners)
+                    {
+                        if (adorner is GridAdorner)
+                        {
+                            return; 
+                        }
+                    }
+                }
+
+               
+                GridAdorner gridAdorner = new GridAdorner(canvas, 20);
+                layer.Add(gridAdorner);
+                layer.Update();
+            }
+        }
+        public void RemoveGridAdorner(Canvas canvas)
+        {
+            AdornerLayer layer = AdornerLayer.GetAdornerLayer(canvas);
+            if (layer != null)
+            {
+                Adorner[] adorners = layer.GetAdorners(canvas);
+                if (adorners != null)
+                {
+                    foreach (Adorner adorner in adorners)
+                    {
+                        if (adorner is GridAdorner)
+                        {
+                            layer.Remove(adorner);
+                            layer.Update();
+                        }
+                    }
+                }
+            }
+        }
         public void ClearSnapLines()
         {
             snapAdorner?.ClearSnapLines();
