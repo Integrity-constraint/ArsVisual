@@ -9,6 +9,8 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <AssemblyVersion>1.0.8</AssemblyVersion>
     <FileVersion>1.0.8</FileVersion>
+    <PackageIcon>logo.png</PackageIcon>
+    <ApplicationIcon>icons\logoIco.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,7 +24,7 @@
     <None Remove="icons\folder.gif" />
     <None Remove="icons\info_icon.png" />
     <None Remove="icons\integration.png" />
-    <None Remove="icons\logo.png" />
+    <None Remove="icons\logoIco.ico" />
     <None Remove="icons\minimize_icon.png" />
     <None Remove="icons\TreyPop2.png" />
     <None Remove="icons\window_icon.png" />
@@ -70,6 +72,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="icons\logoIco.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="icons\minimize_icon.png">
@@ -174,6 +179,13 @@
     <Compile Update="NetService\DigitalHiveGetFilesLogin.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="icons\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
