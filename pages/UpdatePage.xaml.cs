@@ -37,8 +37,9 @@ namespace ArsVisual.pages
 
         private void CheckUpdates(object sender, RoutedEventArgs e)
         {
-           AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/ArsVisual/master/Update.xml");
+              AutoUpdater.Start("https://raw.githubusercontent.com/Integrity-constraint/ArsVisual/master/Update.xml");
 
+            
         }
 
         public static void AutoUpdaterOnCheckForUpdateEvent(UpdateInfoEventArgs args)
@@ -72,7 +73,7 @@ namespace ArsVisual.pages
                     }
                    
                 }
-                else
+                else if (!args.IsUpdateAvailable)
                 {
 
                     NotifyBox.Show(

@@ -1,4 +1,6 @@
-﻿using ArsVisual.Resources;
+﻿using ArsVisual.NotifyComponents.MsgBox;
+using ArsVisual.Resources;
+using ArsVisual.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace ArsVisual.pages
 {
@@ -70,6 +73,30 @@ namespace ArsVisual.pages
                 }
             }
         }
-      
+
+        private void RestoreColors(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = NotifyBox.Show(
+                      "Сбросить цветовую схему?",
+                      "Внимание",
+                      MessageBoxButton.YesNo, MessageBoxImage.Warning
+                  );
+
+            if (messageBoxResult == MessageBoxResult.No)
+            {
+
+              
+            }
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+              AppearanceMaster.RestoreDefaultColors();
+               
+
+            }
+           
+
+        }
+
+       
     }
 }

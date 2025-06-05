@@ -43,6 +43,9 @@
 
                             </Border>
                         </StackPanel>
+                        <StackPanel Margin="10" Orientation="Horizontal">
+                            <Button Click="RestoreColors" Style="{StaticResource TextButtonStyle}">Сбросить цветовую схему?</Button>
+                        </StackPanel>
                     </StackPanel>
                 </StackPanel>
             </Border>

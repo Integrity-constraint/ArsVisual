@@ -50,7 +50,7 @@
     <Setter Property="Template">
       <Setter.Value>
         <ControlTemplate TargetType="{x:Type ButtonBase}">
-          <Border
+          <Border Cursor="Hand"
             x:Name="Border"
             BorderThickness="1"
             Background="Transparent"

@@ -149,12 +149,12 @@ namespace ArsVisual
                 if (_pageCanvases.ContainsKey(tabItem) && _pageCanvases[tabItem].Children.Count > 0)
                 {
                     MessageBoxResult messageBoxResult = NotifyBox.Show(
-                        "На странице есть схема, сохранить схему?",
+                        "На странице есть схема, закрыть?",
                         "Внимание",
-                        MessageBoxButton.YesNoCancel, MessageBoxImage.Warning
+                        MessageBoxButton.YesNo, MessageBoxImage.Warning
                     );
 
-                    if (messageBoxResult == MessageBoxResult.No)
+                    if (messageBoxResult == MessageBoxResult.Yes)
                     {
                       
                         MainTabControl.Items.Remove(tabItem);
@@ -163,20 +163,13 @@ namespace ArsVisual
                         _pageCanvases.Remove(tabItem);
                         _pageStates.Remove(tabItem);
                     }
-                    if (messageBoxResult == MessageBoxResult.Yes)
+                    if (messageBoxResult == MessageBoxResult.No)
                     {
                        
-                            if (_pageCanvases.ContainsKey(tabItem))
-                            {
-                                var canvas = _pageCanvases[tabItem];
-                                canvas.Save_Executed(null, null); 
-                        }
+                          
                         
                     }
-                    if(messageBoxResult == MessageBoxResult.Cancel)
-                    {
-
-                    }
+                   
                    
 
                     

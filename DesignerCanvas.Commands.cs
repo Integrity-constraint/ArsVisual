@@ -12,10 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Linq;
-using ArsVisual.NotifyComponents.Not;
+
 using ArsVisual.Settings;
 using Microsoft.Win32;
-using Hardcodet.Wpf.TaskbarNotification;
+
 using System.Windows.Controls.Primitives;
 using static ArsVisual.Connection;
 using System.Windows.Threading;
@@ -84,7 +84,7 @@ namespace ArsVisual
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.GridToggle, gridToggle));
             this.CommandBindings.Add(new CommandBinding(DesignerCanvas.GridOff, gridToggleOff));
                  
-
+            this.Focusable = true;
         SelectAll.InputGestures.Add(new KeyGesture(Key.A, ModifierKeys.Control));
         GridToggle.InputGestures.Add(new KeyGesture(Key.G, ModifierKeys.Control));
        GridOff.InputGestures.Add(new KeyGesture(Key.G, ModifierKeys.Alt));
@@ -260,14 +260,14 @@ namespace ArsVisual
                     item.Content = XamlReader.Load(xmlReader);
                 }
 
-                // Принудительно загружаем шаблон
+              
                 item.ApplyTemplate();
                 this.Children.Add(item);
                 itemDict[itemState.ID] = item;
               
             }
 
-            // Восстановление Connection
+         
             foreach (var connState in state.Connections)
             {
                 if (itemDict.TryGetValue(connState.SourceId, out var sourceItem) &&

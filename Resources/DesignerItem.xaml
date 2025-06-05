@@ -19,7 +19,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ContextMenu">
-                    <Border CornerRadius="10" Background="{TemplateBinding Background}"
+                    <Border CornerRadius="5" Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}">
                         <StackPanel IsItemsHost="True"/>
@@ -38,7 +38,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="MenuItem">
-                    <Border CornerRadius="10" x:Name="Bg" Background="{TemplateBinding Background}"
+                    <Border CornerRadius="5" x:Name="Bg" Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="0">
                         <Grid>

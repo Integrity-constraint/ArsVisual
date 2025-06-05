@@ -64,7 +64,7 @@ namespace ArsVisual.Settings
           
         }
 
-        private static void RestoreDefaultColors()
+        public static void RestoreDefaultColors()
         {
             
             

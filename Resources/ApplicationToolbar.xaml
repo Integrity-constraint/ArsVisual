@@ -16,7 +16,7 @@
         <!-- Редактирование -->
         <StackPanel Orientation="Vertical">
             <StackPanel Orientation="Horizontal">
-                <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
+                <Button  Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
                 Command="{x:Static ApplicationCommands.Paste}"
                 CommandTarget="{Binding ElementName=MyDesigner}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
@@ -24,8 +24,8 @@
                         <TextBlock Text="Вставить" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
                     </StackPanel>
                 </Button>
-                
-                <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
+
+                <Button  Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
                 Command="{x:Static ApplicationCommands.Copy}"
                 CommandTarget="{Binding ElementName=MyDesigner}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
@@ -33,8 +33,8 @@
                         <TextBlock Text="Копировать" HorizontalAlignment="Center" Foreground="White" FontSize="12"/>
                     </StackPanel>
                 </Button>
-    
-                <Button Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
+
+                <Button   Margin="2" Width="80" Style="{StaticResource ToolBarButtonBaseStyle}"
                 Command="{x:Static ApplicationCommands.Cut}"
                 CommandTarget="{Binding ElementName=MyDesigner}">
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">

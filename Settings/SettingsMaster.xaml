@@ -70,11 +70,11 @@
                             </Style>
                         </TreeView.Resources>
 
-                        <TreeViewItem Header="Общее">
-                            <TreeViewItem Header="Цвета" Selected="Palitra" />
+                        <TreeViewItem Cursor="Hand" Header="Общее">
+                            <TreeViewItem Cursor="Hand" Header="Цвета" Selected="Palitra" />
                         </TreeViewItem>
-                        <TreeViewItem Selected="TreeViewItem_Selected" Header="Обновления" />
-                        <TreeViewItem Selected="TreeViewItem_Selected" Header="Справка" />
+                        <TreeViewItem Cursor="Hand" Selected="TreeViewItem_Selected" Header="Обновления" />
+                        <TreeViewItem Cursor="Hand" Selected="TreeViewItem_Selected" Header="Справка" />
                     </TreeView>
                 </GroupBox>
 

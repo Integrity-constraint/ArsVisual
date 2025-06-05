@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:ArsVisual.pages"
       mc:Ignorable="d" 
       d:DesignHeight="450"  d:DesignWidth="550"
-  Title="ColorChanger">
+     Title="ColorChanger">
 
     <Grid >
         <Border Background="Gray" CornerRadius="15">
@@ -27,12 +27,17 @@
                                 
                             </Image>
                         </StackPanel>
-                        <StackPanel >
-                            <TextBlock TextWrapping="Wrap" Margin="10" Cursor="Hand"  VerticalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18">
-                              Приложение позволяет визуализировать рабоиче процессы, алгоритмы, создавать различные схемы и интеллект карты
-                            </TextBlock>
-                           
-                        </StackPanel>
+                        <ScrollViewer MaxHeight="350" VerticalScrollBarVisibility="Visible">
+                            <StackPanel >
+
+                                <Image Height="300" Source="/Resources/Images/mocuo.png" ></Image>
+                                <TextBlock TextWrapping="Wrap" Margin="10" Cursor="Hand"  VerticalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18">
+        Приложение позволяет визуализировать рабоиче процессы, алгоритмы, создавать различные схемы и интеллект карты
+                                </TextBlock>
+
+                            </StackPanel>
+                        </ScrollViewer>
+                      
 
                     </StackPanel>
                 </StackPanel>

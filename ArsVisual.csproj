@@ -43,6 +43,7 @@
     <None Remove="Resources\Images\horizontal_align_icon.png" />
     <None Remove="Resources\Images\layers_minus_icon.png" />
     <None Remove="Resources\Images\layers_plus_icon.png" />
+    <None Remove="Resources\Images\mocuo.png" />
     <None Remove="Resources\Images\paste_icon.png" />
     <None Remove="Resources\Images\Splash.png" />
     <None Remove="Resources\Images\ungroup_icon.png" />
@@ -129,6 +130,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\layers_plus_icon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Images\mocuo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Images\paste_icon.png">
