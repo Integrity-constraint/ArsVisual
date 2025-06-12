@@ -13,10 +13,7 @@ namespace ArsVisual.NetService
 {
    public class FileRemover
     {
-       // private static readonly HttpClient _httpClient = new HttpClient
-       // {
-       //     BaseAddress = new Uri("https://digitalhive74.ru/")
-       // };
+       
 
         public static async Task<bool> DeleteFileAsync(string fileId, string email, string password)
         {

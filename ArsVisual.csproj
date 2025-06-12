@@ -12,7 +12,10 @@
     <PackageIcon>logo.png</PackageIcon>
     <ApplicationIcon>icons\logoIco.ico</ApplicationIcon>
   </PropertyGroup>
-
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <None Remove="icons\attention_icon.png" />
     <None Remove="icons\close.png" />

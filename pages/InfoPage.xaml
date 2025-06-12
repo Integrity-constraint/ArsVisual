@@ -29,13 +29,31 @@
                         </StackPanel>
                         <ScrollViewer MaxHeight="350" VerticalScrollBarVisibility="Visible">
                             <StackPanel >
-
+                                <StackPanel.Resources>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="TextWrapping" Value="Wrap"></Setter>
+                                        <Setter Property="Margin" Value="10"></Setter>
+                                        <Setter Property="Foreground" Value="White"></Setter>
+                                        <Setter Property="FontFamily" Value="Century Gothic"></Setter>
+                                        <Setter Property="FontSize" Value="18"></Setter>
+                                    </Style>
+                                </StackPanel.Resources>
                                 <Image Height="300" Source="/Resources/Images/mocuo.png" ></Image>
-                                <TextBlock TextWrapping="Wrap" Margin="10" Cursor="Hand"  VerticalAlignment="Center" Foreground="White" FontFamily="Century Gothic" FontSize="18">
+                                <TextBlock  VerticalAlignment="Center"  >
         Приложение позволяет визуализировать рабоиче процессы, алгоритмы, создавать различные схемы и интеллект карты
                                 </TextBlock>
-
+                                <StackPanel>
+                                      <TextBlock>Начало работы</TextBlock>
+                                    <TextBlock >Справа от рабочего поля будет находится панель с элементами. 
+                                    Каждый элемент можно перетаскивать. Требуется навести курсор и перетащить нужный элемент на рабочую область.
+                                    </TextBlock>
+                                    <TextBlock>Взаимодействие с элементами</TextBlock>
+                                    <TextBlock>На рабочем поле элементы можно перемещать, вращать, изменять размеры
+                                    
+                                    </TextBlock>
+                                </StackPanel>
                             </StackPanel>
+                          
                         </ScrollViewer>
                       
 

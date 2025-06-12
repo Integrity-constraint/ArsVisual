@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35222.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ArsVisual", "ArsVisual.csproj", "{4D57D1FD-3A26-4595-9E11-C5266E0A21B9}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ArsVisualSetup", "..\ArsVisualSetup\ArsVisualSetup.vdproj", "{CC6B3EA1-B631-40C3-8342-CEAACFF90B27}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,8 @@ Global
 		{4D57D1FD-3A26-4595-9E11-C5266E0A21B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D57D1FD-3A26-4595-9E11-C5266E0A21B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D57D1FD-3A26-4595-9E11-C5266E0A21B9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC6B3EA1-B631-40C3-8342-CEAACFF90B27}.Debug|Any CPU.ActiveCfg = Debug
+		{CC6B3EA1-B631-40C3-8342-CEAACFF90B27}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
