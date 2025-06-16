@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ArsVisual.Adorners;
+using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -36,147 +37,144 @@ namespace ArsVisual.Controls
 
         private void MoveThumb_DragDelta(object sender, DragDeltaEventArgs e)
         {
-          
             if (this.designerItem != null)
             {
                 var designerCanvas = VisualTreeHelper.GetParent(this.designerItem) as DesignerCanvas;
                 if (designerCanvas != null)
                 {
-                    var selectedItems = designerCanvas.GetSelectedItems().ToList();
-                    designerCanvas.ClearSnapLines();
+            
+                    var selectedElements = designerCanvas.GetSelectedItems().OfType<ContentControl>().ToList();
+                    if (selectedElements.Count == 0) return;
 
                   
+                    designerCanvas.ClearSnapLines();
+
+               
                     Point dragDelta = new Point(e.HorizontalChange, e.VerticalChange);
                     if (this.rotateTransform != null)
                     {
                         dragDelta = this.rotateTransform.Transform(dragDelta);
                     }
 
-                    Rect selectionBounds = GetSelectionBounds(selectedItems);
+             
+                    Rect selectionBounds = GetSelectionBounds(selectedElements);
 
-              
                     double newLeft = selectionBounds.Left + dragDelta.X;
                     double newTop = selectionBounds.Top + dragDelta.Y;
 
-             
-                    SnapSelectionToAlignment(designerCanvas, selectedItems, ref newLeft, ref newTop,
-                                            selectionBounds.Width, selectionBounds.Height);
-
        
+                    SnapToAlignment(designerCanvas, selectedElements, ref newLeft, ref newTop, selectionBounds.Width, selectionBounds.Height);
+
                     double finalDeltaX = newLeft - selectionBounds.Left;
                     double finalDeltaY = newTop - selectionBounds.Top;
 
-                    foreach (var item in selectedItems)
+                    foreach (var control in selectedElements)
                     {
-                        if (item is ContentControl control)
-                        {
-                            double itemLeft = Canvas.GetLeft(control);
-                            double itemTop = Canvas.GetTop(control);
-
-                            Canvas.SetLeft(control, itemLeft + finalDeltaX);
-                            Canvas.SetTop(control, itemTop + finalDeltaY);
-                        }
+                        double itemLeft = Canvas.GetLeft(control);
+                        double itemTop = Canvas.GetTop(control);
+                        Canvas.SetLeft(control, itemLeft + finalDeltaX);
+                        Canvas.SetTop(control, itemTop + finalDeltaY);
                     }
                 }
             }
         }
-        private Rect GetSelectionBounds(IEnumerable<UIElement> items)
+        private void SnapToAlignment(DesignerCanvas canvas, List<ContentControl> selectedElements,
+                             ref double newLeft, ref double newTop, double width, double height)
+        {
+            const double SnapThreshold = 5.0; 
+                                             
+            var otherElements = canvas.Children.OfType<ContentControl>().Except(selectedElements);
+
+          
+            foreach (var element in otherElements)
+            {
+                double otherTop = Canvas.GetTop(element);
+                if (double.IsNaN(otherTop)) continue;
+                double otherHeight = element.ActualHeight;
+
+                if (Math.Abs(newTop - otherTop) < SnapThreshold)
+                {
+                    newTop = otherTop;
+                    canvas.DrawSnapLine(DesignerCanvas.AlignmentType.Horizontal, newTop);
+                }
+                else if (Math.Abs(newTop + height - (otherTop + otherHeight)) < SnapThreshold)
+                {
+                    newTop = otherTop + otherHeight - height;
+                    canvas.DrawSnapLine(DesignerCanvas.AlignmentType.Horizontal, otherTop + otherHeight);
+                }
+
+            
+                double otherLeft = Canvas.GetLeft(element);
+                if (double.IsNaN(otherLeft)) continue;
+                double otherWidth = element.ActualWidth;
+
+                if (Math.Abs(newLeft - otherLeft) < SnapThreshold)
+                {
+                    newLeft = otherLeft;
+                    canvas.DrawSnapLine(DesignerCanvas.AlignmentType.Vertical, newLeft);
+                }
+                else if (Math.Abs(newLeft + width - (otherLeft + otherWidth)) < SnapThreshold)
+                {
+                    newLeft = otherLeft + otherWidth - width;
+                    canvas.DrawSnapLine(DesignerCanvas.AlignmentType.Vertical, otherLeft + otherWidth);
+                }
+            }
+        }
+      
+        private Rect GetSelectionBounds(IEnumerable<ContentControl> items)
         {
             Rect bounds = Rect.Empty;
             foreach (var item in items)
             {
-                if (item is FrameworkElement element)
-                {
-                    double left = Canvas.GetLeft(element);
-                    double top = Canvas.GetTop(element);
-                    Rect itemRect = new Rect(left, top, element.ActualWidth, element.ActualHeight);
-
-                    if (bounds.IsEmpty)
-                        bounds = itemRect;
-                    else
-                        bounds.Union(itemRect);
-                }
+                double left = Canvas.GetLeft(item);
+                double top = Canvas.GetTop(item);
+            
+                if (double.IsNaN(left) || double.IsNaN(top)) continue;
+                Rect itemRect = new Rect(left, top, item.ActualWidth, item.ActualHeight);
+                bounds = bounds.IsEmpty ? itemRect : Rect.Union(bounds, itemRect);
             }
             return bounds;
         }
-        private void SnapSelectionToAlignment(DesignerCanvas canvas, List<UIElement> selectedItems,
-                                    ref double newLeft, ref double newTop,
-                                    double selectionWidth, double selectionHeight)
-        {
-            var otherElements = canvas.GetOtherElements(selectedItems);
 
-    
-            CheckGroupAlignment(canvas, otherElements, ref newTop, selectionHeight,
-                               DesignerCanvas.AlignmentType.Horizontal);
-
-     
-            CheckGroupAlignment(canvas, otherElements, ref newLeft, selectionWidth,
-                               DesignerCanvas.AlignmentType.Vertical);
-        }
-      
-        private void CheckGroupAlignment(DesignerCanvas canvas, IEnumerable<UIElement> otherElements,
-                                 ref double newPos, double size,
-                                 DesignerCanvas.AlignmentType alignmentType)
+       
+        private void SnapToAlignment(DesignerCanvas canvas, SnapAdorner adorner, IEnumerable<DependencyObject> selectedItems,
+                                    ref double newLeft, ref double newTop, double width, double height)
         {
-            foreach (var other in otherElements)
+            const double SnapThreshold = 5.0; // Порог привязки
+            var otherElements = canvas.Children.Cast<UIElement>().Except(selectedItems.OfType<UIElement>());
+
+            // Проверка горизонтальной привязки
+            foreach (var element in otherElements)
             {
-                double otherPos = alignmentType == DesignerCanvas.AlignmentType.Horizontal
-                    ? Canvas.GetTop(other)
-                    : Canvas.GetLeft(other);
-                double otherSize = alignmentType == DesignerCanvas.AlignmentType.Horizontal
-                    ? other.RenderSize.Height
-                    : other.RenderSize.Width;
+                double otherTop = Canvas.GetTop(element);
+                double otherHeight = element.RenderSize.Height;
 
-           
-                var alignmentOptions = new List<(double referencePos, double targetPos, string type)>
-        {
-            // Левый/верхний край с левым/верхним краем
-            (newPos, otherPos, "edge"),
-            
-            // Правый/нижний край с правым/нижним краем
-            (newPos + size, otherPos + otherSize, "edge"),
-            
-            // Центр с центром
-            (newPos + size/2, otherPos + otherSize/2, "center"),
-            
-            // Левый/верхний край с правым/нижним краем
-            (newPos, otherPos + otherSize, "opposite-edge"),
-            
-            // Правый/нижний край с левым/верхним краем
-            (newPos + size, otherPos, "opposite-edge")
-        };
-
-                foreach (var option in alignmentOptions)
+                if (Math.Abs(newTop - otherTop) < SnapThreshold)
                 {
-                    double diff = Math.Abs(option.referencePos - option.targetPos);
-                    if (diff < canvas.SnapThresholdValue)
-                    {
-                        switch (option.type)
-                        {
-                            case "edge":
-                                // Выравнивание одинаковых краев
-                                newPos = option.targetPos;
-                                break;
-                            case "opposite-edge":
-                                // Выравнивание противоположных краев
-                                if (option.referencePos == newPos) // Левый/верхний край
-                                    newPos = option.targetPos;
-                                else // Правый/нижний край
-                                    newPos = option.targetPos - size;
-                                break;
-                            case "center":
-                                // Центр с центром
-                                newPos = option.targetPos - size / 2;
-                                break;
-                        }
+                    newTop = otherTop;
+                    adorner?.AddSnapLine(DesignerCanvas.AlignmentType.Horizontal, newTop, canvas.ActualWidth, canvas.ActualHeight);
+                }
+                else if (Math.Abs(newTop + height - (otherTop + otherHeight)) < SnapThreshold)
+                {
+                    newTop = otherTop + otherHeight - height;
+                    adorner?.AddSnapLine(DesignerCanvas.AlignmentType.Horizontal, otherTop + otherHeight, canvas.ActualWidth, canvas.ActualHeight);
+                }
 
-                        canvas.DrawSnapLine(alignmentType, option.targetPos);
-                        break;
-                    }
+               
+                double otherLeft = Canvas.GetLeft(element);
+                double otherWidth = element.RenderSize.Width;
+
+                if (Math.Abs(newLeft - otherLeft) < SnapThreshold)
+                {
+                    newLeft = otherLeft;
+                    adorner?.AddSnapLine(DesignerCanvas.AlignmentType.Vertical, newLeft, canvas.ActualWidth, canvas.ActualHeight);
+                }
+                else if (Math.Abs(newLeft + width - (otherLeft + otherWidth)) < SnapThreshold)
+                {
+                    newLeft = otherLeft + otherWidth - width;
+                    adorner?.AddSnapLine(DesignerCanvas.AlignmentType.Vertical, otherLeft + otherWidth, canvas.ActualWidth, canvas.ActualHeight);
                 }
             }
         }
-       
-        
     }
 }
