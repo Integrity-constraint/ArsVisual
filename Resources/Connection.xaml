@@ -323,12 +323,12 @@
                             </Grid.LayoutTransform>
                         </Grid>
 
-
+                        <!--
                         <TextBox  Text="{Binding Text, RelativeSource={RelativeSource AncestorType=s:Connection}}"  Background="Transparent" BorderBrush="Transparent" IsHitTestVisible="True"  Width="100" Height="35"
                                        
                                        Canvas.Left="{Binding LabelPosition.X}"
                                        Canvas.Top="{Binding LabelPosition.Y}">
-                           <!--Text="{Binding Path=(Canvas.ZIndex)}" -->
+                           Text="{Binding Path=(Canvas.ZIndex)}" 
                             <TextBox.RenderTransform>
                                 <TranslateTransform X="5" Y="5"/>
                               </TextBox.RenderTransform>
@@ -337,7 +337,9 @@
                         <Canvas.BitmapEffect>
                             <DropShadowBitmapEffect Color="Gray" Direction="315" ShadowDepth="10" Softness="0" Opacity="0.1"/>
                         </Canvas.BitmapEffect>
+                        -->
                     </Canvas>
+                        
                     <ControlTemplate.Triggers>
                         <DataTrigger Value="Arrow" Binding="{Binding RelativeSource={RelativeSource Self},Path=SourceArrowSymbol}">
                             <Setter TargetName="PART_SourceAnchorPath" Property="Style" Value="{StaticResource Arrow}"/>
