@@ -32,7 +32,7 @@
                 <StackPanel>
                  
 
-                    <ListView  MouseDoubleClick="LoadSelectedFile" Name="FileList" >
+                    <ListView MaxHeight="250"  MouseDoubleClick="LoadSelectedFile" Name="FileList" >
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Имя проекта" Width="200">
@@ -240,7 +240,9 @@
                         <Button Click="ChoosePath" Margin="4,15,0,0" Style="{StaticResource TextButtonStyle}" Height="20">
                             Выбрать путь
                         </Button>
-                       
+                        <Button Click="LoadFilebtn" Margin="4,0,0,0" Style="{StaticResource TextButtonStyle}">
+                            Выгрузить файл
+                        </Button>
                     </StackPanel>
                    
                 </StackPanel>

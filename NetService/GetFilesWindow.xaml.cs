@@ -42,7 +42,7 @@ namespace ArsVisual.NetService
             pathcurrent.Text = Filepath;
         }
 
-        private async void LoadSelectedFile(object sender, MouseButtonEventArgs e)
+        private  async void loadfile()
         {
             if (FileList.SelectedItem != null)
             {
@@ -50,7 +50,7 @@ namespace ArsVisual.NetService
                 string id = selectedfile.idApi;
                 string name = selectedfile.fileName;
 
-        
+
                 string filePath = await FileLoader.GetFileFromCloud(id, Filepath);
 
                 if (!string.IsNullOrEmpty(filePath))
@@ -62,9 +62,17 @@ namespace ArsVisual.NetService
                     {
                         canvas.Open_FromCloud(null, null, filePath);
                     }
-                   
+
                 }
             }
+            else
+            {
+                NotifyBox.Show("Файл не выбран", "Ошибка", MessageBoxButton.OK);
+            }
+        }
+        private async void LoadSelectedFile(object sender, MouseButtonEventArgs e)
+        {
+          loadfile();
         }
 
         private void Drag(object sender, MouseButtonEventArgs e)
@@ -123,6 +131,11 @@ namespace ArsVisual.NetService
           
            
           
+        }
+
+        private async void LoadFilebtn(object sender, RoutedEventArgs e)
+        {
+            loadfile();
         }
     }
 }
