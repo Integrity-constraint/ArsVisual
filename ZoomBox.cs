@@ -103,8 +103,8 @@ namespace ArsVisual
             this.zoomThumb.Width = this.ScrollViewer.ViewportWidth * scale;
             this.zoomThumb.Height = this.ScrollViewer.ViewportHeight * scale;
 
-            Canvas.SetLeft(this.zoomThumb, xOffset + this.ScrollViewer.HorizontalOffset * scale);
-            Canvas.SetTop(this.zoomThumb, yOffset + this.ScrollViewer.VerticalOffset * scale);
+            DesignerCanvas.SetLeft(this.zoomThumb, xOffset + this.ScrollViewer.HorizontalOffset * scale);
+            DesignerCanvas.SetTop(this.zoomThumb, yOffset + this.ScrollViewer.VerticalOffset * scale);
         }
 
         private void InvalidateScale(out double scale, out double xOffset, out double yOffset)

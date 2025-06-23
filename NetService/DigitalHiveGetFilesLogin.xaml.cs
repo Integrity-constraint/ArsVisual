@@ -100,14 +100,19 @@ namespace ArsVisual.NetService
                 string format = null;
                 List<FileInfo> files = await FileInfo.GetFilesByFormatAsync(email, password, format);
 
-                GetFilesWindow fileWindow = new GetFilesWindow(files);
-                this.Close();
-                fileWindow.Show();
+                if (files != null)
+                {
+                    GetFilesWindow fileWindow = new GetFilesWindow(files);
+                    this.Close();
+                    fileWindow.Show();
+                }
+              
             }
             catch (Exception ex)
             {
                 NotifyBox.Show($"{ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
         private async void LoginGetFiles(object sender, RoutedEventArgs e)
@@ -132,7 +137,7 @@ namespace ArsVisual.NetService
             }
 
            
-            UserData.GetInstance(password, email);
+           // UserData.GetInstance(password, email);
             LoginGetFilesAsync(email, password);
         }
     }

@@ -87,7 +87,7 @@ namespace ArsVisual.NetService
             try
             {
                
-                UserData.GetInstance(password, email);
+               
 
                 string defaultPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, $"{fileName}.xml");
                 XElement.Save(defaultPath);

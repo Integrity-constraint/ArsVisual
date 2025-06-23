@@ -75,6 +75,7 @@ namespace ArsVisual.NetService
                     responseBody,
                     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }
                 );
+                UserData.GetInstance(password, email);
 
             }
             catch (Exception ex)

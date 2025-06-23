@@ -72,8 +72,11 @@ namespace ArsVisual.NetService
                 );
 
                 var files = responseJson?.GetValueOrDefault("files") ?? new List<FileInfo>();
-               
+
+                UserData.GetInstance(password, email);
                 return files;
+
+               
             }
             catch (Exception ex)
             {

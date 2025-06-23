@@ -34,6 +34,7 @@ namespace ArsVisual.Adorners
             {
                 drawingContext.DrawLine(pen, new Point(0, y), new Point(bounds.Width, y));
             }
+           
         }
     }
 }
