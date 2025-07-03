@@ -2,4 +2,5 @@
 Приложение для построения различных диаграмм и блок схем
 -Кастомизация линий
 -Кастомизация элементов
-![изображение](https://github.com/user-attachments/assets/6c01e909-927e-4e47-8fc9-24066dc4f5c9)
+
+![изображение](https://github.com/user-attachments/assets/cb878cfa-fd0f-46b3-a1de-8f2685c5d4f2)
