@@ -5,6 +5,7 @@
 
 ![изображение](https://github.com/user-attachments/assets/cb878cfa-fd0f-46b3-a1de-8f2685c5d4f2)
 ![изображение](https://github.com/user-attachments/assets/2d47c107-fa62-4af1-9393-07d8930d3429)
+![изображение](https://github.com/user-attachments/assets/d71ab1af-a060-40c2-be57-9d30607c8d1d)
 
 ![изображение](https://github.com/user-attachments/assets/013fe8e3-edec-4020-beed-7388c4fe9c08)
 
